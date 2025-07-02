@@ -1,8 +1,7 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Truck, UserCircle, Shield, LogOut } from "lucide-react";
+import { Menu, X, UserCircle, Shield, LogOut } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 
 const Navigation = () => {
@@ -15,14 +14,11 @@ const Navigation = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isActive = (path: string) => {
-    return location.pathname === path;
-  };
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <header
@@ -32,16 +28,21 @@ const Navigation = () => {
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="flex items-center">
-              <div className="h-10 w-10 bg-kargon-red rounded-full flex items-center justify-center">
-                <Truck className="text-white" size={20} />
-              </div>
-              <span className={`ml-2 font-display font-bold text-xl ${isScrolled ? 'text-kargon-dark' : 'text-white'}`}>
-                AURACARGO
-              </span>
-            </div>
-          </Link>
+          {/* Updated Logo Section */}
+          <div className="flex items-center gap-4 bg-black px-4 py-2 rounded-md">
+            <img
+              src="/lovable-uploads/GGL.png"
+              alt="GGL Logo"
+              onClick={() => (window.location.href = "/")}
+              className="h-12 w-auto cursor-pointer object-fill transition-all duration-300"
+            />
+            <div className="h-8 w-px bg-gray-600 hidden md:block"></div>
+            <img
+              src="/1GlobalEnterprises.png"
+              alt="1 Global Enterprises Logo"
+              className="hidden md:block h-10 w-auto object-contain transition-all duration-300"
+            />
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
@@ -69,6 +70,7 @@ const Navigation = () => {
             )}
           </nav>
 
+          {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center gap-4">
             {user ? (
               <div className="flex items-center gap-2">
@@ -86,8 +88,8 @@ const Navigation = () => {
                     MY ACCOUNT
                   </Button>
                 </Link>
-                <Button 
-                  variant="ghost" 
+                <Button
+                  variant="ghost"
                   className={`font-medium ${isScrolled ? 'text-kargon-dark hover:text-kargon-red' : 'text-white hover:text-white/80'} hover:bg-transparent`}
                   onClick={() => signOut()}
                 >
@@ -112,8 +114,8 @@ const Navigation = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)} 
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2"
           >
             {isMenuOpen ? (
@@ -152,7 +154,6 @@ const Navigation = () => {
                   ADMIN
                 </Link>
               )}
-              
               {user ? (
                 <div className="pt-2">
                   {isAdmin && (
@@ -163,8 +164,8 @@ const Navigation = () => {
                   <Link to="/dashboard" className="font-medium text-kargon-dark hover:text-kargon-red py-2 flex items-center" onClick={() => setIsMenuOpen(false)}>
                     <UserCircle className="mr-2 h-5 w-5" /> MY ACCOUNT
                   </Link>
-                  <button 
-                    className="font-medium text-kargon-dark hover:text-kargon-red py-2 flex items-center" 
+                  <button
+                    className="font-medium text-kargon-dark hover:text-kargon-red py-2 flex items-center"
                     onClick={() => {
                       setIsMenuOpen(false);
                       signOut();
