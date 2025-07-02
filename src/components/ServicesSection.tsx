@@ -65,7 +65,7 @@ const ServicesSection = () => {
           </p>
         </ScrollAnimation>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map(service => <ScrollAnimation key={service.id} delay={service.delay}>
               <div className="service-card group">
                 <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
