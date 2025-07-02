@@ -12,7 +12,7 @@ const Navigation = () => {
     isAdmin
   } = useAuth();
   const isActive = (path: string) => location.pathname === path;
-  return <header className="fixed top-0 left-0 right-0 w-full z-50 bg-black py-2 shadow-md transition-all duration-300">
+  return <header className="fixed top-0 left-0 right-0 w-full z-50 bg-black shadow-md transition-all duration-300 py-[19px]">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
           {/* Logo Section */}
