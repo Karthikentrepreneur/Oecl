@@ -18,7 +18,7 @@ const Navigation = () => {
           {/* Logo Section */}
           <div className="flex items-center gap-4">
             <img
-              src="/lovable-uploads/GGL.png"
+              src="/oecl.png"
               alt="GGL Logo"
               className="h-16 w-auto cursor-pointer object-fill transition-all duration-300"
             />
