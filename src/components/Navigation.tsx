@@ -19,7 +19,7 @@ const Navigation = () => {
           <div className="flex items-center gap-4">
             <img src="/oecl.png" alt="GGL Logo" className="h-14 w-auto cursor-pointer object-fill transition-all duration-300" />
             <div className="h-8 w-px bg-gray-500 hidden md:block"></div>
-            <img src="/1GlobalEnterprises.png" alt="1 Global Enterprises Logo" className="hidden md:block h-10 w-auto object-contain transition-all duration-300" />
+            <img alt="1 Global Enterprises Logo" className="hidden md:block h-10 w-auto object-contain transition-all duration-300" src="/lovable-uploads/d67654d5-3b39-46c3-a167-8b9a025bbf05.png" />
           </div>
 
           {/* Desktop Navigation */}
