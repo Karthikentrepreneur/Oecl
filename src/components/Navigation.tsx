@@ -3,31 +3,23 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Shield, UserCircle, LogOut } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const { user, signOut, isAdmin } = useAuth();
-
+  const {
+    user,
+    signOut,
+    isAdmin
+  } = useAuth();
   const isActive = (path: string) => location.pathname === path;
-
-  return (
-    <header className="fixed top-0 left-0 right-0 w-full z-50 bg-black py-2 shadow-md transition-all duration-300">
+  return <header className="fixed top-0 left-0 right-0 w-full z-50 bg-black py-2 shadow-md transition-all duration-300">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
           {/* Logo Section */}
           <div className="flex items-center gap-4">
-            <img
-              src="/oecl.png"
-              alt="GGL Logo"
-              className="h-16 w-auto cursor-pointer object-fill transition-all duration-300"
-            />
+            <img src="/oecl.png" alt="GGL Logo" className="h-14 w-auto cursor-pointer object-fill transition-all duration-300" />
             <div className="h-8 w-px bg-gray-500 hidden md:block"></div>
-            <img
-              src="/1GlobalEnterprises.png"
-              alt="1 Global Enterprises Logo"
-              className="hidden md:block h-10 w-auto object-contain transition-all duration-300"
-            />
+            <img src="/1GlobalEnterprises.png" alt="1 Global Enterprises Logo" className="hidden md:block h-10 w-auto object-contain transition-all duration-300" />
           </div>
 
           {/* Desktop Navigation */}
@@ -44,30 +36,23 @@ const Navigation = () => {
             <Link to="/contact" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/contact") ? "text-kargon-red" : ""}`}>
               CONTACT
             </Link>
-            {user && (
-              <Link to="/dashboard" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/dashboard") ? "text-kargon-red" : ""}`}>
+            {user && <Link to="/dashboard" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/dashboard") ? "text-kargon-red" : ""}`}>
                 DASHBOARD
-              </Link>
-            )}
-            {isAdmin && (
-              <Link to="/admin" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/admin") ? "text-kargon-red" : ""}`}>
+              </Link>}
+            {isAdmin && <Link to="/admin" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/admin") ? "text-kargon-red" : ""}`}>
                 ADMIN
-              </Link>
-            )}
+              </Link>}
           </nav>
 
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center gap-4">
-            {user ? (
-              <>
-                {isAdmin && (
-                  <Link to="/admin">
+            {user ? <>
+                {isAdmin && <Link to="/admin">
                     <Button variant="ghost" className="text-white hover:text-kargon-red hover:bg-transparent">
                       <Shield className="mr-2 h-5 w-5" />
                       ADMIN
                     </Button>
-                  </Link>
-                )}
+                  </Link>}
                 <Link to="/dashboard">
                   <Button variant="ghost" className="text-white hover:text-kargon-red hover:bg-transparent">
                     <UserCircle className="mr-2 h-5 w-5" />
@@ -78,9 +63,7 @@ const Navigation = () => {
                   <LogOut className="mr-2 h-5 w-5" />
                   LOGOUT
                 </Button>
-              </>
-            ) : (
-              <>
+              </> : <>
                 <Link to="/login">
                   <Button variant="ghost" className="text-white hover:text-kargon-red hover:bg-transparent">
                     LOGIN
@@ -91,8 +74,7 @@ const Navigation = () => {
                     GET QUOTE
                   </Button>
                 </Link>
-              </>
-            )}
+              </>}
           </div>
 
           {/* Mobile Menu Button */}
@@ -103,8 +85,7 @@ const Navigation = () => {
       </div>
 
       {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-black py-4 shadow-md animate-fade-in">
+      {isMenuOpen && <div className="md:hidden absolute top-full left-0 right-0 bg-black py-4 shadow-md animate-fade-in">
           <div className="container mx-auto px-4">
             <nav className="flex flex-col space-y-4">
               <Link to="/" className={`font-medium text-white hover:text-kargon-red ${isActive("/") ? "text-kargon-red" : ""}`} onClick={() => setIsMenuOpen(false)}>
@@ -119,32 +100,26 @@ const Navigation = () => {
               <Link to="/contact" className={`font-medium text-white hover:text-kargon-red ${isActive("/contact") ? "text-kargon-red" : ""}`} onClick={() => setIsMenuOpen(false)}>
                 CONTACT
               </Link>
-              {user && (
-                <Link to="/dashboard" className={`font-medium text-white hover:text-kargon-red ${isActive("/dashboard") ? "text-kargon-red" : ""}`} onClick={() => setIsMenuOpen(false)}>
+              {user && <Link to="/dashboard" className={`font-medium text-white hover:text-kargon-red ${isActive("/dashboard") ? "text-kargon-red" : ""}`} onClick={() => setIsMenuOpen(false)}>
                   DASHBOARD
-                </Link>
-              )}
-              {isAdmin && (
-                <Link to="/admin" className={`font-medium text-white hover:text-kargon-red ${isActive("/admin") ? "text-kargon-red" : ""}`} onClick={() => setIsMenuOpen(false)}>
+                </Link>}
+              {isAdmin && <Link to="/admin" className={`font-medium text-white hover:text-kargon-red ${isActive("/admin") ? "text-kargon-red" : ""}`} onClick={() => setIsMenuOpen(false)}>
                   ADMIN
-                </Link>
-              )}
-              {user ? (
-                <div className="pt-2">
-                  {isAdmin && (
-                    <Link to="/admin" className="flex items-center text-white hover:text-kargon-red py-2" onClick={() => setIsMenuOpen(false)}>
+                </Link>}
+              {user ? <div className="pt-2">
+                  {isAdmin && <Link to="/admin" className="flex items-center text-white hover:text-kargon-red py-2" onClick={() => setIsMenuOpen(false)}>
                       <Shield className="mr-2 h-5 w-5" /> ADMIN PANEL
-                    </Link>
-                  )}
+                    </Link>}
                   <Link to="/dashboard" className="flex items-center text-white hover:text-kargon-red py-2" onClick={() => setIsMenuOpen(false)}>
                     <UserCircle className="mr-2 h-5 w-5" /> MY ACCOUNT
                   </Link>
-                  <button className="flex items-center text-white hover:text-kargon-red py-2" onClick={() => { setIsMenuOpen(false); signOut(); }}>
+                  <button className="flex items-center text-white hover:text-kargon-red py-2" onClick={() => {
+              setIsMenuOpen(false);
+              signOut();
+            }}>
                     <LogOut className="mr-2 h-5 w-5" /> LOGOUT
                   </button>
-                </div>
-              ) : (
-                <>
+                </div> : <>
                   <Link to="/login" className="text-white hover:text-kargon-red py-2" onClick={() => setIsMenuOpen(false)}>
                     LOGIN
                   </Link>
@@ -153,14 +128,10 @@ const Navigation = () => {
                       GET QUOTE
                     </Button>
                   </Link>
-                </>
-              )}
+                </>}
             </nav>
           </div>
-        </div>
-      )}
-    </header>
-  );
+        </div>}
+    </header>;
 };
-
 export default Navigation;
