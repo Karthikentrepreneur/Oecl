@@ -13,7 +13,7 @@ const HeroSection = () => {
     url: "/h1.png",
     title: "OECL",
     description: "Vital Link to Enhance Your Supply Chain.",
-    gradient: "from-gray-900/80 via-gray-700/60 to-gray-900/80"
+    gradient: "from-black/60 via-black/40 to-black/60"
   }, {
     url: "/h2.png",
     title: "LOGISTICS SERVICES",
