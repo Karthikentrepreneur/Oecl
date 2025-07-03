@@ -1,4 +1,4 @@
-import { Truck, Plane, Ship, Box, UserCheck , Container , Cuboid } from "lucide-react";
+import { Truck, Plane, Ship, Box, UserCheck, Container, Cuboid } from "lucide-react";
 import ScrollAnimation from "./ScrollAnimation";
 const services = [{
   id: 1,
