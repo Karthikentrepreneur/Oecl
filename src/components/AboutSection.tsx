@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import ScrollAnimation from "./ScrollAnimation";
 const AboutSection = () => {
-  return <section className="py-16 bg-milk-texture">
+  return <section className="py-16 bg-milk-texture bg-slate-100">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div className="order-2 lg:order-1">

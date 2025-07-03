@@ -1,13 +1,13 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, User, Phone, Send } from "lucide-react";
-
 const ContactForm = () => {
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,23 +15,27 @@ const ContactForm = () => {
     message: ""
   });
   const [loading, setLoading] = useState(false);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    const {
+      name,
+      value
+    } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    
+
     // Simulate form submission
     setTimeout(() => {
       toast({
         title: "Message Sent",
-        description: "Thank you for contacting us. We'll respond shortly.",
+        description: "Thank you for contacting us. We'll respond shortly."
       });
-      
+
       // Reset form
       setFormData({
         name: "",
@@ -42,9 +46,7 @@ const ContactForm = () => {
       setLoading(false);
     }, 1000);
   };
-
-  return (
-    <section className="py-16 bg-milk-texture">
+  return <section className="py-16 bg-milk-texture bg-slate-100">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-2">Contact Us</h2>
@@ -81,7 +83,7 @@ const ContactForm = () => {
                 
                 <div className="flex items-start">
                   <div className="mr-3 mt-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
                   </div>
                   <div>
                     <p className="font-medium">Address</p>
@@ -98,14 +100,7 @@ const ContactForm = () => {
                     <User className="text-gray-400 mr-2" size={18} />
                     <label htmlFor="name" className="font-medium text-gray-700">Full Name</label>
                   </div>
-                  <Input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Your name"
-                    required
-                  />
+                  <Input id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Your name" required />
                 </div>
                 
                 <div className="space-y-2">
@@ -113,15 +108,7 @@ const ContactForm = () => {
                     <Mail className="text-gray-400 mr-2" size={18} />
                     <label htmlFor="email" className="font-medium text-gray-700">Email Address</label>
                   </div>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Your email address"
-                    required
-                  />
+                  <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="Your email address" required />
                 </div>
                 
                 <div className="space-y-2">
@@ -129,58 +116,34 @@ const ContactForm = () => {
                     <Phone className="text-gray-400 mr-2" size={18} />
                     <label htmlFor="phone" className="font-medium text-gray-700">Phone Number</label>
                   </div>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="Your phone number (optional)"
-                  />
+                  <Input id="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="Your phone number (optional)" />
                 </div>
                 
                 <div className="space-y-2">
                   <div className="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-message-square text-gray-400 mr-2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-message-square text-gray-400 mr-2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
                     <label htmlFor="message" className="font-medium text-gray-700">Message</label>
                   </div>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="How can we help you?"
-                    rows={4}
-                    required
-                  />
+                  <Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="How can we help you?" rows={4} required />
                 </div>
                 
-                <Button 
-                  type="submit" 
-                  className="bg-kargon-red hover:bg-kargon-red/90 text-white w-full"
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <span className="flex items-center justify-center">
+                <Button type="submit" className="bg-kargon-red hover:bg-kargon-red/90 text-white w-full" disabled={loading}>
+                  {loading ? <span className="flex items-center justify-center">
                       <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
                       Sending Message...
-                    </span>
-                  ) : (
-                    <span className="flex items-center justify-center">
+                    </span> : <span className="flex items-center justify-center">
                       <Send size={18} className="mr-2" />
                       Send Message
-                    </span>
-                  )}
+                    </span>}
                 </Button>
               </form>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ContactForm;

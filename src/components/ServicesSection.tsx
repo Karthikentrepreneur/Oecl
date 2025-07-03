@@ -24,13 +24,13 @@ const services = [{
   icon: Truck,
   image: "/lovable-uploads/3a1b8055-f4b1-4340-ac19-94530c129084.png",
   delay: 300
-},{
+}, {
   id: 5,
   title: "Road Freight",
   icon: Truck,
   image: "/lovable-uploads/3a1b8055-f4b1-4340-ac19-94530c129084.png",
   delay: 300
-},{
+}, {
   id: 6,
   title: "Warehousing",
   icon: Box,
@@ -56,7 +56,7 @@ const services = [{
   delay: 300
 }];
 const ServicesSection = () => {
-  return <section className="py-16">
+  return <section className="py-16 bg-slate-100">
       <div className="container mx-auto px-4 md:px-6">
         <ScrollAnimation className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
