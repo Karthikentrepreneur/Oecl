@@ -59,7 +59,7 @@ const ServicesSection = () => {
   return <section className="py-16 bg-slate-100">
       <div className="container mx-auto px-4 md:px-6">
         <ScrollAnimation className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
+          <h2 className="text-3xl font-bold mb-4 md:text-5xl">Our Services</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             We provide comprehensive logistics solutions tailored to meet your specific needs.
           </p>
