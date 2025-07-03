@@ -113,19 +113,6 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-black/40 z-[2]" />
       </div>
 
-      {/* Floating Elements */}
-      <div className="absolute inset-0 z-[3] pointer-events-none">
-        <div className="absolute w-96 h-96 bg-gradient-to-r from-red-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse" style={{
-        left: `${mousePosition.x * 0.05}px`,
-        top: `${mousePosition.y * 0.05}px`,
-        transform: 'translate(-50%, -50%)'
-      }} />
-        <div className="absolute w-64 h-64 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-full blur-2xl animate-pulse" style={{
-        right: `${mousePosition.x * 0.03}px`,
-        bottom: `${mousePosition.y * 0.03}px`,
-        transform: 'translate(50%, 50%)'
-      }} />
-      </div>
 
       {/* Main Content */}
       <div className="relative z-20 flex items-center min-h-screen px-6 lg:px-12">
