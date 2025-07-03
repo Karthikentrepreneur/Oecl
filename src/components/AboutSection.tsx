@@ -7,7 +7,7 @@ const AboutSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div className="order-2 lg:order-1">
             <ScrollAnimation>
-              <h2 className="text-3xl md:text-4xl font-bold mb-2">grow transport.</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-2">About Us</h2>
               <div className="w-16 h-1 bg-kargon-red mb-6"></div>
               <div className="space-y-4 mb-8">
                 <div className="flex items-start">
