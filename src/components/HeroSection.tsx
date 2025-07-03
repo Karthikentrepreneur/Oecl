@@ -10,22 +10,22 @@ const HeroSection = () => {
     y: 0
   });
   const sliderImages = [{
-    url: "/lovable-uploads/9bc9bb5d-5345-4122-9396-f69e5f467fc3.png",
+    url: "/h1.png",
     title: "OECL",
     description: "Vital Link to Enhance Your Supply Chain.",
     gradient: "from-gray-900/80 via-gray-700/60 to-gray-900/80"
   }, {
-    url: "/truck12.png",
+    url: "/h2.png",
     title: "LOGISTICS SERVICES",
     description: "Supported through own offices and network of key partners around the world.",
     gradient: "from-gray-900/80 via-gray-700/60 to-gray-900/80"
   }, {
-    url: "/ships.png",
+    url: "/h3.png",
     title: "WAREHOUSE MANAGEMENT",
     description: "A cutting edge solutions with advanced WMS .",
     gradient: "from-gray-900/80 via-gray-700/60 to-gray-900/80"
   }, {
-    url: "/cargoplane.png",
+    url: "/h4.png",
     title: "MULTIPLE CARRIER OPTION",
     description: "Assured space with contracted rates to major trade routes .",
     gradient: "from-gray-900/80 via-gray-700/60 to-gray-900/80"
