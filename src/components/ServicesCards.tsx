@@ -26,6 +26,6 @@ const ServiceCard = ({
     </ScrollAnimation>;
 };
 const ServicesCards = () => {
-  return;
+  return null;
 };
 export default ServicesCards;
