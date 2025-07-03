@@ -26,7 +26,7 @@ const AboutSection = () => {
                 </div>
               </div>
               <div className="flex flex-wrap gap-4">
-                <Button className="bg-kargon-red hover:bg-kargon-red/90 text-white rounded-md">Know More</Button>
+                <Button className="bg-kargon-red hover:bg-kargon-red/90 text-white rounded-md">Know More...</Button>
                 
               </div>
             </ScrollAnimation>
