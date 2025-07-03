@@ -33,11 +33,11 @@ const AboutSection = () => {
           </div>
           <div className="order-1 lg:order-2">
             <ScrollAnimation delay={200} className="relative">
-              <img src="/lovable-uploads/1e21aeaa-540f-4dde-8a28-4ab829e83c16.png" alt="Container Port" className="rounded-lg shadow-lg w-full object-cover" style={{
+              <img alt="Container Port" className="rounded-lg shadow-lg w-full object-cover" style={{
               height: '400px'
-            }} />
+            }} src="/lovable-uploads/14af4f37-de1e-4e64-b5d7-b6a53ec592d7.png" />
               <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-lg shadow-lg">
-                <div className="text-5xl font-bold text-kargon-red">10M+</div>
+                <div className="text-5xl font-bold text-kargon-red">1M+</div>
                 <div className="font-medium">Successful Deliveries</div>
               </div>
             </ScrollAnimation>
