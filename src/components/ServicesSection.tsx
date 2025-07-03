@@ -1,4 +1,4 @@
-import { Truck, Plane, Ship, Box, UserCheck, Container, Cuboid } from "lucide-react";
+import { Truck, Plane, Ship, Box, UserCheck, Box, Cuboid } from "lucide-react";
 import ScrollAnimation from "./ScrollAnimation";
 const services = [{
   id: 1,
@@ -27,7 +27,7 @@ const services = [{
 }, {
   id: 5,
   title: "Linear Agency",
-  icon: Container,
+  icon: Box,
   image: "/lovable-uploads/3a1b8055-f4b1-4340-ac19-94530c129084.png",
   delay: 300
 }, {
