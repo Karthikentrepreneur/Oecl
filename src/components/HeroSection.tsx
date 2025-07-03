@@ -11,24 +11,24 @@ const HeroSection = () => {
   });
   const sliderImages = [{
     url: "/lovable-uploads/9bc9bb5d-5345-4122-9396-f69e5f467fc3.png",
-    title: "Delivering Excellence in Global Logistics Solutions",
-    description: "GGL brings over 25 years of expertise in international logistics, offering comprehensive solutions tailored to your business needs.",
-    gradient: "from-blue-900/80 via-purple-900/60 to-red-900/80"
+    title: "OECL",
+    description: "Vital Link to Enhance Your Supply Chain.",
+    gradient: "from-gray-900/80 via-gray-700/60 to-gray-900/80"
   }, {
     url: "/truck12.png",
-    title: "Seamless Road Freight Across Borders",
-    description: "Our truck freight services are optimized for speed, safety, and reliability from start to finish.",
-    gradient: "from-green-900/80 via-teal-900/60 to-blue-900/80"
+    title: "LOGISTICS SERVICES",
+    description: "Supported through own offices and network of key partners around the world.",
+    gradient: "from-gray-900/80 via-gray-700/60 to-gray-900/80"
   }, {
     url: "/ships.png",
-    title: "Shipping Solutions That Navigate Success",
-    description: "Efficient ocean freight services that guarantee timely and cost-effective global shipping.",
-    gradient: "from-cyan-900/80 via-blue-900/60 to-indigo-900/80"
+    title: "WAREHOUSE MANAGEMENT",
+    description: "A cutting edge solutions with advanced WMS .",
+    gradient: "from-gray-900/80 via-gray-700/60 to-gray-900/80"
   }, {
     url: "/cargoplane.png",
-    title: "Air Freight With Sky-High Standards",
-    description: "Fast, secure, and trackable air cargo solutions for urgent shipments worldwide.",
-    gradient: "from-orange-900/80 via-red-900/60 to-pink-900/80"
+    title: "MULTIPLE CARRIER OPTION",
+    description: "Assured space with contracted rates to major trade routes .",
+    gradient: "from-gray-900/80 via-gray-700/60 to-gray-900/80"
   }];
   const portalLinks = [{
     icon: <Users className="w-5 h-5 sm:w-6 sm:h-6" />,
