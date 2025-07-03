@@ -6,6 +6,10 @@ import {
   Ship,
   Calendar,
   Globe,
+  ArrowRight,
+  Play,
+  Sparkles,
+  Zap,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -13,6 +17,7 @@ const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
   const [isCustomerPortalOpen, setIsCustomerPortalOpen] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const sliderImages = [
     {
@@ -20,56 +25,75 @@ const HeroSection = () => {
       title: "Delivering Excellence in Global Logistics Solutions",
       description:
         "GGL brings over 25 years of expertise in international logistics, offering comprehensive solutions tailored to your business needs.",
+      gradient: "from-blue-900/80 via-purple-900/60 to-red-900/80",
     },
     {
       url: "/truck12.png",
       title: "Seamless Road Freight Across Borders",
       description:
         "Our truck freight services are optimized for speed, safety, and reliability from start to finish.",
+      gradient: "from-green-900/80 via-teal-900/60 to-blue-900/80",
     },
     {
       url: "/ships.png",
       title: "Shipping Solutions That Navigate Success",
       description:
         "Efficient ocean freight services that guarantee timely and cost-effective global shipping.",
+      gradient: "from-cyan-900/80 via-blue-900/60 to-indigo-900/80",
     },
     {
       url: "/cargoplane.png",
       title: "Air Freight With Sky-High Standards",
       description:
         "Fast, secure, and trackable air cargo solutions for urgent shipments worldwide.",
+      gradient: "from-orange-900/80 via-red-900/60 to-pink-900/80",
     },
   ];
 
   const portalLinks = [
     {
-      icon: <Users className="w-4 h-4 sm:w-5 sm:h-5" />,
+      icon: <Users className="w-5 h-5 sm:w-6 sm:h-6" />,
       title: "Customer Portal",
+      subtitle: "Access your account",
       onClick: () => setIsCustomerPortalOpen(true),
+      color: "from-blue-500 to-blue-700",
+      hoverColor: "from-blue-600 to-blue-800",
     },
     {
-      icon: <UserCircle className="w-4 h-4 sm:w-5 sm:h-5" />,
+      icon: <UserCircle className="w-5 h-5 sm:w-6 sm:h-6" />,
       title: "Partner Portal",
+      subtitle: "Partner dashboard",
       url: "https://pp.onlinetracking.co/auth/login/3",
       external: true,
+      color: "from-purple-500 to-purple-700",
+      hoverColor: "from-purple-600 to-purple-800",
     },
     {
-      icon: <SearchCode className="w-4 h-4 sm:w-5 sm:h-5" />,
+      icon: <SearchCode className="w-5 h-5 sm:w-6 sm:h-6" />,
       title: "Tracking",
+      subtitle: "Track shipments",
       url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:102:::::P0_GROUP_RID:59",
       external: true,
+      color: "from-green-500 to-green-700",
+      hoverColor: "from-green-600 to-green-800",
     },
     {
-      icon: <Ship className="w-4 h-4 sm:w-5 sm:h-5" />,
+      icon: <Ship className="w-5 h-5 sm:w-6 sm:h-6" />,
       title: "Sailing Schedule",
+      subtitle: "View schedules",
       url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:104:::::P0_GROUP_RID:59",
       external: true,
+      color: "from-cyan-500 to-cyan-700",
+      hoverColor: "from-cyan-600 to-cyan-800",
     },
     {
-      icon: <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />,
+      icon: <Calendar className="w-5 h-5 sm:w-6 sm:h-6" />,
       title: "Online Quote",
+      subtitle: "Get instant quote",
       url: "/contact",
       external: false,
+      color: "from-orange-500 to-orange-700",
+      hoverColor: "from-orange-600 to-orange-800",
     },
   ];
 
@@ -81,81 +105,199 @@ const HeroSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % sliderImages.length);
-    }, 5000);
+    }, 6000);
     return () => clearInterval(interval);
   }, [sliderImages.length]);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   const currentSlide = sliderImages[activeSlide];
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-black text-white">
+      {/* Animated Background Particles */}
+      <div className="absolute inset-0 z-0">
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-white/20 rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 3}s`,
+            }}
+          />
+        ))}
+      </div>
+
       {/* Background Slider */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+      <div className="absolute inset-0 z-10 overflow-hidden">
         {sliderImages.map((slide, i) => (
           <div
             key={i}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              activeSlide === i ? "opacity-100" : "opacity-0"
+            className={`absolute inset-0 transition-all duration-2000 ease-in-out ${
+              activeSlide === i 
+                ? "opacity-100 scale-100" 
+                : "opacity-0 scale-105"
             }`}
             style={{ zIndex: activeSlide === i ? 1 : 0 }}
           >
             <img
               src={slide.url}
               alt={`Slide ${i}`}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-2000"
               loading={i === 0 ? "eager" : "lazy"}
             />
+            <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient} z-[1]`} />
           </div>
         ))}
-        <div className="absolute inset-0 bg-black/60 z-[1]" />
+        <div className="absolute inset-0 bg-black/40 z-[2]" />
       </div>
 
-      {/* Text and Title */}
-      <div className="relative z-10 flex items-center min-h-screen px-6">
-        <div className="max-w-3xl space-y-6">
-          <div className="flex items-center gap-3">
-            <div className="text-red-500 animate-spin-slow">
-              <Globe className="w-8 h-8 drop-shadow-[0_0_8px_rgba(255,80,80,0.8)]" />
+      {/* Floating Elements */}
+      <div className="absolute inset-0 z-[3] pointer-events-none">
+        <div 
+          className="absolute w-96 h-96 bg-gradient-to-r from-red-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse"
+          style={{
+            left: `${mousePosition.x * 0.05}px`,
+            top: `${mousePosition.y * 0.05}px`,
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
+        <div 
+          className="absolute w-64 h-64 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-full blur-2xl animate-pulse"
+          style={{
+            right: `${mousePosition.x * 0.03}px`,
+            bottom: `${mousePosition.y * 0.03}px`,
+            transform: 'translate(50%, 50%)',
+          }}
+        />
+      </div>
+
+      {/* Main Content */}
+      <div className="relative z-20 flex items-center min-h-screen px-6 lg:px-12">
+        <div className="max-w-4xl space-y-8">
+          {/* Badge */}
+          <div 
+            className={`flex items-center gap-4 transform transition-all duration-1000 ${
+              isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+            }`}
+          >
+            <div className="relative">
+              <div className="absolute inset-0 bg-red-500/30 rounded-full blur-xl animate-pulse" />
+              <div className="relative text-red-400 animate-spin-slow">
+                <Globe className="w-10 h-10 drop-shadow-[0_0_12px_rgba(239,68,68,0.8)]" />
+              </div>
             </div>
-            <span className="bg-red-500/20 text-white px-3 py-1 rounded-full text-xs sm:text-sm font-medium border border-red-500/30">
-              Beyond Logistics, a Complete Solution
-            </span>
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-yellow-400 animate-pulse" />
+              <span className="bg-gradient-to-r from-red-500/20 to-purple-500/20 backdrop-blur text-white px-4 py-2 rounded-full text-sm font-medium border border-red-500/40 shadow-lg">
+                Beyond Logistics, a Complete Solution
+              </span>
+            </div>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
+
+          {/* Title */}
+          <h1 
+            className={`text-4xl md:text-6xl lg:text-7xl font-bold leading-tight transform transition-all duration-1000 delay-300 ${
+              isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+            }`}
+          >
             {currentSlide.title.split(" ").map((word, i) => (
               <span
                 key={i}
-                className={`${
-                  i % 6 === 0 ? "text-red-500" : ""
-                } transition-all duration-500`}
+                className={`inline-block transform transition-all duration-500 hover:scale-105 ${
+                  i % 6 === 0 
+                    ? "bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg" 
+                    : "text-white drop-shadow-md"
+                }`}
+                style={{
+                  animationDelay: `${i * 0.1}s`,
+                }}
               >
                 {word}{" "}
               </span>
             ))}
           </h1>
-          <p className="text-lg text-white/90">{currentSlide.description}</p>
-          <Link to="/signup">
-            <button className="bg-red-600 hover:bg-red-700 text-white rounded-md px-6 py-4 text-lg flex items-center gap-2 shadow-lg">
-              GET STARTED
+
+          {/* Description */}
+          <p 
+            className={`text-xl md:text-2xl text-gray-200 max-w-2xl leading-relaxed transform transition-all duration-1000 delay-500 ${
+              isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+            }`}
+          >
+            {currentSlide.description}
+          </p>
+
+          {/* CTA Button */}
+          <div 
+            className={`flex flex-col sm:flex-row gap-4 transform transition-all duration-1000 delay-700 ${
+              isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+            }`}
+          >
+            <Link to="/signup" className="group">
+              <button className="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl px-8 py-4 text-lg font-semibold flex items-center gap-3 shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-red-500/30 border border-red-500/30">
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                <Zap className="w-5 h-5" />
+                <span>GET STARTED</span>
+                <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+              </button>
+            </Link>
+            
+            <button className="group bg-white/10 backdrop-blur hover:bg-white/20 text-white rounded-xl px-8 py-4 text-lg font-semibold flex items-center gap-3 border border-white/20 hover:border-white/40 transition-all duration-300">
+              <Play className="w-5 h-5" />
+              <span>Watch Demo</span>
             </button>
-          </Link>
+          </div>
+
+          {/* Slide Indicators */}
+          <div className="flex space-x-2 pt-4">
+            {sliderImages.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveSlide(i)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  activeSlide === i
+                    ? "bg-red-500 scale-125 shadow-lg shadow-red-500/50"
+                    : "bg-white/30 hover:bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Portal Buttons */}
-      <div className="absolute bottom-6 left-0 right-0 z-10 px-4">
+      {/* Enhanced Portal Buttons */}
+      <div className="absolute bottom-6 left-0 right-0 z-20 px-4">
         <div
-          className={`max-w-7xl mx-auto transition-all duration-800 ${
+          className={`max-w-7xl mx-auto transition-all duration-1000 delay-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
           }`}
         >
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-3 bg-white/10 backdrop-blur p-3 rounded-lg shadow-md">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 bg-white/5 backdrop-blur-xl p-4 rounded-2xl shadow-2xl border border-white/10">
             {portalLinks.map((link, index) => {
               const ButtonContent = (
-                <button className="w-full h-14 flex flex-col gap-1 items-center justify-center text-xs sm:text-sm bg-red-600 hover:bg-red-700 text-white transition-all duration-300 rounded-lg shadow hover:scale-105">
-                  {link.icon}
-                  <span className="font-medium leading-none">{link.title}</span>
-                </button>
+                <div className="group relative overflow-hidden w-full h-20 sm:h-24 flex flex-col gap-2 items-center justify-center text-xs sm:text-sm transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${link.color} opacity-90 group-hover:opacity-100 transition-opacity`} />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${link.hoverColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                  <div className="relative z-10 flex flex-col items-center gap-1">
+                    <div className="p-2 bg-white/20 rounded-lg group-hover:bg-white/30 transition-colors">
+                      {link.icon}
+                    </div>
+                    <div className="text-center">
+                      <div className="font-semibold text-white leading-tight">{link.title}</div>
+                      <div className="text-xs text-white/80 leading-tight">{link.subtitle}</div>
+                    </div>
+                  </div>
+                </div>
               );
 
               if (link.external) {
@@ -172,15 +314,13 @@ const HeroSection = () => {
                 );
               } else if (link.onClick) {
                 return (
-                  <div key={index} className="w-full">
-                    <button
-                      onClick={link.onClick}
-                      className="w-full h-14 flex flex-col gap-1 items-center justify-center text-xs sm:text-sm bg-red-600 hover:bg-red-700 text-white transition-all duration-300 rounded-lg shadow hover:scale-105"
-                    >
-                      {link.icon}
-                      <span className="font-medium leading-none">{link.title}</span>
-                    </button>
-                  </div>
+                  <button
+                    key={index}
+                    onClick={link.onClick}
+                    className="w-full"
+                  >
+                    {ButtonContent}
+                  </button>
                 );
               } else {
                 return (
@@ -194,56 +334,84 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Enhanced Modal */}
       {isCustomerPortalOpen && (
-        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-red-700">Customer Portal</h2>
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl border border-gray-200 animate-in slide-in-from-bottom duration-500">
+            <div className="bg-gradient-to-r from-red-600 to-red-700 p-6">
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-white/20 rounded-lg">
+                    <Users className="w-6 h-6 text-white" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-white">Customer Portal</h2>
+                </div>
                 <button
                   onClick={() => setIsCustomerPortalOpen(false)}
-                  className="text-gray-500 hover:text-gray-700 text-2xl"
+                  className="text-white/80 hover:text-white hover:bg-white/20 rounded-full p-2 transition-all duration-200"
                 >
-                  ×
+                  <span className="text-2xl">×</span>
                 </button>
               </div>
-              <div className="space-y-4">
-                <h3 className="font-medium text-gray-800">Tutorial Videos</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            </div>
+            
+            <div className="p-6 overflow-y-auto">
+              <div className="space-y-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <Play className="w-5 h-5 text-red-600" />
+                  <h3 className="text-xl font-semibold text-gray-800">Tutorial Videos</h3>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
-                    { src: "/GGL_demo1.mp4", label: "Getting Started" },
-                    { src: "/GGL_promo.mp4", label: "Advanced Features" },
+                    { src: "/GGL_demo1.mp4", label: "Getting Started", duration: "5:32" },
+                    { src: "/GGL_promo.mp4", label: "Advanced Features", duration: "7:45" },
                   ].map((video, i) => (
                     <div
                       key={i}
-                      className="border rounded-lg overflow-hidden bg-gray-50"
+                      className="group border-2 border-gray-200 rounded-xl overflow-hidden bg-gray-50 hover:border-red-300 transition-all duration-300 hover:shadow-lg"
                     >
-                      <div className="aspect-video">
-                        <video controls className="w-full h-full object-cover">
+                      <div className="aspect-video relative">
+                        <video 
+                          controls 
+                          className="w-full h-full object-cover"
+                          poster={`/video-thumbnail-${i + 1}.jpg`}
+                        >
                           <source src={video.src} type="video/mp4" />
                           Your browser does not support the video tag.
                         </video>
+                        <div className="absolute top-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-xs">
+                          {video.duration}
+                        </div>
                       </div>
-                      <div className="p-2 text-sm font-medium">{video.label}</div>
+                      <div className="p-4">
+                        <h4 className="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">
+                          {video.label}
+                        </h4>
+                        <p className="text-sm text-gray-600 mt-1">
+                          Learn how to use the portal effectively
+                        </p>
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="mt-6 flex justify-end gap-4">
+              
+              <div className="mt-8 flex flex-col sm:flex-row justify-end gap-3 pt-6 border-t">
                 <button
                   onClick={() => setIsCustomerPortalOpen(false)}
-                  className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
+                  className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
                 >
-                  Cancel
+                  Close
                 </button>
                 <a
                   href="https://cp.onlinetracking.co/#/login/3"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <button className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
-                    Login
+                  <button className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-lg font-medium flex items-center gap-2 justify-center transition-all duration-300 shadow-lg hover:shadow-xl">
+                    <span>Login to Portal</span>
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 </a>
               </div>
