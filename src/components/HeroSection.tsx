@@ -116,7 +116,7 @@ const HeroSection = () => {
 
       {/* Main Content */}
       <div className="relative z-20 flex items-center min-h-screen px-6 lg:px-12">
-        <div className="max-w-4xl space-y-8 px-0 py-0 mx-[180px]">
+        <div className="max-w-4xl space-y-8 px-0 py-0 mx-[200px]">
           {/* Badge */}
           
 
