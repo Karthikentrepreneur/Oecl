@@ -1,115 +1,145 @@
-import { Phone, Mail, MapPin, Facebook, Twitter, Linkedin, Instagram, ArrowRight, Truck } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { motion } from "framer-motion";
+import { MapPin, Phone, Mail, ArrowRight, Facebook, Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const Footer = () => {
+export const Footer = () => {
+  const footerAnimation = {
+    hidden: {
+      opacity: 0,
+      y: 20
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
-    <footer className="bg-kargon-dark text-white pt-16 pb-6">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
-          <div>
-            <div className="flex items-center gap-2 mb-6">
-              <div className="h-10 w-10 bg-kargon-red rounded-full flex items-center justify-center">
-                <Truck className="text-white" size={20} />
-              </div>
-              <span className="ml-2 font-display font-bold text-xl text-white">AURACARGO</span>
-            </div>
-            <p className="text-gray-300 mb-6">
-              We pride ourselves on providing the best logistics and transportation services worldwide.
-            </p>
-            <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <MapPin size={20} className="text-kargon-red shrink-0 mt-1" />
-                <p className="text-gray-300">123 Main Street, Suite 100, New York, NY 10001</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <Phone size={20} className="text-kargon-red" />
-                <a href="tel:+1-234-567-890" className="text-gray-300 hover:text-white transition-colors">
-                  +1 (234) 567-890
-                </a>
-              </div>
-              <div className="flex items-center gap-3">
-                <Mail size={20} className="text-kargon-red" />
-                <a href="mailto:info@auracargo.com" className="text-gray-300 hover:text-white transition-colors">
-                  info@auracargo.com
-                </a>
-              </div>
-            </div>
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-bold mb-6">Quick Links</h3>
-            <div className="grid grid-cols-2 gap-2">
-              <a href="/" className="text-gray-300 hover:text-white transition-colors py-1 flex items-center">
-                <ArrowRight size={14} className="mr-2 text-kargon-red" />
-                Home
-              </a>
-              <a href="/services" className="text-gray-300 hover:text-white transition-colors py-1 flex items-center">
-                <ArrowRight size={14} className="mr-2 text-kargon-red" />
-                Services
-              </a>
-              <a href="/projects" className="text-gray-300 hover:text-white transition-colors py-1 flex items-center">
-                <ArrowRight size={14} className="mr-2 text-kargon-red" />
-                Projects
-              </a>
-              <a href="/contact" className="text-gray-300 hover:text-white transition-colors py-1 flex items-center">
-                <ArrowRight size={14} className="mr-2 text-kargon-red" />
-                Contact
-              </a>
-              <a href="/privacy" className="text-gray-300 hover:text-white transition-colors py-1 flex items-center">
-                <ArrowRight size={14} className="mr-2 text-kargon-red" />
-                Privacy Policy
-              </a>
-              <a href="/terms" className="text-gray-300 hover:text-white transition-colors py-1 flex items-center">
-                <ArrowRight size={14} className="mr-2 text-kargon-red" />
-                Terms of Service
-              </a>
-              <a href="/faq" className="text-gray-300 hover:text-white transition-colors py-1 flex items-center">
-                <ArrowRight size={14} className="mr-2 text-kargon-red" />
-                FAQ
-              </a>
-            </div>
-          </div>
+    <footer className="pt-16 pb-8 bg-gradient-to-b from-white to-gray-100">
+      <div className="container mx-auto px-4">
+        {/* Decorative Line */}
+        <div className="h-1 bg-gradient-to-r from-brand-navy via-brand-gold to-brand-navy rounded-full mb-8"></div>
 
-          <div>
-            <h3 className="text-lg font-bold mb-6">Our Newsletter</h3>
-            <p className="text-gray-300 mb-4">
-              Subscribe to our newsletter to stay updated with the latest news and special offers.
-            </p>
-            <div className="flex gap-2 mb-6">
-              <Input
-                type="email"
-                placeholder="Your email address"
-                className="bg-kargon-dark/40 border-gray-700 focus:border-kargon-red focus:ring-0 text-white"
+        {/* Revised Column Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6 lg:gap-4">
+          {/* Column 1: Logo & About Section */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={footerAnimation}
+            className="flex flex-col items-start"
+          >
+            <div className="mb-4">
+              <img
+                src="/oecl.png"
+                alt="OECL Logo"
+                className="h-14 w-auto object-contain"
+                loading="lazy"
               />
-              <Button className="bg-kargon-red hover:bg-kargon-red/90 px-4 shrink-0">
-                Subscribe
-              </Button>
+              <img
+                src="/1GlobalEnterprises.png"
+                alt="1 Global Enterprises Logo"
+                className="h-10 w-auto object-contain mt-2"
+              />
             </div>
-            <div className="flex gap-4">
-              <a href="#" className="bg-gray-700 hover:bg-kargon-red transition-colors p-2 rounded-full">
+            <p className="text-sm md:text-base text-gray-600 max-w-xs text-left">
+              At OECL, we are proud to be one of Singapore's leading logistics companies. We offer specialized divisions in warehousing, forwarding (air and ocean), and transportation. Our mission is to deliver comprehensive end-to-end solutions in global freight forwarding, managed through a trusted network of partners who excel in all logistics segments.
+            </p>
+            <div className="flex space-x-3 mt-4">
+              <motion.a
+                href="https://www.facebook.com/oeclglobal"
+                target="_blank"
+                className="bg-brand-navy text-white p-2 rounded-full hover:bg-brand-gold transition"
+                whileHover={{ y: -3, scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Facebook size={18} />
-              </a>
-              <a href="#" className="bg-gray-700 hover:bg-kargon-red transition-colors p-2 rounded-full">
-                <Twitter size={18} />
-              </a>
-              <a href="#" className="bg-gray-700 hover:bg-kargon-red transition-colors p-2 rounded-full">
+              </motion.a>
+              <motion.a
+                href="https://www.linkedin.com/company/oeclglobal"
+                target="_blank"
+                className="bg-brand-navy text-white p-2 rounded-full hover:bg-brand-gold transition"
+                whileHover={{ y: -3, scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Linkedin size={18} />
-              </a>
-              <a href="#" className="bg-gray-700 hover:bg-kargon-red transition-colors p-2 rounded-full">
-                <Instagram size={18} />
-              </a>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
+
+          {/* Column 2: Navigation */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={footerAnimation}
+            transition={{ delay: 0.2 }}
+            className="flex flex-col items-start md:items-end lg:items-start lg:pl-10"
+          >
+            <h3 className="font-bold text-lg text-brand-navy mb-4">Navigation</h3>
+            <div className="flex flex-col gap-2">
+              {[
+                { name: "Home", path: "/" },
+                { name: "About", path: "/about" },
+                { name: "Services", path: "/services" },
+                { name: "Contact Us", path: "/contact" },
+                { name: "Privacy Policy", path: "/privacy-policy" },
+                { name: "Terms And Conditions", path: "/terms-and-conditions" }
+              ].map((link, index) => (
+                <Link
+                  key={index}
+                  to={link.path}
+                  className="text-gray-600 hover:text-brand-gold transition flex items-center gap-2"
+                >
+                  <ArrowRight size={14} className="text-brand-gold" />
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Column 3: Contact Info */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={footerAnimation}
+            transition={{ delay: 0.4 }}
+            className="flex flex-col items-start md:items-end lg:items-start lg:pl-10"
+          >
+            <h3 className="font-bold text-lg text-brand-navy mb-4">Contact Us</h3>
+            <div className="space-y-3 text-gray-600">
+              <div className="flex items-start gap-2">
+                <MapPin size={18} className="text-brand-gold mt-1 flex-shrink-0" />
+                <p>
+                  OECL (Singapore) Pte Ltd.<br />
+                  Blk 511 Kampong Bahru Road<br />
+                  #03-01 Keppel Distripark<br />
+                  Singapore - 099447
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone size={18} className="text-brand-gold flex-shrink-0" />
+                <p>+65 69080838</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail size={18} className="text-brand-gold flex-shrink-0" />
+                <p>info@oecl.sg</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
-        <div className="border-t border-gray-700 pt-6 flex flex-col sm:flex-row justify-between items-center text-gray-400 text-sm">
-          <p>
-            Made by <a href="https://x.com/mrcontech" target="_blank" rel="noopener noreferrer" className="text-kargon-red hover:text-white transition-colors">mrcontech</a>
-          </p>
+
+        {/* Footer Bottom */}
+        <div className="text-center text-gray-600 mt-10 text-sm">
+          &copy; {new Date().getFullYear()} OECL. All Rights Reserved.
         </div>
       </div>
     </footer>
   );
 };
-
-export default Footer;
