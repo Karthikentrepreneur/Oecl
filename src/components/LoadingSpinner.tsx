@@ -1,20 +1,25 @@
-
-import { Truck } from 'lucide-react';
-
 interface LoadingSpinnerProps {
   size?: number;
 }
 
-const LoadingSpinner = ({ size = 40 }: LoadingSpinnerProps) => {
+const LoadingSpinner = ({ size = 64 }: LoadingSpinnerProps) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
       <div className="flex flex-col items-center">
         <div className="animate-bounce mb-4">
-          <div className="h-16 w-16 bg-kargon-red rounded-full flex items-center justify-center">
-            <Truck className="text-white" size={size} />
+          <div
+            className="rounded-full flex items-center justify-center overflow-hidden"
+            style={{ height: size, width: size }}
+          >
+            <img
+              src="/oecl.png"
+              alt="OECL Logo"
+              className="object-contain h-full w-full"
+              loading="eager"
+            />
           </div>
         </div>
-        <div className="text-2xl font-bold text-kargon-dark">AuraCargo</div>
+        <div className="text-2xl font-bold text-kargon-dark">OECL</div>
         <div className="mt-4 flex space-x-1">
           <div className="h-3 w-3 bg-kargon-red rounded-full animate-pulse"></div>
           <div className="h-3 w-3 bg-kargon-red rounded-full animate-pulse delay-150"></div>
