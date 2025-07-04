@@ -25,6 +25,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
 import NewsDetailPage from "./pages/NewsDetailPage";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 const queryClient = new QueryClient();
 
