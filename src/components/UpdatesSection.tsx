@@ -1,6 +1,5 @@
 import { Truck, Clock, Gift, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import ScrollAnimation from "./ScrollAnimation";
 const features = [{
   id: 1,
   title: "Fast Delivery",
