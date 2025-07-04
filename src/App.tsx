@@ -15,6 +15,10 @@ import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
+import IndiaHome from "./pages/IndiaHome";
+import IndonesiaHome from "./pages/IndonesiaHome";
+import MalaysiaHome from "./pages/MalaysiaHome";
+import ThailandHome from "./pages/ThailandHome";
 import LoadingSpinner from "./components/LoadingSpinner";
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -54,6 +58,10 @@ const App = () => {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                 <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+                <Route path="/india/home" element={<IndiaHome />} />
+                <Route path="/indonesia/home" element={<IndonesiaHome />} />
+                <Route path="/malaysia/home" element={<MalaysiaHome />} />
+                <Route path="/thailand/home" element={<ThailandHome />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
