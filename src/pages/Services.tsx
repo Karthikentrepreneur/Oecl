@@ -43,7 +43,7 @@ const ServiceCard = ({
         </div>
         <h3 className="text-xl font-semibold mb-3 text-slate-50">{title}</h3>
         <p className="text-sm mb-4 line-clamp-4 text-slate-200">{description}</p>
-        <Link to={link} className="text-white-600 font-medium hover:text-red-800 inline-flex items-center text-sm">
+        <Link to={link} className="text-black font-medium hover:text-red-800 inline-flex items-center text-sm">
           Learn More
           <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
