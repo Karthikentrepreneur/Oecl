@@ -27,6 +27,9 @@ const Navigation = () => {
             <Link to="/" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/") ? "text-kargon-red" : ""}`}>
               HOME
             </Link>
+            <Link to="/about-us" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/services") ? "text-kargon-red" : ""}`}>
+              ABOUT US
+            </Link>
             <Link to="/services" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/services") ? "text-kargon-red" : ""}`}>
               SERVICES
             </Link>
