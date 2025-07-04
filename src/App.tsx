@@ -12,7 +12,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Services from "./pages/Services";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
-import aboutus from "./pages/aboutus";
+import AboutUs from "./pages/aboutus";
 import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
