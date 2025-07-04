@@ -2,31 +2,23 @@ import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, ArrowRight, Facebook, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export const Footer = () => {
+const Footer = () => {
   const footerAnimation = {
-    hidden: {
-      opacity: 0,
-      y: 20
-    },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    }
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
   };
 
   return (
     <footer className="pt-16 pb-8 bg-gradient-to-b from-white to-gray-100">
       <div className="container mx-auto px-4">
-        {/* Decorative Line */}
-        <div className="h-1 bg-gradient-to-r from-brand-navy via-brand-gold to-brand-navy rounded-full mb-8"></div>
+        <div className="h-1 bg-gradient-to-r from-brand-navy via-brand-gold to-brand-navy rounded-full mb-8" />
 
-        {/* Revised Column Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6 lg:gap-4">
-          {/* Column 1: Logo & About Section */}
+          {/* Column 1: Logo & About */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -35,17 +27,8 @@ export const Footer = () => {
             className="flex flex-col items-start"
           >
             <div className="mb-4">
-              <img
-                src="/oecl.png"
-                alt="OECL Logo"
-                className="h-14 w-auto object-contain"
-                loading="lazy"
-              />
-              <img
-                src="/1GlobalEnterprises.png"
-                alt="1 Global Enterprises Logo"
-                className="h-10 w-auto object-contain mt-2"
-              />
+              <img src="/oecl.png" alt="OECL Logo" className="h-14 w-auto object-contain" loading="lazy" />
+              <img src="/1GlobalEnterprises.png" alt="1 Global Enterprises Logo" className="h-10 w-auto object-contain mt-2" />
             </div>
             <p className="text-sm md:text-base text-gray-600 max-w-xs text-left">
               At OECL, we are proud to be one of Singapore's leading logistics companies. We offer specialized divisions in warehousing, forwarding (air and ocean), and transportation. Our mission is to deliver comprehensive end-to-end solutions in global freight forwarding, managed through a trusted network of partners who excel in all logistics segments.
@@ -89,7 +72,7 @@ export const Footer = () => {
                 { name: "Services", path: "/services" },
                 { name: "Contact Us", path: "/contact" },
                 { name: "Privacy Policy", path: "/privacy-policy" },
-                { name: "Terms And Conditions", path: "/terms-and-conditions" }
+                { name: "Terms And Conditions", path: "/terms-and-conditions" },
               ].map((link, index) => (
                 <Link
                   key={index}
@@ -135,7 +118,7 @@ export const Footer = () => {
           </motion.div>
         </div>
 
-        {/* Footer Bottom */}
+        {/* Bottom Line */}
         <div className="text-center text-gray-600 mt-10 text-sm">
           &copy; {new Date().getFullYear()} OECL. All Rights Reserved.
         </div>
@@ -143,3 +126,5 @@ export const Footer = () => {
     </footer>
   );
 };
+
+export default Footer;
