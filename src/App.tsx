@@ -17,6 +17,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 import IndiaHome from "./pages/IndiaHome";
 import NewsOverviewPage from "./pages/NewsOverviewPage";
+import Blog from "./pages/Blog";
 import IndonesiaHome from "./pages/IndonesiaHome";
 import MalaysiaHome from "./pages/MalaysiaHome";
 import ThailandHome from "./pages/ThailandHome";
@@ -24,6 +25,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
 import NewsDetailPage from "./pages/NewsDetailPage";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 const queryClient = new QueryClient();
 
@@ -56,7 +58,7 @@ const App = () => {
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/projects" element={<Projects />} />
-                <Route path="/blog" element={<NewsOverviewPage />} />
+                <Route path="/blog" element={<Blog />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                 <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />

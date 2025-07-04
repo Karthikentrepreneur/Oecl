@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, User, Tag } from "lucide-react";
-import Navbar from '@/components/Navbar';
+import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { newsItems } from '@/data/newsData'; // Wir werden diese Datei gleich erstellen
 import { NewsItem } from '@/types/newsTypes'; // Wir werden diese Datei gleich erstellen
@@ -118,7 +118,7 @@ const NewsDetailPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <Navbar />
+      <Navigation />
       <div className="container mx-auto px-4 py-12">
         <div className="mb-6">
           <Button asChild variant="outline" className="mb-8">
