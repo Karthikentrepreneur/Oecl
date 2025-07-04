@@ -1,0 +1,380 @@
+import React, { useState, useEffect } from "react";
+import { Users, UserCircle, SearchCode, Ship, Calendar, Globe, ArrowRight, Play, Sparkles, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
+
+interface HeroSectionProps {
+  country?: 'india' | 'indonesia' | 'malaysia' | 'thailand';
+}
+
+const HeroSection = ({ country }: HeroSectionProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isCustomerPortalOpen, setIsCustomerPortalOpen] = useState(false);
+
+  // Country-specific content
+  const countryContent = {
+    india: {
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+          title: "INDIA LOGISTICS",
+          description: "Your trusted partner for comprehensive logistics solutions across India.",
+          gradient: "from-orange-600/60 via-orange-500/40 to-red-600/60"
+        },
+        {
+          url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+          title: "FREIGHT FORWARDING",
+          description: "Seamless freight services connecting India to the world.",
+          gradient: "from-blue-600/60 via-blue-500/40 to-indigo-600/60"
+        }
+      ]
+    },
+    indonesia: {
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+          title: "INDONESIA MARITIME",
+          description: "Connecting the archipelago with world-class shipping solutions.",
+          gradient: "from-emerald-600/60 via-teal-500/40 to-cyan-600/60"
+        },
+        {
+          url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+          title: "ISLAND LOGISTICS",
+          description: "Specialized logistics for Indonesia's unique geography.",
+          gradient: "from-blue-700/60 via-blue-600/40 to-indigo-700/60"
+        }
+      ]
+    },
+    malaysia: {
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+          title: "MALAYSIA HUB",
+          description: "Strategic logistics hub for Southeast Asian trade.",
+          gradient: "from-red-600/60 via-red-500/40 to-yellow-600/60"
+        },
+        {
+          url: "https://images.unsplash.com/photo-1568454537842-d933259bb258?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+          title: "TRADE GATEWAY",
+          description: "Your gateway to efficient cross-border logistics.",
+          gradient: "from-purple-600/60 via-purple-500/40 to-pink-600/60"
+        }
+      ]
+    },
+    thailand: {
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1539650116574-75c0c6d3e9e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+          title: "THAILAND EXPRESS",
+          description: "Fast and reliable logistics solutions throughout Thailand.",
+          gradient: "from-purple-600/60 via-indigo-500/40 to-blue-600/60"
+        },
+        {
+          url: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+          title: "REGIONAL NETWORK",
+          description: "Comprehensive coverage across the Thai region.",
+          gradient: "from-amber-600/60 via-orange-500/40 to-red-600/60"
+        }
+      ]
+    }
+  };
+
+  const defaultImages = [
+    {
+      url: "/h1.png",
+      title: "OECL",
+      description: "Vital Link to Enhance Your Supply Chain.",
+      gradient: "from-black/60 via-black/40 to-black/60"
+    },
+    {
+      url: "/h2.png", 
+      title: "LOGISTICS SERVICES",
+      description: "Supported through own offices and network of key partners around the world.",
+      gradient: "from-black/60 via-black/40 to-black/60"
+    }
+  ];
+
+  const sliderImages = country ? countryContent[country].images : defaultImages;
+
+  const portalLinks = [
+    {
+      icon: <Users className="w-5 h-5 sm:w-6 sm:h-6" />,
+      title: "Customer Portal",
+      subtitle: "Access your account",
+      onClick: () => setIsCustomerPortalOpen(true),
+      color: "from-blue-500 to-blue-700",
+      hoverColor: "from-blue-600 to-blue-800"
+    },
+    {
+      icon: <UserCircle className="w-5 h-5 sm:w-6 sm:h-6" />,
+      title: "Partner Portal", 
+      subtitle: "Partner dashboard",
+      url: "https://pp.onlinetracking.co/auth/login/3",
+      external: true,
+      color: "from-purple-500 to-purple-700",
+      hoverColor: "from-purple-600 to-purple-800"
+    },
+    {
+      icon: <SearchCode className="w-5 h-5 sm:w-6 sm:h-6" />,
+      title: "Tracking",
+      subtitle: "Track shipments", 
+      url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:102:::::P0_GROUP_RID:59",
+      external: true,
+      color: "from-green-500 to-green-700",
+      hoverColor: "from-green-600 to-green-800"
+    },
+    {
+      icon: <Ship className="w-5 h-5 sm:w-6 sm:h-6" />,
+      title: "Sailing Schedule",
+      subtitle: "View schedules",
+      url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:104:::::P0_GROUP_RID:59",
+      external: true,
+      color: "from-cyan-500 to-cyan-700",
+      hoverColor: "from-cyan-600 to-cyan-800"
+    },
+    {
+      icon: <Calendar className="w-5 h-5 sm:w-6 sm:h-6" />,
+      title: "Online Quote",
+      subtitle: "Get instant quote",
+      url: "/contact",
+      external: false,
+      color: "from-orange-500 to-orange-700",
+      hoverColor: "from-orange-600 to-orange-800"
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 300);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide(prev => (prev + 1) % sliderImages.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [sliderImages.length]);
+
+  const currentSlide = sliderImages[activeSlide];
+
+  return (
+    <section className="relative min-h-screen overflow-hidden bg-black text-white">
+      {/* Animated Background Particles */}
+      <div className="absolute inset-0 z-0">
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-white/20 rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 3}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Background Slider */}
+      <div className="absolute inset-0 z-10 overflow-hidden">
+        {sliderImages.map((slide, i) => (
+          <div
+            key={i}
+            className={`absolute inset-0 transition-all duration-2000 ease-in-out ${
+              activeSlide === i ? "opacity-100 scale-100" : "opacity-0 scale-105"
+            }`}
+            style={{ zIndex: activeSlide === i ? 1 : 0 }}
+          >
+            <img
+              src={slide.url}
+              alt={`Slide ${i}`}
+              className="w-full h-full object-cover transition-transform duration-2000"
+              loading={i === 0 ? "eager" : "lazy"}
+            />
+            <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient} z-[1]`} />
+          </div>
+        ))}
+        <div className="absolute inset-0 bg-black/40 z-[2]" />
+      </div>
+
+      {/* Main Content */}
+      <div className="relative z-20 flex items-center min-h-screen px-6 lg:px-12">
+        <div className="max-w-4xl space-y-8 px-0 py-0 mx-[200px]">
+          {/* Title */}
+          <h1 className="text-6xl">
+            {currentSlide.title.split(" ").map((word, i) => (
+              <span
+                key={i}
+                style={{ animationDelay: `${i * 0.1}s` }}
+                className="text-slate-50 text-5xl animate-fade-in"
+              >
+                {word}{" "}
+              </span>
+            ))}
+          </h1>
+
+          {/* Description */}
+          <p className={`text-xl md:text-2xl text-gray-200 max-w-2xl leading-relaxed transform transition-all duration-1000 delay-500 ${
+            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+          }`}>
+            {currentSlide.description}
+          </p>
+
+          {/* CTA Button */}
+          <div className={`flex flex-col sm:flex-row gap-4 transform transition-all duration-1000 delay-700 ${
+            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+          }`}>
+            <Link to="/signup" className="group">
+              <button className="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl px-8 py-4 text-lg font-semibold flex items-center gap-3 shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-red-500/30 border border-red-500/30">
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                <Zap className="w-5 h-5" />
+                <span>GET STARTED</span>
+                <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+              </button>
+            </Link>
+          </div>
+
+          {/* Slide Indicators */}
+          <div className="flex space-x-2 pt-4">
+            {sliderImages.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveSlide(i)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  activeSlide === i
+                    ? "bg-red-500 scale-125 shadow-lg shadow-red-500/50"
+                    : "bg-white/30 hover:bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Enhanced Portal Buttons */}
+      <div className="absolute bottom-6 left-0 right-0 z-20 px-4">
+        <div className={`max-w-7xl mx-auto transition-all duration-1000 delay-1000 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+        }`}>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 bg-white/5 backdrop-blur-xl p-4 rounded-2xl shadow-2xl border border-white/10">
+            {portalLinks.map((link, index) => {
+              const ButtonContent = (
+                <div className="group relative overflow-hidden w-full h-20 sm:h-24 flex flex-col gap-2 items-center justify-center text-xs sm:text-sm transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${link.color} opacity-90 group-hover:opacity-100 transition-opacity`} />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${link.hoverColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                  <div className="relative z-10 flex flex-col items-center gap-1">
+                    <div className="p-2 bg-white/20 rounded-lg group-hover:bg-white/30 transition-colors">
+                      {link.icon}
+                    </div>
+                    <div className="text-center">
+                      <div className="font-semibold text-white leading-tight">{link.title}</div>
+                      <div className="text-xs text-white/80 leading-tight">{link.subtitle}</div>
+                    </div>
+                  </div>
+                </div>
+              );
+
+              if (link.external) {
+                return (
+                  <a href={link.url} key={index} target="_blank" rel="noopener noreferrer" className="w-full">
+                    {ButtonContent}
+                  </a>
+                );
+              } else if (link.onClick) {
+                return (
+                  <button key={index} onClick={link.onClick} className="w-full">
+                    {ButtonContent}
+                  </button>
+                );
+              } else {
+                return (
+                  <Link to={link.url} key={index} className="w-full">
+                    {ButtonContent}
+                  </Link>
+                );
+              }
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Enhanced Modal */}
+      {isCustomerPortalOpen && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl border border-gray-200 animate-in slide-in-from-bottom duration-500">
+            <div className="bg-gradient-to-r from-red-600 to-red-700 p-6">
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-white/20 rounded-lg">
+                    <Users className="w-6 h-6 text-white" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-white">Customer Portal</h2>
+                </div>
+                <button
+                  onClick={() => setIsCustomerPortalOpen(false)}
+                  className="text-white/80 hover:text-white hover:bg-white/20 rounded-full p-2 transition-all duration-200"
+                >
+                  <span className="text-2xl">×</span>
+                </button>
+              </div>
+            </div>
+            
+            <div className="p-6 overflow-y-auto">
+              <div className="space-y-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <Play className="w-5 h-5 text-red-600" />
+                  <h3 className="text-xl font-semibold text-gray-800">Tutorial Videos</h3>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[
+                    { src: "/GGL_demo1.mp4", label: "Getting Started", duration: "5:32" },
+                    { src: "/GGL_promo.mp4", label: "Advanced Features", duration: "7:45" }
+                  ].map((video, i) => (
+                    <div key={i} className="group border-2 border-gray-200 rounded-xl overflow-hidden bg-gray-50 hover:border-red-300 transition-all duration-300 hover:shadow-lg">
+                      <div className="aspect-video relative">
+                        <video controls className="w-full h-full object-cover" poster={`/video-thumbnail-${i + 1}.jpg`}>
+                          <source src={video.src} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
+                        <div className="absolute top-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-xs">
+                          {video.duration}
+                        </div>
+                      </div>
+                      <div className="p-4">
+                        <h4 className="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">
+                          {video.label}
+                        </h4>
+                        <p className="text-sm text-gray-600 mt-1">
+                          Learn how to use the portal effectively
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="mt-8 flex flex-col sm:flex-row justify-end gap-3 pt-6 border-t">
+                <button
+                  onClick={() => setIsCustomerPortalOpen(false)}
+                  className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
+                >
+                  Close
+                </button>
+                <a href="https://cp.onlinetracking.co/#/login/3" target="_blank" rel="noopener noreferrer">
+                  <button className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-lg font-medium flex items-center gap-2 justify-center transition-all duration-300 shadow-lg hover:shadow-xl">
+                    <span>Login to Portal</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+};
+
+export default HeroSection;

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
-import HeroSection from "@/components/HeroSection";
+import CountryHeroSection from "@/components/CountryHeroSection";
 import TrackOrder from "@/components/TrackOrder";
-import ServicesCards from "@/components/ServicesCards";
+import CountryServicesCards from "@/components/CountryServicesCards";
 import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
 import WorkflowSection from "@/components/WorkflowSection";
@@ -41,9 +41,9 @@ const IndonesiaHome = () => {
   return (
     <div className="bg-white">
       <Navigation />
-      <HeroSection />
+      <CountryHeroSection country="indonesia" />
       <TrackOrder />
-      <ServicesCards />
+      <CountryServicesCards country="indonesia" />
       <AboutSection />
       <ServicesSection />
       <WorkflowSection />
