@@ -63,36 +63,10 @@ const AboutUs = () => {
                     alt="About OECL"
                     loading="lazy"
                     className="w-full h-full object-cover rounded-lg"
-                    src="/lovable-uploads/14c89acc-9c64-4484-b520-f5142136ccc6.png"
+                    src="/customclearance.png"
                   />
                 </div>
               </motion.div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Extra Image or Visual Section */}
-        <section className="py-12 bg-gray-900">
-          <div className="max-w-6xl mx-auto px-4">
-            <motion.h3
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-center text-2xl font-bold text-white mb-8"
-            >
-              Global Presence & Logistics Excellence
-            </motion.h3>
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.7 }}
-              className="rounded-lg overflow-hidden shadow-xl"
-            >
-              <img
-                src="/lovable-uploads/global-presence.jpg"
-                alt="Global Logistics"
-                className="w-full h-[400px] object-cover"
-              />
             </motion.div>
           </div>
         </section>
