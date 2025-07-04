@@ -13,7 +13,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
+import { Footer } from "@/components/Footer"; // ✅ Correct
 import { newsItems } from '@/data/newsData';
 
 const itemsPerPage = 6;
