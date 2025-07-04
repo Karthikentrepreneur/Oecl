@@ -13,9 +13,9 @@ const Footer = () => {
   };
 
   return (
-    <footer className="pt-16 pb-8 bg-gradient-to-b from-white to-gray-100">
+    <footer className="pt-16 pb-8 bg-black text-white">
       <div className="container mx-auto px-4">
-        <div className="h-1 bg-gradient-to-r from-brand-navy via-brand-gold to-brand-navy rounded-full mb-8" />
+        <div className="h-1 bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-500 rounded-full mb-8" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6 lg:gap-4">
           {/* Column 1: Logo & About */}
@@ -30,14 +30,14 @@ const Footer = () => {
               <img src="/oecl.png" alt="OECL Logo" className="h-14 w-auto object-contain" loading="lazy" />
               <img src="/1GlobalEnterprises.png" alt="1 Global Enterprises Logo" className="h-10 w-auto object-contain mt-2" />
             </div>
-            <p className="text-sm md:text-base text-gray-600 max-w-xs text-left">
+            <p className="text-sm md:text-base text-white/80 max-w-xs text-left">
               At OECL, we are proud to be one of Singapore's leading logistics companies. We offer specialized divisions in warehousing, forwarding (air and ocean), and transportation. Our mission is to deliver comprehensive end-to-end solutions in global freight forwarding, managed through a trusted network of partners who excel in all logistics segments.
             </p>
             <div className="flex space-x-3 mt-4">
               <motion.a
                 href="https://www.facebook.com/oeclglobal"
                 target="_blank"
-                className="bg-brand-navy text-white p-2 rounded-full hover:bg-brand-gold transition"
+                className="bg-white text-black p-2 rounded-full hover:bg-yellow-500 hover:text-black transition"
                 whileHover={{ y: -3, scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -46,7 +46,7 @@ const Footer = () => {
               <motion.a
                 href="https://www.linkedin.com/company/oeclglobal"
                 target="_blank"
-                className="bg-brand-navy text-white p-2 rounded-full hover:bg-brand-gold transition"
+                className="bg-white text-black p-2 rounded-full hover:bg-yellow-500 hover:text-black transition"
                 whileHover={{ y: -3, scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -64,7 +64,7 @@ const Footer = () => {
             transition={{ delay: 0.2 }}
             className="flex flex-col items-start md:items-end lg:items-start lg:pl-10"
           >
-            <h3 className="font-bold text-lg text-brand-navy mb-4">Navigation</h3>
+            <h3 className="font-bold text-lg text-white mb-4">Navigation</h3>
             <div className="flex flex-col gap-2">
               {[
                 { name: "Home", path: "/" },
@@ -77,9 +77,9 @@ const Footer = () => {
                 <Link
                   key={index}
                   to={link.path}
-                  className="text-gray-600 hover:text-brand-gold transition flex items-center gap-2"
+                  className="text-white/80 hover:text-yellow-500 transition flex items-center gap-2"
                 >
-                  <ArrowRight size={14} className="text-brand-gold" />
+                  <ArrowRight size={14} className="text-yellow-500" />
                   {link.name}
                 </Link>
               ))}
@@ -95,10 +95,10 @@ const Footer = () => {
             transition={{ delay: 0.4 }}
             className="flex flex-col items-start md:items-end lg:items-start lg:pl-10"
           >
-            <h3 className="font-bold text-lg text-brand-navy mb-4">Contact Us</h3>
-            <div className="space-y-3 text-gray-600">
+            <h3 className="font-bold text-lg text-white mb-4">Contact Us</h3>
+            <div className="space-y-3 text-white/80">
               <div className="flex items-start gap-2">
-                <MapPin size={18} className="text-brand-gold mt-1 flex-shrink-0" />
+                <MapPin size={18} className="text-yellow-500 mt-1 flex-shrink-0" />
                 <p>
                   OECL (Singapore) Pte Ltd.<br />
                   Blk 511 Kampong Bahru Road<br />
@@ -107,11 +107,11 @@ const Footer = () => {
                 </p>
               </div>
               <div className="flex items-center gap-2">
-                <Phone size={18} className="text-brand-gold flex-shrink-0" />
+                <Phone size={18} className="text-yellow-500 flex-shrink-0" />
                 <p>+65 69080838</p>
               </div>
               <div className="flex items-center gap-2">
-                <Mail size={18} className="text-brand-gold flex-shrink-0" />
+                <Mail size={18} className="text-yellow-500 flex-shrink-0" />
                 <p>info@oecl.sg</p>
               </div>
             </div>
@@ -119,7 +119,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Line */}
-        <div className="text-center text-gray-600 mt-10 text-sm">
+        <div className="text-center text-white/70 mt-10 text-sm">
           &copy; {new Date().getFullYear()} OECL. All Rights Reserved.
         </div>
       </div>
