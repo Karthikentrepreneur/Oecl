@@ -30,8 +30,8 @@ const Navigation = () => {
             <Link to="/services" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/services") ? "text-kargon-red" : ""}`}>
               SERVICES
             </Link>
-            <Link to="/projects" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/projects") ? "text-kargon-red" : ""}`}>
-              PROJECTS
+            <Link to="/blog" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/projects") ? "text-kargon-red" : ""}`}>
+              BLOGS
             </Link>
             <Link to="/contact" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/contact") ? "text-kargon-red" : ""}`}>
               CONTACT
