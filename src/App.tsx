@@ -16,6 +16,7 @@ import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 import IndiaHome from "./pages/IndiaHome";
+import NewsOverviewPage from "./pages/NewsOverviewPage";
 import IndonesiaHome from "./pages/IndonesiaHome";
 import MalaysiaHome from "./pages/MalaysiaHome";
 import ThailandHome from "./pages/ThailandHome";
@@ -55,6 +56,7 @@ const App = () => {
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/projects" element={<Projects />} />
+                <Route path="/blog" element={<NewsOverviewPage />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                 <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
