@@ -4,55 +4,55 @@ const services = [{
   id: 1,
   title: "Air Freight",
   icon: Plane,
-  image: "https://images.unsplash.com/photo-1542296332-2e4473faf563?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+  image: "/airfreight.png",
   delay: 100
 }, {
   id: 2,
   title: "Ocean Freight",
   icon: Ship,
-  image: "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+  image: "/oceanfreight.png",
   delay: 200
 }, {
   id: 3,
   title: "Warehousing",
   icon: Box,
-  image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+  image: "/warehousing.png",
   delay: 0
 }, {
   id: 4,
   title: "Customs Clearance",
   icon: UserCheck,
-  image: "/lovable-uploads/3a1b8055-f4b1-4340-ac19-94530c129084.png",
+  image: "/customclearance.png",
   delay: 300
 }, {
   id: 5,
   title: "Linear Agency",
   icon: Container,
-  image: "/lovable-uploads/3a1b8055-f4b1-4340-ac19-94530c129084.png",
+  image: "/linearagency.png",
   delay: 300
 }, {
   id: 6,
   title: "Liquid Cargo Transportation",
   icon: Truck,
-  image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+  image: "/liquidtransportation.png",
   delay: 0
 }, {
   id: 7,
   title: "Consolidation",
   icon: Cuboid,
-  image: "https://images.unsplash.com/photo-1542296332-2e4473faf563?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+  image: "/consolidation.png",
   delay: 100
 }, {
   id: 8,
   title: "Project Cargo",
   icon: Container,
-  image: "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+  image: "/projectcargo.png",
   delay: 200
 }, {
   id: 9,
   title: "3PL",
   icon: Cuboid,
-  image: "/lovable-uploads/3a1b8055-f4b1-4340-ac19-94530c129084.png",
+  image: "/3pl.png",
   delay: 300
 }];
 const ServicesSection = () => {
