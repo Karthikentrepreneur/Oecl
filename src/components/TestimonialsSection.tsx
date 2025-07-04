@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import ScrollAnimation from "./ScrollAnimation";
 const testimonials = [{
   id: 1,
   name: "Robert Johnson",

@@ -1,4 +1,5 @@
 import { ClipboardCheck, Package, Truck, CheckCircle } from "lucide-react";
+import ScrollAnimation from "./ScrollAnimation";
 const steps = [{
   id: 1,
   title: "Order Processing",
