@@ -91,7 +91,7 @@ const NewsDetailPage = () => {
     return <div className="min-h-screen flex flex-col items-center justify-center">
         <h1 className="text-2xl font-bold mb-4">Artikel nicht gefunden</h1>
         <Button asChild variant="outline">
-          <Link to="/news">Zurück zur Übersicht</Link>
+          <Link to="/blog">Go Back</Link>
         </Button>
       </div>;
   }
@@ -100,9 +100,9 @@ const NewsDetailPage = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="mb-6">
           <Button asChild variant="outline" className="mb-8">
-            <Link to="/news" className="flex items-center gap-2">
+            <Link to="/blog" className="flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" />
-              Zurück zur Übersicht
+              Go Back
             </Link>
           </Button>
         </div>
