@@ -108,7 +108,7 @@ const NewsDetailPage = () => {
         </div>
 
         {newsItem.imageUrl && <div className="w-full h-[300px] md:h-[400px] overflow-hidden rounded-lg mb-8 relative">
-            <img src={newsItem.imageUrl} alt={newsItem.title} className="w-full h-full object-cover" />
+            <img src={newsItem.imageUrl} alt={newsItem.title} className=" max-h-full object-cover" />
           </div>}
 
         <Card className="mb-8 shadow-md border-0">
