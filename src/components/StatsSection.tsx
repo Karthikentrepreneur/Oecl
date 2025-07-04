@@ -1,5 +1,4 @@
 
-import ScrollAnimation from "./ScrollAnimation";
 import { FileCheck, SmileIcon, Building2, Trophy } from "lucide-react";
 
 const StatsSection = () => {
