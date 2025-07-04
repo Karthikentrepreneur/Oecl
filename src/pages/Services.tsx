@@ -3,7 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Truck, Plane, Ship, Box, ShieldCheck, BarChart } from "lucide-react";
+import { Truck, Plane, Ship, Box, ShieldCheck, BarChart, UserCheck, Container, Cuboid } from "lucide-react";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
