@@ -65,9 +65,7 @@ const Navigation = () => {
                 </Button>
               </> : <>
                 <Link to="/login">
-                  <Button variant="ghost" className="text-white hover:text-kargon-red hover:bg-transparent">
-                    LOGIN
-                  </Button>
+                  
                 </Link>
                 <Link to="/signup">
                   <Button className="bg-kargon-red hover:bg-kargon-red/90 text-white rounded-md">
