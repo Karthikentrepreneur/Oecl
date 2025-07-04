@@ -11,7 +11,7 @@ import StatsSection from "@/components/StatsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import UpdatesSection from "@/components/UpdatesSection";
 import ContactForm from "@/components/ContactForm";
-import { Footer } from "@/components/Footer";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   useEffect(() => {

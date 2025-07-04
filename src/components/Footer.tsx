@@ -6,16 +6,16 @@ export const Footer = () => {
   const footerAnimation = {
     hidden: {
       opacity: 0,
-      y: 20,
+      y: 20
     },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
-      },
-    },
+        ease: "easeOut"
+      }
+    }
   };
 
   return (
@@ -24,9 +24,9 @@ export const Footer = () => {
         {/* Decorative Line */}
         <div className="h-1 bg-gradient-to-r from-brand-navy via-brand-gold to-brand-navy rounded-full mb-8"></div>
 
-        {/* Grid Layout */}
+        {/* Revised Column Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6 lg:gap-4">
-          {/* Column 1: Logos & About */}
+          {/* Column 1: Logo & About Section */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -48,17 +48,12 @@ export const Footer = () => {
               />
             </div>
             <p className="text-sm md:text-base text-gray-600 max-w-xs text-left">
-              At OECL, we are proud to be one of Singapore's leading logistics companies. We offer
-              specialized divisions in warehousing, forwarding (air and ocean), and transportation.
-              Our mission is to deliver comprehensive end-to-end solutions in global freight
-              forwarding, managed through a trusted network of partners who excel in all logistics
-              segments.
+              At OECL, we are proud to be one of Singapore's leading logistics companies. We offer specialized divisions in warehousing, forwarding (air and ocean), and transportation. Our mission is to deliver comprehensive end-to-end solutions in global freight forwarding, managed through a trusted network of partners who excel in all logistics segments.
             </p>
             <div className="flex space-x-3 mt-4">
               <motion.a
                 href="https://www.facebook.com/oeclglobal"
                 target="_blank"
-                rel="noopener noreferrer"
                 className="bg-brand-navy text-white p-2 rounded-full hover:bg-brand-gold transition"
                 whileHover={{ y: -3, scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -68,7 +63,6 @@ export const Footer = () => {
               <motion.a
                 href="https://www.linkedin.com/company/oeclglobal"
                 target="_blank"
-                rel="noopener noreferrer"
                 className="bg-brand-navy text-white p-2 rounded-full hover:bg-brand-gold transition"
                 whileHover={{ y: -3, scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -95,7 +89,7 @@ export const Footer = () => {
                 { name: "Services", path: "/services" },
                 { name: "Contact Us", path: "/contact" },
                 { name: "Privacy Policy", path: "/privacy-policy" },
-                { name: "Terms And Conditions", path: "/terms-and-conditions" },
+                { name: "Terms And Conditions", path: "/terms-and-conditions" }
               ].map((link, index) => (
                 <Link
                   key={index}
@@ -123,12 +117,9 @@ export const Footer = () => {
               <div className="flex items-start gap-2">
                 <MapPin size={18} className="text-brand-gold mt-1 flex-shrink-0" />
                 <p>
-                  OECL (Singapore) Pte Ltd.
-                  <br />
-                  Blk 511 Kampong Bahru Road
-                  <br />
-                  #03-01 Keppel Distripark
-                  <br />
+                  OECL (Singapore) Pte Ltd.<br />
+                  Blk 511 Kampong Bahru Road<br />
+                  #03-01 Keppel Distripark<br />
                   Singapore - 099447
                 </p>
               </div>
