@@ -184,7 +184,7 @@ const Contact = () => {
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden relative">
               <div className="h-[500px] w-full relative">
                 <iframe
-                  src="https://www.google.com/maps/d/u/0/edit?mid=18pLzY9L_9ClJWUmM04FwX-lM_i8VgEE"
+                  src="https://www.google.com/maps/d/u/0/embed?mid=18pLzY9L_9ClJWUmM04FwX-lM_i8VgEE&ehbc=2E312F&noprof=1"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
