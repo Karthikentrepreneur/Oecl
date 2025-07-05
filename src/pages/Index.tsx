@@ -12,6 +12,20 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import UpdatesSection from "@/components/UpdatesSection";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import { useLocation, Link } from 'react-router-dom';
+
+const ScrollToTop = () => {
+  const {
+    pathname
+  } = useLocation();
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }, [pathname]);
+  return null;
+};
 
 const Index = () => {
   useEffect(() => {
@@ -42,6 +56,7 @@ const Index = () => {
   return (
     <div className="bg-white">
       <Navigation />
+      <ScrollToTop />
       <HeroSection />
       <TrackOrder />
       <ServicesCards />
