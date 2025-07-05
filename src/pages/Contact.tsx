@@ -20,12 +20,11 @@ const Contact = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col relative bg-white">
+    <div className="min-h-screen flex flex-col relative">
       <Header />
 
-      {/* Notification */}
       {showNotification && (
-        <div className="fixed top-6 right-6 z-50 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-3 transition-all">
+        <div className="fixed top-6 right-6 z-50 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-3 transition-all">
           <Send size={18} />
           Message sent successfully!
           <button onClick={() => setShowNotification(false)} className="ml-2">
@@ -39,9 +38,9 @@ const Contact = () => {
         <motion.section
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="relative h-[40vh] flex items-center justify-center bg-black overflow-hidden"
+          className="relative h-[40vh] flex items-center justify-center bg-red-700 overflow-hidden"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black to-red-800/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black to-red-900/90" />
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -66,10 +65,10 @@ const Contact = () => {
                 transition={{ duration: 0.8 }}
                 className="bg-white p-8 rounded-xl shadow-lg"
               >
-                <h2 className="text-2xl font-bold mb-6 text-red-700">Contact Information</h2>
+                <h2 className="text-2xl font-bold mb-6 text-black">Contact Information</h2>
                 <div className="space-y-8">
                   <div className="space-y-6">
-                    <h3 className="text-lg font-semibold text-black">Singapore Office</h3>
+                    <h3 className="text-lg font-semibold text-red-700">Singapore Office</h3>
                     <motion.div whileHover={{ x: 10 }} className="flex items-start gap-4 group">
                       <Phone className="mt-1 text-red-600 group-hover:scale-110 transition-transform" />
                       <div>
@@ -82,7 +81,7 @@ const Contact = () => {
                       <div>
                         <p className="font-medium">Address</p>
                         <p className="text-gray-600">
-                          GGL (Singapore) Pte Ltd. Blk 511 Kampong Bahru Road #03-01 Keppel Distripark Singapore - 099447
+                          OECL (Singapore) Pte Ltd. Blk 511 Kampong Bahru Road #03-01 Keppel Distripark Singapore - 099447
                         </p>
                       </div>
                     </motion.div>
@@ -97,32 +96,32 @@ const Contact = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ y: -5 }}
-                        className="bg-gray-100 p-3 rounded-full text-gray-700 hover:bg-red-600 hover:text-white transition-colors"
+                        className="bg-gray-100 p-3 rounded-full text-gray-600 hover:bg-red-700 hover:text-white transition-colors"
                       >
-                        <FaLinkedin size={18} />
+                        <Linkedin size={18} />
                       </motion.a>
                       <motion.a
                         href="https://www.facebook.com/gglusa"
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ y: -5 }}
-                        className="bg-gray-100 p-3 rounded-full text-gray-700 hover:bg-red-600 hover:text-white transition-colors"
+                        className="bg-gray-100 p-3 rounded-full text-gray-600 hover:bg-red-700 hover:text-white transition-colors"
                       >
-                        <FaFacebookF size={18} />
+                        <Facebook size={18} />
                       </motion.a>
                     </div>
                   </div>
                 </div>
               </motion.div>
 
-              {/* FormSubmit Form */}
+              {/* Form */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 className="bg-white p-8 rounded-xl shadow-lg"
               >
-                <h2 className="text-2xl font-bold mb-4 text-red-700">Send us a Message</h2>
+                <h2 className="text-2xl font-bold mb-4 text-black">Send us a Message</h2>
                 <p className="text-gray-600 mb-6">
                   Fill in the form below and we'll get back to you as soon as possible.
                 </p>
@@ -152,7 +151,7 @@ const Contact = () => {
                   <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                     <Button
                       type="submit"
-                      className="w-full text-white py-6 flex items-center justify-center gap-2 bg-red-700 hover:bg-black transition-all"
+                      className="w-full text-white py-6 flex items-center justify-center gap-2 bg-black hover:bg-red-700"
                     >
                       Send Message
                       <Send size={18} />
@@ -165,7 +164,7 @@ const Contact = () => {
         </section>
 
         {/* Google Maps */}
-        <section className="py-10 bg-gray-100">
+        <section className="py-10 bg-gray-50">
           <div className="container mx-auto px-4 max-w-7xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -174,12 +173,12 @@ const Contact = () => {
               viewport={{ once: true }}
               className="text-center mb-10"
             >
-              <h2 className="text-3xl font-bold text-black flex items-center justify-center gap-3">
-                <MapPin className="text-red-600" />
+              <h2 className="text-3xl font-bold text-gray-800 flex items-center justify-center gap-3">
+                <MapPin className="text-red-700" />
                 Our Location
               </h2>
-              <p className="text-gray-700 mt-2 max-w-2xl mx-auto">
-                Visit us at our Singapore office location
+              <p className="text-gray-600 mt-2 max-w-2xl mx-auto">
+                Visit us at our OECL Singapore office location
               </p>
             </motion.div>
 
@@ -193,7 +192,7 @@ const Contact = () => {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="GGL Singapore Office Location"
+                  title="OECL Singapore Office Location"
                 />
                 <div className="absolute top-0 left-0 right-0 h-14 bg-white z-10 pointer-events-none" />
                 <div className="absolute top-0 right-0 w-32 h-14 bg-white z-10 pointer-events-none" />
