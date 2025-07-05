@@ -15,6 +15,7 @@ import Warehousing from "./pages/services/Warehousing";
 import CustomsClearance from "./pages/services/CustomsClearance";
 import LinearAgency from "./pages/services/LinearAgency";
 import LiquidCargo from "./pages/services/LiquidCargo";
+import ProjectCargo from "./pages/services/ProjectCargo";
 import Services from "./pages/Services";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
@@ -51,6 +52,7 @@ const App = () => {
                 <Route path="/services/air-freight" element={<AirFreight />} />
                 <Route path="/services/ocean-freight" element={<OceanFreight />} />
                 <Route path="/services/warehousing" element={<Warehousing />} />
+                 <Route path="/services/project-cargo" element={<ProjectCargo />} />
                 <Route path="/services/customs-clearance" element={<CustomsClearance />} />
                 <Route path="/services/linear-agency" element={<LinearAgency />} />
                 <Route path="/services/liquid-cargo" element={<LiquidCargo />} />
