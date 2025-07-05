@@ -1,9 +1,22 @@
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Truck, Ship, Globe, Users, Award, TrendingUp, CheckCircle, Star } from "lucide-react";
+const ScrollToTop = () => {
+  const {
+    pathname
+  } = useLocation();
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }, [pathname]);
+  return null;
+};
 const AboutUs = () => {
   const stats = [{
     number: "30+",
@@ -24,6 +37,7 @@ const AboutUs = () => {
   }];
   const features = ["World-class logistics services", "Cutting-edge technology solutions", "Dedicated professional team", "Global office network", "24/7 customer support", "Competitive pricing"];
   return <div className="bg-black text-white min-h-screen flex flex-col">
+      <ScrollToTop />
       <Navigation />
       <main className="flex-grow pt-20">
         {/* Hero Section */}
