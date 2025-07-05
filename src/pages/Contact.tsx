@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Send, XCircle, Linkedin, Facebook } from 'lucide-react';
+import { useLocation } from "react-router-dom";
 
 const ScrollToTop = () => {
   const {
