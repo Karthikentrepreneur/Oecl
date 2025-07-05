@@ -7,6 +7,19 @@ import { Textarea } from "@/components/ui/textarea";
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Send, XCircle, Linkedin, Facebook } from 'lucide-react';
 
+const ScrollToTop = () => {
+  const {
+    pathname
+  } = useLocation();
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }, [pathname]);
+  return null;
+};
+
 const Contact = () => {
   const [showNotification, setShowNotification] = useState(false);
 
