@@ -140,47 +140,46 @@ const Contact = () => {
             <div>
               <h2 className="text-2xl font-bold text-kargon-dark mb-6">Contact Information</h2>
               
-              <div className="space-y-8">
-                <div className="flex items-start">
-                  <div className="p-3 bg-kargon-red/10 text-kargon-red rounded-full mr-4">
-                    <MapPin size={24} />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-kargon-dark mb-1">Our Location</h3>
-                    <p className="text-gray-600">
-                      123 Logistics Avenue<br />
-                      Cargo District, NY 10001<br />
-                      United States
-                    </p>
-                  </div>
+            <div className="space-y-8">
+              <div className="flex items-start">
+                <div className="p-3 bg-kargon-red/10 text-kargon-red rounded-full mr-4">
+                  <MapPin size={24} />
                 </div>
-                
-                <div className="flex items-start">
-                  <div className="p-3 bg-kargon-red/10 text-kargon-red rounded-full mr-4">
-                    <Phone size={24} />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-kargon-dark mb-1">Phone Number</h3>
-                    <p className="text-gray-600">
-                      General: +1 (555) 123-4567<br />
-                      Customer Support: +1 (555) 987-6543
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="p-3 bg-kargon-red/10 text-kargon-red rounded-full mr-4">
-                    <Mail size={24} />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-kargon-dark mb-1">Email Address</h3>
-                    <p className="text-gray-600">
-                      info@kargon.com<br />
-                      support@kargon.com
-                    </p>
-                  </div>
+                <div>
+                  <h3 className="font-bold text-kargon-dark mb-1">Our Location</h3>
+                  <p className="text-gray-600">
+                    OECL (Singapore) Pte Ltd.<br />
+                    Blk 511 Kampong Bahru Road<br />
+                    #03-01 Keppel Distripark<br />
+                    Singapore - 099447
+                  </p>
                 </div>
               </div>
+              
+              <div className="flex items-start">
+                <div className="p-3 bg-kargon-red/10 text-kargon-red rounded-full mr-4">
+                  <Phone size={24} />
+                </div>
+                <div>
+                  <h3 className="font-bold text-kargon-dark mb-1">Phone Number</h3>
+                  <p className="text-gray-600">
+                    +65 69080838
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex items-start">
+                <div className="p-3 bg-kargon-red/10 text-kargon-red rounded-full mr-4">
+                  <Mail size={24} />
+                </div>
+                <div>
+                  <h3 className="font-bold text-kargon-dark mb-1">Email Address</h3>
+                  <p className="text-gray-600">
+                    info@oecl.sg
+                  </p>
+                </div>
+              </div>
+            </div>
               
               <div className="mt-10">
                 <h3 className="font-bold text-kargon-dark mb-3">Office Hours</h3>

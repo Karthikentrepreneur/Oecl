@@ -4,11 +4,17 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
+
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
+import AirFreight from "./pages/services/AirFreight";
+import OceanFreight from "./pages/services/OceanFreight";
+import Warehousing from "./pages/services/Warehousing";
+import CustomsClearance from "./pages/services/CustomsClearance";
+import LinearAgency from "./pages/services/LinearAgency";
+import LiquidCargo from "./pages/services/LiquidCargo";
 import Services from "./pages/Services";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
@@ -26,38 +32,28 @@ import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
 import NewsDetailPage from "./pages/NewsDetailPage";
-import LoadingSpinner from "./components/LoadingSpinner";
-
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate loading time
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        {loading ? (
-          <LoadingSpinner />
-        ) : (
-          <BrowserRouter>
-            <AuthProvider>
-              <Routes>
+        <BrowserRouter>
+          <AuthProvider>
+            <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/services" element={<Services />} />
+                <Route path="/services/air-freight" element={<AirFreight />} />
+                <Route path="/services/ocean-freight" element={<OceanFreight />} />
+                <Route path="/services/warehousing" element={<Warehousing />} />
+                <Route path="/services/customs-clearance" element={<CustomsClearance />} />
+                <Route path="/services/linear-agency" element={<LinearAgency />} />
+                <Route path="/services/liquid-cargo" element={<LiquidCargo />} />
                 <Route path="/about-us" element={<AboutUs/>} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/blog" element={<Blog />} />
@@ -74,7 +70,6 @@ const App = () => {
               </Routes>
             </AuthProvider>
           </BrowserRouter>
-        )}
       </TooltipProvider>
     </QueryClientProvider>
   );
