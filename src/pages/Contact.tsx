@@ -33,6 +33,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative">
+      <ScrollToTop />
       <Navigation />
 
       {showNotification && (
