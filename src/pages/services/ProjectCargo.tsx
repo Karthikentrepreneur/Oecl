@@ -52,7 +52,7 @@ const ProjectCargo = () => {
             >
               <div className="rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="/warehousing.png"
+                  src="/projectcargo.png"
                   alt="Warehousing Services"
                   className="w-full h-96 object-cover"
                 />
