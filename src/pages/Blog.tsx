@@ -6,6 +6,18 @@ import { CalendarIcon, Clock, User, ArrowRight } from "lucide-react";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+const ScrollToTop = () => {
+  const {
+    pathname
+  } = useLocation();
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }, [pathname]);
+  return null;
+};
 const blogPosts = [{
   id: 1,
   title: "The Future of Global Logistics",
@@ -77,6 +89,7 @@ const Blog = () => {
     window.scrollTo(0, 0);
   };
   return <div className="min-h-screen bg-background">
+      <ScrollToTop />
       <Navigation />
       <div className="container mx-auto px-4 py-12 pt-24">
         <div className="text-center mb-12">
