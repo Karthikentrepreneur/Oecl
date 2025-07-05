@@ -36,7 +36,7 @@ const blogPosts = [{
   author: "Michael Chen",
   date: "December 10, 2024",
   readTime: "7 min read",
-  imageUrl: "https://images.unsplash.com/photo-1605600659873-d808a13e4d9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+  imageUrl: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
   category: "Sustainability"
 }, {
   id: 3,
