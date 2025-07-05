@@ -1,9 +1,14 @@
+import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Truck, Droplets, Shield, CheckCircle } from "lucide-react";
 
 const LiquidCargo = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const features = [
     "Specialized tank transportation",
     "Temperature-controlled transport",
@@ -14,7 +19,7 @@ const LiquidCargo = () => {
   ];
 
   return (
-    <div className="bg-black text-white min-h-screen">
+    <div className="bg-white text-black min-h-screen">
       <Navigation />
       
       <section className="pt-28 pb-16 relative overflow-hidden">
@@ -33,7 +38,7 @@ const LiquidCargo = () => {
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               Liquid Cargo <span className="text-red-500">Transportation</span>
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Specialized transportation solutions for liquid cargo with safety and precision
             </p>
           </motion.div>
@@ -62,7 +67,7 @@ const LiquidCargo = () => {
               className="space-y-6"
             >
               <h2 className="text-3xl font-bold text-red-500">Expert Liquid Cargo Handling</h2>
-              <p className="text-gray-200 text-lg leading-relaxed">
+              <p className="text-gray-700 text-lg leading-relaxed">
                 Our specialized liquid cargo transportation services ensure safe, compliant, 
                 and efficient movement of liquid materials using state-of-the-art equipment 
                 and strict safety protocols.
@@ -78,7 +83,7 @@ const LiquidCargo = () => {
                     className="flex items-center gap-3"
                   >
                     <CheckCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
-                    <span className="text-gray-300">{feature}</span>
+                    <span className="text-gray-600">{feature}</span>
                   </motion.div>
                 ))}
               </div>

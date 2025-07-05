@@ -1,9 +1,14 @@
+import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Ship, Anchor, Container, Shield, CheckCircle } from "lucide-react";
 
 const OceanFreight = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const features = [
     "Full Container Load (FCL)",
     "Less than Container Load (LCL)",
@@ -14,7 +19,7 @@ const OceanFreight = () => {
   ];
 
   return (
-    <div className="bg-black text-white min-h-screen">
+    <div className="bg-white text-black min-h-screen">
       <Navigation />
       
       <section className="pt-28 pb-16 relative overflow-hidden">
@@ -33,7 +38,7 @@ const OceanFreight = () => {
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               Ocean Freight <span className="text-red-500">Solutions</span>
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Cost-effective sea cargo services for your bulk shipments with reliable scheduling
             </p>
           </motion.div>
@@ -62,7 +67,7 @@ const OceanFreight = () => {
               className="space-y-6"
             >
               <h2 className="text-3xl font-bold text-red-500">Comprehensive Ocean Freight</h2>
-              <p className="text-gray-200 text-lg leading-relaxed">
+              <p className="text-gray-700 text-lg leading-relaxed">
                 Our ocean freight services provide the most economical solution for large shipments. 
                 With established relationships with major shipping lines, we offer flexible scheduling 
                 and competitive rates for your sea cargo needs.
@@ -78,7 +83,7 @@ const OceanFreight = () => {
                     className="flex items-center gap-3"
                   >
                     <CheckCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
-                    <span className="text-gray-300">{feature}</span>
+                    <span className="text-gray-600">{feature}</span>
                   </motion.div>
                 ))}
               </div>
@@ -87,7 +92,7 @@ const OceanFreight = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-r from-red-600/10 to-transparent">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -96,7 +101,7 @@ const OceanFreight = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-white mb-4">Ocean Freight Advantages</h2>
+            <h2 className="text-4xl font-bold text-black mb-4">Ocean Freight Advantages</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -123,13 +128,13 @@ const OceanFreight = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 * index }}
                 viewport={{ once: true }}
-                className="bg-black/50 p-8 rounded-2xl backdrop-blur-sm border border-white/10"
+                className="bg-white p-8 rounded-2xl shadow-lg border border-gray-200"
               >
                 <div className="bg-red-600/20 p-4 rounded-xl mb-6 w-fit">
                   <benefit.icon className="w-8 h-8 text-red-500" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">{benefit.title}</h3>
-                <p className="text-gray-300 leading-relaxed">{benefit.description}</p>
+                <h3 className="text-2xl font-bold text-black mb-4">{benefit.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
               </motion.div>
             ))}
           </div>

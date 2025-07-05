@@ -121,10 +121,10 @@ const HeroSection = () => {
           
 
           {/* Title */}
-          <h1 className="text-6xl">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
             {currentSlide.title.split(" ").map((word, i) => <span key={i} style={{
             animationDelay: `${i * 0.1}s`
-          }} className="text-slate-50 text-5xl">
+          }} className="text-slate-50">
                 {word}{" "}
               </span>)}
           </h1>
