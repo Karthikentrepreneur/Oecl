@@ -33,6 +33,8 @@ import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
 import NewsDetailPage from "./pages/NewsDetailPage";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -67,6 +69,8 @@ const App = () => {
                 <Route path="/indonesia/home" element={<IndonesiaHome />} />
                 <Route path="/malaysia/home" element={<MalaysiaHome />} />
                 <Route path="/thailand/home" element={<ThailandHome />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
