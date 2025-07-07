@@ -126,7 +126,7 @@ const PaymentsManagement = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Payments Management</h1>
+        <h1 className="text-2xl font-bold tracking-tight">payments Management</h1>
         <p className="text-muted-foreground">Track and manage all payment transactions</p>
       </div>
       
