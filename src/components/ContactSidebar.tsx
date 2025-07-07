@@ -11,21 +11,34 @@ interface ContactSidebarProps {
   onClose: () => void;
 }
 
+The user wants to correct the `lat` and `lng` values for each country and city in the provided `countries` array. I will go through each entry and use Google Search to find the accurate latitude and longitude.
+
+Here's the plan:
+
+1.  For each country, search for its `lat` and `lng`.
+2.  For each city within a country, search for its `lat` and `lng`.
+3.  Update the provided JSON with the corrected values.
+
+Let's start by correcting the coordinates.
+
+Updated `countries` array with corrected latitude and longitude values:
+
+```json
 const countries = [{
   code: "in",
   name: "India",
-  lat: 22.3511,
-  lng: 78.6677,
+  lat: 20.5937,
+  lng: 78.9629,
   cities: [{
     name: "Mumbai",
-    lat: 17.3839,
-    lng: 78.4539,
+    lat: 19.0760,
+    lng: 72.8777,
     address: "407, mayuresh planet, plot no - 42 & 43, sector-15, cbd belapur, navi mumbai, maharashtra, 400614",
     contacts: ["Export customer service: +91 2245174102, +91 2245174109, +91 2245174118", "Export docs team: +91 2245174103, +91 2245174105", "Import docs team: +91 2245174104, +91 2245174106", "Import customer service: +91 2245174113, +91 2245174110, +91 2245174107, +91 2245174112"]
   }, {
     name: "Delhi",
-    lat: 25.6083,
-    lng: 85.1437,
+    lat: 28.7041,
+    lng: 77.1025,
     address: "JA 511, DLF Tower A, Jasola District Centre, New Delhi, 110025",
     contacts: ["+91 9999022030"]
   }, {
@@ -53,15 +66,15 @@ const countries = [{
   lat: 4.2105,
   lng: 101.9758,
   cities: [{
-    name: "PASIR GUDANG",
-    lat: 1.4720,
-    lng: 103.9027,
+    name: "PASIRGUDANG",
+    lat: 1.4580,
+    lng: 103.8853,
     address: "Unit 20-03A, Level 20 Menara Zurich, 15 Jalan Dato Abdullah Tahir, 80300 Johor Bahru",
     contacts: ["+603-3319 2778 / 74 / 75, 79"]
   }, {
-    name: "PORT KLANG",
-    lat: 3.0038,
-    lng: 101.3929,
+    name: "PORTKLANG",
+    lat: 2.9982,
+    lng: 101.3831,
     address: "MTBBT 2, 3A-5, Jalan Batu Nilam 16, The Landmark (Behind AEON Mall), Bandar Bukit Tinggi 2, 41200, Klang, Selangor D.E",
     contacts: ["+603 - 3319 2778 / 74 / 75"]
   }]
@@ -147,18 +160,18 @@ const countries = [{
 }, {
   code: "pk",
   name: "Pakistan",
-  lat: 32.4145,
-  lng: 64.9162,
+  lat: 30.3753,
+  lng: 69.3451,
   cities: [{
     name: "Karachi",
-    lat: 32.4145,
-    lng: 64.9162,
+    lat: 24.8608,
+    lng: 67.0097,
     address: "Suite No.301, 3rd Floor, Fortune Center, Shahrah-e-Faisal, Block 6, PECHS, Karachi, Pakistan",
     contacts: ["+92-300-8282511", "+92-21-34302281-5"]
   }, {
     name: "Lahore",
-    lat: 32.4145,
-    lng: 64.9162,
+    lat: 31.5204,
+    lng: 74.3487,
     address: "Office # 301, 3rd Floor, Gulberg Arcade Main Market, Gulberg 2, Lahore, Pakistan",
     contacts: ["+92 42-35782306/07/08"]
   }]
@@ -175,8 +188,8 @@ const countries = [{
     contacts: ["+971 4 3433388"]
   }, {
     name: "JEBEL ALI",
-    lat: 24.9857,
-    lng: 55.1436,
+    lat: 25.0617,
+    lng: 55.0886,
     address: "Warehouse# Zg06, Near Roundabout 13, North Zone, p. B No: 30821, jebel Ali, Dubai, U.A.E",
     contacts: ["+971 4 8819787"]
   }, {
@@ -189,12 +202,12 @@ const countries = [{
 }, {
   code: "qa",
   name: "Qatar",
-  lat: 25.276987,
-  lng: 51.520008,
+  lat: 25.3548,
+  lng: 51.1839,
   cities: [{
     name: "Doha",
-    lat: 25.276987,
-    lng: 51.520008,
+    lat: 25.2854,
+    lng: 51.5310,
     address: "Office no: 48, 2nd Floor, Al matar Centre, Old Airport Road Doha",
     contacts: ["0974 33622555"]
   }]
@@ -263,8 +276,8 @@ const countries = [{
 }, {
   code: "au",
   name: "Australia",
-  lat: -37.8136,
-  lng: 144.9631,
+  lat: -25.2744,
+  lng: 133.7751,
   cities: [{
     name: "Melbourne",
     lat: -37.8136,
