@@ -12,7 +12,7 @@ const Navigation = () => {
     isAdmin
   } = useAuth();
   const isActive = (path: string) => location.pathname === path;
-  return <header className="fixed top-0 left-0 right-0 w-full z-50 bg-black shadow-md transition-all duration-300 py-[19px]">
+  return <header className="fixed top-0 left-0 right-0 w-full z-50 shadow-md transition-all duration-300 py-[19px] bg-slate-50">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
           {/* Logo Section */}
@@ -24,7 +24,7 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            <Link to="/" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/") ? "text-kargon-red" : ""}`}>
+            <Link to="/" className="">
               HOME
             </Link>
             <Link to="/about-us" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/services") ? "text-kargon-red" : ""}`}>
