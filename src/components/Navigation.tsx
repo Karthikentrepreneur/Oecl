@@ -19,7 +19,7 @@ const Navigation = () => {
           <div className="flex items-center gap-4">
             <img src="/oecl.png" alt="GGL Logo" className="h-10 w-auto cursor-pointer object-fill transition-all duration-300" />
             <div className="h-8 w-px bg-gray-500 hidden md:block"></div>
-            <img alt="1 Global Enterprises Logo" src="/lovable-uploads/d67654d5-3b39-46c3-a167-8b9a025bbf05.png" className="hidden md:block h-8 w-auto object-contain transition-all duration-300" />
+            <img alt="1 Global Enterprises Logo" src="/lovable-uploads/a2513c1d-2708-4143-a69b-fa65a1d4d1f2.png" className="hidden md:block h-11 w-auto object-contain transition-all duration-300" />
           </div>
 
           {/* Desktop Navigation */}
@@ -27,22 +27,22 @@ const Navigation = () => {
             <Link to="/" className="">
               HOME
             </Link>
-            <Link to="/about-us" className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/services") ? "text-kargon-red" : ""}`}>
+            <Link to="/about-us" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/services") ? "text-kargon-red" : ""}`}>
               ABOUT US
             </Link>
-            <Link to="/services" className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/services") ? "text-kargon-red" : ""}`}>
+            <Link to="/services" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/services") ? "text-kargon-red" : ""}`}>
               SERVICES
             </Link>
-            <Link to="/blog" className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/projects") ? "text-kargon-red" : ""}`}>
+            <Link to="/blog" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/projects") ? "text-kargon-red" : ""}`}>
               BLOGS
             </Link>
-            <Link to="/contact" className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/contact") ? "text-kargon-red" : ""}`}>
+            <Link to="/contact" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/contact") ? "text-kargon-red" : ""}`}>
               CONTACT
             </Link>
-            {user && <Link to="/dashboard" className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/dashboard") ? "text-kargon-red" : ""}`}>
+            {user && <Link to="/dashboard" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/dashboard") ? "text-kargon-red" : ""}`}>
                 DASHBOARD
               </Link>}
-            {isAdmin && <Link to="/admin" className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/admin") ? "text-kargon-red" : ""}`}>
+            {isAdmin && <Link to="/admin" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/admin") ? "text-kargon-red" : ""}`}>
                 ADMIN
               </Link>}
           </nav>
