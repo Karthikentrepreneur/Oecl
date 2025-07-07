@@ -80,7 +80,7 @@ const Navigation = () => {
 
           {/* Mobile Menu Button */}
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden p-2">
-            {isMenuOpen ? <X className="text-white" size={24} /> : <Menu className="text-white" size={24} />}
+            {isMenuOpen ? <X className="text-white" size={24} /> : <Menu className="text-black" size={24} />}
           </button>
         </div>
       </div>
