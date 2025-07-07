@@ -24,7 +24,7 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            <Link to="/" className="">
+            <Link to="/" className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/services") ? "text-kargon-red" : ""}`}>
               HOME
             </Link>
             <Link to="/about-us" className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/services") ? "text-kargon-red" : ""}`}>
