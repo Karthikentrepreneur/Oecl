@@ -5,9 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Send, XCircle, Linkedin, Facebook, Globe, Building2 } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, XCircle, Linkedin, Facebook, Globe, Building2, Map, Menu } from 'lucide-react';
 import { useLocation } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import ContactMapContainer from "@/components/ContactMapContainer";
+import ContactSidebar from "@/components/ContactSidebar";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const ScrollToTop = () => {
   const {
@@ -24,6 +27,20 @@ const ScrollToTop = () => {
 
 const Contact = () => {
   const [showNotification, setShowNotification] = useState(false);
+  const isMobile = useIsMobile();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showMap, setShowMap] = useState(true);
+
+  useEffect(() => {
+    // For mobile, initially show sidebar instead of map
+    if (isMobile) {
+      setShowMap(false);
+      setIsSidebarOpen(true);
+    } else {
+      setShowMap(true);
+      setIsSidebarOpen(true);
+    }
+  }, [isMobile]);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -69,8 +86,8 @@ const Contact = () => {
           </motion.div>
         </motion.section>
 
-        {/* Global Presence Section */}
-        <section className="py-16 bg-white">
+        {/* Interactive Global Presence Section */}
+        <section className="py-16 bg-gradient-to-b from-red-50/30 to-white">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -86,93 +103,59 @@ const Contact = () => {
               </p>
             </motion.div>
 
-            <div className="flex flex-col lg:flex-row gap-8">
-              {/* Map Section */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                className="lg:w-2/3"
-              >
-                <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                  <div className="h-[600px] w-full relative">
-                    <iframe
-                      src="https://www.google.com/maps/d/u/0/embed?mid=1d5jZQlEjnKqnsGHvdJWR5wB_-fcQ_Zk&z=2&ll=12.9716,77.5946&hl=en&ehbc=2E312F&output=embed"
-                      width="100%"
-                      height="100%"
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title="OECL Global Presence Map"
-                    />
-                    <div className="absolute top-0 left-0 right-0 h-14 bg-white z-10 pointer-events-none" />
-                  </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-1 relative overflow-hidden"
+            >
+              {/* Page title for mobile */}
+              {isMobile && (
+                <div className="fixed top-20 left-0 right-0 z-30 bg-gradient-to-r from-red-600 to-red-700 p-3 text-white text-center shadow-md">
+                  <h3 className="text-lg font-bold">Global Presence</h3>
                 </div>
-              </motion.div>
+              )}
+              
+              {/* Main content with map - 60% on desktop, full on mobile when active */}
+              {(!isMobile || (isMobile && showMap)) && (
+                <motion.main
+                  initial={isMobile ? { x: '100%' } : { opacity: 0 }}
+                  animate={isMobile ? { x: 0 } : { opacity: 1 }}
+                  exit={isMobile ? { x: '100%' } : { opacity: 0 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                  className={`transition-all duration-300 ease-in-out ${isMobile ? 'w-full' : 'w-[60%]'}`}
+                >
+                  <ContactMapContainer />
+                </motion.main>
+              )}
+              
+              {/* Sidebar for locations - 35% on desktop, full width on mobile when active */}
+              {(!isMobile || (isMobile && !showMap)) && (
+                <motion.div
+                  initial={isMobile ? { x: '-100%' } : { opacity: 0 }}
+                  animate={isMobile ? { x: 0 } : { opacity: 1 }}
+                  exit={isMobile ? { x: '-100%' } : { opacity: 0 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                  className={`transition-all duration-300 ease-in-out ${isMobile ? 'w-full pt-12' : 'w-[35%]'}`}
+                >
+                  <ContactSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+                </motion.div>
+              )}
 
-              {/* Global Locations Sidebar */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                className="lg:w-1/3"
-              >
-                <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                  {/* Header */}
-                  <div className="bg-gradient-to-r from-red-600 to-red-700 text-white p-4">
-                    <div className="flex items-center gap-2">
-                      <Globe className="h-5 w-5" />
-                      <h3 className="text-lg font-bold">Global Locations</h3>
-                    </div>
-                  </div>
-
-                  {/* Countries List */}
-                  <div className="p-4 max-h-[550px] overflow-y-auto">
-                    <Accordion type="single" collapsible className="space-y-2">
-                      {[
-                        { code: "au", name: "Australia", cities: ["Melbourne"] },
-                        { code: "bd", name: "Bangladesh", cities: ["Dhaka"] },
-                        { code: "in", name: "India", cities: ["Mumbai", "Delhi", "Chennai", "Bangalore", "Kolkata"] },
-                        { code: "id", name: "Indonesia", cities: ["Jakarta", "Surabaya"] },
-                        { code: "my", name: "Malaysia", cities: ["Johor Bahru", "Port Klang"] },
-                        { code: "mm", name: "Myanmar", cities: ["Yangon"] },
-                        { code: "pk", name: "Pakistan", cities: ["Karachi", "Lahore"] },
-                        { code: "qa", name: "Qatar", cities: ["Doha"] },
-                        { code: "sa", name: "Saudi Arabia", cities: ["Dammam", "Riyadh", "Jeddah"] },
-                        { code: "sg", name: "Singapore", cities: ["Singapore"] },
-                        { code: "lk", name: "Sri Lanka", cities: ["Colombo"] },
-                        { code: "th", name: "Thailand", cities: ["Bangkok"] },
-                        { code: "ae", name: "United Arab Emirates (UAE)", cities: ["Dubai", "Jebel Ali", "Abu Dhabi"] },
-                        { code: "gb", name: "United Kingdom (UK)", cities: ["London"] },
-                        { code: "us", name: "United States (USA)", cities: ["New York", "Los Angeles", "Chicago"] }
-                      ].map((country) => (
-                        <AccordionItem key={country.code} value={country.code} className="border border-gray-200 rounded-lg">
-                          <AccordionTrigger className="px-4 py-3 hover:bg-gray-50 rounded-t-lg">
-                            <div className="flex items-center gap-3 w-full">
-                              <div className="w-6 h-4 bg-gray-300 rounded-sm flex-shrink-0"></div>
-                              <span className="text-left font-medium text-gray-800">{country.name}</span>
-                            </div>
-                          </AccordionTrigger>
-                          <AccordionContent className="px-4 py-2 bg-gray-50 rounded-b-lg">
-                            <div className="space-y-1">
-                              {country.cities.map((city, index) => (
-                                <div key={index} className="flex items-center gap-2 py-1">
-                                  <MapPin className="h-3 w-3 text-red-500" />
-                                  <span className="text-sm text-gray-700">{city}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </AccordionContent>
-                        </AccordionItem>
-                      ))}
-                    </Accordion>
-                  </div>
+              {/* Mobile toggle buttons */}
+              {isMobile && (
+                <div className="fixed bottom-4 right-4 z-50 flex gap-2">
+                  <Button
+                    onClick={() => setShowMap(!showMap)}
+                    className="bg-red-600 hover:bg-red-700 text-white shadow-lg"
+                    size="lg"
+                  >
+                    {showMap ? <Menu size={20} /> : <Map size={20} />}
+                    {showMap ? 'Locations' : 'Map'}
+                  </Button>
                 </div>
-              </motion.div>
-            </div>
+              )}
+            </motion.div>
           </div>
         </section>
 
