@@ -27,22 +27,22 @@ const Navigation = () => {
             <Link to="/" className="">
               HOME
             </Link>
-            <Link to="/about-us" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/services") ? "text-kargon-red" : ""}`}>
+            <Link to="/about-us" className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/services") ? "text-kargon-red" : ""}`}>
               ABOUT US
             </Link>
-            <Link to="/services" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/services") ? "text-kargon-red" : ""}`}>
+            <Link to="/services" className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/services") ? "text-kargon-red" : ""}`}>
               SERVICES
             </Link>
-            <Link to="/blog" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/projects") ? "text-kargon-red" : ""}`}>
+            <Link to="/blog" className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/projects") ? "text-kargon-red" : ""}`}>
               BLOGS
             </Link>
-            <Link to="/contact" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/contact") ? "text-kargon-red" : ""}`}>
+            <Link to="/contact" className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/contact") ? "text-kargon-red" : ""}`}>
               CONTACT
             </Link>
-            {user && <Link to="/dashboard" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/dashboard") ? "text-kargon-red" : ""}`}>
+            {user && <Link to="/dashboard" className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/dashboard") ? "text-kargon-red" : ""}`}>
                 DASHBOARD
               </Link>}
-            {isAdmin && <Link to="/admin" className={`nav-link font-medium text-white hover:text-kargon-red ${isActive("/admin") ? "text-kargon-red" : ""}`}>
+            {isAdmin && <Link to="/admin" className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/admin") ? "text-kargon-red" : ""}`}>
                 ADMIN
               </Link>}
           </nav>
