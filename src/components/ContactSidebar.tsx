@@ -11,19 +11,6 @@ interface ContactSidebarProps {
   onClose: () => void;
 }
 
-The user wants to correct the `lat` and `lng` values for each country and city in the provided `countries` array. I will go through each entry and use Google Search to find the accurate latitude and longitude.
-
-Here's the plan:
-
-1.  For each country, search for its `lat` and `lng`.
-2.  For each city within a country, search for its `lat` and `lng`.
-3.  Update the provided JSON with the corrected values.
-
-Let's start by correcting the coordinates.
-
-Updated `countries` array with corrected latitude and longitude values:
-
-```json
 const countries = [{
   code: "in",
   name: "India",
