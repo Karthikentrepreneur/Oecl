@@ -309,10 +309,15 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
   }, []);
 
   const navigateToLocation = (lat: number, lng: number, city: any = null) => {
-    if (iframeRef.current) {
+    // Find the iframe in the ContactMapContainer
+    const iframe = document.querySelector('iframe[title="Interactive Map"]') as HTMLIFrameElement;
+    if (iframe) {
       try {
-        const newSrc = iframeRef.current.src.split('&z=')[0] + `&z=6&ll=${lat},${lng}`;
-        iframeRef.current.src = newSrc;
+        // Use higher zoom level for city-specific locations
+        const zoomLevel = city ? 12 : 6;
+        const baseUrl = "https://www.google.com/maps/d/u/0/embed?mid=1d5jZQlEjnKqnsGHvdJWR5wB_-fcQ_Zk";
+        const newSrc = `${baseUrl}&z=${zoomLevel}&ll=${lat},${lng}&hl=en&ehbc=2E312F&output=embed`;
+        iframe.src = newSrc;
         if (city) {
           setSelectedLocation(city);
         }
