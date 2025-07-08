@@ -1,11 +1,12 @@
-
 import { Calendar, User, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ScrollAnimation from "./ScrollAnimation";
+import { Link } from "react-router-dom"; // ✅ Import Link for navigation
 
 const blogs = [
   {
     id: 1,
+    slug: "digital-supply-chain-benefits",
     title: "The advantages of a digital supply chain",
     excerpt: "Explore how digital technologies can transform your supply chain operations for greater efficiency.",
     image: "https://images.unsplash.com/photo-1580674285054-bed31e145f59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
@@ -15,6 +16,7 @@ const blogs = [
   },
   {
     id: 2,
+    slug: "measuring-success-in-logistics",
     title: "How will you know success when it shows up?",
     excerpt: "Identifying and measuring success in logistics operations through key performance indicators.",
     image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
@@ -24,6 +26,7 @@ const blogs = [
   },
   {
     id: 3,
+    slug: "handling-valuable-goods",
     title: "We carefully handle the valuable goods",
     excerpt: "Our specialized approach to transporting high-value and sensitive cargo with maximum security.",
     image: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
@@ -33,6 +36,7 @@ const blogs = [
   },
   {
     id: 4,
+    slug: "green-logistics-solutions",
     title: "Green logistics solutions for a greener future",
     excerpt: "Sustainable practices in logistics that reduce environmental impact while maintaining efficiency.",
     image: "https://images.unsplash.com/photo-1605600659873-d808a13e4d9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
@@ -74,19 +78,24 @@ const BlogSection = () => {
                     {blog.author}
                   </div>
                 </div>
-                <a href="#" className="text-kargon-red font-medium text-sm flex items-center hover:underline">
+                <Link
+                  to={`/blog/${blog.slug}`}
+                  className="text-kargon-red font-medium text-sm flex items-center hover:underline"
+                >
                   READ MORE
                   <ArrowRight size={14} className="ml-1" />
-                </a>
+                </Link>
               </div>
             </ScrollAnimation>
           ))}
         </div>
 
         <div className="text-center">
-          <Button className="bg-kargon-red hover:bg-kargon-red/90 text-white px-6">
-            VIEW ALL POSTS
-          </Button>
+          <Link to="/blog">
+            <Button className="bg-kargon-red hover:bg-kargon-red/90 text-white px-6">
+              VIEW ALL POSTS
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
