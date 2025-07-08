@@ -263,8 +263,8 @@ const countries = [{
 }, {
   code: "au",
   name: "Australia",
-  lat: -25.2744,
-  lng: 133.7751,
+  lat: -37.7976,
+  lng: 144.9652,
   cities: [{
     name: "Melbourne",
     lat: -37.7976,
