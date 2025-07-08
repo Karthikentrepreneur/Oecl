@@ -104,7 +104,7 @@ const OceanFreight = () => {
           delay: 0.2
         }} viewport={{
           once: true
-        }} className="bg-white p-6 md:p-10 rounded-2xl shadow-lg mb-8 md:mb-12 border-l-4 border-red-500">
+        }} className="p-6 md:p-10 rounded-2xl shadow-lg mb-8 md:mb-12 border-l-4 border-red-500 bg-slate-200">
             <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-4">
               FCL is the most optimized container shipping way regarding cost, volume and weight of the cargo. 
               We take special care at each step of the process which involves fixing contract pricing with carriers, reserving space, make booking, picking up empty container at the container depot, 
@@ -142,7 +142,7 @@ const OceanFreight = () => {
           delay: 0.6
         }} viewport={{
           once: true
-        }} className="bg-white p-6 md:p-10 rounded-2xl shadow-lg mb-6 md:mb-8 border-l-4 border-red-500">
+        }} className="p-6 md:p-10 rounded-2xl shadow-lg mb-6 md:mb-8 border-l-4 border-red-500 bg-slate-200">
             <p className="text-gray-700 text-base md:text-lg leading-relaxed">
               OECL operate own consolidation service on many trade routes. 
               With its vast network of consolidators, the company is able to provide competitive price with multiple options of sailing. 
