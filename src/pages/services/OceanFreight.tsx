@@ -90,8 +90,6 @@ const OceanFreight = () => {
         }} className="text-center mb-6 md:mb-8">
             <h3 className="text-2xl md:text-3xl font-bold text-red-500 mb-4">FCL Services</h3>
           </motion.div>
-            
-          </motion.div>
 
           <motion.div initial={{
           opacity: 0,
