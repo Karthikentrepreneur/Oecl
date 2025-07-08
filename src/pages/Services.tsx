@@ -37,7 +37,7 @@ const ServiceCard = ({
       <div className="w-full h-48 md:h-64">
         <img src={image} alt={title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
       </div>
-      <div className="p-6 flex flex-col justify-center bg-slate-100">
+      <div className="p-6 flex flex-col justify-center bg-gray-200">
         <div className="bg-red-600/10 text-red-600 p-2 rounded-full inline-block mb-2 w-fit">
           <Icon className="w-5 h-5" />
         </div>
