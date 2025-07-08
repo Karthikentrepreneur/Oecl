@@ -316,7 +316,7 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
       try {
         // Use higher zoom level for city-specific locations
         const zoomLevel = city ? 12 : 6;
-        const baseUrl = "https://www.google.com/maps/d/u/0/embed?mid=1d5jZQlEjnKqnsGHvdJWR5wB_-fcQ_Zk";
+        const baseUrl = "https://www.google.com/maps/d/u/0/edit?mid=1rF5337I7j7xk98at6ZPdMul4aglzrLg";
         const newSrc = `${baseUrl}&z=${zoomLevel}&ll=${lat},${lng}&hl=en&ehbc=2E312F&output=embed`;
         iframe.src = newSrc;
         if (city) {
