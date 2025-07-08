@@ -67,37 +67,29 @@ const OceanFreight = () => {
               className="space-y-6"
             >
               <h2 className="text-3xl font-bold text-red-500">Comprehensive Ocean Freight</h2>
-              <p className="text-gray-700 text-lg leading-relaxed">
-                OECL has own fleet of containers including special equipment’s to accommodate special requirements of customers and specializes in many trade lanes. 
-                Being sea freight professionals with vast experience in the field helps to match frequent sailing and flexible service options. 
-                Multiple carrier options on any trade route with contracted rates helps to secure the space, allocation, timing, pricing and frequency of your shipments. 
-                FCL is the most optimized container shipping way regarding cost, volume and weight of the cargo. 
-                We take special care at each step of the process which involves fixing contract pricing with carriers, reserving space, make booking, picking up empty container at the container depot, 
-                loading at shipper facility, transporting by truck / rail to the port and vessel loading, monitor vessel schedule till final delivery to consignee. 
-                For import bookings we engage our overseas partners in the absence of our own network and monitor each steps and keep our customers / consignees informed at all stages.
+              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                OECL has own fleet of containers including special equipment's to accommodate special requirements of customers and specializes in many trade lanes. 
+                Being sea freight professionals with vast experience in the field helps to match frequent sailing and flexible service options.
               </p>
               <p className="text-gray-700 text-lg leading-relaxed">
-                OECL operate own consolidation service on many trade routes. 
-                With its vast network of consolidators, the company is able to provide competitive price with multiple options of sailing. 
-                With regular consolidation boxes to important trade lanes, the company has the advantage of accommodating cargo which requires timely deliveries.
+                Multiple carrier options on any trade route with contracted rates helps to secure the space, allocation, timing, pricing and frequency of your shipments.
               </p>
-
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* FCL Services Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-16 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <h2 className="text-4xl font-bold text-black mb-4">FCL Services</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">FCL Services</h2>
             <div className="w-20 h-1 bg-red-500 mx-auto"></div>
           </motion.div>
 
@@ -106,15 +98,14 @@ const OceanFreight = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="bg-white p-8 md:p-12 rounded-2xl shadow-lg mb-16"
+            className="bg-white p-6 md:p-10 rounded-2xl shadow-lg mb-8 md:mb-12 border-l-4 border-red-500"
           >
-            <p className="text-gray-700 text-lg leading-relaxed">
-              OECL has own fleet of containers including special equipment's to accommodate special requirements of customers and specializes in many trade lanes. 
-              Being sea freight professionals with vast experience in the field helps to match frequent sailing and flexible service options. 
-              Multiple carrier options on any trade route with contracted rates helps to secure the space, allocation, timing, pricing and frequency of your shipments. 
+            <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-4">
               FCL is the most optimized container shipping way regarding cost, volume and weight of the cargo. 
               We take special care at each step of the process which involves fixing contract pricing with carriers, reserving space, make booking, picking up empty container at the container depot, 
-              loading at shipper facility, transporting by truck / rail to the port and vessel loading, monitor vessel schedule till final delivery to consignee. 
+              loading at shipper facility, transporting by truck / rail to the port and vessel loading, monitor vessel schedule till final delivery to consignee.
+            </p>
+            <p className="text-gray-700 text-base md:text-lg leading-relaxed">
               For import bookings we engage our overseas partners in the absence of our own network and monitor each steps and keep our customers / consignees informed at all stages.
             </p>
           </motion.div>
@@ -125,9 +116,9 @@ const OceanFreight = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="text-center mb-8"
+            className="text-center mb-6 md:mb-8"
           >
-            <h3 className="text-3xl font-bold text-red-500 mb-4">LCL Services</h3>
+            <h3 className="text-2xl md:text-3xl font-bold text-red-500 mb-4">LCL Services</h3>
           </motion.div>
 
           <motion.div
@@ -135,9 +126,9 @@ const OceanFreight = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
-            className="bg-white p-8 md:p-12 rounded-2xl shadow-lg mb-8"
+            className="bg-white p-6 md:p-10 rounded-2xl shadow-lg mb-6 md:mb-8 border-l-4 border-red-500"
           >
-            <p className="text-gray-700 text-lg leading-relaxed">
+            <p className="text-gray-700 text-base md:text-lg leading-relaxed">
               OECL operate own consolidation service on many trade routes. 
               With its vast network of consolidators, the company is able to provide competitive price with multiple options of sailing. 
               With regular consolidation boxes to important trade lanes, the company has the advantage of accommodating cargo which requires timely deliveries.
@@ -149,9 +140,9 @@ const OceanFreight = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
             viewport={{ once: true }}
-            className="text-center bg-red-50 p-8 rounded-2xl border border-red-200"
+            className="text-center bg-gradient-to-r from-red-50 to-red-100 p-6 md:p-8 rounded-2xl border border-red-200 shadow-md"
           >
-            <p className="text-red-700 text-lg font-semibold">
+            <p className="text-red-700 text-base md:text-lg font-semibold">
               OECL Provide complete transparency of all the pricing at the origin, destination and ocean freight charges.
             </p>
           </motion.div>
@@ -159,36 +150,36 @@ const OceanFreight = () => {
       </section>
 
       {/* Additional Services Section */}
-      <section className="py-20 bg-white">
+      <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <h2 className="text-4xl font-bold text-black mb-4">Additional Services</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Additional Services</h2>
             <div className="w-20 h-1 bg-red-500 mx-auto"></div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
             {/* Warehousing */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="bg-gray-50 p-8 rounded-2xl shadow-lg"
+              className="bg-gradient-to-br from-gray-50 to-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow"
             >
-              <h3 className="text-2xl font-bold text-red-500 mb-6">WAREHOUSING</h3>
-              <p className="text-gray-700 leading-relaxed mb-4">
+              <h3 className="text-xl md:text-2xl font-bold text-red-500 mb-4 md:mb-6">WAREHOUSING</h3>
+              <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-3 md:mb-4">
                 OECL is well equipped to handle the warehousing of various commodities including cold storage.
               </p>
-              <p className="text-gray-700 leading-relaxed mb-4">
+              <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-3 md:mb-4">
                 Warehouse management is a key part of the supply chain and primarily aims to control the movement and storage of materials within a warehouse and process the associated transactions including shipping, receiving, put away and picking.
               </p>
-              <p className="text-gray-700 leading-relaxed">
+              <p className="text-gray-700 text-sm md:text-base leading-relaxed">
                 With its network in domestic and global market, OECL can identify the right kind of warehouse depending on customer's requirement based on cost effective, storage specific, commodity specific and proximity specific needs.
               </p>
             </motion.div>
@@ -199,13 +190,13 @@ const OceanFreight = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="bg-gray-50 p-8 rounded-2xl shadow-lg"
+              className="bg-gradient-to-br from-gray-50 to-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow"
             >
-              <h3 className="text-2xl font-bold text-red-500 mb-6">CUSTOMS CLEARANCE</h3>
-              <p className="text-gray-700 leading-relaxed mb-4">
+              <h3 className="text-xl md:text-2xl font-bold text-red-500 mb-4 md:mb-6">CUSTOMS CLEARANCE</h3>
+              <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-3 md:mb-4">
                 As one of the leading custom clearing agents, we ensure that all clearance formalities are done in a smooth and easy manner so that all our customers receive their goods on time.
               </p>
-              <p className="text-gray-700 leading-relaxed">
+              <p className="text-gray-700 text-sm md:text-base leading-relaxed">
                 OECL takes pride in being in business for more than a decade and have cleared all types of shipments of any sizes and for a plethora of goods from across the world taking care of each transportation with precision.
               </p>
             </motion.div>
@@ -216,13 +207,13 @@ const OceanFreight = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
-              className="bg-gray-50 p-8 rounded-2xl shadow-lg"
+              className="bg-gradient-to-br from-gray-50 to-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow"
             >
-              <h3 className="text-2xl font-bold text-red-500 mb-6">LINER AGENCY</h3>
-              <p className="text-gray-700 leading-relaxed mb-4">
+              <h3 className="text-xl md:text-2xl font-bold text-red-500 mb-4 md:mb-6">LINER AGENCY</h3>
+              <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-3 md:mb-4">
                 OECL has liner division which is representing many medium to small carriers who use our local knowledge and expertise to handle and market their products.
               </p>
-              <p className="text-gray-700 leading-relaxed">
+              <p className="text-gray-700 text-sm md:text-base leading-relaxed">
                 With shipping industry going through many changes, OECL helps shipping carriers to optimize their resources by providing local support to ensure a win-win formula.
               </p>
             </motion.div>
@@ -233,10 +224,10 @@ const OceanFreight = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
-              className="bg-gray-50 p-8 rounded-2xl shadow-lg"
+              className="bg-gradient-to-br from-gray-50 to-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow"
             >
-              <h3 className="text-2xl font-bold text-red-500 mb-6">LIQUID CARGO TRANSPORTATION</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl md:text-2xl font-bold text-red-500 mb-4 md:mb-6">LIQUID CARGO TRANSPORTATION</h3>
+              <p className="text-gray-700 text-sm md:text-base leading-relaxed">
                 OECL provides expertise and services for carriage of liquid cargoes in ISO Tanks, Flexi Tanks and IBCs (Inter Bulk Containers).
                 OECL provide professional, cost effective and safe transportation of liquid cargo. A well experienced dedicated team provides complete logistics management for door to door movements with complete visibility.
               </p>
@@ -249,17 +240,17 @@ const OceanFreight = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="mt-12 bg-gradient-to-r from-red-50 to-gray-50 p-8 md:p-12 rounded-2xl shadow-lg border border-red-100"
+            className="mt-8 md:mt-12 bg-gradient-to-r from-red-50 via-white to-red-50 p-6 md:p-12 rounded-2xl shadow-lg border border-red-100 hover:shadow-xl transition-shadow"
           >
-            <h3 className="text-3xl font-bold text-red-500 mb-6 text-center">PROJECT CARGO</h3>
-            <p className="text-gray-700 leading-relaxed mb-4">
+            <h3 className="text-2xl md:text-3xl font-bold text-red-500 mb-4 md:mb-6 text-center">PROJECT CARGO</h3>
+            <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-3 md:mb-4">
               We have a dedicated knowledge based project division having skilled experts in the field inherited from major project handlers. 
               OECL are well equipped to handle all kinds of long lengths, over width, over height, heavy lift and complex project cargoes including those that needs floating cranes or tandem lifting.
             </p>
-            <p className="text-gray-700 leading-relaxed mb-4">
+            <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-3 md:mb-4">
               We create single solution packages, tailor made to meet our customers specific shipping and transport requirements, to most compass points across the globe, be it port to port or ex-works to door.
             </p>
-            <p className="text-gray-700 leading-relaxed">
+            <p className="text-gray-700 text-sm md:text-base leading-relaxed">
               We believe in transparency, especially in our costings, so that our customers gets the best value which is important for their projects.
             </p>
           </motion.div>
