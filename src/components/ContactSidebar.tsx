@@ -236,8 +236,8 @@ const countries = [{
     email: "info@gglusa.us"
   }, {
     name: "New York",
-    lat: 40.7128,
-    lng: -74.0060,
+    lat: 37.4545,
+    lng: -122.1818,
     address: "New Jersey Branch, 33 Wood Avenue South Suite 600, Iselin, NJ 08830",
     contacts: ["+1 732 456 6780"],
     email: "info@gglusa.us"
