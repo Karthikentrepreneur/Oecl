@@ -39,10 +39,7 @@ const AirFreight = () => {
               Air Freight <span className="text-red-500">Solutions</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              As one of the leading independent airfreight company, we provide more flexibility, choice worldwide 
-              by working in partnership with an extensive range of specialist carriers who provide customized 
-              schedules and solutions. Our Directors and Managers are hands-on and work closely with our staff 
-              to provide an integrated highly professional service to our clients.
+               Fast, reliable, and secure air cargo services connecting your business to the world
             </p>
           </motion.div>
 
@@ -71,20 +68,15 @@ const AirFreight = () => {
             >
               <h2 className="text-3xl font-bold text-red-500">Why Choose Our Air Freight?</h2>
               <p className="text-gray-700 text-lg leading-relaxed">
-                Our air freight services offer the fastest transit times for your urgent shipments. 
-                With partnerships across major airlines and cargo carriers, we ensure your goods 
-                reach their destination quickly and safely.
+               As one of the leading independent airfreight company, we provide more flexibility, choice worldwide by working in partnership with an extensive range of specialist carriers who provide customized schedules and solutions. Our Directors and Managers are hands-on and work closely with our staff to provide an integrated highly professional service to our clients.
               </p>
 
               <p className="text-gray-700 text-lg leading-relaxed">
-                The company through its extensive worldwide network have established a fast and efficient airfreight 
-                product which translates into a cost-efficient and fast movement of cargo to and from worldwide markets.
+                The company through its extensive worldwide network have established a fast and efficient airfreight product which translates into a cost-efficient and fast movement of cargo to and from worldwide markets.
               </p>
 
               <p className="text-gray-700 text-lg leading-relaxed">
-                OECL can provide customized sea-air & air-sea options to meet customer’s deadline/timeliness 
-                and achieve cost savings. The company handles the airfreight consolidation on many major routes 
-                through its efficient worldwide network.
+                OECL can provide customized sea-air & air-sea options to meet customer’s deadline/timeliness and achieve cost savings. The company handles the airfreight consolidation on many major routes through its efficient worldwide network
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
