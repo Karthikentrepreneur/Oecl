@@ -68,11 +68,20 @@ const OceanFreight = () => {
             >
               <h2 className="text-3xl font-bold text-red-500">Comprehensive Ocean Freight</h2>
               <p className="text-gray-700 text-lg leading-relaxed">
-                Our ocean freight services provide the most economical solution for large shipments. 
-                With established relationships with major shipping lines, we offer flexible scheduling 
-                and competitive rates for your sea cargo needs.
+                OECL has own fleet of containers including special equipment’s to accommodate special requirements of customers and specializes in many trade lanes. 
+                Being sea freight professionals with vast experience in the field helps to match frequent sailing and flexible service options. 
+                Multiple carrier options on any trade route with contracted rates helps to secure the space, allocation, timing, pricing and frequency of your shipments. 
+                FCL is the most optimized container shipping way regarding cost, volume and weight of the cargo. 
+                We take special care at each step of the process which involves fixing contract pricing with carriers, reserving space, make booking, picking up empty container at the container depot, 
+                loading at shipper facility, transporting by truck / rail to the port and vessel loading, monitor vessel schedule till final delivery to consignee. 
+                For import bookings we engage our overseas partners in the absence of our own network and monitor each steps and keep our customers / consignees informed at all stages.
               </p>
-              
+              <p className="text-gray-700 text-lg leading-relaxed">
+                OECL operate own consolidation service on many trade routes. 
+                With its vast network of consolidators, the company is able to provide competitive price with multiple options of sailing. 
+                With regular consolidation boxes to important trade lanes, the company has the advantage of accommodating cargo which requires timely deliveries.
+              </p>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {features.map((feature, index) => (
                   <motion.div
@@ -104,7 +113,7 @@ const OceanFreight = () => {
             <h2 className="text-4xl font-bold text-black mb-4">Ocean Freight Advantages</h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {[
               {
                 icon: Anchor,
@@ -137,6 +146,12 @@ const OceanFreight = () => {
                 <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
               </motion.div>
             ))}
+          </div>
+
+          <div className="max-w-4xl mx-auto text-gray-700 text-lg leading-relaxed space-y-6">
+            <p>
+              OECL Provide complete transparency of all the pricing at the origin, destination and ocean freight charges.
+            </p>
           </div>
         </div>
       </section>
