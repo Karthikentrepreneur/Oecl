@@ -267,8 +267,8 @@ const countries = [{
   lng: 133.7751,
   cities: [{
     name: "Melbourne",
-    lat: -37.8136,
-    lng: 144.9631,
+    lat: -37.7976,
+    lng: 144.9652,
     address: "Suite 5, 7-9 Mallet Road, Tullamarine, Victoria, 3043",
     contacts: ["Mob: +61 432254969", "Tel: +61 388205157"]
   }]
