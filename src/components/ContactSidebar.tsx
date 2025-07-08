@@ -54,8 +54,8 @@ const countries = [{
   lng: 101.9758,
   cities: [{
     name: "PASIRGUDANG",
-    lat: 1.4580,
-    lng: 103.8853,
+    lat: 1.4842,
+    lng: 103.7629,
     address: "Unit 20-03A, Level 20 Menara Zurich, 15 Jalan Dato Abdullah Tahir, 80300 Johor Bahru",
     contacts: ["+603-3319 2778 / 74 / 75, 79"]
   }, {
@@ -189,8 +189,8 @@ const countries = [{
 }, {
   code: "qa",
   name: "Qatar",
-  lat: 25.3548,
-  lng: 51.1839,
+  lat: 25.2854,
+  lng: 51.531,
   cities: [{
     name: "Doha",
     lat: 25.2854,
@@ -201,8 +201,8 @@ const countries = [{
 }, {
   code: "sa",
   name: "Saudi Arabia",
-  lat: 23.8859,
-  lng: 45.0792,
+  lat: 26.4207,
+  lng: 50.0888,
   cities: [{
     name: "Dammam",
     lat: 26.4207,
