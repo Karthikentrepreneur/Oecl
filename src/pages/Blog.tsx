@@ -18,7 +18,7 @@ const ScrollToTop = () => {
 export const blogPosts = [
   {
     id: 1,
-    slug: "the-future-of-global-logistics",
+    slug: "digital-supply-chain-benefits",
     title: "The Future of Global Logistics",
     excerpt: "Exploring how emerging technologies are reshaping the logistics industry and creating new opportunities for businesses worldwide.",
     content: "Full blog content for The Future of Global Logistics...",
