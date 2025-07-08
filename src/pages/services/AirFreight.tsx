@@ -21,7 +21,7 @@ const AirFreight = () => {
   return (
     <div className="bg-white text-black min-h-screen">
       <Navigation />
-      
+
       <section className="pt-28 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-transparent"></div>
         <div className="container mx-auto px-4 relative">
@@ -39,7 +39,10 @@ const AirFreight = () => {
               Air Freight <span className="text-red-500">Solutions</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Fast, reliable, and secure air cargo services connecting your business to the world
+              As one of the leading independent airfreight company, we provide more flexibility, choice worldwide 
+              by working in partnership with an extensive range of specialist carriers who provide customized 
+              schedules and solutions. Our Directors and Managers are hands-on and work closely with our staff 
+              to provide an integrated highly professional service to our clients.
             </p>
           </motion.div>
 
@@ -72,7 +75,18 @@ const AirFreight = () => {
                 With partnerships across major airlines and cargo carriers, we ensure your goods 
                 reach their destination quickly and safely.
               </p>
-              
+
+              <p className="text-gray-700 text-lg leading-relaxed">
+                The company through its extensive worldwide network have established a fast and efficient airfreight 
+                product which translates into a cost-efficient and fast movement of cargo to and from worldwide markets.
+              </p>
+
+              <p className="text-gray-700 text-lg leading-relaxed">
+                OECL can provide customized sea-air & air-sea options to meet customer’s deadline/timeliness 
+                and achieve cost savings. The company handles the airfreight consolidation on many major routes 
+                through its efficient worldwide network.
+              </p>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {features.map((feature, index) => (
                   <motion.div
