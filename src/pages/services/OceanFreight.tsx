@@ -99,7 +99,7 @@ const OceanFreight = () => {
           y: 0
         }} transition={{
           duration: 0.8,
-          delay: 0.2
+          delay: 0.6
         }} viewport={{
           once: true
         }} className="p-6 md:p-10 rounded-2xl shadow-lg mb-8 md:mb-12 border-l-4 border-red-500 bg-slate-200">
