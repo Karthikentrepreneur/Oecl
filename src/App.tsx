@@ -64,7 +64,7 @@ const App = () => {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                 <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
-                 <Route path="/blog/:id" element={<NewsDetailPage />} />
+                 <Route path="/blog/:slug" element={<NewsDetailPage />} />
                 <Route path="/india/home" element={<IndiaHome />} />
                 <Route path="/indonesia/home" element={<IndonesiaHome />} />
                 <Route path="/malaysia/home" element={<MalaysiaHome />} />
