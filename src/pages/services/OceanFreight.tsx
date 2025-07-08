@@ -80,72 +80,44 @@ const OceanFreight = () => {
         </div>
       </section>
 
-      {/* FCL Services Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        viewport={{ once: true }}
-        className="text-center mb-6 md:mb-8"
-      >
-        <h3 className="text-2xl md:text-3xl font-bold text-red-500 mb-4">FCL Services</h3>
-      </motion.div>
+      {/* Services Section */}
+<div className="container mx-auto px-4 py-8">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-        viewport={{ once: true }}
-        className="p-6 md:p-10 rounded-2xl shadow-lg mb-8 md:mb-12 border-l-4 border-red-500 bg-slate-200"
-      >
-        <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-4">
-          FCL is the most optimized container shipping way regarding cost, volume and weight of the cargo. 
-          We take special care at each step of the process which involves fixing contract pricing with carriers, reserving space, make booking, picking up empty container at the container depot, 
-          loading at shipper facility, transporting by truck / rail to the port and vessel loading, monitor vessel schedule till final delivery to consignee.
-        </p>
-        <p className="text-gray-700 text-base md:text-lg leading-relaxed">
-          For import bookings we engage our overseas partners in the absence of our own network and monitor each steps and keep our customers / consignees informed at all stages.
-        </p>
-      </motion.div>
+    {/* FCL Card */}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.4 }}
+      viewport={{ once: true }}
+      className="p-6 md:p-8 rounded-2xl shadow-lg border-l-4 border-red-500 bg-slate-200"
+    >
+      <h3 className="text-xl md:text-2xl font-bold text-red-500 mb-4 text-center">FCL Services</h3>
+      <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-4">
+        FCL is the most optimized container shipping way regarding cost, volume and weight of the cargo.
+        We take special care at each step of the process which involves fixing contract pricing with carriers, reserving space, make booking, picking up empty container at the container depot,
+        loading at shipper facility, transporting by truck / rail to the port and vessel loading, monitor vessel schedule till final delivery to consignee.
+      </p>
+      <p className="text-gray-700 text-base md:text-lg leading-relaxed">
+        For import bookings we engage our overseas partners in the absence of our own network and monitor each step and keep our customers / consignees informed at all stages.
+      </p>
+    </motion.div>
 
-      {/* LCL Services Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        viewport={{ once: true }}
-        className="text-center mb-6 md:mb-8"
-      >
-        <h3 className="text-2xl md:text-3xl font-bold text-red-500 mb-4">LCL Services</h3>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-        viewport={{ once: true }}
-        className="p-6 md:p-10 rounded-2xl shadow-lg mb-6 md:mb-8 border-l-4 border-red-500 bg-slate-200"
-      >
-        <p className="text-gray-700 text-base md:text-lg leading-relaxed">
-          OECL operate own consolidation service on many trade routes. 
-          With its vast network of consolidators, the company is able to provide competitive price with multiple options of sailing. 
-          With regular consolidation boxes to important trade lanes, the company has the advantage of accommodating cargo which requires timely deliveries.
-        </p>
-      </motion.div>
-
-      {/* Transparency Message */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.8 }}
-        viewport={{ once: true }}
-        className="text-center bg-gradient-to-r from-red-50 to-red-100 p-6 md:p-8 rounded-2xl border border-red-200 shadow-md"
-      >
-        <p className="text-red-700 text-base md:text-lg font-semibold">
-          OECL Provide complete transparency of all the pricing at the origin, destination and ocean freight charges.
-        </p>
-      </motion.div>
-
+    {/* LCL Card */}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.4 }}
+      viewport={{ once: true }}
+      className="p-6 md:p-8 rounded-2xl shadow-lg border-l-4 border-red-500 bg-slate-200"
+    >
+      <h3 className="text-xl md:text-2xl font-bold text-red-500 mb-4 text-center">LCL Services</h3>
+      <p className="text-gray-700 text-base md:text-lg leading-relaxed">
+        OECL operate own consolidation service on many trade routes.
+        With its vast network of consolidators, the company is able to provide competitive price with multiple options of sailing.
+        With regular consolidation boxes to important trade lanes, the company has the advantage of accommodating cargo which requires timely deliveries.
+      </p>
+    </motion.div>
       {/* Footer */}
       <Footer />
     </div>
