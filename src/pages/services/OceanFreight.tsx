@@ -76,7 +76,7 @@ const OceanFreight = () => {
       </section>
 
       {/* FCL Services Section */}
-          <motion.div initial={{
+           <motion.div initial={{
           opacity: 0,
           y: 30
         }} whileInView={{
