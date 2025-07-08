@@ -84,6 +84,10 @@ const OceanFreight = () => {
 <div className="container mx-auto px-4 py-8">
   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
+    {/* Services Section */}
+<div className="container mx-auto px-4 py-8">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
     {/* FCL Card */}
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -118,6 +122,10 @@ const OceanFreight = () => {
         With regular consolidation boxes to important trade lanes, the company has the advantage of accommodating cargo which requires timely deliveries.
       </p>
     </motion.div>
+
+  </div>
+</div>
+
       {/* Footer */}
       <Footer />
     </div>
