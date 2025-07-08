@@ -24,8 +24,8 @@ const countries = [{
     contacts: ["Export customer service: +91 2245174102, +91 2245174109, +91 2245174118", "Export docs team: +91 2245174103, +91 2245174105", "Import docs team: +91 2245174104, +91 2245174106", "Import customer service: +91 2245174113, +91 2245174110, +91 2245174107, +91 2245174112"]
   }, {
     name: "Delhi",
-    lat: 28.7041,
-    lng: 77.1025,
+    lat: 28.5371,
+    lng: 77.2844,
     address: "JA 511, DLF Tower A, Jasola District Centre, New Delhi, 110025",
     contacts: ["+91 9999022030"]
   }, {
@@ -81,8 +81,8 @@ const countries = [{
 }, {
   code: "id",
   name: "Indonesia",
-  lat: -0.7893,
-  lng: 113.9213,
+  lat: -4.4676,
+  lng: 112.3205,
   cities: [{
     name: "Jakarta",
     lat: -6.2088,
@@ -225,12 +225,12 @@ const countries = [{
 }, {
   code: "us",
   name: "United States (USA)",
-  lat: 37.0902,
-  lng: -95.7129,
+  lat: 41.8622,
+  lng: -87.7209,
   cities: [{
     name: "Chicago",
-    lat: 41.8781,
-    lng: -87.6298,
+    lat: 41.8622,
+    lng: -87.7209,
     address: "",
     contacts: []
   }, {
@@ -242,8 +242,8 @@ const countries = [{
     email: "info@gglusa.us"
   }, {
     name: "Los Angeles",
-    lat: 34.0522,
-    lng: -118.2437,
+    lat: 40.5330,
+    lng: -74.3481,
     address: "2250 South Central Avenue Compton, CA 90220",
     contacts: ["+1 310 928 3903"],
     email: "info@gglusa.us"
@@ -251,8 +251,8 @@ const countries = [{
 }, {
   code: "gb",
   name: "United Kingdom (UK)",
-  lat: 55.3781,
-  lng: -3.4360,
+  lat: 51.5074,
+  lng: -0.1278,
   cities: [{
     name: "London",
     lat: 51.5074,
