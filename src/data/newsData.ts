@@ -4,6 +4,7 @@ export const newsItems: NewsItem[] = [
   {
     id: 1,
     title: "Brille auf für mehr Sichtbarkeit",
+    slug: "digital-supply-chain-benefits",
     date: "8. April 2025",
     category: "Allgemein",
     summary: "Suchmaschinen lieben Struktur – und Nutzer auch. Mit klarer Informationsarchitektur, Content-Hubs und thematischen Clustern entsteht nicht nur Durchblick, sondern digitale Relevanz.",
