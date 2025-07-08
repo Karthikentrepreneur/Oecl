@@ -78,21 +78,6 @@ const AirFreight = () => {
               <p className="text-gray-700 text-lg leading-relaxed">
                 OECL can provide customized sea-air & air-sea options to meet customer’s deadline/timeliness and achieve cost savings. The company handles the airfreight consolidation on many major routes through its efficient worldwide network
               </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {features.map((feature, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.6 + (0.1 * index) }}
-                    className="flex items-center gap-3"
-                  >
-                    <CheckCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
-                    <span className="text-gray-600">{feature}</span>
-                  </motion.div>
-                ))}
-              </div>
             </motion.div>
           </div>
         </div>
