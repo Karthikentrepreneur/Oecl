@@ -66,27 +66,18 @@ const LinearAgency = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="space-y-6"
             >
-              <h2 className="text-3xl font-bold text-red-500">Comprehensive Shipping Line Support</h2>
-              <p className="text-gray-700 text-lg leading-relaxed">
-                As a trusted linear agency partner, we provide comprehensive representation 
-                services for shipping lines, managing vessel operations, customer relations, 
-                and port activities with professional expertise and dedication.
+              <h2 className="text-3xl font-bold text-red-500">LINER AGENCY</h2>
+              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                OECL has liner division which is representing many medium to small carriers who use our local knowledge and expertise to handle and market their products.We provide first class liner and port agency services, together with an extensive range of related services to liners who trust our company knowing the potential and people in the management and their experience.
               </p>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {features.map((feature, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.6 + (0.1 * index) }}
-                    className="flex items-center gap-3"
-                  >
-                    <CheckCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
-                    <span className="text-gray-600">{feature}</span>
-                  </motion.div>
-                ))}
-              </div>
+              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                Highly dedicated, enthusiastic and professional employees, providing top quality service, have swiftly turned Overseas Express Container Lines into a well-established agency, with a remarkable reputation in all aspects.With dedicated trained personnel for each principals OECL ensures equal attention and care in order to protect every principal's interest.
+              </p>
+              
+              <p className="text-gray-700 text-lg leading-relaxed">
+                With shipping industry going through many changes, OECL helps shipping carriers to optimize their resources by providing local support to ensure a win-win formula. We provide full range of general agency to various elements of shipping support and our services are tailored to meet the exact needs of principals in this fast changing global liner shipping environment.
+              </p>
             </motion.div>
           </div>
         </div>

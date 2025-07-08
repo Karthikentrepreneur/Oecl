@@ -66,49 +66,22 @@ const ProjectCargo = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="space-y-6"
             >
-              <h2 className="text-3xl font-bold text-red-500">Project Cargo</h2>
-
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-black mb-1">
-                    Expertise in Complex Project Cargo Handling
-                  </h3>
-                  <p className="text-gray-700 text-lg leading-relaxed">
-                    We operate a dedicated, knowledge-driven project division comprising industry veterans with experience from leading project cargo handlers. OECL is fully equipped to manage cargoes of extreme dimensions—long lengths, over-width, over-height, and heavy-lift consignments—including those requiring floating cranes or tandem lifting operations.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-black mb-1">
-                    Customized End-to-End Logistics Solutions
-                  </h3>
-                  <p className="text-gray-700 text-lg leading-relaxed">
-                    We offer fully tailored solution packages to meet specific shipping and transport needs—from port-to-port to ex-works-to-door delivery—across global destinations. Our expert team evaluates each project through detailed feasibility and risk assessments to ensure optimal handling strategies.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-black mb-1">
-                    Efficient, Safe & Transparent Execution
-                  </h3>
-                  <p className="text-gray-700 text-lg leading-relaxed">
-                    Beyond transportation, we deliver operational excellence through deep industry knowledge, real-time communication, and a strong focus on safety. We uphold full transparency in costing, ensuring maximum value and trust for every project we handle.
-                  </p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {features.map((feature, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                    className="flex items-center gap-3"
-                  >
-                    <CheckCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
-                    <span className="text-gray-600">{feature}</span>
-                  </motion.div>
-                ))}
-              </div>
+              <h2 className="text-3xl font-bold text-red-500">PROJECT CARGO</h2>
+              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                We have a dedicated knowledge based project division having skilled experts in the field inherited from major project handlers. OECL are well equipped to handle all kinds of long lengths, over width, over height, heavy lift and complex project cargoes including those that needs floating cranes or tandem lifting.
+              </p>
+              
+              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                We create single solution packages, tailor made to meet our customers specific shipping and transport requirements, to most compass points across the globe, be it port to port or ex-works to door. Our project/heavy-lift breakbulk handling team guides our customers with the right strategy, after doing the feasibility and risk assessment study for every specific jobs.
+              </p>
+              
+              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                Over to this we also provide our customers the knowledge, efficiency and safety, along with the timely communications they need.
+              </p>
+              
+              <p className="text-gray-700 text-lg leading-relaxed">
+                We believe in transparency, especially in our costings, so that our customers gets the best value which is important for their projects.
+              </p>
             </motion.div>
           </div>
         </div>

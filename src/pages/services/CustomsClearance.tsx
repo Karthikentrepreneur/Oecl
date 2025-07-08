@@ -66,27 +66,18 @@ const CustomsClearance = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="space-y-6"
             >
-              <h2 className="text-3xl font-bold text-red-500">Professional Customs Brokerage</h2>
-              <p className="text-gray-700 text-lg leading-relaxed">
-                Navigate complex customs regulations with confidence. Our experienced customs 
-                brokers handle all documentation, compliance requirements, and government 
-                procedures to ensure your cargo clears customs efficiently and legally.
+              <h2 className="text-3xl font-bold text-red-500">CUSTOMS CLEARANCE</h2>
+              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                As one of the leading custom clearing agents, we ensure that all clearance formalities are done in a smooth and easy manner so that all our customers receive their goods on time. Our customs brokers help ease import and export regulations and all paperwork related to trade compliances and procedures to ensure that your consignments via sea and air leave on time.
               </p>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {features.map((feature, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.6 + (0.1 * index) }}
-                    className="flex items-center gap-3"
-                  >
-                    <CheckCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
-                    <span className="text-gray-600">{feature}</span>
-                  </motion.div>
-                ))}
-              </div>
+              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                OECL takes pride in being in business for more than a decade and have cleared all types of shipments of any sizes and for a plethora of goods from across the world taking care of each transportation with precision. It is our well-experienced team that makes us the best and leading customs clearing agents as our professionals carry out a complete study of all the local rules and regulations to help our clients overcome the complex matters of trade compliances.
+              </p>
+              
+              <p className="text-gray-700 text-lg leading-relaxed">
+                It is our ability in identifying demand and changing challenges in business that makes us the best to help you take care of all your paper works thereby ensuring the smooth flow of your business operations. With all the required documents in place, our professionals also ensure end-to-end solutions for both Import and Export Customs Clearance.
+              </p>
             </motion.div>
           </div>
         </div>
