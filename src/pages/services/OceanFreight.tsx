@@ -89,8 +89,8 @@ const OceanFreight = () => {
         }} viewport={{
           once: true
         }} className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">FCL Services</h2>
-            <div className="w-20 h-1 bg-red-500 mx-auto"></div>
+            <h2 className="text-3xl font-bold mb-4 md:text-3xl py-0 my-0 px-0 mx-0 text-red-500">FCL Services</h2>
+            
           </motion.div>
 
           <motion.div initial={{
