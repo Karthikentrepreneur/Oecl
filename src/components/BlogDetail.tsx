@@ -1,5 +1,6 @@
+
 import { useParams } from 'react-router-dom';
-import { blogPosts } from './Blog';
+import { blogPosts } from '../pages/Blog';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 

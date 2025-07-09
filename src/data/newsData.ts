@@ -1,3 +1,4 @@
+
 import { NewsItem } from '@/types/newsTypes';
 
 export const newsItems: NewsItem[] = [
@@ -60,6 +61,7 @@ Wir unterstützen Sie bei der Planung, Umsetzung und Optimierung – vom SEO-Aud
   {
     id: 2,
     title: "Mehr Sichtbarkeit durch Barrierefreiheit: Wie Unternehmen von BFSG und SEO doppelt profitieren",
+    slug: "sustainable-shipping-solutions",
     date: "27. März 2025",
     category: "Allgemein",
     summary: "BFSG und SEO kombinieren: Sichtbarkeit durch Barrierefreiheit",
@@ -107,6 +109,7 @@ Wir bieten Ihnen einen unverbindlichen Quick-Check mit Handlungsempfehlungen fü
   {
     id: 3,
     title: "KI-Wissenstransfer mit Microsoft 365 und TYPO3: Künstliche Intelligenz als Schlüssel zur digitalen Effizienz",
+    slug: "digital-transformation-in-supply-chain",
     date: "12. März 2025",
     category: "Allgemein",
     summary: "KI-Assistent für TYPO3 und Microsoft 365",
@@ -158,6 +161,7 @@ Weitere Infos auf ki.ccds.de`
   {
     id: 4,
     title: "Neue Partnerschaft mit Microsoft",
+    slug: "international-trade-regulations",
     date: "20.04.2025",
     category: "Partnerschaften",
     summary: "Wir sind stolz, unsere erweiterte Partnerschaft mit Microsoft bekannt zu geben, die uns ermöglicht, noch bessere Integrationen anzubieten.",
@@ -210,6 +214,7 @@ Möchten Sie mehr über unsere Microsoft-Partnerschaft erfahren und wie Sie davo
   {
     id: 5,
     title: "Industrie 4.0 – Wie Unternehmen von digitalen Lösungen profitieren",
+    slug: "ai-in-logistics-operations",
     date: "12.03.2025",
     category: "Fachartikel",
     summary: "Die digitale Transformation revolutioniert Produktionsprozesse. Erfahren Sie, wie moderne Lösungen die Effizienz steigern und Kosten senken können.",
@@ -287,6 +292,7 @@ Unser Expertenteam unterstützt Sie gerne dabei, Ihre individuellen Potenziale z
   {
     id: 6,
     title: "Case Study: Digitale Transformation im öffentlichen Sektor",
+    slug: "cross-border-ecommerce-growth",
     date: "25.02.2025",
     category: "Fallstudie",
     summary: "Erfahren Sie, wie eine große Behörde ihre Prozesse mit unseren Lösungen digitalisiert und die Bürgerzufriedenheit deutlich verbessert hat.",
@@ -406,6 +412,7 @@ Als Technologiepartner begleiten wir die Stadtverwaltung weiterhin auf diesem We
   {
     id: 7,
     title: "SPTools Version 5.0 – Release Notes",
+    slug: "sptools-version-5-release-notes",
     date: "18.01.2025",
     category: "Produktnews",
     summary: "Die neueste Version unserer SPTools-Plattform bringt zahlreiche neue Funktionen und Verbesserungen. Erfahren Sie alle Details im Überblick.",
