@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Shield, UserCircle, LogOut } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import CountrySelector from "../common/CountrySelector";
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
@@ -68,7 +69,7 @@ const Navigation = () => {
                 </Button>
               </> : <>
                 <Link to="/login">
-                  
+                 <CountrySelector />
                 </Link>
                 <Link to="/signup">
                   <Button className="bg-kargon-red hover:bg-kargon-red/90 text-white rounded-md">
@@ -124,6 +125,7 @@ const Navigation = () => {
                   <Link to="/login" className="text-white hover:text-kargon-red py-2" onClick={() => setIsMenuOpen(false)}>
                     LOGIN
                   </Link>
+                  <CountrySelector />
                   <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
                     <Button className="bg-kargon-red hover:bg-kargon-red/90 text-white w-full rounded-md mt-4">
                       GET QUOTE
