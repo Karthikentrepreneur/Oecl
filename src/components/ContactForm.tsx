@@ -1,13 +1,15 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, User, Phone, Send } from "lucide-react";
+import { useLocation } from "react-router-dom";
+
 const ContactForm = () => {
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
+  const location = useLocation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,16 +17,63 @@ const ContactForm = () => {
     message: ""
   });
   const [loading, setLoading] = useState(false);
+
+  // Determine country from current route
+  const getCountryFromRoute = () => {
+    const path = location.pathname;
+    if (path.includes('/india')) return 'india';
+    if (path.includes('/malaysia')) return 'malaysia'; 
+    if (path.includes('/indonesia')) return 'indonesia';
+    if (path.includes('/thailand')) return 'thailand';
+    return 'singapore'; // default
+  };
+
+  const country = getCountryFromRoute();
+
+  // Country-specific contact information
+  const countryInfo = {
+    india: {
+      name: "India Office",
+      email: "india@oecl.com",
+      phone: "+91 22 4517 4102",
+      address: "407, Mayuresh Planet, Plot No - 42 & 43, Sector-15, CBD Belapur, Navi Mumbai, Maharashtra, 400614"
+    },
+    malaysia: {
+      name: "Malaysia Office", 
+      email: "malaysia@oecl.com",
+      phone: "+60 3-3319 2778",
+      address: "Unit 20-03A, Level 20 Menara Zurich, 15 Jalan Dato Abdullah Tahir, 80300 Johor Bahru"
+    },
+    indonesia: {
+      name: "Indonesia Office",
+      email: "indonesia@oecl.com", 
+      phone: "+62 21 529 20292",
+      address: "408, Lina Building, JL.HR Rasuna Said kav B7, Jakarta"
+    },
+    thailand: {
+      name: "Thailand Office",
+      email: "thailand@oecl.com",
+      phone: "+66 2-634-3240", 
+      address: "109 CCT Building, 3rd Floor, Rm.3, Surawong Road, Suriyawongse, Bangrak, Bangkok 10500"
+    },
+    singapore: {
+      name: "Singapore Office",
+      email: "info@oecl.com",
+      phone: "+65 69080838",
+      address: "OECL (Singapore) Pte Ltd. Blk 511 Kampong Bahru Road #03-01 Keppel Distripark Singapore - 099447"
+    }
+  };
+
+  const currentCountryInfo = countryInfo[country];
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const {
-      name,
-      value
-    } = e.target;
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -44,13 +93,15 @@ const ContactForm = () => {
       setLoading(false);
     }, 1000);
   };
-  return <section className="text-white py-16 bg-slate-100">
+
+  return (
+    <section className="text-white py-16 bg-slate-100">
       <div className="container mx-auto px-4 md:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-2 text-slate-950">Get In Touch</h2>
           <div className="w-16 h-1 bg-red-600 mx-auto mb-4"></div>
           <p className="max-w-2xl mx-auto text-slate-950">
-            Need logistics support or want to know more about OECL services? Fill out the form and we’ll get back to you shortly.
+            Need logistics support or want to know more about OECL services? Fill out the form and we'll get back to you shortly.
           </p>
         </div>
 
@@ -64,14 +115,14 @@ const ContactForm = () => {
                 <Mail size={20} className="mt-1 mr-3" />
                 <div>
                   <p className="font-medium">Email</p>
-                  <p>info@oecl.com</p>
+                  <p>{currentCountryInfo.email}</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <Phone size={20} className="mt-1 mr-3" />
                 <div>
                   <p className="font-medium">Phone</p>
-                  <p>+1 (800) 234-5678</p>
+                  <p>{currentCountryInfo.phone}</p>
                 </div>
               </div>
               <div className="flex items-start">
@@ -81,10 +132,7 @@ const ContactForm = () => {
                 </svg>
                 <div>
                   <p className="font-medium">Address</p>
-                  <p>
-                    123 OECL Global HQ, <br />
-                    Freight Forwarding Zone, Singapore
-                  </p>
+                  <p>{currentCountryInfo.address}</p>
                 </div>
               </div>
             </div>
@@ -125,21 +173,27 @@ const ContactForm = () => {
               </div>
 
               <Button type="submit" className="bg-kargon-red text-white hover:bg-kargon-red/90 w-full" disabled={loading}>
-                {loading ? <span className="flex items-center justify-center">
+                {loading ? (
+                  <span className="flex items-center justify-center">
                     <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
                     Sending...
-                  </span> : <span className="flex items-center justify-center">
+                  </span>
+                ) : (
+                  <span className="flex items-center justify-center">
                     <Send size={18} className="mr-2" />
                     Send Message
-                  </span>}
+                  </span>
+                )}
               </Button>
             </form>
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default ContactForm;

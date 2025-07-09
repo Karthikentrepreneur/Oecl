@@ -1,3 +1,4 @@
+
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import React, { useState, useEffect } from 'react';
@@ -13,9 +14,7 @@ import ContactSidebar from "@/components/ContactSidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const ScrollToTop = () => {
-  const {
-    pathname
-  } = useLocation();
+  const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -30,6 +29,60 @@ const Contact = () => {
   const isMobile = useIsMobile();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showMap, setShowMap] = useState(true);
+  const location = useLocation();
+
+  // Determine country from current route
+  const getCountryFromRoute = () => {
+    const path = location.pathname;
+    if (path.includes('/india')) return 'india';
+    if (path.includes('/malaysia')) return 'malaysia';
+    if (path.includes('/indonesia')) return 'indonesia';
+    if (path.includes('/thailand')) return 'thailand';
+    return 'singapore'; // default
+  };
+
+  const country = getCountryFromRoute();
+
+  // Country-specific information
+  const countryInfo = {
+    india: {
+      name: "India Office",
+      email: "india@oecl.com",
+      phone: "+91 22 4517 4102",
+      address: "407, Mayuresh Planet, Plot No - 42 & 43, Sector-15, CBD Belapur, Navi Mumbai, Maharashtra, 400614",
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.1234567890123!2d73.0256789!3d19.0330000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAyJzAwLjAiTiA3M8KwMDEnMzIuNCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+    },
+    malaysia: {
+      name: "Malaysia Office",
+      email: "malaysia@oecl.com",
+      phone: "+60 3-3319 2778",
+      address: "Unit 20-03A, Level 20 Menara Zurich, 15 Jalan Dato Abdullah Tahir, 80300 Johor Bahru",
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.1234567890123!2d103.7629000!3d1.4842000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMjknMDMuMSJOIDEwM8KwNDUnNDYuNCJF!5e0!3m2!1sen!2smy!4v1234567890123!5m2!1sen!2smy"
+    },
+    indonesia: {
+      name: "Indonesia Office",
+      email: "indonesia@oecl.com",
+      phone: "+62 21 529 20292",
+      address: "408, Lina Building, JL.HR Rasuna Said kav B7, Jakarta",
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.1234567890123!2d106.8456000!3d-6.2088000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTInMzEuNyJTIDEwNsKwNTAnNDQuMiJF!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid"
+    },
+    thailand: {
+      name: "Thailand Office",
+      email: "thailand@oecl.com",
+      phone: "+66 2-634-3240",
+      address: "109 CCT Building, 3rd Floor, Rm.3, Surawong Road, Suriyawongse, Bangrak, Bangkok 10500",
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.1234567890123!2d100.5018000!3d13.7563000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQ1JzIyLjciTiAxMDDCsDMwJzA2LjUiRQ!5e0!3m2!1sen!2sth!4v1234567890123!5m2!1sen!2sth"
+    },
+    singapore: {
+      name: "Singapore Office",
+      email: "info@oecl.com",
+      phone: "+65 69080838",
+      address: "OECL (Singapore) Pte Ltd. Blk 511 Kampong Bahru Road #03-01 Keppel Distripark Singapore - 099447",
+      mapUrl: "https://www.google.com/maps/d/u/0/embed?mid=18pLzY9L_9ClJWUmM04FwX-lM_i8VgEE&ehbc=2E312F&noprof=1"
+    }
+  };
+
+  const currentCountryInfo = countryInfo[country];
 
   useEffect(() => {
     // For mobile, initially show sidebar instead of map
@@ -173,21 +226,19 @@ const Contact = () => {
                 <h2 className="text-2xl font-bold mb-6 text-black">Contact Information</h2>
                 <div className="space-y-8">
                   <div className="space-y-6">
-                    <h3 className="text-lg font-semibold text-red-700">Singapore Office</h3>
+                    <h3 className="text-lg font-semibold text-red-700">{currentCountryInfo.name}</h3>
                     <motion.div whileHover={{ x: 10 }} className="flex items-start gap-4 group">
                       <Phone className="mt-1 text-red-600 group-hover:scale-110 transition-transform" />
                       <div>
                         <p className="font-medium">Phone</p>
-                        <p className="text-gray-600">+65 69080838</p>
+                        <p className="text-gray-600">{currentCountryInfo.phone}</p>
                       </div>
                     </motion.div>
                     <motion.div whileHover={{ x: 10 }} className="flex items-start gap-4 group">
                       <MapPin className="mt-1 text-red-600 group-hover:scale-110 transition-transform" />
                       <div>
                         <p className="font-medium">Address</p>
-                        <p className="text-gray-600">
-                          OECL (Singapore) Pte Ltd. Blk 511 Kampong Bahru Road #03-01 Keppel Distripark Singapore - 099447
-                        </p>
+                        <p className="text-gray-600">{currentCountryInfo.address}</p>
                       </div>
                     </motion.div>
                   </div>
@@ -231,14 +282,14 @@ const Contact = () => {
                   Fill in the form below and we'll get back to you as soon as possible.
                 </p>
                 <form
-                  action="https://formsubmit.co/ajax/karthiktrendsandtactics@gmail.com"
+                  action={`https://formsubmit.co/ajax/${currentCountryInfo.email}`}
                   method="POST"
                   className="space-y-5"
                 >
                   <input type="hidden" name="_captcha" value="false" />
                   <input type="hidden" name="_template" value="box" />
-                  <input type="hidden" name="_subject" value="New Contact Submission!" />
-                  <input type="hidden" name="_next" value="https://yourdomain.com/contact?submitted=true" />
+                  <input type="hidden" name="_subject" value={`New Contact Submission from ${currentCountryInfo.name}!`} />
+                  <input type="hidden" name="_next" value={`${window.location.origin}/contact?submitted=true`} />
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <Input placeholder="First Name" name="First Name" required />
@@ -268,7 +319,7 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* Google Maps */}
+        {/* Country-specific Google Maps */}
         <section className="py-10 bg-gray-50">
           <div className="container mx-auto px-4 max-w-7xl">
             <motion.div
@@ -280,24 +331,24 @@ const Contact = () => {
             >
               <h2 className="text-3xl font-bold text-gray-800 flex items-center justify-center gap-3">
                 <MapPin className="text-red-700" />
-                Our Location
+                Our {currentCountryInfo.name} Location
               </h2>
               <p className="text-gray-600 mt-2 max-w-2xl mx-auto">
-                Visit us at our OECL Singapore office location
+                Visit us at our {currentCountryInfo.name} office location
               </p>
             </motion.div>
 
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden relative">
               <div className="h-[500px] w-full relative">
                 <iframe
-                  src="https://www.google.com/maps/d/u/0/embed?mid=18pLzY9L_9ClJWUmM04FwX-lM_i8VgEE&ehbc=2E312F&noprof=1"
+                  src={currentCountryInfo.mapUrl}
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="OECL Singapore Office Location"
+                  title={`${currentCountryInfo.name} Location`}
                 />
                 <div className="absolute top-0 left-0 right-0 h-14 bg-white z-10 pointer-events-none" />
                 <div className="absolute top-0 right-0 w-32 h-14 bg-white z-10 pointer-events-none" />
