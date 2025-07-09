@@ -1,20 +1,46 @@
+
 import { Truck, Plane, Ship, Box, UserCheck, Container, Cuboid } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ScrollAnimation from "./ScrollAnimation";
 
-const services = [
+const allServices = [
   { id: 1, title: "Air Freight", icon: Plane, image: "/airfreight.png", slug: "air-freight", delay: 100 },
   { id: 2, title: "Ocean Freight", icon: Ship, image: "/oceanfreight.png", slug: "ocean-freight", delay: 200 },
   { id: 3, title: "Warehousing", icon: Box, image: "/warehousing.png", slug: "warehousing", delay: 0 },
   { id: 4, title: "Customs Clearance", icon: UserCheck, image: "/customclearance.png", slug: "customs-clearance", delay: 300 },
-  { id: 5, title: "Linear Agency", icon: Container, image: "/linearagency.png", slug: "linear-agency", delay: 300 },
+  { id: 5, title: "Liner Agency", icon: Container, image: "/linearagency.png", slug: "linear-agency", delay: 300 },
   { id: 6, title: "Liquid Cargo Transportation", icon: Truck, image: "/liquidtransportation.png", slug: "liquid-cargo", delay: 0 },
   { id: 7, title: "Consolidation", icon: Cuboid, image: "/consolidation.png", slug: "consolidation", delay: 100 },
   { id: 8, title: "Project Cargo", icon: Container, image: "/projectcargo.png", slug: "project-cargo", delay: 200 },
   { id: 9, title: "3PL", icon: Cuboid, image: "/3pl.png", slug: "3pl", delay: 300 },
 ];
 
+const countryServiceFilters = {
+  '/india': ['Ocean Freight', 'Air Freight', 'Liquid Cargo Transportation', 'Liner Agency', 'Project Cargo', 'Consolidation'],
+  '/malaysia': ['Ocean Freight', 'Air Freight', 'Customs Clearance', 'Liner Agency', 'Project Cargo', 'Consolidation'],
+  '/indonesia': ['Ocean Freight', 'Air Freight', 'Customs Clearance', 'Liquid Cargo Transportation', 'Warehousing', 'Consolidation'],
+  '/thailand': ['Project Cargo', 'Liner Agency', 'Customs Clearance', 'Liquid Cargo Transportation', '3PL', 'Consolidation']
+};
+
 const ServicesSection = () => {
+  const location = useLocation();
+  
+  // Determine which services to show based on current route
+  const getFilteredServices = () => {
+    const currentPath = location.pathname;
+    
+    for (const [path, serviceNames] of Object.entries(countryServiceFilters)) {
+      if (currentPath.includes(path)) {
+        return allServices.filter(service => serviceNames.includes(service.title));
+      }
+    }
+    
+    // Default: show all services
+    return allServices;
+  };
+
+  const services = getFilteredServices();
+
   return (
     <section className="py-20 bg-black">
       <div className="container mx-auto px-4">

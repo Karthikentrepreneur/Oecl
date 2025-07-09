@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Users, UserCircle, SearchCode, Ship, Calendar, Globe, ArrowRight, Play, Sparkles, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -19,13 +20,13 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           url: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
           title: "INDIA LOGISTICS",
           description: "Your trusted partner for comprehensive logistics solutions across India.",
-          gradient: "from-orange-600/60 via-orange-500/40 to-red-600/60"
+          gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
         },
         {
           url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
           title: "FREIGHT FORWARDING",
           description: "Seamless freight services connecting India to the world.",
-          gradient: "from-blue-600/60 via-blue-500/40 to-indigo-600/60"
+          gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
         }
       ]
     },
@@ -35,13 +36,13 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           url: "https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
           title: "INDONESIA MARITIME",
           description: "Connecting the archipelago with world-class shipping solutions.",
-          gradient: "from-emerald-600/60 via-teal-500/40 to-cyan-600/60"
+          gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
         },
         {
           url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
           title: "ISLAND LOGISTICS",
           description: "Specialized logistics for Indonesia's unique geography.",
-          gradient: "from-blue-700/60 via-blue-600/40 to-indigo-700/60"
+          gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
         }
       ]
     },
@@ -51,13 +52,13 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           url: "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
           title: "MALAYSIA HUB",
           description: "Strategic logistics hub for Southeast Asian trade.",
-          gradient: "from-red-600/60 via-red-500/40 to-yellow-600/60"
+          gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
         },
         {
           url: "https://images.unsplash.com/photo-1568454537842-d933259bb258?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
           title: "TRADE GATEWAY",
           description: "Your gateway to efficient cross-border logistics.",
-          gradient: "from-purple-600/60 via-purple-500/40 to-pink-600/60"
+          gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
         }
       ]
     },
@@ -67,13 +68,13 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           url: "https://images.unsplash.com/photo-1539650116574-75c0c6d3e9e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
           title: "THAILAND EXPRESS",
           description: "Fast and reliable logistics solutions throughout Thailand.",
-          gradient: "from-purple-600/60 via-indigo-500/40 to-blue-600/60"
+          gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
         },
         {
           url: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
           title: "REGIONAL NETWORK",
           description: "Comprehensive coverage across the Thai region.",
-          gradient: "from-amber-600/60 via-orange-500/40 to-red-600/60"
+          gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
         }
       ]
     }
@@ -84,13 +85,13 @@ const HeroSection = ({ country }: HeroSectionProps) => {
       url: "/h1.png",
       title: "OECL",
       description: "Vital Link to Enhance Your Supply Chain.",
-      gradient: "from-black/60 via-black/40 to-black/60"
+      gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
     },
     {
       url: "/h2.png", 
       title: "LOGISTICS SERVICES",
       description: "Supported through own offices and network of key partners around the world.",
-      gradient: "from-black/60 via-black/40 to-black/60"
+      gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
     }
   ];
 
@@ -201,31 +202,24 @@ const HeroSection = ({ country }: HeroSectionProps) => {
       <div className="relative z-20 flex items-center min-h-screen px-6 lg:px-12">
         <div className="max-w-4xl space-y-8 px-0 py-0 mx-[200px]">
           {/* Title */}
-          <h1 className="text-6xl">
+          <h1 className="text-4xl md:text-5xl">
             {currentSlide.title.split(" ").map((word, i) => (
               <span
                 key={i}
                 style={{ animationDelay: `${i * 0.1}s` }}
-                className="text-slate-50 text-5xl animate-fade-in"
+                className="text-slate-50 font-bold animate-fade-in"
               >
                 {word}{" "}
               </span>
             ))}
           </h1>
 
-          {/* Description */}
-          <p className={`text-xl md:text-2xl text-gray-200 max-w-2xl leading-relaxed transform transition-all duration-1000 delay-500 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-          }`}>
-            {currentSlide.description}
-          </p>
-
           {/* CTA Button */}
           <div className={`flex flex-col sm:flex-row gap-4 transform transition-all duration-1000 delay-700 ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
           }`}>
             <Link to="/signup" className="group">
-              <button className="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl px-8 py-4 text-lg font-semibold flex items-center gap-3 shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-red-500/30 border border-red-500/30">
+              <button className="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl px-6 py-3 text-lg font-semibold flex items-center gap-3 shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-red-500/30 border border-red-500/30">
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
                 <Zap className="w-5 h-5" />
                 <span>GET STARTED</span>
@@ -259,7 +253,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 bg-white/5 backdrop-blur-xl p-4 rounded-2xl shadow-2xl border border-white/10">
             {portalLinks.map((link, index) => {
               const ButtonContent = (
-                <div className="group relative overflow-hidden w-full h-20 sm:h-24 flex flex-col gap-2 items-center justify-center text-xs sm:text-sm transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1">
+                <div className="group relative overflow-hidden w-full h-16 sm:h-20 flex flex-col gap-2 items-center justify-center text-xs sm:text-sm transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1">
                   <div className={`absolute inset-0 bg-gradient-to-br ${link.color} opacity-90 group-hover:opacity-100 transition-opacity`} />
                   <div className={`absolute inset-0 bg-gradient-to-br ${link.hoverColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
