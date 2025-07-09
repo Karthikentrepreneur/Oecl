@@ -1,5 +1,4 @@
 
-
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronDown, Globe } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -11,6 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
 interface CountryData {
   country: string;
@@ -18,14 +18,15 @@ interface CountryData {
   website: string;
   priority: number;
   flag?: string;
+  route?: string;
 }
 
 const countries: CountryData[] = [
-  { country: "MALAYSIA", company: "OECL", website: "https://www.oecl.sg/malaysia/home", priority: 3, flag: "/my.svg" },
-  { country: "SINGAPORE", company: "GGL", website: "https://ggl.sg/", priority: 1, flag: "/sg.svg" },
-  { country: "SINGAPORE", company: "GC", website: "https://www.globalconsol.com/", priority: 2, flag: "/sg.svg" },
-  { country: "INDONESIA", company: "OECL", website: "https://www.oecl.sg/indonesia/home", priority: 6, flag: "/id.svg" },
-  { country: "THAILAND", company: "OECL", website: "https://www.oecl.sg/thailand/home", priority: 4, flag: "/th.svg" },
+  { country: "MALAYSIA", company: "OECL", website: "https://www.oecl.sg/malaysia/home", priority: 3, flag: "/my.svg", route: "/malaysia/home" },
+  { country: "SINGAPORE", company: "GGL", website: "https://ggl.sg/", priority: 1, flag: "/sg.svg", route: "/" },
+  { country: "SINGAPORE", company: "GC", website: "https://www.globalconsol.com/", priority: 2, flag: "/sg.svg", route: "/" },
+  { country: "INDONESIA", company: "OECL", website: "https://www.oecl.sg/indonesia/home", priority: 6, flag: "/id.svg", route: "/indonesia/home" },
+  { country: "THAILAND", company: "OECL", website: "https://www.oecl.sg/thailand/home", priority: 4, flag: "/th.svg", route: "/thailand/home" },
   { country: "MYANMAR", company: "GC", website: "https://www.globalconsol.com", priority: 5, flag: "/mm.svg" },
   { country: "AUSTRALIA", company: "GGL Aus", website: "https://www.gglaustralia.com", priority: 7, flag: "/au.svg" },
   { country: "BANGLADESH", company: "GC", website: "https://www.globalconsol.com", priority: 9, flag: "/bd.svg" },
@@ -35,31 +36,42 @@ const countries: CountryData[] = [
   { country: "SAUDI ARABIA", company: "AMASS", website: "https://amassmiddleeast.com/", priority: 13, flag: "/sa.svg" },
   { country: "UAE", company: "AMASS", website: "https://amassmiddleeast.com/", priority: 14, flag: "/ae.svg" },
   { country: "USA", company: "GGL", website: "https://gglusa.us/", priority: 15, flag: "/us.svg" },
-  { country: "UK", company: "MOLTECH", website: "https://moltech.uk/", priority: 16, flag: "/gb.svg" }
+  { country: "UK", company: "MOLTECH", website: "https://moltech.uk/", priority: 16, flag: "/gb.svg" },
+  { country: "INDIA", company: "OECL", website: "https://www.oecl.sg/india/home", priority: 17, flag: "/in.svg", route: "/india/home" }
 ];
-
-// Find Australia in the countries list
-const findAustraliaCountry = () => {
-  return countries.find(country => country.country === "AUSTRALIA") || countries[0];
-};
 
 const CountrySelector = () => {
   const [isOpen, setIsOpen] = useState(false);
-  // This state is only used for tracking the selected country for redirection
-  const [selectedRedirectCountry, setSelectedRedirectCountry] = useState<CountryData>(findAustraliaCountry());
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
   
-  // Sort countries by priority, with Australia first
-  const sortedCountries = [...countries].sort((a, b) => {
-    if (a.country === "AUSTRALIA") return -1;
-    if (b.country === "AUSTRALIA") return 1;
-    return a.priority - b.priority;
-  });
+  // Determine current country based on route
+  const getCurrentCountry = () => {
+    const path = location.pathname;
+    if (path.includes('/india')) return 'INDIA';
+    if (path.includes('/malaysia')) return 'MALAYSIA';
+    if (path.includes('/indonesia')) return 'INDONESIA';
+    if (path.includes('/thailand')) return 'THAILAND';
+    return 'SINGAPORE';
+  };
 
-  // Handle redirect
+  const currentCountry = getCurrentCountry();
+  
+  // Filter out the current country from the list
+  const availableCountries = countries.filter(country => country.country !== currentCountry);
+  
+  // Sort countries by priority
+  const sortedCountries = [...availableCountries].sort((a, b) => a.priority - b.priority);
+
+  // Handle country selection
   const handleCountrySelect = (country: CountryData) => {
-    setSelectedRedirectCountry(country);
-    window.open(country.website, '_blank', 'noopener,noreferrer');
+    if (country.route) {
+      // Navigate to local route
+      window.location.href = country.route;
+    } else {
+      // Open external website
+      window.open(country.website, '_blank', 'noopener,noreferrer');
+    }
     setIsOpen(false);
   };
 
@@ -85,9 +97,8 @@ const CountrySelector = () => {
             variant="outline" 
             className="border-[#F6B100] bg-white text-gray-800 hover:bg-[#F6B100]/10 px-4 py-2 rounded-full flex items-center gap-2"
           >
-              {/* Show globe icon instead of Australia flag */}
-            <Globe className="w-6 h-6 text-[#F6B100]" />
-            <span className="flex items-center gap-1">
+            <Globe className="w-5 h-5 text-[#F6B100]" />
+            <span className="flex items-center gap-1 text-sm">
               Switch Country <ChevronDown className="h-3 w-3 ml-1 text-gray-500" />
             </span>
           </Button>
@@ -99,11 +110,11 @@ const CountrySelector = () => {
         >
           <ScrollArea className="h-[300px] w-full pr-2">
             <div className="grid grid-cols-1 gap-1 p-1">
-              {sortedCountries.map((country) => (
+              {sortedCountries.map((country, index) => (
                 <DropdownMenuItem
-                  key={country.country}
+                  key={`${country.country}-${index}`}
                   onSelect={(e) => {
-                    e.preventDefault(); // Prevent closing on select
+                    e.preventDefault();
                     handleCountrySelect(country);
                   }}
                   className="cursor-pointer hover:bg-amber-50 p-2 rounded-md flex items-center gap-2 transition-colors"
@@ -121,7 +132,7 @@ const CountrySelector = () => {
                         />
                       ) : (
                         <div className="w-6 h-6 bg-gray-200 rounded-sm flex items-center justify-center">
-                         <Globe className="w-6 h-6 text-[#F6B100]" />
+                         <Globe className="w-4 h-4 text-[#F6B100]" />
                         </div>
                       )}
                     </div>

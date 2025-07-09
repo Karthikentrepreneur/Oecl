@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { Users, UserCircle, SearchCode, Ship, Calendar, Globe, ArrowRight, Play, Sparkles, Zap } from "lucide-react";
+import { Users, UserCircle, SearchCode, Ship, Calendar, Globe, ArrowRight, Play, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface HeroSectionProps {
@@ -12,7 +12,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [isCustomerPortalOpen, setIsCustomerPortalOpen] = useState(false);
 
-  // Country-specific content
+  // Country-specific content with red gradient
   const countryContent = {
     india: {
       images: [
@@ -20,13 +20,13 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           url: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
           title: "INDIA LOGISTICS",
           description: "Your trusted partner for comprehensive logistics solutions across India.",
-          gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
+          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
         },
         {
           url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
           title: "FREIGHT FORWARDING",
           description: "Seamless freight services connecting India to the world.",
-          gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
+          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
         }
       ]
     },
@@ -36,13 +36,13 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           url: "https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
           title: "INDONESIA MARITIME",
           description: "Connecting the archipelago with world-class shipping solutions.",
-          gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
+          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
         },
         {
           url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
           title: "ISLAND LOGISTICS",
           description: "Specialized logistics for Indonesia's unique geography.",
-          gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
+          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
         }
       ]
     },
@@ -52,13 +52,13 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           url: "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
           title: "MALAYSIA HUB",
           description: "Strategic logistics hub for Southeast Asian trade.",
-          gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
+          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
         },
         {
           url: "https://images.unsplash.com/photo-1568454537842-d933259bb258?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
           title: "TRADE GATEWAY",
           description: "Your gateway to efficient cross-border logistics.",
-          gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
+          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
         }
       ]
     },
@@ -68,13 +68,13 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           url: "https://images.unsplash.com/photo-1539650116574-75c0c6d3e9e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
           title: "THAILAND EXPRESS",
           description: "Fast and reliable logistics solutions throughout Thailand.",
-          gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
+          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
         },
         {
           url: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
           title: "REGIONAL NETWORK",
           description: "Comprehensive coverage across the Thai region.",
-          gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
+          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
         }
       ]
     }
@@ -85,13 +85,13 @@ const HeroSection = ({ country }: HeroSectionProps) => {
       url: "/h1.png",
       title: "OECL",
       description: "Vital Link to Enhance Your Supply Chain.",
-      gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
+      gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
     },
     {
       url: "/h2.png", 
       title: "LOGISTICS SERVICES",
       description: "Supported through own offices and network of key partners around the world.",
-      gradient: "from-red-600/60 via-red-500/40 to-red-600/60"
+      gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
     }
   ];
 
@@ -99,48 +99,43 @@ const HeroSection = ({ country }: HeroSectionProps) => {
 
   const portalLinks = [
     {
-      icon: <Users className="w-5 h-5 sm:w-6 sm:h-6" />,
+      icon: <Users className="w-4 h-4" />,
       title: "Customer Portal",
-      subtitle: "Access your account",
       onClick: () => setIsCustomerPortalOpen(true),
-      color: "from-blue-500 to-blue-700",
-      hoverColor: "from-blue-600 to-blue-800"
+      color: "from-red-500 to-red-700",
+      hoverColor: "from-red-600 to-red-800"
     },
     {
-      icon: <UserCircle className="w-5 h-5 sm:w-6 sm:h-6" />,
+      icon: <UserCircle className="w-4 h-4" />,
       title: "Partner Portal", 
-      subtitle: "Partner dashboard",
       url: "https://pp.onlinetracking.co/auth/login/3",
       external: true,
-      color: "from-purple-500 to-purple-700",
-      hoverColor: "from-purple-600 to-purple-800"
+      color: "from-red-500 to-red-700",
+      hoverColor: "from-red-600 to-red-800"
     },
     {
-      icon: <SearchCode className="w-5 h-5 sm:w-6 sm:h-6" />,
+      icon: <SearchCode className="w-4 h-4" />,
       title: "Tracking",
-      subtitle: "Track shipments", 
       url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:102:::::P0_GROUP_RID:59",
       external: true,
-      color: "from-green-500 to-green-700",
-      hoverColor: "from-green-600 to-green-800"
+      color: "from-red-500 to-red-700",
+      hoverColor: "from-red-600 to-red-800"
     },
     {
-      icon: <Ship className="w-5 h-5 sm:w-6 sm:h-6" />,
+      icon: <Ship className="w-4 h-4" />,
       title: "Sailing Schedule",
-      subtitle: "View schedules",
       url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:104:::::P0_GROUP_RID:59",
       external: true,
-      color: "from-cyan-500 to-cyan-700",
-      hoverColor: "from-cyan-600 to-cyan-800"
+      color: "from-red-500 to-red-700",
+      hoverColor: "from-red-600 to-red-800"
     },
     {
-      icon: <Calendar className="w-5 h-5 sm:w-6 sm:h-6" />,
+      icon: <Calendar className="w-4 h-4" />,
       title: "Online Quote",
-      subtitle: "Get instant quote",
       url: "/contact",
       external: false,
-      color: "from-orange-500 to-orange-700",
-      hoverColor: "from-orange-600 to-orange-800"
+      color: "from-red-500 to-red-700",
+      hoverColor: "from-red-600 to-red-800"
     }
   ];
 
@@ -159,7 +154,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
   const currentSlide = sliderImages[activeSlide];
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-black text-white">
+    <section className="relative min-h-screen overflow-hidden bg-red-900 text-white">
       {/* Animated Background Particles */}
       <div className="absolute inset-0 z-0">
         {[...Array(50)].map((_, i) => (
@@ -195,7 +190,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
             <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient} z-[1]`} />
           </div>
         ))}
-        <div className="absolute inset-0 bg-black/40 z-[2]" />
+        <div className="absolute inset-0 bg-red-900/40 z-[2]" />
       </div>
 
       {/* Main Content */}
@@ -245,25 +240,24 @@ const HeroSection = ({ country }: HeroSectionProps) => {
         </div>
       </div>
 
-      {/* Enhanced Portal Buttons */}
+      {/* Enhanced Portal Buttons - Made Smaller */}
       <div className="absolute bottom-6 left-0 right-0 z-20 px-4">
         <div className={`max-w-7xl mx-auto transition-all duration-1000 delay-1000 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
         }`}>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 bg-white/5 backdrop-blur-xl p-4 rounded-2xl shadow-2xl border border-white/10">
+          <div className="grid grid-cols-5 gap-2 sm:gap-3 bg-white/5 backdrop-blur-xl p-3 rounded-2xl shadow-2xl border border-white/10">
             {portalLinks.map((link, index) => {
               const ButtonContent = (
-                <div className="group relative overflow-hidden w-full h-16 sm:h-20 flex flex-col gap-2 items-center justify-center text-xs sm:text-sm transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1">
+                <div className="group relative overflow-hidden w-full h-12 sm:h-14 flex flex-col gap-1 items-center justify-center text-xs transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1">
                   <div className={`absolute inset-0 bg-gradient-to-br ${link.color} opacity-90 group-hover:opacity-100 transition-opacity`} />
                   <div className={`absolute inset-0 bg-gradient-to-br ${link.hoverColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                  <div className="relative z-10 flex flex-col items-center gap-1">
-                    <div className="p-2 bg-white/20 rounded-lg group-hover:bg-white/30 transition-colors">
+                  <div className="relative z-10 flex flex-col items-center gap-0.5">
+                    <div className="p-1.5 bg-white/20 rounded-lg group-hover:bg-white/30 transition-colors">
                       {link.icon}
                     </div>
                     <div className="text-center">
-                      <div className="font-semibold text-white leading-tight">{link.title}</div>
-                      <div className="text-xs text-white/80 leading-tight">{link.subtitle}</div>
+                      <div className="font-semibold text-white leading-tight text-xs">{link.title}</div>
                     </div>
                   </div>
                 </div>

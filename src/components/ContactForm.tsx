@@ -1,195 +1,268 @@
 
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
-import { Mail, User, Phone, Send } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { motion } from "framer-motion";
+import { Phone, Mail, MapPin, Send, Building2 } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
 const ContactForm = () => {
-  const { toast } = useToast();
   const location = useLocation();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: ""
-  });
-  const [loading, setLoading] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState("");
 
-  // Determine country from current route
-  const getCountryFromRoute = () => {
-    const path = location.pathname;
-    if (path.includes('/india')) return 'india';
-    if (path.includes('/malaysia')) return 'malaysia'; 
-    if (path.includes('/indonesia')) return 'indonesia';
-    if (path.includes('/thailand')) return 'thailand';
-    return 'singapore'; // default
-  };
-
-  const country = getCountryFromRoute();
-
-  // Country-specific contact information
-  const countryInfo = {
-    india: {
+  // All office locations
+  const allOffices = [
+    {
+      country: "Singapore",
+      name: "Singapore Office",
+      email: "info@oecl.com",
+      phone: "+65 69080838",
+      address: "OECL (Singapore) Pte Ltd. Blk 511 Kampong Bahru Road #03-01 Keppel Distripark Singapore - 099447"
+    },
+    {
+      country: "India", 
       name: "India Office",
       email: "india@oecl.com",
       phone: "+91 22 4517 4102",
       address: "407, Mayuresh Planet, Plot No - 42 & 43, Sector-15, CBD Belapur, Navi Mumbai, Maharashtra, 400614"
     },
-    malaysia: {
+    {
+      country: "Malaysia",
       name: "Malaysia Office", 
       email: "malaysia@oecl.com",
       phone: "+60 3-3319 2778",
       address: "Unit 20-03A, Level 20 Menara Zurich, 15 Jalan Dato Abdullah Tahir, 80300 Johor Bahru"
     },
-    indonesia: {
+    {
+      country: "Indonesia",
       name: "Indonesia Office",
       email: "indonesia@oecl.com", 
       phone: "+62 21 529 20292",
       address: "408, Lina Building, JL.HR Rasuna Said kav B7, Jakarta"
     },
-    thailand: {
+    {
+      country: "Thailand",
       name: "Thailand Office",
       email: "thailand@oecl.com",
       phone: "+66 2-634-3240", 
       address: "109 CCT Building, 3rd Floor, Rm.3, Surawong Road, Suriyawongse, Bangrak, Bangkok 10500"
-    },
-    singapore: {
-      name: "Singapore Office",
-      email: "info@oecl.com",
-      phone: "+65 69080838",
-      address: "OECL (Singapore) Pte Ltd. Blk 511 Kampong Bahru Road #03-01 Keppel Distripark Singapore - 099447"
     }
+  ];
+
+  // Determine current country from route
+  const getCurrentCountry = () => {
+    const path = location.pathname;
+    if (path.includes('/india')) return 'India';
+    if (path.includes('/malaysia')) return 'Malaysia';
+    if (path.includes('/indonesia')) return 'Indonesia';
+    if (path.includes('/thailand')) return 'Thailand';
+    return 'Singapore';
   };
 
-  const currentCountryInfo = countryInfo[country];
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    // Simulate API submission
-    setTimeout(() => {
-      toast({
-        title: "Message Sent",
-        description: "Thank you for contacting us. We'll respond shortly."
-      });
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        message: ""
-      });
-      setLoading(false);
-    }, 1000);
-  };
+  const currentCountry = getCurrentCountry();
+  const currentOffice = allOffices.find(office => office.country === currentCountry) || allOffices[0];
 
   return (
-    <section className="text-white py-16 bg-slate-100">
-      <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-2 text-slate-950">Get In Touch</h2>
-          <div className="w-16 h-1 bg-red-600 mx-auto mb-4"></div>
-          <p className="max-w-2xl mx-auto text-slate-950">
-            Need logistics support or want to know more about OECL services? Fill out the form and we'll get back to you shortly.
+    <section className="py-16 bg-gradient-to-b from-gray-50 to-white" id="contact">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            Get In Touch
+          </h2>
+          <div className="w-24 h-1 bg-red-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            Ready to streamline your logistics? Contact us today for a customized solution.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="max-w-5xl mx-auto bg-white text-black rounded-lg overflow-hidden shadow-lg grid md:grid-cols-5">
-          {/* Contact Info Section */}
-          <div className="bg-kargon-red text-white p-6 md:col-span-2 space-y-6">
-            <img src="/oecl.png" alt="OECL Logo" className="h-12 mb-4" />
-            <h3 className="text-xl font-bold">Contact Information</h3>
-            <div className="space-y-4">
-              <div className="flex items-start">
-                <Mail size={20} className="mt-1 mr-3" />
-                <div>
-                  <p className="font-medium">Email</p>
-                  <p>{currentCountryInfo.email}</p>
-                </div>
-              </div>
-              <div className="flex items-start">
-                <Phone size={20} className="mt-1 mr-3" />
-                <div>
-                  <p className="font-medium">Phone</p>
-                  <p>{currentCountryInfo.phone}</p>
-                </div>
-              </div>
-              <div className="flex items-start">
-                <svg className="mt-1 mr-3" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-                <div>
-                  <p className="font-medium">Address</p>
-                  <p>{currentCountryInfo.address}</p>
-                </div>
-              </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          {/* Contact Information - All Offices */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+              <Building2 className="w-6 h-6 text-red-600" />
+              Our Global Offices
+            </h3>
+            
+            <div className="space-y-6">
+              {allOffices.map((office, index) => (
+                <motion.div
+                  key={office.country}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className={`bg-white p-6 rounded-xl shadow-lg border-2 transition-all duration-300 hover:shadow-xl ${
+                    office.country === currentCountry 
+                      ? 'border-red-500 bg-red-50' 
+                      : 'border-gray-200 hover:border-red-300'
+                  }`}
+                >
+                  <h4 className="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                    <span className={`w-3 h-3 rounded-full ${
+                      office.country === currentCountry ? 'bg-red-500' : 'bg-gray-400'
+                    }`}></span>
+                    {office.name}
+                    {office.country === currentCountry && (
+                      <span className="text-xs bg-red-600 text-white px-2 py-1 rounded-full ml-2">
+                        Current
+                      </span>
+                    )}
+                  </h4>
+                  
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-3">
+                      <MapPin className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
+                      <p className="text-gray-600 text-sm leading-relaxed">{office.address}</p>
+                    </div>
+                    
+                    <div className="flex items-center gap-3">
+                      <Phone className="w-5 h-5 text-red-600 flex-shrink-0" />
+                      <a href={`tel:${office.phone}`} className="text-gray-600 hover:text-red-600 transition-colors text-sm">
+                        {office.phone}
+                      </a>
+                    </div>
+                    
+                    <div className="flex items-center gap-3">
+                      <Mail className="w-5 h-5 text-red-600 flex-shrink-0" />
+                      <a href={`mailto:${office.email}`} className="text-gray-600 hover:text-red-600 transition-colors text-sm">
+                        {office.email}
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* Form Section */}
-          <div className="p-6 md:col-span-3 bg-white">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="font-medium text-gray-700 flex items-center">
-                  <User size={18} className="mr-2 text-gray-500" />
-                  Full Name
-                </label>
-                <Input name="name" value={formData.name} onChange={handleChange} placeholder="Your name" required />
-              </div>
-              <div>
-                <label className="font-medium text-gray-700 flex items-center">
-                  <Mail size={18} className="mr-2 text-gray-500" />
-                  Email
-                </label>
-                <Input name="email" type="email" value={formData.email} onChange={handleChange} placeholder="Your email" required />
-              </div>
-              <div>
-                <label className="font-medium text-gray-700 flex items-center">
-                  <Phone size={18} className="mr-2 text-gray-500" />
-                  Phone
-                </label>
-                <Input name="phone" value={formData.phone} onChange={handleChange} placeholder="Your phone number" />
-              </div>
-              <div>
-                <label className="font-medium text-gray-700 flex items-center">
-                  <svg className="mr-2 text-gray-500" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                  </svg>
-                  Message
-                </label>
-                <Textarea name="message" rows={4} value={formData.message} onChange={handleChange} placeholder="How can we help you?" required />
+          {/* Enhanced Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100"
+          >
+            <h3 className="text-2xl font-bold text-gray-800 mb-6">Send us a Message</h3>
+            <p className="text-gray-600 mb-6">
+              Fill out the form below and we'll get back to you within 24 hours.
+            </p>
+            
+            <form 
+              action={`https://formsubmit.co/ajax/${currentOffice.email}`} 
+              method="POST" 
+              className="space-y-6"
+            >
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="box" />
+              <input type="hidden" name="_subject" value={`New Contact Submission from ${currentOffice.name}!`} />
+              <input type="hidden" name="_next" value={`${window.location.origin}/contact?submitted=true`} />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">First Name *</label>
+                  <Input 
+                    placeholder="Enter your first name" 
+                    name="First Name" 
+                    required 
+                    className="border-gray-300 focus:border-red-500 focus:ring-red-500"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">Last Name *</label>
+                  <Input 
+                    placeholder="Enter your last name" 
+                    name="Last Name" 
+                    required 
+                    className="border-gray-300 focus:border-red-500 focus:ring-red-500"
+                  />
+                </div>
               </div>
 
-              <Button type="submit" className="bg-kargon-red text-white hover:bg-kargon-red/90 w-full" disabled={loading}>
-                {loading ? (
-                  <span className="flex items-center justify-center">
-                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Sending...
-                  </span>
-                ) : (
-                  <span className="flex items-center justify-center">
-                    <Send size={18} className="mr-2" />
-                    Send Message
-                  </span>
-                )}
-              </Button>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">Email Address *</label>
+                  <Input 
+                    placeholder="Enter your email" 
+                    type="email" 
+                    name="Email" 
+                    required 
+                    className="border-gray-300 focus:border-red-500 focus:ring-red-500"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">Phone Number</label>
+                  <Input 
+                    placeholder="Enter your phone number" 
+                    name="Phone" 
+                    className="border-gray-300 focus:border-red-500 focus:ring-red-500"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">Company/Organization</label>
+                <Input 
+                  placeholder="Enter your company name" 
+                  name="Organization" 
+                  className="border-gray-300 focus:border-red-500 focus:ring-red-500"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">Preferred Office Location</label>
+                <Select value={selectedLocation} onValueChange={setSelectedLocation} name="Preferred_Location">
+                  <SelectTrigger className="border-gray-300 focus:border-red-500 focus:ring-red-500">
+                    <SelectValue placeholder="Select office location" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {allOffices.map((office) => (
+                      <SelectItem key={office.country} value={office.country}>
+                        {office.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">Message *</label>
+                <Textarea 
+                  placeholder="Tell us about your logistics needs..." 
+                  name="Message" 
+                  required 
+                  rows={5}
+                  className="border-gray-300 focus:border-red-500 focus:ring-red-500 resize-none"
+                />
+              </div>
+
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Button 
+                  type="submit" 
+                  className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3"
+                >
+                  <Send className="w-5 h-5" />
+                  Send Message
+                </Button>
+              </motion.div>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
