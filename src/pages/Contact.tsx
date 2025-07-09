@@ -223,7 +223,7 @@ const Contact = () => {
         {/* Contact Info & Form */}
         <section className="py-16 bg-white" id="contact-form">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-10 mb-10">
               {/* Contact Info */}
               
 
