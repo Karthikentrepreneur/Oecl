@@ -48,7 +48,7 @@ const Blog = () => {
           )
         `)
         .eq('status', 'published')
-        .order('published_at', { ascending: false, nullsFirst: false })
+        .order('published_at', { ascending: false })
         .order('created_at', { ascending: false });
 
       if (error) throw error;
@@ -63,7 +63,7 @@ const Blog = () => {
   };
 
   const getAuthorName = (blog: BlogPost) => {
-    if (!blog.profiles) return "Unknown Author";
+    if (!blog.profiles) return "OECL Admin";
     return blog.profiles.full_name || blog.profiles.email;
   };
 

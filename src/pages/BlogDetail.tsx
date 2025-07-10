@@ -102,7 +102,7 @@ const BlogDetail = () => {
   };
 
   const getAuthorName = (blog: BlogPost) => {
-    if (!blog.profiles) return "Unknown Author";
+    if (!blog.profiles) return "OECL Admin";
     return blog.profiles.full_name || blog.profiles.email;
   };
 
