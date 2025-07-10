@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Users, UserCircle, SearchCode, Ship, Calendar, Globe, ArrowRight, Play, Sparkles, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -163,7 +164,6 @@ const HeroSection = () => {
                     </div>
                     <div className="text-center">
                       <div className="font-semibold text-white leading-tight">{link.title}</div>
-                      <div className="text-xs text-white/80 leading-tight">{link.subtitle}</div>
                     </div>
                   </div>
                 </div>;
