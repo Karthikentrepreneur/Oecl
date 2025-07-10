@@ -1,215 +1,192 @@
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { CalendarIcon, Clock, User, ArrowRight } from "lucide-react";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import { Card, CardContent } from "@/components/ui/card";
-import { Calendar, Search } from "lucide-react";
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
+  return null;
+};
 
-interface Article {
-  id: string;
-  title: string;
-  description: string;
-  image_url: string | null;
-  created_at: string;
-  updated_at: string;
-  published: boolean;
-}
+export const blogPosts = [
+  {
+    id: 1,
+    slug: "digital-supply-chain-benefits",
+    title: "The Future of Global Logistics",
+    excerpt: "Exploring how emerging technologies are reshaping the logistics industry and creating new opportunities for businesses worldwide.",
+    content: "Full blog content for The Future of Global Logistics...",
+    author: "Sarah Johnson",
+    date: "December 15, 2024",
+    readTime: "5 min read",
+    imageUrl: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "Technology"
+  },
+  {
+    id: 2,
+    slug: "sustainable-shipping-solutions",
+    title: "Sustainable Shipping Solutions",
+    excerpt: "How companies are adopting eco-friendly practices to reduce their environmental impact while maintaining operational efficiency.",
+    content: "Full blog content for Sustainable Shipping Solutions...",
+    author: "Michael Chen",
+    date: "December 10, 2024",
+    readTime: "7 min read",
+    imageUrl: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "Sustainability"
+  },
+  {
+    id: 3,
+    slug: "digital-transformation-in-supply-chain",
+    title: "Digital Transformation in Supply Chain",
+    excerpt: "The impact of digitalization on modern supply chains and how businesses can leverage technology for competitive advantage.",
+    content: "Full blog content for Digital Transformation...",
+    author: "Emma Rodriguez",
+    date: "December 5, 2024",
+    readTime: "6 min read",
+    imageUrl: "https://images.unsplash.com/photo-1580674285054-bed31e145f59?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "Digital"
+  },
+  {
+    id: 4,
+    slug: "international-trade-regulations",
+    title: "International Trade Regulations",
+    excerpt: "Understanding the latest changes in global trade policies and their implications for international businesses.",
+    content: "Full blog content for International Trade Regulations...",
+    author: "Robert Kim",
+    date: "November 28, 2024",
+    readTime: "8 min read",
+    imageUrl: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "Regulations"
+  },
+  {
+    id: 5,
+    slug: "ai-in-logistics-operations",
+    title: "AI in Logistics Operations",
+    excerpt: "How artificial intelligence is revolutionizing warehouse management, route optimization, and customer service.",
+    content: "Full blog content for AI in Logistics...",
+    author: "David Liu",
+    date: "November 20, 2024",
+    readTime: "9 min read",
+    imageUrl: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "AI"
+  },
+  {
+    id: 6,
+    slug: "cross-border-ecommerce-growth",
+    title: "Cross-Border E-commerce Growth",
+    excerpt: "The explosive growth of international e-commerce and what it means for logistics providers and retailers.",
+    content: "Full blog content for Cross-Border E-commerce...",
+    author: "Lisa Wang",
+    date: "November 15, 2024",
+    readTime: "4 min read",
+    imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "E-commerce"
+  }
+];
+
+const itemsPerPage = 6;
 
 const Blog = () => {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [featuredArticle, setFeaturedArticle] = useState<Article | null>(null);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(blogPosts.length / itemsPerPage);
+  const currentPosts = blogPosts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-  useEffect(() => {
-    fetchArticles();
-  }, []);
-
-  const fetchArticles = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('articles')
-        .select('*')
-        .eq('published', true)
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-
-      const articlesData = data || [];
-      setArticles(articlesData);
-
-      // Set the most recent article as featured
-      if (articlesData.length > 0) {
-        setFeaturedArticle(articlesData[0]);
-      }
-    } catch (error) {
-      console.error('Error fetching articles:', error);
-    } finally {
-      setLoading(false);
-    }
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo(0, 0);
   };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
-
-  // Filter articles for sidebar (exclude featured article and apply search)
-  const sidebarArticles = articles.filter(article => {
-    const matchesSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         article.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const isNotFeatured = featuredArticle ? article.id !== featuredArticle.id : true;
-    return matchesSearch && isNotFeatured;
-  });
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-orange-50">
-        <Header />
-        <main className="flex-grow pt-20 py-12">
-          <div className="container mx-auto px-4">
-            <div className="text-center py-12">
-              <p className="text-gray-600">Loading articles...</p>
-            </div>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-orange-50">
-      <Header />
-      <main className="flex-grow pt-20 py-0">
-        {/* Hero Section */}
-        <section className="py-8 relative overflow-hidden">
-          <div className="absolute inset-0 bg-pattern opacity-5"></div>
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-8">
-              <h1 className="font-heading font-bold text-4xl md:text-5xl mb-4 text-gradient bg-gradient-to-r from-orange-600 to-amber-500 bg-clip-text text-transparent animate-fade-in">
-                Employee's Corner
-              </h1>
-              <p className="text-gray-600 max-w-2xl mx-auto text-lg animate-fade-in delay-75">
-                Stay updated with the latest news, announcements, and insights from our team
-              </p>
-            </div>
+    <div className="min-h-screen bg-background">
+      <ScrollToTop />
+      <Navigation />
+      <div className="container mx-auto px-4 py-12 pt-24">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">Our Blog</h1>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+            Stay updated with the latest insights, trends, and innovations in global logistics and supply chain management.
+          </p>
+        </div>
 
-            {articles.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-gray-600">No articles published yet.</p>
-              </div>
-            ) : (
-              <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Main Content - Featured Article */}
-                <div className="lg:col-span-2">
-                  {featuredArticle && (
-                    <Card className="border-none shadow-xl overflow-hidden bg-white rounded-2xl">
-                      {featuredArticle.image_url && (
-                        <div className="aspect-video overflow-hidden">
-                          <img 
-                            src={featuredArticle.image_url} 
-                            alt={featuredArticle.title} 
-                            className="w-full h-full object-contain" 
-                          />
-                        </div>
-                      )}
-                      <CardContent className="p-8">
-                        <h2 className="text-3xl font-bold mb-4 text-gray-900">
-                          {featuredArticle.title}
-                        </h2>
-                        <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-                          <Calendar className="h-4 w-4" />
-                          <span>{formatDate(featuredArticle.created_at)}</span>
-                        </div>
-                        <div className="text-gray-700 text-lg leading-relaxed whitespace-pre-wrap">
-                          {featuredArticle.description}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  )}
-                </div>
-
-                {/* Sidebar - All Articles with Search */}
-                <div className="lg:col-span-1">
-                  <div className="sticky top-24">
-                    <Card className="border-none shadow-xl bg-white rounded-2xl">
-                      <CardContent className="p-6">
-                        <h3 className="text-xl font-bold mb-4 text-gray-900 border-b border-orange-200 pb-3">
-                          All Articles
-                        </h3>
-                        
-                        {/* Search Input */}
-                        <div className="relative mb-6">
-                          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                          <Input
-                            placeholder="Search articles..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="pl-10"
-                          />
-                        </div>
-
-                        {/* Scrollable Articles List */}
-                        <ScrollArea className="h-96">
-                          <div className="space-y-4 pr-4">
-                            {sidebarArticles.map((article) => (
-                              <div 
-                                key={article.id} 
-                                className="flex gap-4 cursor-pointer hover:bg-gray-50 p-3 rounded-xl transition-colors" 
-                                onClick={() => setFeaturedArticle(article)}
-                              >
-                                {article.image_url && (
-                                  <div className="w-16 h-16 flex-shrink-0 overflow-hidden rounded-lg">
-                                    <img 
-                                      src={article.image_url} 
-                                      alt={article.title} 
-                                      className="w-full h-full object-cover" 
-                                    />
-                                  </div>
-                                )}
-                                <div className="flex-1 min-w-0">
-                                  <h4 className="font-semibold text-sm text-gray-900 line-clamp-2 mb-2">
-                                    {article.title}
-                                  </h4>
-                                  <p className="text-xs text-gray-600 line-clamp-2 mb-2">
-                                    {article.description}
-                                  </p>
-                                  <div className="flex items-center gap-1 text-xs text-gray-500">
-                                    <Calendar className="h-3 w-3" />
-                                    <span>{formatDate(article.created_at)}</span>
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                            
-                            {sidebarArticles.length === 0 && (
-                              <p className="text-gray-500 text-sm text-center py-4">
-                                {searchTerm ? "No articles found matching your search." : "No other articles available."}
-                              </p>
-                            )}
-                          </div>
-                        </ScrollArea>
-                      </CardContent>
-                    </Card>
-
-                    {/* Advertisement Placeholder */}
-                    <Card className="border-none shadow-xl bg-white rounded-2xl mt-6">
-                      
-                    </Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {currentPosts.map(post => (
+            <Card key={post.id} className="flex flex-col h-full hover:shadow-lg transition-all duration-300 group">
+              {post.imageUrl && (
+                <div className="h-48 overflow-hidden rounded-t-lg relative">
+                  <img src={post.imageUrl} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium">
+                      {post.category}
+                    </span>
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
-        </section>
-      </main>
+              )}
+              <CardHeader>
+                <div className="flex items-center justify-between mb-2 text-sm text-muted-foreground">
+                  <div className="flex items-center">
+                    <CalendarIcon className="w-4 h-4 mr-2" />
+                    <span>{post.date}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Clock className="w-4 h-4 mr-2" />
+                    <span>{post.readTime}</span>
+                  </div>
+                </div>
+                <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                  {post.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-muted-foreground mb-4 line-clamp-3">{post.excerpt}</p>
+                <div className="flex items-center text-sm text-muted-foreground">
+                  <User className="w-4 h-4 mr-2" />
+                  <span>By {post.author}</span>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full group" asChild>
+                  <Link to={`/blog/${post.slug}`} className="flex items-center justify-center gap-2 bg-red-500 text-white p-2 rounded">
+                    Read More
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+
+        {totalPages > 1 && (
+          <Pagination>
+            <PaginationContent>
+              {currentPage > 1 && (
+                <PaginationItem>
+                  <PaginationPrevious onClick={() => handlePageChange(currentPage - 1)} />
+                </PaginationItem>
+              )}
+
+              {[...Array(totalPages)].map((_, i) => (
+                <PaginationItem key={i}>
+                  <PaginationLink isActive={currentPage === i + 1} onClick={() => handlePageChange(i + 1)}>
+                    {i + 1}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+
+              {currentPage < totalPages && (
+                <PaginationItem>
+                  <PaginationNext onClick={() => handlePageChange(currentPage + 1)} />
+                </PaginationItem>
+              )}
+            </PaginationContent>
+          </Pagination>
+        )}
+      </div>
       <Footer />
     </div>
   );
