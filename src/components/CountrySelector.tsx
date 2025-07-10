@@ -110,11 +110,11 @@ const CountrySelector = () => {
         >
           <ScrollArea className="h-[300px] w-full pr-2">
             <div className="grid grid-cols-1 gap-1 p-1">
-              {sortedCountries.map((country, index) => (
+              {sortedCountries.map((country) => (
                 <DropdownMenuItem
-                  key={`${country.country}-${index}`}
+                  key={country.country}
                   onSelect={(e) => {
-                    e.preventDefault();
+                    e.preventDefault(); // Prevent closing on select
                     handleCountrySelect(country);
                   }}
                   className="cursor-pointer hover:bg-amber-50 p-2 rounded-md flex items-center gap-2 transition-colors"
@@ -132,7 +132,7 @@ const CountrySelector = () => {
                         />
                       ) : (
                         <div className="w-6 h-6 bg-gray-200 rounded-sm flex items-center justify-center">
-                         <Globe className="w-4 h-4 text-[#F6B100]" />
+                         <Globe className="w-6 h-6 text-[#F6B100]" />
                         </div>
                       )}
                     </div>
