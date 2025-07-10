@@ -67,7 +67,7 @@ const App = () => {
                 <Route path="/services/liquid-cargo" element={<LiquidCargo />} />
                 <Route path="/about-us" element={<AboutUs/>} />
                 <Route path="/projects" element={<Projects />} />
-                <Route path="/blog" element={<Blog />} />
+                <Route path="/blogs" element={<Blog />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                 <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
