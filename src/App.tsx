@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -70,11 +71,25 @@ const App = () => {
                 <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
                 <Route path="/blog-admin" element={<BlogAdmin />} />
                  <Route path="/blog/:slug" element={<NewsDetailPage />} />
+                
+                {/* Country-specific routes */}
                 <Route path="/india/home" element={<IndiaHome />} />
                 <Route path="/india/services" element={<IndiaServices />} />
+                <Route path="/india/about-us" element={<AboutUs />} />
+                <Route path="/india/contact" element={<Contact />} />
+                
                 <Route path="/indonesia/home" element={<IndonesiaHome />} />
+                <Route path="/indonesia/about-us" element={<AboutUs />} />
+                <Route path="/indonesia/contact" element={<Contact />} />
+                
                 <Route path="/malaysia/home" element={<MalaysiaHome />} />
+                <Route path="/malaysia/about-us" element={<AboutUs />} />
+                <Route path="/malaysia/contact" element={<Contact />} />
+                
                 <Route path="/thailand/home" element={<ThailandHome />} />
+                <Route path="/thailand/about-us" element={<AboutUs />} />
+                <Route path="/thailand/contact" element={<Contact />} />
+                
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

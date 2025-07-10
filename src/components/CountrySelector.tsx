@@ -56,11 +56,24 @@ const CountrySelector = () => {
   // Sort countries by priority
   const sortedCountries = [...availableCountries].sort((a, b) => a.priority - b.priority);
 
-  // Handle country selection
+  // Handle country selection with smart routing
   const handleCountrySelect = (country: CountryData) => {
     if (country.route) {
+      // For internal routes, try to maintain the current page context
+      const currentPath = location.pathname;
+      let targetRoute = country.route;
+      
+      // If user is on about-us or contact, try to navigate to the same page in the new country
+      if (currentPath.includes('/about-us')) {
+        const countryPrefix = country.country === 'SINGAPORE' ? '' : `/${country.country.toLowerCase()}`;
+        targetRoute = `${countryPrefix}/about-us`;
+      } else if (currentPath.includes('/contact')) {
+        const countryPrefix = country.country === 'SINGAPORE' ? '' : `/${country.country.toLowerCase()}`;
+        targetRoute = `${countryPrefix}/contact`;
+      }
+      
       // Navigate to local route
-      window.location.href = country.route;
+      window.location.href = targetRoute;
     } else {
       // Open external website
       window.open(country.website, '_blank', 'noopener,noreferrer');

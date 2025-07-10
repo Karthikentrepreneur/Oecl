@@ -5,13 +5,26 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Shield, UserCircle, LogOut } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import CountrySelector from "@/components/CountrySelector";
+import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const { user, signOut, isAdmin } = useAuth();
   
+  // Get current country info to build dynamic links
+  const currentCountry = getCurrentCountryFromPath(location.pathname);
+  const countryPrefix = currentCountry.code === 'SG' ? '' : `/${currentCountry.name.toLowerCase()}`;
+  
   const isActive = (path: string) => location.pathname === path;
+
+  // Build country-aware navigation links
+  const getNavLink = (basePath: string) => {
+    if (currentCountry.code === 'SG') {
+      return basePath;
+    }
+    return `/${currentCountry.name.toLowerCase()}${basePath}`;
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 w-full z-50 shadow-md transition-all duration-300 py-[19px] bg-slate-50">
@@ -35,20 +48,20 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
             <Link 
-              to="/" 
-              className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/") ? "text-kargon-red" : ""}`}
+              to={getNavLink("/home")} 
+              className={`nav-link font-medium text-black hover:text-kargon-red ${isActive(getNavLink("/home")) || (currentCountry.code === 'SG' && isActive("/")) ? "text-kargon-red" : ""}`}
             >
               HOME
             </Link>
             <Link 
-              to="/about-us" 
-              className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/about-us") ? "text-kargon-red" : ""}`}
+              to={getNavLink("/about-us")} 
+              className={`nav-link font-medium text-black hover:text-kargon-red ${isActive(getNavLink("/about-us")) ? "text-kargon-red" : ""}`}
             >
               ABOUT US
             </Link>
             <Link 
-              to="/services" 
-              className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/services") ? "text-kargon-red" : ""}`}
+              to={currentCountry.code === 'IN' ? "/india/services" : "/services"} 
+              className={`nav-link font-medium text-black hover:text-kargon-red ${isActive(currentCountry.code === 'IN' ? "/india/services" : "/services") ? "text-kargon-red" : ""}`}
             >
               SERVICES
             </Link>
@@ -59,8 +72,8 @@ const Navigation = () => {
               BLOGS
             </Link>
             <Link 
-              to="/contact" 
-              className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/contact") ? "text-kargon-red" : ""}`}
+              to={getNavLink("/contact")} 
+              className={`nav-link font-medium text-black hover:text-kargon-red ${isActive(getNavLink("/contact")) ? "text-kargon-red" : ""}`}
             >
               CONTACT
             </Link>
@@ -139,22 +152,22 @@ const Navigation = () => {
           <div className="container mx-auto px-4">
             <nav className="flex flex-col space-y-4">
               <Link 
-                to="/" 
-                className={`font-medium text-black hover:text-kargon-red ${isActive("/") ? "text-kargon-red" : ""}`} 
+                to={getNavLink("/home")} 
+                className={`font-medium text-black hover:text-kargon-red ${isActive(getNavLink("/home")) || (currentCountry.code === 'SG' && isActive("/")) ? "text-kargon-red" : ""}`} 
                 onClick={() => setIsMenuOpen(false)}
               >
                 HOME
               </Link>
               <Link 
-                to="/about-us" 
-                className={`font-medium text-black hover:text-kargon-red ${isActive("/about-us") ? "text-kargon-red" : ""}`} 
+                to={getNavLink("/about-us")} 
+                className={`font-medium text-black hover:text-kargon-red ${isActive(getNavLink("/about-us")) ? "text-kargon-red" : ""}`} 
                 onClick={() => setIsMenuOpen(false)}
               >
                 ABOUT US
               </Link>
               <Link 
-                to="/services" 
-                className={`font-medium text-black hover:text-kargon-red ${isActive("/services") ? "text-kargon-red" : ""}`} 
+                to={currentCountry.code === 'IN' ? "/india/services" : "/services"} 
+                className={`font-medium text-black hover:text-kargon-red ${isActive(currentCountry.code === 'IN' ? "/india/services" : "/services") ? "text-kargon-red" : ""}`} 
                 onClick={() => setIsMenuOpen(false)}
               >
                 SERVICES
@@ -167,8 +180,8 @@ const Navigation = () => {
                 BLOGS
               </Link>
               <Link 
-                to="/contact" 
-                className={`font-medium text-black hover:text-kargon-red ${isActive("/contact") ? "text-kargon-red" : ""}`} 
+                to={getNavLink("/contact")} 
+                className={`font-medium text-black hover:text-kargon-red ${isActive(getNavLink("/contact")) ? "text-kargon-red" : ""}`} 
                 onClick={() => setIsMenuOpen(false)}
               >
                 CONTACT
