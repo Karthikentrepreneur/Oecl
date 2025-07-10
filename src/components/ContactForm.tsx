@@ -84,7 +84,7 @@ const ContactForm = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Information - All Offices */}
+          {/* Contact Information - Current Office Only */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -94,58 +94,42 @@ const ContactForm = () => {
           >
             <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
               <Building2 className="w-6 h-6 text-red-600" />
-              Our Global Offices
+              Our Office
             </h3>
             
-            <div className="space-y-6">
-              {allOffices.map((office, index) => (
-                <motion.div
-                  key={office.country}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className={`bg-white p-6 rounded-xl shadow-lg border-2 transition-all duration-300 hover:shadow-xl ${
-                    office.country === currentCountry 
-                      ? 'border-red-500 bg-red-50' 
-                      : 'border-gray-200 hover:border-red-300'
-                  }`}
-                >
-                  <h4 className="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                    <span className={`w-3 h-3 rounded-full ${
-                      office.country === currentCountry ? 'bg-red-500' : 'bg-gray-400'
-                    }`}></span>
-                    {office.name}
-                    {office.country === currentCountry && (
-                      <span className="text-xs bg-red-600 text-white px-2 py-1 rounded-full ml-2">
-                        Current
-                      </span>
-                    )}
-                  </h4>
-                  
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-3">
-                      <MapPin className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
-                      <p className="text-gray-600 text-sm leading-relaxed">{office.address}</p>
-                    </div>
-                    
-                    <div className="flex items-center gap-3">
-                      <Phone className="w-5 h-5 text-red-600 flex-shrink-0" />
-                      <a href={`tel:${office.phone}`} className="text-gray-600 hover:text-red-600 transition-colors text-sm">
-                        {office.phone}
-                      </a>
-                    </div>
-                    
-                    <div className="flex items-center gap-3">
-                      <Mail className="w-5 h-5 text-red-600 flex-shrink-0" />
-                      <a href={`mailto:${office.email}`} className="text-gray-600 hover:text-red-600 transition-colors text-sm">
-                        {office.email}
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="bg-white p-6 rounded-xl shadow-lg border-2 border-red-500 bg-red-50"
+            >
+              <h4 className="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-red-500"></span>
+                {currentOffice.name}
+              </h4>
+              
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
+                  <p className="text-gray-600 text-sm leading-relaxed">{currentOffice.address}</p>
+                </div>
+                
+                <div className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-red-600 flex-shrink-0" />
+                  <a href={`tel:${currentOffice.phone}`} className="text-gray-600 hover:text-red-600 transition-colors text-sm">
+                    {currentOffice.phone}
+                  </a>
+                </div>
+                
+                <div className="flex items-center gap-3">
+                  <Mail className="w-5 h-5 text-red-600 flex-shrink-0" />
+                  <a href={`mailto:${currentOffice.email}`} className="text-gray-600 hover:text-red-600 transition-colors text-sm">
+                    {currentOffice.email}
+                  </a>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Enhanced Contact Form */}

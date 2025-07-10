@@ -17,11 +17,13 @@ import LinearAgency from "./pages/services/LinearAgency";
 import LiquidCargo from "./pages/services/LiquidCargo";
 import ProjectCargo from "./pages/services/ProjectCargo";
 import Services from "./pages/Services";
+import IndiaServices from "./pages/services/IndiaServices";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import AboutUs from "./pages/aboutus";
 import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import BlogAdmin from "./pages/BlogAdmin";
 import NotFound from "./pages/NotFound";
 import IndiaHome from "./pages/IndiaHome";
 import NewsOverviewPage from "./pages/NewsOverviewPage";
@@ -35,6 +37,7 @@ import AdminRoute from "./components/AdminRoute";
 import NewsDetailPage from "./pages/NewsDetailPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
+
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -64,8 +67,10 @@ const App = () => {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                 <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+                <Route path="/blog-admin" element={<BlogAdmin />} />
                  <Route path="/blog/:slug" element={<NewsDetailPage />} />
                 <Route path="/india/home" element={<IndiaHome />} />
+                <Route path="/india/services" element={<IndiaServices />} />
                 <Route path="/indonesia/home" element={<IndonesiaHome />} />
                 <Route path="/malaysia/home" element={<MalaysiaHome />} />
                 <Route path="/thailand/home" element={<ThailandHome />} />
