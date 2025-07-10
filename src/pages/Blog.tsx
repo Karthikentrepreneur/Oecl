@@ -1,6 +1,6 @@
 
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Search } from "lucide-react";
 import { useEffect, useState } from "react";
