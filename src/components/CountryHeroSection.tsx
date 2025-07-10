@@ -1,13 +1,12 @@
-
 import React, { useState, useEffect } from "react";
 import { Users, UserCircle, SearchCode, Ship, Calendar, Globe, ArrowRight, Play, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
-
 interface HeroSectionProps {
   country?: 'india' | 'indonesia' | 'malaysia' | 'thailand';
 }
-
-const HeroSection = ({ country }: HeroSectionProps) => {
+const HeroSection = ({
+  country
+}: HeroSectionProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
   const [isCustomerPortalOpen, setIsCustomerPortalOpen] = useState(false);
@@ -15,181 +14,135 @@ const HeroSection = ({ country }: HeroSectionProps) => {
   // Country-specific content with red gradient
   const countryContent = {
     india: {
-      images: [
-        {
-          url: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-          title: "INDIA LOGISTICS",
-          description: "Your trusted partner for comprehensive logistics solutions across India.",
-          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
-        },
-        {
-          url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-          title: "FREIGHT FORWARDING",
-          description: "Seamless freight services connecting India to the world.",
-          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
-        }
-      ]
+      images: [{
+        url: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+        title: "INDIA LOGISTICS",
+        description: "Your trusted partner for comprehensive logistics solutions across India.",
+        gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+      }, {
+        url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+        title: "FREIGHT FORWARDING",
+        description: "Seamless freight services connecting India to the world.",
+        gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+      }]
     },
     indonesia: {
-      images: [
-        {
-          url: "https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-          title: "INDONESIA MARITIME",
-          description: "Connecting the archipelago with world-class shipping solutions.",
-          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
-        },
-        {
-          url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-          title: "ISLAND LOGISTICS",
-          description: "Specialized logistics for Indonesia's unique geography.",
-          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
-        }
-      ]
+      images: [{
+        url: "https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+        title: "INDONESIA MARITIME",
+        description: "Connecting the archipelago with world-class shipping solutions.",
+        gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+      }, {
+        url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+        title: "ISLAND LOGISTICS",
+        description: "Specialized logistics for Indonesia's unique geography.",
+        gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+      }]
     },
     malaysia: {
-      images: [
-        {
-          url: "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-          title: "MALAYSIA HUB",
-          description: "Strategic logistics hub for Southeast Asian trade.",
-          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
-        },
-        {
-          url: "https://images.unsplash.com/photo-1568454537842-d933259bb258?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-          title: "TRADE GATEWAY",
-          description: "Your gateway to efficient cross-border logistics.",
-          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
-        }
-      ]
+      images: [{
+        url: "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+        title: "MALAYSIA HUB",
+        description: "Strategic logistics hub for Southeast Asian trade.",
+        gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+      }, {
+        url: "https://images.unsplash.com/photo-1568454537842-d933259bb258?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+        title: "TRADE GATEWAY",
+        description: "Your gateway to efficient cross-border logistics.",
+        gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+      }]
     },
     thailand: {
-      images: [
-        {
-          url: "https://images.unsplash.com/photo-1539650116574-75c0c6d3e9e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-          title: "THAILAND EXPRESS",
-          description: "Fast and reliable logistics solutions throughout Thailand.",
-          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
-        },
-        {
-          url: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-          title: "REGIONAL NETWORK",
-          description: "Comprehensive coverage across the Thai region.",
-          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
-        }
-      ]
+      images: [{
+        url: "https://images.unsplash.com/photo-1539650116574-75c0c6d3e9e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+        title: "THAILAND EXPRESS",
+        description: "Fast and reliable logistics solutions throughout Thailand.",
+        gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+      }, {
+        url: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+        title: "REGIONAL NETWORK",
+        description: "Comprehensive coverage across the Thai region.",
+        gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+      }]
     }
   };
-
-  const defaultImages = [
-    {
-      url: "/h1.png",
-      title: "OECL",
-      description: "Vital Link to Enhance Your Supply Chain.",
-      gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
-    },
-    {
-      url: "/h2.png", 
-      title: "LOGISTICS SERVICES",
-      description: "Supported through own offices and network of key partners around the world.",
-      gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
-    }
-  ];
-
+  const defaultImages = [{
+    url: "/h1.png",
+    title: "OECL",
+    description: "Vital Link to Enhance Your Supply Chain.",
+    gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+  }, {
+    url: "/h2.png",
+    title: "LOGISTICS SERVICES",
+    description: "Supported through own offices and network of key partners around the world.",
+    gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+  }];
   const sliderImages = country ? countryContent[country].images : defaultImages;
-
-  const portalLinks = [
-    {
-      icon: <Users className="w-4 h-4" />,
-      title: "Customer Portal",
-      onClick: () => setIsCustomerPortalOpen(true),
-      color: "from-red-500 to-red-700",
-      hoverColor: "from-red-600 to-red-800"
-    },
-    {
-      icon: <UserCircle className="w-4 h-4" />,
-      title: "Partner Portal", 
-      url: "https://pp.onlinetracking.co/auth/login/3",
-      external: true,
-      color: "from-red-500 to-red-700",
-      hoverColor: "from-red-600 to-red-800"
-    },
-    {
-      icon: <SearchCode className="w-4 h-4" />,
-      title: "Tracking",
-      url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:102:::::P0_GROUP_RID:59",
-      external: true,
-      color: "from-red-500 to-red-700",
-      hoverColor: "from-red-600 to-red-800"
-    },
-    {
-      icon: <Ship className="w-4 h-4" />,
-      title: "Sailing Schedule",
-      url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:104:::::P0_GROUP_RID:59",
-      external: true,
-      color: "from-red-500 to-red-700",
-      hoverColor: "from-red-600 to-red-800"
-    },
-    {
-      icon: <Calendar className="w-4 h-4" />,
-      title: "Online Quote",
-      url: "/contact",
-      external: false,
-      color: "from-red-500 to-red-700",
-      hoverColor: "from-red-600 to-red-800"
-    }
-  ];
-
+  const portalLinks = [{
+    icon: <Users className="w-4 h-4" />,
+    title: "Customer Portal",
+    onClick: () => setIsCustomerPortalOpen(true),
+    color: "from-red-500 to-red-700",
+    hoverColor: "from-red-600 to-red-800"
+  }, {
+    icon: <UserCircle className="w-4 h-4" />,
+    title: "Partner Portal",
+    url: "https://pp.onlinetracking.co/auth/login/3",
+    external: true,
+    color: "from-red-500 to-red-700",
+    hoverColor: "from-red-600 to-red-800"
+  }, {
+    icon: <SearchCode className="w-4 h-4" />,
+    title: "Tracking",
+    url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:102:::::P0_GROUP_RID:59",
+    external: true,
+    color: "from-red-500 to-red-700",
+    hoverColor: "from-red-600 to-red-800"
+  }, {
+    icon: <Ship className="w-4 h-4" />,
+    title: "Sailing Schedule",
+    url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:104:::::P0_GROUP_RID:59",
+    external: true,
+    color: "from-red-500 to-red-700",
+    hoverColor: "from-red-600 to-red-800"
+  }, {
+    icon: <Calendar className="w-4 h-4" />,
+    title: "Online Quote",
+    url: "/contact",
+    external: false,
+    color: "from-red-500 to-red-700",
+    hoverColor: "from-red-600 to-red-800"
+  }];
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 300);
     return () => clearTimeout(timer);
   }, []);
-
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide(prev => (prev + 1) % sliderImages.length);
     }, 6000);
     return () => clearInterval(interval);
   }, [sliderImages.length]);
-
   const currentSlide = sliderImages[activeSlide];
-
-  return (
-    <section className="relative min-h-screen overflow-hidden bg-red-900 text-white">
+  return <section className="relative min-h-screen overflow-hidden bg-red-900 text-white">
       {/* Animated Background Particles */}
       <div className="absolute inset-0 z-0">
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white/20 rounded-full animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 3}s`
-            }}
-          />
-        ))}
+        {[...Array(50)].map((_, i) => <div key={i} className="absolute w-1 h-1 bg-white/20 rounded-full animate-pulse" style={{
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 3}s`,
+        animationDuration: `${2 + Math.random() * 3}s`
+      }} />)}
       </div>
 
       {/* Background Slider */}
       <div className="absolute inset-0 z-10 overflow-hidden">
-        {sliderImages.map((slide, i) => (
-          <div
-            key={i}
-            className={`absolute inset-0 transition-all duration-2000 ease-in-out ${
-              activeSlide === i ? "opacity-100 scale-100" : "opacity-0 scale-105"
-            }`}
-            style={{ zIndex: activeSlide === i ? 1 : 0 }}
-          >
-            <img
-              src={slide.url}
-              alt={`Slide ${i}`}
-              className="w-full h-full object-cover transition-transform duration-2000"
-              loading={i === 0 ? "eager" : "lazy"}
-            />
+        {sliderImages.map((slide, i) => <div key={i} className={`absolute inset-0 transition-all duration-2000 ease-in-out ${activeSlide === i ? "opacity-100 scale-100" : "opacity-0 scale-105"}`} style={{
+        zIndex: activeSlide === i ? 1 : 0
+      }}>
+            <img src={slide.url} alt={`Slide ${i}`} className="w-full h-full object-cover transition-transform duration-2000" loading={i === 0 ? "eager" : "lazy"} />
             <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient} z-[1]`} />
-          </div>
-        ))}
+          </div>)}
         <div className="absolute inset-0 bg-red-900/40 z-[2]" />
       </div>
 
@@ -198,21 +151,15 @@ const HeroSection = ({ country }: HeroSectionProps) => {
         <div className="max-w-4xl space-y-8 px-0 py-0 mx-[200px]">
           {/* Title */}
           <h1 className="text-4xl md:text-5xl">
-            {currentSlide.title.split(" ").map((word, i) => (
-              <span
-                key={i}
-                style={{ animationDelay: `${i * 0.1}s` }}
-                className="text-slate-50 font-bold animate-fade-in"
-              >
+            {currentSlide.title.split(" ").map((word, i) => <span key={i} style={{
+            animationDelay: `${i * 0.1}s`
+          }} className="text-slate-50 font-bold animate-fade-in">
                 {word}{" "}
-              </span>
-            ))}
+              </span>)}
           </h1>
 
           {/* CTA Button */}
-          <div className={`flex flex-col sm:flex-row gap-4 transform transition-all duration-1000 delay-700 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-          }`}>
+          <div className={`flex flex-col sm:flex-row gap-4 transform transition-all duration-1000 delay-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
             <Link to="/signup" className="group">
               <button className="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl px-6 py-3 text-lg font-semibold flex items-center gap-3 shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-red-500/30 border border-red-500/30">
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
@@ -225,30 +172,17 @@ const HeroSection = ({ country }: HeroSectionProps) => {
 
           {/* Slide Indicators */}
           <div className="flex space-x-2 pt-4">
-            {sliderImages.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveSlide(i)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  activeSlide === i
-                    ? "bg-red-500 scale-125 shadow-lg shadow-red-500/50"
-                    : "bg-white/30 hover:bg-white/50"
-                }`}
-              />
-            ))}
+            {sliderImages.map((_, i) => <button key={i} onClick={() => setActiveSlide(i)} className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSlide === i ? "bg-red-500 scale-125 shadow-lg shadow-red-500/50" : "bg-white/30 hover:bg-white/50"}`} />)}
           </div>
         </div>
       </div>
 
       {/* Enhanced Portal Buttons - Made Smaller */}
       <div className="absolute bottom-6 left-0 right-0 z-20 px-4">
-        <div className={`max-w-7xl mx-auto transition-all duration-1000 delay-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-        }`}>
-          <div className="grid grid-cols-5 gap-2 sm:gap-3 bg-white/5 backdrop-blur-xl p-3 rounded-2xl shadow-2xl border border-white/10">
+        <div className={`max-w-7xl mx-auto transition-all duration-1000 delay-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+          <div className="grid grid-cols-5 gap-2 sm:gap-3 bg-white/5  p-3 rounded-2xl shadow-2xl border border-white/10">
             {portalLinks.map((link, index) => {
-              const ButtonContent = (
-                <div className="group relative overflow-hidden w-full h-12 sm:h-14 flex flex-col gap-1 items-center justify-center text-xs transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1">
+            const ButtonContent = <div className="group relative overflow-hidden w-full h-12 sm:h-14 flex flex-col gap-1 items-center justify-center text-xs transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1">
                   <div className={`absolute inset-0 bg-gradient-to-br ${link.color} opacity-90 group-hover:opacity-100 transition-opacity`} />
                   <div className={`absolute inset-0 bg-gradient-to-br ${link.hoverColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
@@ -260,36 +194,27 @@ const HeroSection = ({ country }: HeroSectionProps) => {
                       <div className="font-semibold text-white leading-tight text-xs">{link.title}</div>
                     </div>
                   </div>
-                </div>
-              );
-
-              if (link.external) {
-                return (
-                  <a href={link.url} key={index} target="_blank" rel="noopener noreferrer" className="w-full">
+                </div>;
+            if (link.external) {
+              return <a href={link.url} key={index} target="_blank" rel="noopener noreferrer" className="w-full">
                     {ButtonContent}
-                  </a>
-                );
-              } else if (link.onClick) {
-                return (
-                  <button key={index} onClick={link.onClick} className="w-full">
+                  </a>;
+            } else if (link.onClick) {
+              return <button key={index} onClick={link.onClick} className="w-full">
                     {ButtonContent}
-                  </button>
-                );
-              } else {
-                return (
-                  <Link to={link.url} key={index} className="w-full">
+                  </button>;
+            } else {
+              return <Link to={link.url} key={index} className="w-full">
                     {ButtonContent}
-                  </Link>
-                );
-              }
-            })}
+                  </Link>;
+            }
+          })}
           </div>
         </div>
       </div>
 
       {/* Enhanced Modal */}
-      {isCustomerPortalOpen && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
+      {isCustomerPortalOpen && <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
           <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl border border-gray-200 animate-in slide-in-from-bottom duration-500">
             <div className="bg-gradient-to-r from-red-600 to-red-700 p-6">
               <div className="flex justify-between items-center">
@@ -299,10 +224,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
                   </div>
                   <h2 className="text-2xl font-bold text-white">Customer Portal</h2>
                 </div>
-                <button
-                  onClick={() => setIsCustomerPortalOpen(false)}
-                  className="text-white/80 hover:text-white hover:bg-white/20 rounded-full p-2 transition-all duration-200"
-                >
+                <button onClick={() => setIsCustomerPortalOpen(false)} className="text-white/80 hover:text-white hover:bg-white/20 rounded-full p-2 transition-all duration-200">
                   <span className="text-2xl">×</span>
                 </button>
               </div>
@@ -316,11 +238,15 @@ const HeroSection = ({ country }: HeroSectionProps) => {
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {[
-                    { src: "/GGL_demo1.mp4", label: "Getting Started", duration: "5:32" },
-                    { src: "/GGL_promo.mp4", label: "Advanced Features", duration: "7:45" }
-                  ].map((video, i) => (
-                    <div key={i} className="group border-2 border-gray-200 rounded-xl overflow-hidden bg-gray-50 hover:border-red-300 transition-all duration-300 hover:shadow-lg">
+                  {[{
+                src: "/GGL_demo1.mp4",
+                label: "Getting Started",
+                duration: "5:32"
+              }, {
+                src: "/GGL_promo.mp4",
+                label: "Advanced Features",
+                duration: "7:45"
+              }].map((video, i) => <div key={i} className="group border-2 border-gray-200 rounded-xl overflow-hidden bg-gray-50 hover:border-red-300 transition-all duration-300 hover:shadow-lg">
                       <div className="aspect-video relative">
                         <video controls className="w-full h-full object-cover" poster={`/video-thumbnail-${i + 1}.jpg`}>
                           <source src={video.src} type="video/mp4" />
@@ -338,16 +264,12 @@ const HeroSection = ({ country }: HeroSectionProps) => {
                           Learn how to use the portal effectively
                         </p>
                       </div>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </div>
               
               <div className="mt-8 flex flex-col sm:flex-row justify-end gap-3 pt-6 border-t">
-                <button
-                  onClick={() => setIsCustomerPortalOpen(false)}
-                  className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
-                >
+                <button onClick={() => setIsCustomerPortalOpen(false)} className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium">
                   Close
                 </button>
                 <a href="https://cp.onlinetracking.co/#/login/3" target="_blank" rel="noopener noreferrer">
@@ -359,10 +281,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
               </div>
             </div>
           </div>
-        </div>
-      )}
-    </section>
-  );
+        </div>}
+    </section>;
 };
-
 export default HeroSection;
