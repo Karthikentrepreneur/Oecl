@@ -1,14 +1,11 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CalendarIcon, Clock, User, ArrowRight, Edit } from "lucide-react";
+import { CalendarIcon, Clock, User, ArrowRight } from "lucide-react";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -18,74 +15,91 @@ const ScrollToTop = () => {
   return null;
 };
 
-interface Article {
-  id: string;
-  title: string;
-  content: string;
-  excerpt: string;
-  slug: string;
-  featured_image?: string;
-  published_at: string;
-}
+export const blogPosts = [
+  {
+    id: 1,
+    slug: "digital-supply-chain-benefits",
+    title: "The Future of Global Logistics",
+    excerpt: "Exploring how emerging technologies are reshaping the logistics industry and creating new opportunities for businesses worldwide.",
+    content: "Full blog content for The Future of Global Logistics...",
+    author: "Sarah Johnson",
+    date: "December 15, 2024",
+    readTime: "5 min read",
+    imageUrl: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "Technology"
+  },
+  {
+    id: 2,
+    slug: "sustainable-shipping-solutions",
+    title: "Sustainable Shipping Solutions",
+    excerpt: "How companies are adopting eco-friendly practices to reduce their environmental impact while maintaining operational efficiency.",
+    content: "Full blog content for Sustainable Shipping Solutions...",
+    author: "Michael Chen",
+    date: "December 10, 2024",
+    readTime: "7 min read",
+    imageUrl: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "Sustainability"
+  },
+  {
+    id: 3,
+    slug: "digital-transformation-in-supply-chain",
+    title: "Digital Transformation in Supply Chain",
+    excerpt: "The impact of digitalization on modern supply chains and how businesses can leverage technology for competitive advantage.",
+    content: "Full blog content for Digital Transformation...",
+    author: "Emma Rodriguez",
+    date: "December 5, 2024",
+    readTime: "6 min read",
+    imageUrl: "https://images.unsplash.com/photo-1580674285054-bed31e145f59?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "Digital"
+  },
+  {
+    id: 4,
+    slug: "international-trade-regulations",
+    title: "International Trade Regulations",
+    excerpt: "Understanding the latest changes in global trade policies and their implications for international businesses.",
+    content: "Full blog content for International Trade Regulations...",
+    author: "Robert Kim",
+    date: "November 28, 2024",
+    readTime: "8 min read",
+    imageUrl: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "Regulations"
+  },
+  {
+    id: 5,
+    slug: "ai-in-logistics-operations",
+    title: "AI in Logistics Operations",
+    excerpt: "How artificial intelligence is revolutionizing warehouse management, route optimization, and customer service.",
+    content: "Full blog content for AI in Logistics...",
+    author: "David Liu",
+    date: "November 20, 2024",
+    readTime: "9 min read",
+    imageUrl: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "AI"
+  },
+  {
+    id: 6,
+    slug: "cross-border-ecommerce-growth",
+    title: "Cross-Border E-commerce Growth",
+    excerpt: "The explosive growth of international e-commerce and what it means for logistics providers and retailers.",
+    content: "Full blog content for Cross-Border E-commerce...",
+    author: "Lisa Wang",
+    date: "November 15, 2024",
+    readTime: "4 min read",
+    imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "E-commerce"
+  }
+];
 
 const itemsPerPage = 6;
 
 const Blog = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [loading, setLoading] = useState(true);
-  const { toast } = useToast();
-
-  useEffect(() => {
-    fetchArticles();
-  }, []);
-
-  const fetchArticles = async () => {
-    setLoading(true);
-    const { data, error } = await supabase
-      .from('articles')
-      .select('*')
-      .order('published_at', { ascending: false });
-
-    if (error) {
-      toast({
-        title: "Error fetching articles",
-        description: error.message,
-        variant: "destructive"
-      });
-      // Fallback to static articles if there's an error
-      setArticles([]);
-    } else {
-      setArticles(data || []);
-    }
-    setLoading(false);
-  };
-
-  const totalPages = Math.ceil(articles.length / itemsPerPage);
-  const currentPosts = articles.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const totalPages = Math.ceil(blogPosts.length / itemsPerPage);
+  const currentPosts = blogPosts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo(0, 0);
-  };
-
-  const getImageUrl = (article: Article) => {
-    return article.featured_image || "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
-  };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
-
-  const getReadTime = (content: string) => {
-    const wordsPerMinute = 200;
-    const wordCount = content.split(' ').length;
-    const minutes = Math.ceil(wordCount / wordsPerMinute);
-    return `${minutes} min read`;
   };
 
   return (
@@ -98,106 +112,79 @@ const Blog = () => {
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             Stay updated with the latest insights, trends, and innovations in global logistics and supply chain management.
           </p>
-          <div className="mt-6">
-            <Link to="/blog-editor">
-              <Button className="bg-red-600 hover:bg-red-700 text-white">
-                <Edit className="w-4 h-4 mr-2" />
-                Editor Login
-              </Button>
-            </Link>
-          </div>
         </div>
 
-        {loading ? (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">Loading articles...</p>
-          </div>
-        ) : articles.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">No articles published yet.</p>
-            <Link to="/blog-editor">
-              <Button className="mt-4 bg-red-600 hover:bg-red-700 text-white">
-                Create First Article
-              </Button>
-            </Link>
-          </div>
-        ) : (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-              {currentPosts.map(article => (
-                <Card key={article.id} className="flex flex-col h-full hover:shadow-lg transition-all duration-300 group">
-                  <div className="h-48 overflow-hidden rounded-t-lg relative">
-                    <img 
-                      src={getImageUrl(article)} 
-                      alt={article.title} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium">
-                        Article
-                      </span>
-                    </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {currentPosts.map(post => (
+            <Card key={post.id} className="flex flex-col h-full hover:shadow-lg transition-all duration-300 group">
+              {post.imageUrl && (
+                <div className="h-48 overflow-hidden rounded-t-lg relative">
+                  <img src={post.imageUrl} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium">
+                      {post.category}
+                    </span>
                   </div>
-                  <CardHeader>
-                    <div className="flex items-center justify-between mb-2 text-sm text-muted-foreground">
-                      <div className="flex items-center">
-                        <CalendarIcon className="w-4 h-4 mr-2" />
-                        <span>{formatDate(article.published_at)}</span>
-                      </div>
-                      <div className="flex items-center">
-                        <Clock className="w-4 h-4 mr-2" />
-                        <span>{getReadTime(article.content)}</span>
-                      </div>
-                    </div>
-                    <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                      {article.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="flex-grow">
-                    <p className="text-muted-foreground mb-4 line-clamp-3">{article.excerpt}</p>
-                    <div className="flex items-center text-sm text-muted-foreground">
-                      <User className="w-4 h-4 mr-2" />
-                      <span>OECL Team</span>
-                    </div>
-                  </CardContent>
-                  <CardFooter>
-                    <Button variant="outline" className="w-full group" asChild>
-                      <Link to={`/blog/${article.slug}`} className="flex items-center justify-center gap-2">
-                        Read More
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </Link>
-                    </Button>
-                  </CardFooter>
-                </Card>
+                </div>
+              )}
+              <CardHeader>
+                <div className="flex items-center justify-between mb-2 text-sm text-muted-foreground">
+                  <div className="flex items-center">
+                    <CalendarIcon className="w-4 h-4 mr-2" />
+                    <span>{post.date}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Clock className="w-4 h-4 mr-2" />
+                    <span>{post.readTime}</span>
+                  </div>
+                </div>
+                <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                  {post.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-muted-foreground mb-4 line-clamp-3">{post.excerpt}</p>
+                <div className="flex items-center text-sm text-muted-foreground">
+                  <User className="w-4 h-4 mr-2" />
+                  <span>By {post.author}</span>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full group" asChild>
+                  <Link to={`/blog/${post.slug}`} className="flex items-center justify-center gap-2 bg-red-500 text-white p-2 rounded">
+                    Read More
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+
+        {totalPages > 1 && (
+          <Pagination>
+            <PaginationContent>
+              {currentPage > 1 && (
+                <PaginationItem>
+                  <PaginationPrevious onClick={() => handlePageChange(currentPage - 1)} />
+                </PaginationItem>
+              )}
+
+              {[...Array(totalPages)].map((_, i) => (
+                <PaginationItem key={i}>
+                  <PaginationLink isActive={currentPage === i + 1} onClick={() => handlePageChange(i + 1)}>
+                    {i + 1}
+                  </PaginationLink>
+                </PaginationItem>
               ))}
-            </div>
 
-            {totalPages > 1 && (
-              <Pagination>
-                <PaginationContent>
-                  {currentPage > 1 && (
-                    <PaginationItem>
-                      <PaginationPrevious onClick={() => handlePageChange(currentPage - 1)} />
-                    </PaginationItem>
-                  )}
-
-                  {[...Array(totalPages)].map((_, i) => (
-                    <PaginationItem key={i}>
-                      <PaginationLink isActive={currentPage === i + 1} onClick={() => handlePageChange(i + 1)}>
-                        {i + 1}
-                      </PaginationLink>
-                    </PaginationItem>
-                  ))}
-
-                  {currentPage < totalPages && (
-                    <PaginationItem>
-                      <PaginationNext onClick={() => handlePageChange(currentPage + 1)} />
-                    </PaginationItem>
-                  )}
-                </PaginationContent>
-              </Pagination>
-            )}
-          </>
+              {currentPage < totalPages && (
+                <PaginationItem>
+                  <PaginationNext onClick={() => handlePageChange(currentPage + 1)} />
+                </PaginationItem>
+              )}
+            </PaginationContent>
+          </Pagination>
         )}
       </div>
       <Footer />

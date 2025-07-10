@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -27,7 +26,6 @@ import AboutUs from "./pages/aboutus";
 import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import BlogAdmin from "./pages/BlogAdmin";
-import BlogEditor from "./pages/BlogEditor";
 import NotFound from "./pages/NotFound";
 import IndiaHome from "./pages/IndiaHome";
 import NewsOverviewPage from "./pages/NewsOverviewPage";
@@ -39,7 +37,6 @@ import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
 import NewsDetailPage from "./pages/NewsDetailPage";
-import BlogDetail from "./components/BlogDetail";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import CountryRedirect from "./components/CountryRedirect";
@@ -72,13 +69,11 @@ const App = () => {
                 <Route path="/about-us" element={<AboutUs/>} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/blogs" element={<Blog />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog-editor" element={<BlogEditor />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                 <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
                 <Route path="/blog-admin" element={<BlogAdmin />} />
-                <Route path="/blog/:slug" element={<BlogDetail />} />
+                 <Route path="/blog/:slug" element={<NewsDetailPage />} />
                 
                 {/* Country-specific routes */}
                 <Route path="/india/home" element={<IndiaHome />} />

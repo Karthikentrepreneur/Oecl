@@ -1,329 +1,187 @@
 
-import React, { useState, useEffect } from "react";
-import { Users, UserCircle, SearchCode, Ship, Calendar, Globe, ArrowRight, Play, Sparkles, Zap } from "lucide-react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Ship, Globe, Package, Truck, Plane, Anchor } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [isCustomerPortalOpen, setIsCustomerPortalOpen] = useState(false);
-  const [mousePosition, setMousePosition] = useState({
-    x: 0,
-    y: 0
-  });
+  const navigate = useNavigate();
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  const sliderImages = [{
-    url: "/h1.png",
-    title: "OECL",
-    description: "Vital Link to Enhance Your Supply Chain.",
-    gradient: "from-black/60 via-black/40 to-black/60"
-  }, {
-    url: "/h2.png",
-    title: "LOGISTICS SERVICES",
-    description: "Supported through own offices and network of key partners around the world.",
-    gradient: "from-black/60 via-black/40 to-black/60"
-  }, {
-    url: "/h3.png",
-    title: "WAREHOUSE MANAGEMENT",
-    description: "A cutting edge solutions with advanced WMS .",
-    gradient: "from-black/60 via-black/40 to-black/60"
-  }, {
-    url: "/h4.png",
-    title: "MULTIPLE CARRIER OPTION",
-    description: "Assured space with contracted rates to major trade routes .",
-    gradient: "from-black/60 via-black/40 to-black/60"
-  }];
+  const services = [
+    {
+      icon: <Ship className="h-8 w-8" />,
+      title: "Ocean Freight",
+      url: "/services/ocean-freight",
+      external: false,
+      color: "from-blue-600 to-blue-800",
+      hoverColor: "hover:from-blue-700 hover:to-blue-900"
+    },
+    {
+      icon: <Plane className="h-8 w-8" />,
+      title: "Air Freight", 
+      url: "/services/air-freight",
+      external: false,
+      color: "from-sky-500 to-sky-700",
+      hoverColor: "hover:from-sky-600 hover:to-sky-800"
+    },
+    {
+      icon: <Package className="h-8 w-8" />,
+      title: "Warehousing",
+      url: "/services/warehousing", 
+      external: false,
+      color: "from-green-600 to-green-800",
+      hoverColor: "hover:from-green-700 hover:to-green-900"
+    },
+    {
+      icon: <Truck className="h-8 w-8" />,
+      title: "Project Cargo",
+      url: "/services/project-cargo",
+      external: false, 
+      color: "from-orange-600 to-orange-800",
+      hoverColor: "hover:from-orange-700 hover:to-orange-900"
+    },
+    {
+      icon: <Globe className="h-8 w-8" />,
+      title: "Customs Clearance",
+      url: "/services/customs-clearance",
+      external: false,
+      color: "from-purple-600 to-purple-800", 
+      hoverColor: "hover:from-purple-700 hover:to-purple-900"
+    },
+    {
+      icon: <Anchor className="h-8 w-8" />,
+      title: "Linear Agency",
+      onClick: () => navigate("/services/linear-agency"),
+      color: "from-red-600 to-red-800",
+      hoverColor: "hover:from-red-700 hover:to-red-900"
+    }
+  ];
 
-  const portalLinks = [{
-    icon: <Users className="w-4 h-4" />,
-    title: "Customer Portal",
-    onClick: () => setIsCustomerPortalOpen(true),
-    color: "from-red-500 to-red-700",
-    hoverColor: "from-red-600 to-red-800"
-  }, {
-    icon: <UserCircle className="w-4 h-4" />,
-    title: "Partner Portal",
-    url: "https://pp.onlinetracking.co/auth/login/3",
-    external: true,
-    color: "from-red-500 to-red-700",
-    hoverColor: "from-red-600 to-red-800"
-  }, {
-    icon: <SearchCode className="w-4 h-4" />,
-    title: "Tracking",
-    url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:102:::::P0_GROUP_RID:59",
-    external: true,
-    color: "from-red-500 to-red-700",
-    hoverColor: "from-red-600 to-red-800"
-  }, {
-    icon: <Ship className="w-4 h-4" />,
-    title: "Sailing Schedule",
-    url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:104:::::P0_GROUP_RID:59",
-    external: true,
-    color: "from-red-500 to-red-700",
-    hoverColor: "from-red-600 to-red-800"
-  }, {
-    icon: <Calendar className="w-4 h-4" />,
-    title: "Online Quote",
-    url: "/contact",
-    external: false,
-    color: "from-red-500 to-red-700",
-    hoverColor: "from-red-600 to-red-800"
-  }];
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 300);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveSlide(prev => (prev + 1) % sliderImages.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, [sliderImages.length]);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY
-      });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
-  const currentSlide = sliderImages[activeSlide];
+  const handleServiceClick = (service: typeof services[0]) => {
+    if (service.url) {
+      if (service.external) {
+        window.open(service.url, '_blank');
+      } else {
+        navigate(service.url);
+      }
+    } else if (service.onClick) {
+      service.onClick();
+    }
+  };
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-black text-white">
-      {/* Animated Background Particles */}
-      <div className="absolute inset-0 z-0">
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white/20 rounded-full animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 3}s`
-            }}
-          />
-        ))}
-      </div>
+    <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-10"></div>
+      
+      {/* Floating Shapes */}
+      <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-xl animate-pulse"></div>
+      <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-xl animate-pulse delay-1000"></div>
+      <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-green-500/10 rounded-full blur-xl animate-pulse delay-500"></div>
 
-      {/* Background Slider */}
-      <div className="absolute inset-0 z-10 overflow-hidden">
-        {sliderImages.map((slide, i) => (
-          <div
-            key={i}
-            className={`absolute inset-0 transition-all duration-2000 ease-in-out ${
-              activeSlide === i ? "opacity-100 scale-100" : "opacity-0 scale-105"
-            }`}
-            style={{
-              zIndex: activeSlide === i ? 1 : 0
-            }}
-          >
-            <img
-              src={slide.url}
-              alt={`Slide ${i}`}
-              className="w-full h-full object-cover transition-transform duration-2000"
-              loading={i === 0 ? "eager" : "lazy"}
-            />
-            <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient} z-[1]`} />
+      <div className="relative z-10 container mx-auto px-4 py-20 pt-32">
+        <div className="text-center mb-16">
+          <div className="inline-block mb-6">
+            <span className="px-4 py-2 bg-blue-600/20 text-blue-300 rounded-full text-sm font-medium backdrop-blur-sm border border-blue-500/30">
+              Global Logistics Excellence
+            </span>
           </div>
-        ))}
-        <div className="absolute inset-0 bg-black/40 z-[2]" />
-      </div>
-
-      {/* Main Content */}
-      <div className="relative z-20 flex items-center min-h-screen px-6 lg:px-12">
-        <div className="max-w-4xl space-y-8 px-0 py-0 mx-auto lg:mx-[200px]">
-          {/* Title */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
-            {currentSlide.title.split(" ").map((word, i) => (
-              <span
-                key={i}
-                style={{
-                  animationDelay: `${i * 0.1}s`
-                }}
-                className="text-slate-50 font-bold text-4xl"
-              >
-                {word}{" "}
-              </span>
-            ))}
+          
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            Connecting
+            <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              World Commerce
+            </span>
           </h1>
-
-          {/* Description */}
-          <p className={`text-xl md:text-2xl text-gray-200 max-w-2xl leading-relaxed transform transition-all duration-1000 delay-500 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-          }`}>
-            {currentSlide.description}
+          
+          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Your trusted logistics partner delivering seamless supply chain solutions across continents with precision, reliability, and innovation.
           </p>
-
-          {/* CTA Button */}
-          <div className={`flex flex-col sm:flex-row gap-4 transform transition-all duration-1000 delay-700 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-          }`}>
-            <Link to="/signup" className="group hidden md:block">
-              <button className="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl px-8 py-4 text-lg font-semibold flex items-center gap-3 shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-red-500/30 border border-red-500/30">
-                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                <Zap className="w-5 h-5" />
-                <span>GET STARTED</span>
-                <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
-              </button>
-            </Link>
-          </div>
-
-          {/* Slide Indicators */}
-          <div className="flex space-x-2 pt-4">
-            {sliderImages.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveSlide(i)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  activeSlide === i
-                    ? "bg-red-500 scale-125 shadow-lg shadow-red-500/50"
-                    : "bg-white/30 hover:bg-white/50"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Enhanced Portal Buttons - Made smaller and responsive */}
-      <div className="absolute bottom-6 left-0 right-0 z-30 px-4">
-        <div className={`max-w-7xl mx-auto transition-all duration-1000 delay-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-        }`}>
-          <div className="grid grid-cols-5 gap-1 sm:gap-2">
-            {portalLinks.map((link, index) => {
-              const ButtonContent = (
-                <div className="group relative overflow-hidden w-full h-14 sm:h-16 md:h-18 flex flex-col gap-1 items-center justify-center text-xs transition-all duration-300 rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 hover:-translate-y-1">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${link.color} opacity-90 group-hover:opacity-100 transition-opacity`} />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${link.hoverColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                  <div className="relative z-10 flex flex-col items-center gap-1">
-                    <div className="p-1 bg-white/20 rounded group-hover:bg-white/30 transition-colors">
-                      {link.icon}
-                    </div>
-                    <div className="text-center">
-                      <div className="font-medium text-white leading-tight text-xs">{link.title}</div>
-                    </div>
-                  </div>
-                </div>
-              );
-
-              if (link.external) {
-                return (
-                  <a href={link.url} key={index} target="_blank" rel="noopener noreferrer" className="w-full">
-                    {ButtonContent}
-                  </a>
-                );
-              } else if (link.onClick) {
-                return (
-                  <button key={index} onClick={link.onClick} className="w-full">
-                    {ButtonContent}
-                  </button>
-                );
-              } else {
-                return (
-                  <Link to={link.url} key={index} className="w-full">
-                    {ButtonContent}
-                  </Link>
-                );
-              }
-            })}
-          </div>
-        </div>
-      </div>
-
-      {/* Enhanced Modal - Fixed z-index issue */}
-      {isCustomerPortalOpen && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl border border-gray-200 animate-in slide-in-from-bottom duration-500">
-            <div className="bg-gradient-to-r from-red-600 to-red-700 p-6">
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-white/20 rounded-lg">
-                    <Users className="w-6 h-6 text-white" />
-                  </div>
-                  <h2 className="text-2xl font-bold text-white">Customer Portal</h2>
-                </div>
-                <button
-                  onClick={() => setIsCustomerPortalOpen(false)}
-                  className="text-white/80 hover:text-white hover:bg-white/20 rounded-full p-2 transition-all duration-200"
-                >
-                  <span className="text-2xl">×</span>
-                </button>
-              </div>
-            </div>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+              onClick={() => navigate('/services')}
+            >
+              Explore Our Services
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
             
-            <div className="p-6 overflow-y-auto">
-              <div className="space-y-6">
-                <div className="flex items-center gap-2 mb-4">
-                  <Play className="w-5 h-5 text-red-600" />
-                  <h3 className="text-xl font-semibold text-gray-800">Tutorial Videos</h3>
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="border-2 border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg font-semibold rounded-full backdrop-blur-sm transition-all duration-300"
+              onClick={() => navigate('/contact')}
+            >
+              Get Quote
+            </Button>
+          </div>
+        </div>
+
+        {/* Services Grid */}
+        <div className="mt-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Our Core Services
+            </h2>
+            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+              Comprehensive logistics solutions tailored to your business needs
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className={`relative group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
+                  hoveredCard === index ? 'z-10' : 'z-0'
+                }`}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+                onClick={() => handleServiceClick(service)}
+              >
+                <div className={`bg-gradient-to-br ${service.color} ${service.hoverColor} p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-white/10 backdrop-blur-sm`}>
+                  <div className="text-white mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {service.title}
+                  </h3>
+                  <div className="flex items-center text-white/80 group-hover:text-white transition-colors duration-300">
+                    <span className="text-sm font-medium">Learn More</span>
+                    <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform duration-300" />
+                  </div>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {[{
-                    src: "/GGL_demo1.mp4",
-                    label: "Getting Started",
-                    duration: "5:32"
-                  }, {
-                    src: "/GGL_promo.mp4",
-                    label: "Advanced Features",
-                    duration: "7:45"
-                  }].map((video, i) => (
-                    <div key={i} className="group border-2 border-gray-200 rounded-xl overflow-hidden bg-gray-50 hover:border-red-300 transition-all duration-300 hover:shadow-lg">
-                      <div className="aspect-video relative">
-                        <video
-                          controls
-                          className="w-full h-full object-cover"
-                          poster={`/video-thumbnail-${i + 1}.jpg`}
-                        >
-                          <source src={video.src} type="video/mp4" />
-                          Your browser does not support the video tag.
-                        </video>
-                        <div className="absolute top-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-xs">
-                          {video.duration}
-                        </div>
-                      </div>
-                      <div className="p-4">
-                        <h4 className="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">
-                          {video.label}
-                        </h4>
-                        <p className="text-sm text-gray-600 mt-1">
-                          Learn how to use the portal effectively
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                {/* Glow effect */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300 -z-10`}></div>
               </div>
-              
-              <div className="mt-8 flex flex-col sm:flex-row justify-end gap-3 pt-6 border-t">
-                <button
-                  onClick={() => setIsCustomerPortalOpen(false)}
-                  className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
-                >
-                  Close
-                </button>
-                <a href="https://cp.onlinetracking.co/#/login/3" target="_blank" rel="noopener noreferrer">
-                  <button className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-lg font-medium flex items-center gap-2 justify-center transition-all duration-300 shadow-lg hover:shadow-xl">
-                    <span>Login to Portal</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </a>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
-      )}
-    </section>
+
+        {/* Stats Section */}
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+          {[
+            { number: "50+", label: "Countries Served" },
+            { number: "10K+", label: "Shipments Delivered" },
+            { number: "99.9%", label: "On-Time Delivery" },
+            { number: "24/7", label: "Customer Support" }
+          ].map((stat, index) => (
+            <div key={index} className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+                {stat.number}
+              </div>
+              <div className="text-gray-300 text-sm md:text-base">
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 

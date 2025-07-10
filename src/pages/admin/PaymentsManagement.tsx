@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { 
   Table, 
   TableBody, 
@@ -17,116 +17,34 @@ import {
   CreditCard, 
   Download, 
   Eye,
-  BarChart
+  BarChart,
+  AlertCircle
 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { supabase } from "@/integrations/supabase/client";
-
-interface Payment {
-  id: string;
-  amount: number;
-  status: string;
-  payment_method: string;
-  created_at: string;
-  transaction_id: string | null;
-  profiles: {
-    email: string;
-    first_name: string | null;
-    last_name: string | null;
-  } | null;
-}
+// import { supabase } from "@/integrations/supabase/client";
 
 const PaymentsManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [payments, setPayments] = useState<Payment[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  
-  useEffect(() => {
-    const fetchPayments = async () => {
-      setIsLoading(true);
-      setError(null);
-      
-      try {
-        const { data, error } = await supabase
-          .from('payments')
-          .select(`
-            id,
-            amount,
-            status,
-            payment_method,
-            created_at,
-            transaction_id,
-            profiles:user_id (
-              email,
-              first_name,
-              last_name
-            )
-          `)
-          .order('created_at', { ascending: false });
-        
-        if (error) throw error;
-        
-        setPayments(data || []);
-      } catch (err: any) {
-        console.error('Error fetching payments:', err.message);
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    
-    fetchPayments();
-  }, []);
+  const [payments] = useState<any[]>([]);
+  const [isLoading] = useState(false);
+  const [error] = useState<string | null>(null);
   
   const filteredPayments = payments.filter(payment => 
-    payment.transaction_id?.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    (payment.profiles?.email && payment.profiles.email.toLowerCase().includes(searchTerm.toLowerCase()))
+    payment.transaction_id && payment.transaction_id.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const getStatusVariant = (status: string) => {
-    switch (status) {
-      case "Completed": return "default";
-      case "Pending": return "secondary";
-      case "Failed": return "destructive";
-      default: return "outline";
-    }
-  };
-
-  const getCustomerName = (payment: Payment) => {
-    if (!payment.profiles) return "Unknown";
-    
-    const firstName = payment.profiles.first_name || "";
-    const lastName = payment.profiles.last_name || "";
-    
-    if (firstName || lastName) {
-      return `${firstName} ${lastName}`.trim();
-    }
-    
-    return payment.profiles.email;
-  };
-
-  // Calculate summary statistics
-  const totalRevenue = payments.reduce((sum, payment) => 
-    payment.status === "Completed" ? sum + Number(payment.amount) : sum, 0
-  );
-  
-  const pendingRevenue = payments.reduce((sum, payment) => 
-    payment.status === "Pending" ? sum + Number(payment.amount) : sum, 0
-  );
-  
-  const failedRevenue = payments.reduce((sum, payment) => 
-    payment.status === "Failed" ? sum + Number(payment.amount) : sum, 0
-  );
-  
-  const completedCount = payments.filter(payment => payment.status === "Completed").length;
-  const pendingCount = payments.filter(payment => payment.status === "Pending").length;
-  const failedCount = payments.filter(payment => payment.status === "Failed").length;
+  // Placeholder calculations
+  const totalRevenue = 0;
+  const pendingRevenue = 0; 
+  const failedRevenue = 0;
+  const completedCount = 0;
+  const pendingCount = 0;
+  const failedCount = 0;
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">payments Management</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Payments Management</h1>
         <p className="text-muted-foreground">Track and manage all payment transactions</p>
       </div>
       
@@ -171,10 +89,7 @@ const PaymentsManagement = () => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {isLoading ? '...' : 
-                payments.length > 0 
-                  ? `${((completedCount / payments.length) * 100).toFixed(1)}%` 
-                  : "0%"}
+              {isLoading ? '...' : "0%"}
             </div>
             <p className="text-xs text-muted-foreground">Based on all transactions</p>
           </CardContent>
@@ -223,38 +138,17 @@ const PaymentsManagement = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredPayments.length > 0 ? (
-                filteredPayments.map((payment) => (
-                  <TableRow key={payment.id}>
-                    <TableCell className="font-medium">{payment.transaction_id || payment.id.slice(0, 8)}</TableCell>
-                    <TableCell>{getCustomerName(payment)}</TableCell>
-                    <TableCell>${Number(payment.amount).toFixed(2)}</TableCell>
-                    <TableCell>{payment.payment_method}</TableCell>
-                    <TableCell>{new Date(payment.created_at).toLocaleDateString()}</TableCell>
-                    <TableCell>
-                      <Badge variant={getStatusVariant(payment.status)}>
-                        {payment.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex justify-end gap-2">
-                        <Button variant="ghost" size="icon">
-                          <Eye className="h-4 w-4" />
-                        </Button>
-                        <Button variant="ghost" size="icon">
-                          <Download className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={7} className="text-center">
-                    No payments found
-                  </TableCell>
-                </TableRow>
-              )}
+              <TableRow>
+                <TableCell colSpan={7} className="text-center py-8">
+                  <div className="flex flex-col items-center gap-2">
+                    <AlertCircle className="h-8 w-8 text-yellow-500" />
+                    <p>Database tables need to be created first</p>
+                    <p className="text-sm text-muted-foreground">
+                      Set up payments table to manage payment data
+                    </p>
+                  </div>
+                </TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         )}
