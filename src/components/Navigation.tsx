@@ -66,7 +66,7 @@ const Navigation = () => {
               SERVICES
             </Link>
             <Link 
-              to="/blog" 
+              to={getNavLink("/contact")} 
               className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/blog") ? "text-kargon-red" : ""}`}
             >
               BLOGS
