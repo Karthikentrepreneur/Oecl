@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -37,6 +36,7 @@ import AdminRoute from "./components/AdminRoute";
 import NewsDetailPage from "./pages/NewsDetailPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
+import CountryRedirect from "./components/CountryRedirect";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +48,7 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <AuthProvider>
+            <CountryRedirect />
             <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/login" element={<Login />} />

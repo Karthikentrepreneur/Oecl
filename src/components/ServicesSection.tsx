@@ -2,6 +2,7 @@
 import { Truck, Plane, Ship, Box, UserCheck, Container, Cuboid } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import ScrollAnimation from "./ScrollAnimation";
+import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
 const allServices = [
   { id: 1, title: "Air Freight", icon: Plane, image: "/airfreight.png", slug: "air-freight", delay: 100 },
@@ -16,27 +17,33 @@ const allServices = [
 ];
 
 const countryServiceFilters = {
-  '/india': ['Ocean Freight', 'Air Freight', 'Liquid Cargo Transportation', 'Liner Agency', 'Project Cargo', 'Consolidation'],
-  '/malaysia': ['Ocean Freight', 'Air Freight', 'Customs Clearance', 'Liner Agency', 'Project Cargo', 'Consolidation'],
-  '/indonesia': ['Ocean Freight', 'Air Freight', 'Customs Clearance', 'Liquid Cargo Transportation', 'Warehousing', 'Consolidation'],
-  '/thailand': ['Project Cargo', 'Liner Agency', 'Customs Clearance', 'Liquid Cargo Transportation', '3PL', 'Consolidation']
+  'India': ['Ocean Freight', 'Air Freight', 'Liquid Cargo Transportation', 'Liner Agency', 'Project Cargo', 'Consolidation'],
+  'Malaysia': ['Ocean Freight', 'Air Freight', 'Customs Clearance', 'Liner Agency', 'Project Cargo', 'Consolidation'],
+  'Indonesia': ['Ocean Freight', 'Air Freight', 'Customs Clearance', 'Liquid Cargo Transportation', 'Warehousing', 'Consolidation'],
+  'Thailand': ['Project Cargo', 'Liner Agency', 'Customs Clearance', 'Liquid Cargo Transportation', '3PL', 'Consolidation']
 };
 
 const ServicesSection = () => {
   const location = useLocation();
+  const currentCountry = getCurrentCountryFromPath(location.pathname);
   
-  // Determine which services to show based on current route
+  // Determine which services to show based on current country
   const getFilteredServices = () => {
-    const currentPath = location.pathname;
-    
-    for (const [path, serviceNames] of Object.entries(countryServiceFilters)) {
-      if (currentPath.includes(path)) {
-        return allServices.filter(service => serviceNames.includes(service.title));
-      }
+    const serviceNames = countryServiceFilters[currentCountry.name];
+    if (serviceNames) {
+      return allServices.filter(service => serviceNames.includes(service.title));
     }
     
-    // Default: show all services
+    // Default: show all services for Singapore
     return allServices;
+  };
+
+  // Determine the services link based on current country
+  const getServicesLink = () => {
+    if (currentCountry.name === 'India') {
+      return '/india/services';
+    }
+    return '/services';
   };
 
   const services = getFilteredServices();
@@ -82,6 +89,15 @@ const ServicesSection = () => {
               </Link>
             </ScrollAnimation>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <Link 
+            to={getServicesLink()}
+            className="inline-block bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-300"
+          >
+            View All Services
+          </Link>
         </div>
       </div>
     </section>

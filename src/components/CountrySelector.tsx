@@ -11,6 +11,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
+import { getCurrentCountryFromPath } from '@/services/countryDetection';
 
 interface CountryData {
   country: string;
@@ -24,7 +25,6 @@ interface CountryData {
 const countries: CountryData[] = [
   { country: "MALAYSIA", company: "OECL", website: "https://www.oecl.sg/malaysia/home", priority: 3, flag: "/my.svg", route: "/malaysia/home" },
   { country: "SINGAPORE", company: "GGL", website: "https://ggl.sg/", priority: 1, flag: "/sg.svg", route: "/" },
-  { country: "SINGAPORE", company: "GC", website: "https://www.globalconsol.com/", priority: 2, flag: "/sg.svg", route: "/" },
   { country: "INDONESIA", company: "OECL", website: "https://www.oecl.sg/indonesia/home", priority: 6, flag: "/id.svg", route: "/indonesia/home" },
   { country: "THAILAND", company: "OECL", website: "https://www.oecl.sg/thailand/home", priority: 4, flag: "/th.svg", route: "/thailand/home" },
   { country: "MYANMAR", company: "GC", website: "https://www.globalconsol.com", priority: 5, flag: "/mm.svg" },
@@ -45,20 +45,13 @@ const CountrySelector = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   
-  // Determine current country based on route
-  const getCurrentCountry = () => {
-    const path = location.pathname;
-    if (path.includes('/india')) return 'INDIA';
-    if (path.includes('/malaysia')) return 'MALAYSIA';
-    if (path.includes('/indonesia')) return 'INDONESIA';
-    if (path.includes('/thailand')) return 'THAILAND';
-    return 'SINGAPORE';
-  };
-
-  const currentCountry = getCurrentCountry();
+  // Get current country info
+  const currentCountry = getCurrentCountryFromPath(location.pathname);
   
   // Filter out the current country from the list
-  const availableCountries = countries.filter(country => country.country !== currentCountry);
+  const availableCountries = countries.filter(country => 
+    country.country !== currentCountry.name.toUpperCase()
+  );
   
   // Sort countries by priority
   const sortedCountries = [...availableCountries].sort((a, b) => a.priority - b.priority);
@@ -97,7 +90,6 @@ const CountrySelector = () => {
             variant="outline" 
             className="border-[#F6B100] bg-white text-gray-800 hover:bg-[#F6B100]/10 px-4 py-2 rounded-full flex items-center gap-2"
           >
-              {/* Show globe icon instead of Australia flag */}
             <Globe className="w-6 h-6 text-[#F6B100]" />
             <span className="flex items-center gap-1">
               Switch Country <ChevronDown className="h-3 w-3 ml-1 text-gray-500" />
@@ -115,7 +107,7 @@ const CountrySelector = () => {
                 <DropdownMenuItem
                   key={country.country}
                   onSelect={(e) => {
-                    e.preventDefault(); // Prevent closing on select
+                    e.preventDefault();
                     handleCountrySelect(country);
                   }}
                   className="cursor-pointer hover:bg-amber-50 p-2 rounded-md flex items-center gap-2 transition-colors"
