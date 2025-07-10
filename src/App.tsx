@@ -56,7 +56,7 @@ const App = () => {
             <CountryRedirect />
             <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/home" element={<Home />} />
+                <Route path="/home" element={<Index />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
