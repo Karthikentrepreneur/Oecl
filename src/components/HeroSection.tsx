@@ -30,46 +30,47 @@ const HeroSection = () => {
     description: "Assured space with contracted rates to major trade routes .",
     gradient: "from-black/60 via-black/40 to-black/60"
   }];
-  const portalLinks = [{
-    icon: <Users className="w-5 h-5 sm:w-6 sm:h-6" />,
-    title: "Customer Portal",
-    subtitle: "Access your account",
-    onClick: () => setIsCustomerPortalOpen(true),
-    color: "from-blue-500 to-blue-700",
-    hoverColor: "from-blue-600 to-blue-800"
-  }, {
-    icon: <UserCircle className="w-5 h-5 sm:w-6 sm:h-6" />,
-    title: "Partner Portal",
-    subtitle: "Partner dashboard",
-    url: "https://pp.onlinetracking.co/auth/login/3",
-    external: true,
-    color: "from-purple-500 to-purple-700",
-    hoverColor: "from-purple-600 to-purple-800"
-  }, {
-    icon: <SearchCode className="w-5 h-5 sm:w-6 sm:h-6" />,
-    title: "Tracking",
-    subtitle: "Track shipments",
-    url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:102:::::P0_GROUP_RID:59",
-    external: true,
-    color: "from-green-500 to-green-700",
-    hoverColor: "from-green-600 to-green-800"
-  }, {
-    icon: <Ship className="w-5 h-5 sm:w-6 sm:h-6" />,
-    title: "Sailing Schedule",
-    subtitle: "View schedules",
-    url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:104:::::P0_GROUP_RID:59",
-    external: true,
-    color: "from-cyan-500 to-cyan-700",
-    hoverColor: "from-cyan-600 to-cyan-800"
-  }, {
-    icon: <Calendar className="w-5 h-5 sm:w-6 sm:h-6" />,
-    title: "Online Quote",
-    subtitle: "Get instant quote",
-    url: "/contact",
-    external: false,
-    color: "from-orange-500 to-orange-700",
-    hoverColor: "from-orange-600 to-orange-800"
-  }];
+  const portalLinks = [
+    {
+      icon: <Users className="w-4 h-4" />,
+      title: "Customer Portal",
+      onClick: () => setIsCustomerPortalOpen(true),
+      color: "from-red-500 to-red-700",
+      hoverColor: "from-red-600 to-red-800"
+    },
+    {
+      icon: <UserCircle className="w-4 h-4" />,
+      title: "Partner Portal", 
+      url: "https://pp.onlinetracking.co/auth/login/3",
+      external: true,
+      color: "from-red-500 to-red-700",
+      hoverColor: "from-red-600 to-red-800"
+    },
+    {
+      icon: <SearchCode className="w-4 h-4" />,
+      title: "Tracking",
+      url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:102:::::P0_GROUP_RID:59",
+      external: true,
+      color: "from-red-500 to-red-700",
+      hoverColor: "from-red-600 to-red-800"
+    },
+    {
+      icon: <Ship className="w-4 h-4" />,
+      title: "Sailing Schedule",
+      url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:104:::::P0_GROUP_RID:59",
+      external: true,
+      color: "from-red-500 to-red-700",
+      hoverColor: "from-red-600 to-red-800"
+    },
+    {
+      icon: <Calendar className="w-4 h-4" />,
+      title: "Online Quote",
+      url: "/contact",
+      external: false,
+      color: "from-red-500 to-red-700",
+      hoverColor: "from-red-600 to-red-800"
+    }
+  ];
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 300);
     return () => clearTimeout(timer);
