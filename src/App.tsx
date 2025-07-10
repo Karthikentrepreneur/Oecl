@@ -56,6 +56,7 @@ const App = () => {
             <CountryRedirect />
             <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -69,7 +70,7 @@ const App = () => {
                 <Route path="/services/liquid-cargo" element={<LiquidCargo />} />
                 <Route path="/about-us" element={<AboutUs/>} />
                 <Route path="/projects" element={<Projects />} />
-                <Route path="/blog" element={<Blog />} />
+                <Route path="/blogs" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogDetail />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
