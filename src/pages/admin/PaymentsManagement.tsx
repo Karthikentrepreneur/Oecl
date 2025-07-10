@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { 
   Table, 
@@ -31,8 +30,7 @@ interface Payment {
   transaction_id: string | null;
   profiles: {
     email: string;
-    first_name: string | null;
-    last_name: string | null;
+    full_name: string | null;
   } | null;
 }
 
@@ -59,8 +57,7 @@ const PaymentsManagement = () => {
             transaction_id,
             profiles:user_id (
               email,
-              first_name,
-              last_name
+              full_name
             )
           `)
           .order('created_at', { ascending: false });
@@ -95,15 +92,7 @@ const PaymentsManagement = () => {
 
   const getCustomerName = (payment: Payment) => {
     if (!payment.profiles) return "Unknown";
-    
-    const firstName = payment.profiles.first_name || "";
-    const lastName = payment.profiles.last_name || "";
-    
-    if (firstName || lastName) {
-      return `${firstName} ${lastName}`.trim();
-    }
-    
-    return payment.profiles.email;
+    return payment.profiles.full_name || payment.profiles.email;
   };
 
   // Calculate summary statistics
@@ -126,7 +115,7 @@ const PaymentsManagement = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">payments Management</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Payments Management</h1>
         <p className="text-muted-foreground">Track and manage all payment transactions</p>
       </div>
       

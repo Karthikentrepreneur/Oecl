@@ -48,7 +48,7 @@ const Blog = () => {
           )
         `)
         .eq('status', 'published')
-        .order('published_at', { ascending: false, nullsLast: true })
+        .order('published_at', { ascending: false, nullsFirst: false })
         .order('created_at', { ascending: false });
 
       if (error) throw error;
