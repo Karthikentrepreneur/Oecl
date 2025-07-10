@@ -1,131 +1,194 @@
-import { useRef } from "react";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, ArrowRight, Facebook, Linkedin, ChevronLeft, ChevronRight } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
-import { getCurrentCountryFromPath } from "@/services/countryDetection";
+import { MapPin, Phone, Mail, ArrowRight, Facebook, Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const location = useLocation();
-  const currentCountry = getCurrentCountryFromPath(location.pathname);
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: direction === "left" ? -300 : 300, behavior: "smooth" });
-    }
+  const footerAnimation = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
   };
-
-  const addressData: Record<string, { office: string; phone: string }[]> = {
-    SG: [
-      {
-        office: `OECL (Singapore) Pte Ltd.\nBlk 511 Kampong Bahru Road\n#03-01 Keppel Distripark\nSingapore - 099447`,
-        phone: `+65 69080838`
-      }
-    ],
-    IN: [
-      {
-        office: `Roma Building, Door No. 10, 3rd Floor, G.S.T. Road, Alandur, Chennai-600 016`,
-        phone: `044 4689 4646`
-      },
-      {
-        office: `Chennai Warehouse\nSurvey No.209/6A(Part), Perambakkam Road, Sriperumbudur, Kanchipuram`,
-        phone: `+91 9994355523`
-      },
-      {
-        office: `Delhi - Plot No. 15, 1st Floor, Sector 17, Dwarka, New Delhi 110075`,
-        phone: `+91 11 41088871`
-      },
-      {
-        office: `Kolkata - Imagine Techpark, Salt Lake City, WB - 700091`,
-        phone: `+91 33 4814 9162 – 63`
-      },
-      {
-        office: `Bengaluru - HRBR LAYOUT 1st Block, Kalayan Nagar, Bengaluru - 560043`,
-        phone: `+91 9841676259`
-      },
-      {
-        office: `Cochin - Thevara Ferry Jn, Cochin 682013`,
-        phone: `+91 484 4019192 / 93`
-      },
-      {
-        office: `Hyderabad - Indian Airlines colony, Begumpet, Hyderabad-500016`,
-        phone: `040-49559704`
-      },
-      {
-        office: `Mumbai - Town Center - 2, Andheri East, Mumbai - 400059`,
-        phone: `+91 8879756838`
-      }
-    ],
-    ID: [
-      {
-        office: `Jakarta - 408, Lina Building, JL.HR Rasuna Said kav B7`,
-        phone: `+62 21 529 20292`
-      },
-      {
-        office: `Surabaya - Japfa Indoland Center, JL Jend, Surabaya 60271`,
-        phone: `+62 21 529 20292`
-      }
-    ],
-    MY: [
-      {
-        office: `Pasirgudang - Unit 20-03A, Menara Zurich, Johor Bahru`,
-        phone: `603-3319 2778 / 74`
-      },
-      {
-        office: `PortKlang - MTBBT 2, Jalan Batu Nilam, Klang`,
-        phone: `+603 - 3319 2778 / 74`
-      }
-    ],
-    TH: [
-      {
-        office: `Bangkok - 109 CCT Building, 3rd Floor, Surawong Road, Bangkok 10500`,
-        phone: `+662-634-3240`
-      }
-    ]
-  };
-
-  const addresses = addressData[currentCountry.code] || addressData["SG"];
 
   return (
     <footer className="pt-16 pb-8 bg-black text-white">
       <div className="container mx-auto px-4">
-        {/* Address Scroll Buttons */}
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="font-bold text-lg">Contact Us</h3>
-          <div className="flex gap-2">
-            <button onClick={() => scroll("left")} className="bg-white text-black p-1 rounded hover:bg-yellow-500 transition">
-              <ChevronLeft size={20} />
-            </button>
-            <button onClick={() => scroll("right")} className="bg-white text-black p-1 rounded hover:bg-yellow-500 transition">
-              <ChevronRight size={20} />
-            </button>
-          </div>
-        </div>
+        <div className="h-1 bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-500 rounded-full mb-8" />
 
-        {/* Address List */}
-        <div ref={scrollRef} className="overflow-x-auto whitespace-nowrap scroll-smooth flex gap-6 pb-4 pr-4">
-          {addresses.map((addr, index) => (
-            <div
-              key={index}
-              className="min-w-[260px] max-w-xs bg-white/10 p-4 rounded-md shadow-md flex-shrink-0"
-            >
-              <div className="flex items-start gap-2 mb-2">
-                <MapPin className="text-yellow-500 mt-1" size={18} />
-                <p className="text-sm whitespace-pre-wrap">{addr.office}</p>
-              </div>
-              <div className="flex items-center gap-2 mb-1">
-                <Phone className="text-yellow-500" size={18} />
-                <p className="text-sm">{addr.phone}</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="text-yellow-500" size={18} />
-                <p className="text-sm">info@oecl.sg</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6 lg:gap-4">
+          {/* Column 1: Logo & About */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={footerAnimation}
+            className="flex flex-col items-start"
+          >
+            <div className="mb-4">
+              <img src="/oecl.png" alt="OECL Logo" className="h-14 w-auto object-contain" loading="lazy" />
+              <img src="/1GlobalEnterprises.png" alt="1 Global Enterprises Logo" className="h-10 w-auto object-contain mt-2" />
+            </div>
+            <p className="text-sm md:text-base text-white/80 max-w-xs text-left">
+              At OECL, we are proud to be one of Singapore's leading logistics companies. We offer specialized divisions in warehousing, forwarding (air and ocean), and transportation. Our mission is to deliver comprehensive end-to-end solutions in global freight forwarding, managed through a trusted network of partners who excel in all logistics segments.
+            </p>
+            <div className="flex space-x-3 mt-4">
+              <motion.a
+                href="https://www.facebook.com/oeclglobal"
+                target="_blank"
+                className="bg-white text-black p-2 rounded-full hover:bg-yellow-500 hover:text-black transition"
+                whileHover={{ y: -3, scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Facebook size={18} />
+              </motion.a>
+              <motion.a
+                href="https://www.linkedin.com/company/oeclglobal"
+                target="_blank"
+                className="bg-white text-black p-2 rounded-full hover:bg-yellow-500 hover:text-black transition"
+                whileHover={{ y: -3, scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Linkedin size={18} />
+              </motion.a>
+            </div>
+          </motion.div>
+
+          {/* Column 2: Navigation */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={footerAnimation}
+            transition={{ delay: 0.2 }}
+            className="flex flex-col items-start md:items-end lg:items-start lg:pl-10"
+          >
+            <h3 className="font-bold text-lg text-white mb-4">Navigation</h3>
+            <div className="flex flex-col gap-2">
+              {[
+                { name: "Home", path: "/" },
+                { name: "About", path: "/about-us" },
+                { name: "Services", path: "/services" },
+                { name: "Contact Us", path: "/contact" },
+                { name: "Privacy Policy", path: "/privacy-policy" },
+                { name: "Terms And Conditions", path: "/terms-and-conditions" },
+              ].map((link, index) => (
+                <Link
+                  key={index}
+                  to={link.path}
+                  className="text-white/80 hover:text-yellow-500 transition flex items-center gap-2"
+                >
+                  <ArrowRight size={14} className="text-yellow-500" />
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Column 3: Contact Info - Scrollable */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={footerAnimation}
+            transition={{ delay: 0.4 }}
+            className="flex flex-col lg:pl-10"
+          >
+            <h3 className="font-bold text-lg text-white mb-4">Global Offices</h3>
+
+            <div className="relative w-full">
+              {/* Scroll Buttons */}
+              <button
+                onClick={() =>
+                  document.getElementById("officeScroll").scrollBy({ left: -300, behavior: "smooth" })
+                }
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-yellow-500 text-black p-2 rounded-full shadow"
+              >
+                &#8592;
+              </button>
+              <button
+                onClick={() =>
+                  document.getElementById("officeScroll").scrollBy({ left: 300, behavior: "smooth" })
+                }
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-yellow-500 text-black p-2 rounded-full shadow"
+              >
+                &#8594;
+              </button>
+
+              {/* Scrollable Container */}
+              <div
+                id="officeScroll"
+                className="flex overflow-x-auto space-x-4 pr-6 scroll-smooth"
+              >
+                {[
+                  {
+                    country: "Singapore",
+                    address: (
+                      <>
+                        OECL (Singapore) Pte Ltd.<br />
+                        Blk 511 Kampong Bahru Road<br />
+                        #03-01 Keppel Distripark<br />
+                        Singapore - 099447<br />
+                        <strong>+65 69080838</strong>
+                      </>
+                    ),
+                  },
+                  {
+                    country: "Indonesia - Jakarta",
+                    address: (
+                      <>
+                        408, Lina Building,<br />
+                        JL.HR Rasuna Said kav B7, Jakarta<br />
+                        <strong>+62 21 529 20292, 522 4887</strong>
+                      </>
+                    ),
+                  },
+                  {
+                    country: "India - Chennai",
+                    address: (
+                      <>
+                        Roma Building, Door No. 10, 3rd Floor,<br />
+                        G.S.T. Road, Alandur, Chennai-600 016<br />
+                        <strong>044 4689 4646</strong>
+                      </>
+                    ),
+                  },
+                  {
+                    country: "Malaysia - Pasirgudang",
+                    address: (
+                      <>
+                        Unit 20-03A, Level 20 Menara Zurich<br />
+                        15 Jalan Dato Abdullah Tahir, 80300 Johor Bahru<br />
+                        <strong>603-3319 2778 / 74 / 75, 79</strong>
+                      </>
+                    ),
+                  },
+                  {
+                    country: "Thailand - Bangkok",
+                    address: (
+                      <>
+                        109 CCT Building, 3rd Floor, Rm.3,<br />
+                        Surawong Road, Suriyawongse, Bangrak, Bangkok 10500<br />
+                        <strong>+662-634-3240</strong>
+                      </>
+                    ),
+                  },
+                ].map((office, index) => (
+                  <div
+                    key={index}
+                    className="min-w-[250px] bg-white/10 p-4 rounded-lg shadow-md border border-white/10"
+                  >
+                    <h4 className="text-yellow-400 font-semibold mb-2">{office.country}</h4>
+                    <p className="text-sm text-white/80">{office.address}</p>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
+          </motion.div>
         </div>
 
-        {/* Bottom line */}
+        {/* Bottom Line */}
         <div className="text-center text-white/70 mt-10 text-sm">
           &copy; {new Date().getFullYear()} OECL. All Rights Reserved.
         </div>
