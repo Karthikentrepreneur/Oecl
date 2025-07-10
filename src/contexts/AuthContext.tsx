@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 // Define the shape of our context
 type AuthContextType = {
@@ -43,21 +43,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // Check if user is admin or staff
-  const isAdmin = profile?.role === 'admin';
+  // Check if user is admin or staff - simplified for now
+  const isAdmin = user?.email === 'admin@oecl.sg';
   const isStaff = profile?.role === 'staff';
 
-  // Fetch user profile
+  // Fetch user profile - simplified since we don't have profiles table yet
   const fetchProfile = async (userId: string) => {
     try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
-        .single();
-      
-      if (error) throw error;
-      if (data) setProfile(data);
+      // For now, we'll just set a basic profile
+      setProfile({ id: userId, role: user?.email === 'admin@oecl.sg' ? 'admin' : 'user' });
     } catch (error: any) {
       console.error('Error fetching profile:', error.message);
     }
@@ -137,7 +131,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       toast({
         title: "Registration successful",
-        description: "Welcome to Auracargo!",
+        description: "Welcome to OECL!",
       });
       navigate('/dashboard');
     } catch (error: any) {
