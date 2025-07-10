@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, UserCircle, LogOut } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import CountrySelector from "@/components/CountrySelector";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
@@ -9,10 +9,9 @@ import { getCurrentCountryFromPath } from "@/services/countryDetection";
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
 
   const currentCountry = getCurrentCountryFromPath(location.pathname);
-  const countryPrefix = currentCountry.code === 'SG' ? '' : `/${currentCountry.name.toLowerCase()}`;
   const isActive = (path: string) => location.pathname === path;
   const getNavLink = (basePath: string) =>
     currentCountry.code === 'SG' ? basePath : `/${currentCountry.name.toLowerCase()}${basePath}`;
@@ -47,33 +46,14 @@ const Navigation = () => {
             </Link>
           </nav>
 
-          {/* Auth Buttons and Country Selector */}
+          {/* Country Selector & Quote Button */}
           <div className="hidden md:flex items-center gap-4">
             <CountrySelector />
-            {user ? (
-              <>
-                <Link to="/dashboard">
-                  <Button variant="ghost" className="text-black hover:text-kargon-red hover:bg-transparent">
-                    <UserCircle className="mr-2 h-5 w-5" />
-                    MY ACCOUNT
-                  </Button>
-                </Link>
-                <Button
-                  variant="ghost"
-                  className="text-black hover:text-kargon-red hover:bg-transparent"
-                  onClick={signOut}
-                >
-                  <LogOut className="mr-2 h-5 w-5" />
-                  LOGOUT
-                </Button>
-              </>
-            ) : (
-              <Link to="/contact">
-                <Button className="bg-kargon-red hover:bg-kargon-red/90 text-white rounded-md">
-                  GET QUOTE
-                </Button>
-              </Link>
-            )}
+            <Link to="/signup">
+              <Button className="bg-kargon-red hover:bg-kargon-red/90 text-white rounded-md">
+                GET QUOTE
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -112,27 +92,11 @@ const Navigation = () => {
                 <CountrySelector />
               </div>
 
-              {user ? (
-                <div className="pt-2">
-                  <Link to="/dashboard" className="flex items-center text-black hover:text-kargon-red py-2" onClick={() => setIsMenuOpen(false)}>
-                    <UserCircle className="mr-2 h-5 w-5" />
-                    MY ACCOUNT
-                  </Link>
-                  <button className="flex items-center text-black hover:text-kargon-red py-2" onClick={() => {
-                    setIsMenuOpen(false);
-                    signOut();
-                  }}>
-                    <LogOut className="mr-2 h-5 w-5" />
-                    LOGOUT
-                  </button>
-                </div>
-              ) : (
-                <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
-                  <Button className="bg-kargon-red hover:bg-kargon-red/90 text-white w-full rounded-md mt-4">
-                    GET QUOTE
-                  </Button>
-                </Link>
-              )}
+              <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+                <Button className="bg-kargon-red hover:bg-kargon-red/90 text-white w-full rounded-md mt-4">
+                  GET QUOTE
+                </Button>
+              </Link>
             </nav>
           </div>
         </div>
