@@ -68,7 +68,7 @@ const Navigation = () => {
                 </Button>
               </>
             ) : (
-              <Link to="/signup">
+              <Link to="/contact">
                 <Button className="bg-kargon-red hover:bg-kargon-red/90 text-white rounded-md">
                   GET QUOTE
                 </Button>
@@ -127,7 +127,7 @@ const Navigation = () => {
                   </button>
                 </div>
               ) : (
-                <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+                <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
                   <Button className="bg-kargon-red hover:bg-kargon-red/90 text-white w-full rounded-md mt-4">
                     GET QUOTE
                   </Button>
