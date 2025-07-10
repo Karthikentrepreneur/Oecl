@@ -77,22 +77,22 @@ const App = () => {
                 <Route path="/india/services" element={<IndiaServices />} />
                 <Route path="/india/about-us" element={<AboutUs />} />
                 <Route path="/india/contact" element={<Contact />} />
-                <Route path="/india/blogs" element={<blogs />} />
+                <Route path="/india/blogs" element={<blog />} />
                 
                 <Route path="/indonesia/home" element={<IndonesiaHome />} />
                 <Route path="/indonesia/about-us" element={<AboutUs />} />
                 <Route path="/indonesia/contact" element={<Contact />} />
-                <Route path="/indonesia/blogs" element={<blogs />} />
+                <Route path="/indonesia/blogs" element={<blog />} />
                 
                 <Route path="/malaysia/home" element={<MalaysiaHome />} />
                 <Route path="/malaysia/about-us" element={<AboutUs />} />
                 <Route path="/malaysia/contact" element={<Contact />} />
-                <Route path="/malaysia/blogs" element={<blogs />} />
+                <Route path="/malaysia/blogs" element={<blog />} />
                 
                 <Route path="/thailand/home" element={<ThailandHome />} />
                 <Route path="/thailand/about-us" element={<AboutUs />} />
                 <Route path="/thailand/contact" element={<Contact />} />
-                <Route path="/thailand/blogs" element={<blogs />} />
+                <Route path="/thailand/blogs" element={<blog />} />
                 
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
