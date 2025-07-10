@@ -1,4 +1,3 @@
-
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { supabase } from "@/integrations/supabase/client";
@@ -31,16 +30,22 @@ const BlogDetail = () => {
 
   const fetchArticle = async (articleSlug: string) => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from('articles')
-      .select('*')
-      .eq('slug', articleSlug)
-      .single();
+    try {
+      const { data, error } = await supabase
+        .from('articles')
+        .select('*')
+        .eq('slug', articleSlug)
+        .single();
 
-    if (error) {
+      if (error || !data) {
+        console.log('Article not found in Supabase');
+        setArticle(null);
+      } else {
+        setArticle(data);
+      }
+    } catch (error) {
       console.error('Error fetching article:', error);
-    } else {
-      setArticle(data);
+      setArticle(null);
     }
     setLoading(false);
   };
@@ -69,6 +74,7 @@ const BlogDetail = () => {
       <div className="min-h-screen bg-background">
         <Navigation />
         <div className="container mx-auto px-4 py-12 pt-24 text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mx-auto mb-4"></div>
           <p className="text-muted-foreground">Loading article...</p>
         </div>
         <Footer />
