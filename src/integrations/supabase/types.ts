@@ -14,206 +14,115 @@ export type Database = {
   }
   public: {
     Tables: {
-      complaint_timeline: {
+      blogs: {
         Row: {
-          action: string
-          complaint_id: string
-          created_at: string | null
-          description: string
+          author_id: string
+          content: Json
+          created_at: string
+          excerpt: string | null
+          featured_image_url: string | null
           id: string
-          user_id: string
+          meta_description: string | null
+          meta_title: string | null
+          published_at: string | null
+          slug: string
+          status: string
+          tags: string[] | null
+          title: string
+          updated_at: string
         }
         Insert: {
-          action: string
-          complaint_id: string
-          created_at?: string | null
-          description: string
+          author_id: string
+          content: Json
+          created_at?: string
+          excerpt?: string | null
+          featured_image_url?: string | null
           id?: string
-          user_id: string
+          meta_description?: string | null
+          meta_title?: string | null
+          published_at?: string | null
+          slug: string
+          status?: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
         }
         Update: {
-          action?: string
-          complaint_id?: string
-          created_at?: string | null
-          description?: string
+          author_id?: string
+          content?: Json
+          created_at?: string
+          excerpt?: string | null
+          featured_image_url?: string | null
           id?: string
-          user_id?: string
+          meta_description?: string | null
+          meta_title?: string | null
+          published_at?: string | null
+          slug?: string
+          status?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
         }
         Relationships: [
           {
-            foreignKeyName: "complaint_timeline_complaint_id_fkey"
-            columns: ["complaint_id"]
-            isOneToOne: false
-            referencedRelation: "complaints"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "complaint_timeline_user_id_fkey"
-            columns: ["user_id"]
+            foreignKeyName: "blogs_author_id_fkey"
+            columns: ["author_id"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]
       }
-      complaints: {
+      payments: {
         Row: {
-          assigned_to: string | null
-          attachments: string[] | null
-          category: string
-          complainant_id: string
-          created_at: string | null
-          department: string
-          description: string
-          feedback: string | null
+          amount: number
+          created_at: string
+          currency: string
           id: string
-          institution_id: string
-          rating: number | null
-          resolution_notes: string | null
-          resolved_at: string | null
-          status: string | null
-          title: string
-          updated_at: string | null
-          urgency: string | null
-        }
-        Insert: {
-          assigned_to?: string | null
-          attachments?: string[] | null
-          category: string
-          complainant_id: string
-          created_at?: string | null
-          department: string
-          description: string
-          feedback?: string | null
-          id?: string
-          institution_id: string
-          rating?: number | null
-          resolution_notes?: string | null
-          resolved_at?: string | null
-          status?: string | null
-          title: string
-          updated_at?: string | null
-          urgency?: string | null
-        }
-        Update: {
-          assigned_to?: string | null
-          attachments?: string[] | null
-          category?: string
-          complainant_id?: string
-          created_at?: string | null
-          department?: string
-          description?: string
-          feedback?: string | null
-          id?: string
-          institution_id?: string
-          rating?: number | null
-          resolution_notes?: string | null
-          resolved_at?: string | null
-          status?: string | null
-          title?: string
-          updated_at?: string | null
-          urgency?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "complaints_assigned_to_fkey"
-            columns: ["assigned_to"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "complaints_complainant_id_fkey"
-            columns: ["complainant_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "complaints_institution_id_fkey"
-            columns: ["institution_id"]
-            isOneToOne: false
-            referencedRelation: "institutions"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      institutions: {
-        Row: {
-          created_at: string | null
-          domain: string
-          id: string
-          logo_url: string | null
-          name: string
-          primary_color: string | null
-          secondary_color: string | null
-          subscription_plan: string | null
-          subscription_status: string | null
-          trial_ends_at: string | null
-          type: string
-          updated_at: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          domain: string
-          id?: string
-          logo_url?: string | null
-          name: string
-          primary_color?: string | null
-          secondary_color?: string | null
-          subscription_plan?: string | null
-          subscription_status?: string | null
-          trial_ends_at?: string | null
-          type: string
-          updated_at?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          domain?: string
-          id?: string
-          logo_url?: string | null
-          name?: string
-          primary_color?: string | null
-          secondary_color?: string | null
-          subscription_plan?: string | null
-          subscription_status?: string | null
-          trial_ends_at?: string | null
-          type?: string
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
-      notifications: {
-        Row: {
-          created_at: string | null
-          id: string
-          message: string
-          read: boolean | null
-          title: string
-          type: string | null
+          payment_gateway: string | null
+          payment_method: string
+          shipment_id: string | null
+          status: string
+          transaction_id: string | null
+          updated_at: string
           user_id: string
         }
         Insert: {
-          created_at?: string | null
+          amount: number
+          created_at?: string
+          currency?: string
           id?: string
-          message: string
-          read?: boolean | null
-          title: string
-          type?: string | null
+          payment_gateway?: string | null
+          payment_method: string
+          shipment_id?: string | null
+          status?: string
+          transaction_id?: string | null
+          updated_at?: string
           user_id: string
         }
         Update: {
-          created_at?: string | null
+          amount?: number
+          created_at?: string
+          currency?: string
           id?: string
-          message?: string
-          read?: boolean | null
-          title?: string
-          type?: string | null
+          payment_gateway?: string | null
+          payment_method?: string
+          shipment_id?: string | null
+          status?: string
+          transaction_id?: string | null
+          updated_at?: string
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "notifications_user_id_fkey"
+            foreignKeyName: "payments_shipment_id_fkey"
+            columns: ["shipment_id"]
+            isOneToOne: false
+            referencedRelation: "shipments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
@@ -223,50 +132,83 @@ export type Database = {
       }
       profiles: {
         Row: {
-          avatar_url: string | null
-          created_at: string | null
-          department: string | null
+          created_at: string
           email: string
-          full_name: string
+          full_name: string | null
           id: string
-          institution_id: string | null
-          is_active: boolean | null
-          phone: string | null
           role: string | null
-          updated_at: string | null
+          updated_at: string
         }
         Insert: {
-          avatar_url?: string | null
-          created_at?: string | null
-          department?: string | null
+          created_at?: string
           email: string
-          full_name: string
+          full_name?: string | null
           id: string
-          institution_id?: string | null
-          is_active?: boolean | null
-          phone?: string | null
           role?: string | null
-          updated_at?: string | null
+          updated_at?: string
         }
         Update: {
-          avatar_url?: string | null
-          created_at?: string | null
-          department?: string | null
+          created_at?: string
           email?: string
-          full_name?: string
+          full_name?: string | null
           id?: string
-          institution_id?: string | null
-          is_active?: boolean | null
-          phone?: string | null
           role?: string | null
-          updated_at?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      shipments: {
+        Row: {
+          actual_delivery: string | null
+          created_at: string
+          destination: string
+          dimensions: string | null
+          estimated_delivery: string | null
+          id: string
+          origin: string
+          service_type: string | null
+          status: string
+          tracking_number: string
+          updated_at: string
+          user_id: string
+          weight: number | null
+        }
+        Insert: {
+          actual_delivery?: string | null
+          created_at?: string
+          destination: string
+          dimensions?: string | null
+          estimated_delivery?: string | null
+          id?: string
+          origin: string
+          service_type?: string | null
+          status?: string
+          tracking_number: string
+          updated_at?: string
+          user_id: string
+          weight?: number | null
+        }
+        Update: {
+          actual_delivery?: string | null
+          created_at?: string
+          destination?: string
+          dimensions?: string | null
+          estimated_delivery?: string | null
+          id?: string
+          origin?: string
+          service_type?: string | null
+          status?: string
+          tracking_number?: string
+          updated_at?: string
+          user_id?: string
+          weight?: number | null
         }
         Relationships: [
           {
-            foreignKeyName: "profiles_institution_id_fkey"
-            columns: ["institution_id"]
+            foreignKeyName: "shipments_user_id_fkey"
+            columns: ["user_id"]
             isOneToOne: false
-            referencedRelation: "institutions"
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]

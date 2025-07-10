@@ -1,192 +1,165 @@
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { CalendarIcon, Clock, User, ArrowRight } from "lucide-react";
-import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
 
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [pathname]);
-  return null;
-};
+import React, { useState, useEffect } from "react";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import { Link } from "react-router-dom";
+import { Badge } from "@/components/ui/badge";
+import { Calendar, User } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
-export const blogPosts = [
-  {
-    id: 1,
-    slug: "digital-supply-chain-benefits",
-    title: "The Future of Global Logistics",
-    excerpt: "Exploring how emerging technologies are reshaping the logistics industry and creating new opportunities for businesses worldwide.",
-    content: "Full blog content for The Future of Global Logistics...",
-    author: "Sarah Johnson",
-    date: "December 15, 2024",
-    readTime: "5 min read",
-    imageUrl: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    category: "Technology"
-  },
-  {
-    id: 2,
-    slug: "sustainable-shipping-solutions",
-    title: "Sustainable Shipping Solutions",
-    excerpt: "How companies are adopting eco-friendly practices to reduce their environmental impact while maintaining operational efficiency.",
-    content: "Full blog content for Sustainable Shipping Solutions...",
-    author: "Michael Chen",
-    date: "December 10, 2024",
-    readTime: "7 min read",
-    imageUrl: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    category: "Sustainability"
-  },
-  {
-    id: 3,
-    slug: "digital-transformation-in-supply-chain",
-    title: "Digital Transformation in Supply Chain",
-    excerpt: "The impact of digitalization on modern supply chains and how businesses can leverage technology for competitive advantage.",
-    content: "Full blog content for Digital Transformation...",
-    author: "Emma Rodriguez",
-    date: "December 5, 2024",
-    readTime: "6 min read",
-    imageUrl: "https://images.unsplash.com/photo-1580674285054-bed31e145f59?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    category: "Digital"
-  },
-  {
-    id: 4,
-    slug: "international-trade-regulations",
-    title: "International Trade Regulations",
-    excerpt: "Understanding the latest changes in global trade policies and their implications for international businesses.",
-    content: "Full blog content for International Trade Regulations...",
-    author: "Robert Kim",
-    date: "November 28, 2024",
-    readTime: "8 min read",
-    imageUrl: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    category: "Regulations"
-  },
-  {
-    id: 5,
-    slug: "ai-in-logistics-operations",
-    title: "AI in Logistics Operations",
-    excerpt: "How artificial intelligence is revolutionizing warehouse management, route optimization, and customer service.",
-    content: "Full blog content for AI in Logistics...",
-    author: "David Liu",
-    date: "November 20, 2024",
-    readTime: "9 min read",
-    imageUrl: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    category: "AI"
-  },
-  {
-    id: 6,
-    slug: "cross-border-ecommerce-growth",
-    title: "Cross-Border E-commerce Growth",
-    excerpt: "The explosive growth of international e-commerce and what it means for logistics providers and retailers.",
-    content: "Full blog content for Cross-Border E-commerce...",
-    author: "Lisa Wang",
-    date: "November 15, 2024",
-    readTime: "4 min read",
-    imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    category: "E-commerce"
-  }
-];
-
-const itemsPerPage = 6;
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  created_at: string;
+  published_at: string | null;
+  tags: string[] | null;
+  profiles: {
+    email: string;
+    full_name: string | null;
+  } | null;
+}
 
 const Blog = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(blogPosts.length / itemsPerPage);
-  const currentPosts = blogPosts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const [blogs, setBlogs] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    window.scrollTo(0, 0);
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  const fetchBlogs = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('blogs')
+        .select(`
+          id,
+          title,
+          slug,
+          excerpt,
+          created_at,
+          published_at,
+          tags,
+          profiles:author_id (
+            email,
+            full_name
+          )
+        `)
+        .eq('status', 'published')
+        .order('published_at', { ascending: false, nullsLast: true })
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      
+      setBlogs(data || []);
+    } catch (err: any) {
+      console.error('Error fetching blogs:', err.message);
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getAuthorName = (blog: BlogPost) => {
+    if (!blog.profiles) return "Unknown Author";
+    return blog.profiles.full_name || blog.profiles.email;
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <ScrollToTop />
+    <div className="min-h-screen bg-gray-50">
       <Navigation />
-      <div className="container mx-auto px-4 py-12 pt-24">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">Our Blog</h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Stay updated with the latest insights, trends, and innovations in global logistics and supply chain management.
-          </p>
+      
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              Our Blog
+            </h1>
+            <p className="text-xl opacity-90 leading-relaxed">
+              Stay updated with the latest insights, trends, and stories from the world of logistics and freight forwarding.
+            </p>
+          </div>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {currentPosts.map(post => (
-            <Card key={post.id} className="flex flex-col h-full hover:shadow-lg transition-all duration-300 group">
-              {post.imageUrl && (
-                <div className="h-48 overflow-hidden rounded-t-lg relative">
-                  <img src={post.imageUrl} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium">
-                      {post.category}
-                    </span>
-                  </div>
-                </div>
-              )}
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2 text-sm text-muted-foreground">
-                  <div className="flex items-center">
-                    <CalendarIcon className="w-4 h-4 mr-2" />
-                    <span>{post.date}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Clock className="w-4 h-4 mr-2" />
-                    <span>{post.readTime}</span>
-                  </div>
-                </div>
-                <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                  {post.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <p className="text-muted-foreground mb-4 line-clamp-3">{post.excerpt}</p>
-                <div className="flex items-center text-sm text-muted-foreground">
-                  <User className="w-4 h-4 mr-2" />
-                  <span>By {post.author}</span>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button variant="outline" className="w-full group" asChild>
-                  <Link to={`/blog/${post.slug}`} className="flex items-center justify-center gap-2 bg-red-500 text-white p-2 rounded">
-                    Read More
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+      {/* Blog Posts */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          {isLoading ? (
+            <div className="text-center py-12">
+              <div className="text-lg">Loading blog posts...</div>
+            </div>
+          ) : error ? (
+            <div className="text-center py-12">
+              <div className="text-red-600 text-lg">Error loading blogs: {error}</div>
+            </div>
+          ) : blogs.length === 0 ? (
+            <div className="text-center py-12">
+              <div className="text-lg text-gray-600">No blog posts available yet.</div>
+            </div>
+          ) : (
+            <div className="max-w-6xl mx-auto">
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {blogs.map((blog) => (
+                  <article key={blog.id} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div className="p-6">
+                      <h2 className="text-xl font-semibold mb-3 hover:text-blue-600 transition-colors">
+                        <Link to={`/blog/${blog.slug}`}>
+                          {blog.title}
+                        </Link>
+                      </h2>
+                      
+                      {blog.excerpt && (
+                        <p className="text-gray-600 mb-4 leading-relaxed">
+                          {blog.excerpt}
+                        </p>
+                      )}
+
+                      <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 mb-4">
+                        <div className="flex items-center">
+                          <User className="mr-1 h-3 w-3" />
+                          {getAuthorName(blog)}
+                        </div>
+                        
+                        <div className="flex items-center">
+                          <Calendar className="mr-1 h-3 w-3" />
+                          {new Date(blog.published_at || blog.created_at).toLocaleDateString()}
+                        </div>
+                      </div>
+
+                      {blog.tags && blog.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {blog.tags.slice(0, 3).map((tag, index) => (
+                            <Badge key={index} variant="secondary" className="text-xs">
+                              {tag}
+                            </Badge>
+                          ))}
+                          {blog.tags.length > 3 && (
+                            <Badge variant="outline" className="text-xs">
+                              +{blog.tags.length - 3} more
+                            </Badge>
+                          )}
+                        </div>
+                      )}
+
+                      <Link 
+                        to={`/blog/${blog.slug}`}
+                        className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        Read More →
+                      </Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
+      </section>
 
-        {totalPages > 1 && (
-          <Pagination>
-            <PaginationContent>
-              {currentPage > 1 && (
-                <PaginationItem>
-                  <PaginationPrevious onClick={() => handlePageChange(currentPage - 1)} />
-                </PaginationItem>
-              )}
-
-              {[...Array(totalPages)].map((_, i) => (
-                <PaginationItem key={i}>
-                  <PaginationLink isActive={currentPage === i + 1} onClick={() => handlePageChange(i + 1)}>
-                    {i + 1}
-                  </PaginationLink>
-                </PaginationItem>
-              ))}
-
-              {currentPage < totalPages && (
-                <PaginationItem>
-                  <PaginationNext onClick={() => handlePageChange(currentPage + 1)} />
-                </PaginationItem>
-              )}
-            </PaginationContent>
-          </Pagination>
-        )}
-      </div>
       <Footer />
     </div>
   );
