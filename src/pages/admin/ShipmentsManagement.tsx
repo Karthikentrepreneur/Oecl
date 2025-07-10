@@ -23,8 +23,7 @@ interface Shipment {
   created_at: string;
   profiles: {
     email: string;
-    first_name: string | null;
-    last_name: string | null;
+    full_name: string | null;
   } | null;
 }
 
@@ -51,8 +50,7 @@ const ShipmentsManagement = () => {
             created_at,
             profiles:user_id (
               email,
-              first_name,
-              last_name
+              full_name
             )
           `)
           .order('created_at', { ascending: false });
@@ -88,15 +86,7 @@ const ShipmentsManagement = () => {
 
   const getCustomerName = (shipment: Shipment) => {
     if (!shipment.profiles) return "Unknown";
-    
-    const firstName = shipment.profiles.first_name || "";
-    const lastName = shipment.profiles.last_name || "";
-    
-    if (firstName || lastName) {
-      return `${firstName} ${lastName}`.trim();
-    }
-    
-    return shipment.profiles.email;
+    return shipment.profiles.full_name || shipment.profiles.email;
   };
 
   return (

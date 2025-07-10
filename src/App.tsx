@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -30,6 +31,7 @@ import NotFound from "./pages/NotFound";
 import IndiaHome from "./pages/IndiaHome";
 import NewsOverviewPage from "./pages/NewsOverviewPage";
 import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
 import IndonesiaHome from "./pages/IndonesiaHome";
 import MalaysiaHome from "./pages/MalaysiaHome";
 import ThailandHome from "./pages/ThailandHome";
@@ -68,6 +70,7 @@ const App = () => {
                 <Route path="/about-us" element={<AboutUs/>} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogDetail />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                 <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />

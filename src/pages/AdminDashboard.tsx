@@ -8,6 +8,7 @@ import UsersPage from "./admin/Users";
 import ShipmentsManagement from "./admin/ShipmentsManagement";
 import PaymentsManagement from "./admin/PaymentsManagement";
 import SystemSettings from "./admin/SystemSettings";
+import BlogManagement from "./admin/BlogManagement";
 import { useAuth } from "@/contexts/AuthContext";
 
 const AdminDashboard = () => {
@@ -37,6 +38,7 @@ const AdminDashboard = () => {
             {activeTab === "users" && <UsersPage />}
             {activeTab === "shipments" && <ShipmentsManagement />}
             {activeTab === "payments" && <PaymentsManagement />}
+            {activeTab === "blogs" && <BlogManagement />}
             {activeTab === "settings" && <SystemSettings />}
           </div>
         </div>
