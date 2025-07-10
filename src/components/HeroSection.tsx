@@ -155,40 +155,48 @@ const HeroSection = () => {
       </div>
 
       {/* Enhanced Portal Buttons */}
-       <div className="absolute bottom-6 left-0 right-0 z-20 px-4">
+       div className="absolute bottom-6 left-0 right-0 z-20 px-4">
         <div className={`max-w-7xl mx-auto transition-all duration-1000 delay-1000 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
         }`}>
           <div className="grid grid-cols-5 gap-2 sm:gap-3 bg-white/5 backdrop-blur-xl p-3 rounded-2xl shadow-2xl border border-white/10">
             {portalLinks.map((link, index) => {
-            const ButtonContent = <div className="group relative overflow-hidden w-full h-20 sm:h-24 flex flex-col gap-2 items-center justify-center text-xs sm:text-sm transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1">
+              const ButtonContent = (
+                <div className="group relative overflow-hidden w-full h-12 sm:h-14 flex flex-col gap-1 items-center justify-center text-xs transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1">
                   <div className={`absolute inset-0 bg-gradient-to-br ${link.color} opacity-90 group-hover:opacity-100 transition-opacity`} />
                   <div className={`absolute inset-0 bg-gradient-to-br ${link.hoverColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                  <div className="relative z-10 flex flex-col items-center gap-1">
-                    <div className="p-2 bg-white/20 rounded-lg group-hover:bg-white/30 transition-colors">
+                  <div className="relative z-10 flex flex-col items-center gap-0.5">
+                    <div className="p-1.5 bg-white/20 rounded-lg group-hover:bg-white/30 transition-colors">
                       {link.icon}
                     </div>
                     <div className="text-center">
-                      <div className="font-semibold text-white leading-tight">{link.title}</div>
-                      <div className="text-xs text-white/80 leading-tight">{link.subtitle}</div>
+                      <div className="font-semibold text-white leading-tight text-xs">{link.title}</div>
                     </div>
                   </div>
-                </div>;
-            if (link.external) {
-              return <a href={link.url} key={index} target="_blank" rel="noopener noreferrer" className="w-full">
+                </div>
+              );
+
+              if (link.external) {
+                return (
+                  <a href={link.url} key={index} target="_blank" rel="noopener noreferrer" className="w-full">
                     {ButtonContent}
-                  </a>;
-            } else if (link.onClick) {
-              return <button key={index} onClick={link.onClick} className="w-full">
+                  </a>
+                );
+              } else if (link.onClick) {
+                return (
+                  <button key={index} onClick={link.onClick} className="w-full">
                     {ButtonContent}
-                  </button>;
-            } else {
-              return <Link to={link.url} key={index} className="w-full">
+                  </button>
+                );
+              } else {
+                return (
+                  <Link to={link.url} key={index} className="w-full">
                     {ButtonContent}
-                  </Link>;
-            }
-          })}
+                  </Link>
+                );
+              }
+            })}
           </div>
         </div>
       </div>
