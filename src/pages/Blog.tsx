@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,16 +7,18 @@ import { Pagination, PaginationContent, PaginationItem, PaginationLink, Paginati
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
-
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const {
+    pathname
+  } = useLocation();
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   }, [pathname]);
   return null;
 };
-
 interface Article {
   id: string;
   title: string;
@@ -27,52 +28,44 @@ interface Article {
   featured_image?: string;
   published_at: string;
 }
-
 const itemsPerPage = 6;
-
 const Blog = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
-  const { toast } = useToast();
-
   useEffect(() => {
     fetchArticles();
   }, []);
-
   const fetchArticles = async () => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from('articles')
-      .select('*')
-      .order('published_at', { ascending: false });
-
-    if (error) {
-      toast({
-        title: "Error fetching articles",
-        description: error.message,
-        variant: "destructive"
+    try {
+      const {
+        data,
+        error
+      } = await supabase.from('articles').select('*').order('published_at', {
+        ascending: false
       });
-      // Fallback to static articles if there's an error
+      if (error) {
+        console.error('Error fetching from Supabase:', error);
+        setArticles([]);
+      } else {
+        setArticles(data || []);
+      }
+    } catch (error) {
+      console.error('Unexpected error:', error);
       setArticles([]);
-    } else {
-      setArticles(data || []);
     }
     setLoading(false);
   };
-
   const totalPages = Math.ceil(articles.length / itemsPerPage);
   const currentPosts = articles.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo(0, 0);
   };
-
   const getImageUrl = (article: Article) => {
     return article.featured_image || "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
   };
-
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -80,16 +73,13 @@ const Blog = () => {
       day: 'numeric'
     });
   };
-
   const getReadTime = (content: string) => {
     const wordsPerMinute = 200;
     const wordCount = content.split(' ').length;
     const minutes = Math.ceil(wordCount / wordsPerMinute);
     return `${minutes} min read`;
   };
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <ScrollToTop />
       <Navigation />
       <div className="container mx-auto px-4 py-12 pt-24">
@@ -98,40 +88,24 @@ const Blog = () => {
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             Stay updated with the latest insights, trends, and innovations in global logistics and supply chain management.
           </p>
-          <div className="mt-6">
-            <Link to="/blog-editor">
-              <Button className="bg-red-600 hover:bg-red-700 text-white">
-                <Edit className="w-4 h-4 mr-2" />
-                Editor Login
-              </Button>
-            </Link>
-          </div>
+          
         </div>
 
-        {loading ? (
-          <div className="text-center py-12">
+        {loading ? <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mx-auto mb-4"></div>
             <p className="text-muted-foreground">Loading articles...</p>
-          </div>
-        ) : articles.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">No articles published yet.</p>
+          </div> : articles.length === 0 ? <div className="text-center py-12">
+            <p className="text-muted-foreground mb-4">No articles published yet.</p>
             <Link to="/blog-editor">
-              <Button className="mt-4 bg-red-600 hover:bg-red-700 text-white">
+              <Button className="bg-red-600 hover:bg-red-700 text-white">
                 Create First Article
               </Button>
             </Link>
-          </div>
-        ) : (
-          <>
+          </div> : <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-              {currentPosts.map(article => (
-                <Card key={article.id} className="flex flex-col h-full hover:shadow-lg transition-all duration-300 group">
+              {currentPosts.map(article => <Card key={article.id} className="flex flex-col h-full hover:shadow-lg transition-all duration-300 group">
                   <div className="h-48 overflow-hidden rounded-t-lg relative">
-                    <img 
-                      src={getImageUrl(article)} 
-                      alt={article.title} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
-                    />
+                    <img src={getImageUrl(article)} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     <div className="absolute top-4 left-4">
                       <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium">
                         Article
@@ -168,41 +142,29 @@ const Blog = () => {
                       </Link>
                     </Button>
                   </CardFooter>
-                </Card>
-              ))}
+                </Card>)}
             </div>
 
-            {totalPages > 1 && (
-              <Pagination>
+            {totalPages > 1 && <Pagination>
                 <PaginationContent>
-                  {currentPage > 1 && (
-                    <PaginationItem>
+                  {currentPage > 1 && <PaginationItem>
                       <PaginationPrevious onClick={() => handlePageChange(currentPage - 1)} />
-                    </PaginationItem>
-                  )}
+                    </PaginationItem>}
 
-                  {[...Array(totalPages)].map((_, i) => (
-                    <PaginationItem key={i}>
+                  {[...Array(totalPages)].map((_, i) => <PaginationItem key={i}>
                       <PaginationLink isActive={currentPage === i + 1} onClick={() => handlePageChange(i + 1)}>
                         {i + 1}
                       </PaginationLink>
-                    </PaginationItem>
-                  ))}
+                    </PaginationItem>)}
 
-                  {currentPage < totalPages && (
-                    <PaginationItem>
+                  {currentPage < totalPages && <PaginationItem>
                       <PaginationNext onClick={() => handlePageChange(currentPage + 1)} />
-                    </PaginationItem>
-                  )}
+                    </PaginationItem>}
                 </PaginationContent>
-              </Pagination>
-            )}
-          </>
-        )}
+              </Pagination>}
+          </>}
       </div>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Blog;
