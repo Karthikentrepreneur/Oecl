@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, Package, CreditCard, AlertTriangle } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+// import { supabase } from "@/integrations/supabase/client";
 
 const AdminOverview = () => {
   const [stats, setStats] = useState({
@@ -18,55 +18,65 @@ const AdminOverview = () => {
     const fetchStats = async () => {
       setIsLoading(true);
       try {
-        // Fetch total users
-        const { count: userCount, error: userError } = await supabase
-          .from('profiles')
-          .select('*', { count: 'exact', head: true });
+        // TODO: Uncomment when database tables are created
+        // // Fetch total users
+        // const { count: userCount, error: userError } = await supabase
+        //   .from('profiles')
+        //   .select('*', { count: 'exact', head: true });
 
-        if (userError) throw userError;
+        // if (userError) throw userError;
 
-        // Fetch active shipments (not delivered)
-        const { count: shipmentCount, error: shipmentError } = await supabase
-          .from('shipments')
-          .select('*', { count: 'exact', head: true })
-          .not('status', 'eq', 'Delivered');
+        // // Fetch active shipments (not delivered)
+        // const { count: shipmentCount, error: shipmentError } = await supabase
+        //   .from('shipments')
+        //   .select('*', { count: 'exact', head: true })
+        //   .not('status', 'eq', 'Delivered');
 
-        if (shipmentError) throw shipmentError;
+        // if (shipmentError) throw shipmentError;
 
-        // Fetch revenue from completed payments
-        const { data: payments, error: paymentError } = await supabase
-          .from('payments')
-          .select('amount')
-          .eq('status', 'Completed');
+        // // Fetch revenue from completed payments
+        // const { data: payments, error: paymentError } = await supabase
+        //   .from('payments')
+        //   .select('amount')
+        //   .eq('status', 'Completed');
 
-        if (paymentError) throw paymentError;
+        // if (paymentError) throw paymentError;
 
-        const totalRevenue = payments?.reduce((sum, payment) => sum + Number(payment.amount), 0) || 0;
+        // const totalRevenue = payments?.reduce((sum, payment) => sum + Number(payment.amount), 0) || 0;
 
-        // Fetch shipments with issues (delayed, issues, etc)
-        const { count: issuesCount, error: issuesError } = await supabase
-          .from('shipments')
-          .select('*', { count: 'exact', head: true })
-          .eq('status', 'Delayed');
+        // // Fetch shipments with issues (delayed, issues, etc)
+        // const { count: issuesCount, error: issuesError } = await supabase
+        //   .from('shipments')
+        //   .select('*', { count: 'exact', head: true })
+        //   .eq('status', 'Delayed');
 
-        if (issuesError) throw issuesError;
+        // if (issuesError) throw issuesError;
 
+        // setStats({
+        //   totalUsers: userCount || 0,
+        //   activeShipments: shipmentCount || 0,
+        //   monthlyRevenue: totalRevenue,
+        //   issues: issuesCount || 0
+        // });
+
+        // // Fetch recent activity
+        // const { data: recentData, error: recentError } = await supabase
+        //   .from('shipments')
+        //   .select('id, created_at, tracking_number, user_id, profiles:user_id(email)')
+        //   .order('created_at', { ascending: false })
+        //   .limit(5);
+
+        // if (recentError) throw recentError;
+        // setRecentActivity(recentData || []);
+
+        // Placeholder data until database is set up
         setStats({
-          totalUsers: userCount || 0,
-          activeShipments: shipmentCount || 0,
-          monthlyRevenue: totalRevenue,
-          issues: issuesCount || 0
+          totalUsers: 0,
+          activeShipments: 0,
+          monthlyRevenue: 0,
+          issues: 0
         });
-
-        // Fetch recent activity
-        const { data: recentData, error: recentError } = await supabase
-          .from('shipments')
-          .select('id, created_at, tracking_number, user_id, profiles:user_id(email)')
-          .order('created_at', { ascending: false })
-          .limit(5);
-
-        if (recentError) throw recentError;
-        setRecentActivity(recentData || []);
+        setRecentActivity([]);
 
       } catch (error: any) {
         console.error('Error fetching dashboard data:', error.message);
@@ -158,7 +168,7 @@ const AdminOverview = () => {
                   </div>
                 ))
               ) : (
-                <p className="text-sm text-muted-foreground">No recent activity</p>
+                <p className="text-sm text-muted-foreground">No recent activity - Database tables need to be created</p>
               )}
             </div>
           </CardContent>
@@ -189,7 +199,7 @@ const AdminOverview = () => {
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm font-medium">Database</span>
-                <span className="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Operational</span>
+                <span className="text-xs px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Tables Needed</span>
               </div>
             </div>
           </CardContent>
