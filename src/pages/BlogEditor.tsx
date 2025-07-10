@@ -5,12 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, Save, Eye, Trash2, Upload, Calendar } from "lucide-react";
+import { ArrowLeft, Save, Eye, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Link, useNavigate } from "react-router-dom";
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
 
 interface Article {
   id: string;
@@ -32,26 +30,48 @@ const BlogEditor = () => {
   const [content, setContent] = useState('');
   const [excerpt, setExcerpt] = useState('');
   const [featuredImage, setFeaturedImage] = useState('');
-  const [publishDate, setPublishDate] = useState('');
-  const [imageFile, setImageFile] = useState<File | null>(null);
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  // Check if user is already authenticated
+  // Check authentication on mount
   useEffect(() => {
-    const isAdminLoggedIn = localStorage.getItem('blog_admin_auth');
-    if (isAdminLoggedIn === 'true') {
-      setIsAuthenticated(true);
+    checkAuth();
+    if (isAuthenticated) {
       fetchArticles();
     }
-  }, []);
+  }, [isAuthenticated]);
+
+  const checkAuth = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      setIsAuthenticated(true);
+    }
+  };
 
   const handleLogin = async () => {
+    // Simple hardcoded authentication - you can replace with proper auth
     if (email === 'admin@oecl.sg' && password === 'OECL@12345') {
-      setIsAuthenticated(true);
-      localStorage.setItem('blog_admin_auth', 'true');
-      fetchArticles();
-      toast({ title: "Logged in successfully!" });
+      // Sign in with Supabase
+      const { error } = await supabase.auth.signInWithPassword({
+        email: 'admin@oecl.sg',
+        password: 'OECL@12345'
+      });
+
+      if (error) {
+        // If user doesn't exist, create them
+        const { error: signUpError } = await supabase.auth.signUp({
+          email: 'admin@oecl.sg',
+          password: 'OECL@12345'
+        });
+        
+        if (!signUpError) {
+          setIsAuthenticated(true);
+          toast({ title: "Logged in successfully!" });
+        }
+      } else {
+        setIsAuthenticated(true);
+        toast({ title: "Logged in successfully!" });
+      }
     } else {
       toast({
         title: "Invalid credentials",
@@ -86,49 +106,6 @@ const BlogEditor = () => {
       .replace(/-+/g, '-');
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setImageFile(file);
-      const imageUrl = URL.createObjectURL(file);
-      setFeaturedImage(imageUrl);
-    }
-  };
-
-  const insertLink = () => {
-    const url = prompt('Enter URL:');
-    const text = prompt('Enter link text:');
-    if (url && text) {
-      const linkHtml = `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">${text}</a>`;
-      setContent(prev => prev + linkHtml);
-    }
-  };
-
-  const formatText = (tag: string) => {
-    const selectedText = window.getSelection()?.toString() || prompt(`Enter text to make ${tag}:`);
-    if (selectedText) {
-      let formattedText = '';
-      switch (tag) {
-        case 'bold':
-          formattedText = `<strong>${selectedText}</strong>`;
-          break;
-        case 'italic':
-          formattedText = `<em>${selectedText}</em>`;
-          break;
-        case 'h2':
-          formattedText = `<h2 class="text-2xl font-bold mb-4">${selectedText}</h2>`;
-          break;
-        case 'h3':
-          formattedText = `<h3 class="text-xl font-semibold mb-3">${selectedText}</h3>`;
-          break;
-        case 'paragraph':
-          formattedText = `<p class="mb-4">${selectedText}</p>`;
-          break;
-      }
-      setContent(prev => prev + formattedText);
-    }
-  };
-
   const handleSaveArticle = async () => {
     if (!title || !content) {
       toast({
@@ -143,10 +120,9 @@ const BlogEditor = () => {
     const articleData = {
       title,
       content,
-      excerpt: excerpt || content.replace(/<[^>]*>/g, '').substring(0, 150) + '...',
+      excerpt: excerpt || content.substring(0, 150) + '...',
       slug,
-      featured_image: featuredImage || null,
-      published_at: publishDate || new Date().toISOString()
+      featured_image: featuredImage || null
     };
 
     if (editingArticle) {
@@ -191,12 +167,9 @@ const BlogEditor = () => {
     setContent(article.content);
     setExcerpt(article.excerpt);
     setFeaturedImage(article.featured_image || '');
-    setPublishDate(new Date(article.published_at).toISOString().split('T')[0]);
   };
 
   const handleDeleteArticle = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this article?')) return;
-    
     const { error } = await supabase
       .from('articles')
       .delete()
@@ -220,12 +193,10 @@ const BlogEditor = () => {
     setContent('');
     setExcerpt('');
     setFeaturedImage('');
-    setPublishDate('');
-    setImageFile(null);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('blog_admin_auth');
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
     setIsAuthenticated(false);
     setEmail('');
     setPassword('');
@@ -233,58 +204,49 @@ const BlogEditor = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Navigation />
-        <div className="flex items-center justify-center min-h-[80vh] px-4 pt-20">
-          <Card className="w-full max-w-md">
-            <CardHeader>
-              <CardTitle className="text-center">Blog Editor Login</CardTitle>
-              <p className="text-center text-sm text-gray-600">
-                Admin access required
-              </p>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="admin@oecl.sg"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Enter password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleLogin()}
-                />
-              </div>
-              <Button onClick={handleLogin} className="w-full bg-red-600 hover:bg-red-700">
-                Login
-              </Button>
-              <div className="text-center">
-                <Link to="/blog" className="text-red-600 hover:underline text-sm">
-                  ← Back to Blog
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-        <Footer />
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-center">Blog Editor Login</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="admin@oecl.sg"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <Button onClick={handleLogin} className="w-full bg-red-600 hover:bg-red-700">
+              Login
+            </Button>
+            <div className="text-center">
+              <Link to="/blog" className="text-red-600 hover:underline text-sm">
+                ← Back to Blog
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation />
-      <div className="container mx-auto px-4 py-8 pt-24">
+      <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-8">
           <div className="flex items-center gap-4">
             <Link to="/blog" className="text-red-600 hover:text-red-700">
@@ -326,81 +288,20 @@ const BlogEditor = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="publishDate">Publish Date</Label>
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4" />
-                  <Input
-                    id="publishDate"
-                    type="date"
-                    value={publishDate}
-                    onChange={(e) => setPublishDate(e.target.value)}
-                  />
-                </div>
+                <Label htmlFor="featuredImage">Featured Image URL</Label>
+                <Input
+                  id="featuredImage"
+                  placeholder="https://example.com/image.jpg"
+                  value={featuredImage}
+                  onChange={(e) => setFeaturedImage(e.target.value)}
+                />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="featuredImage">Featured Image</Label>
-                <div className="flex gap-2">
-                  <Input
-                    id="featuredImage"
-                    placeholder="Image URL or upload below"
-                    value={featuredImage}
-                    onChange={(e) => setFeaturedImage(e.target.value)}
-                  />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => document.getElementById('imageUpload')?.click()}
-                  >
-                    <Upload className="w-4 h-4" />
-                  </Button>
-                  <input
-                    id="imageUpload"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="hidden"
-                  />
-                </div>
-                {featuredImage && (
-                  <img 
-                    src={featuredImage} 
-                    alt="Preview" 
-                    className="w-full h-32 object-cover rounded-md mt-2"
-                  />
-                )}
-              </div>
-
-              {/* Rich Text Formatting Tools */}
-              <div className="space-y-2">
-                <Label>Formatting Tools</Label>
-                <div className="flex flex-wrap gap-2">
-                  <Button size="sm" variant="outline" onClick={() => formatText('bold')}>
-                    <strong>B</strong>
-                  </Button>
-                  <Button size="sm" variant="outline" onClick={() => formatText('italic')}>
-                    <em>I</em>
-                  </Button>
-                  <Button size="sm" variant="outline" onClick={() => formatText('h2')}>
-                    H2
-                  </Button>
-                  <Button size="sm" variant="outline" onClick={() => formatText('h3')}>
-                    H3
-                  </Button>
-                  <Button size="sm" variant="outline" onClick={() => formatText('paragraph')}>
-                    P
-                  </Button>
-                  <Button size="sm" variant="outline" onClick={insertLink}>
-                    Link
-                  </Button>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="content">Content * (HTML supported)</Label>
+                <Label htmlFor="content">Content *</Label>
                 <Textarea
                   id="content"
-                  placeholder="Write your article content here. You can use HTML tags for formatting and the buttons above for quick formatting."
+                  placeholder="Write your article content here. You can use HTML tags for formatting and links."
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                   rows={15}
@@ -425,19 +326,12 @@ const BlogEditor = () => {
           {/* Articles List */}
           <Card>
             <CardHeader>
-              <CardTitle>Published Articles ({articles.length})</CardTitle>
+              <CardTitle>Published Articles</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4 max-h-[600px] overflow-y-auto">
+              <div className="space-y-4">
                 {articles.map((article) => (
                   <div key={article.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                    {article.featured_image && (
-                      <img 
-                        src={article.featured_image} 
-                        alt={article.title}
-                        className="w-full h-32 object-cover rounded-md mb-3"
-                      />
-                    )}
                     <h3 className="font-semibold text-lg mb-2">{article.title}</h3>
                     <p className="text-gray-600 text-sm mb-3 line-clamp-2">{article.excerpt}</p>
                     <div className="flex justify-between items-center">
@@ -478,7 +372,6 @@ const BlogEditor = () => {
           </Card>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
