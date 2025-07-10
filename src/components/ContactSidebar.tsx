@@ -384,10 +384,14 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
                           setExpandedCountry(expandedCountry === country.name ? null : country.name);
                           navigateToLocation(country.lat, country.lng);
                         }}
-                        className="rounded-t-md hover:bg-red-50 transition-colors px-3 py-2"
+                        className="rounded-t-md hover:bg-amber-50 transition-colors px-3 py-2"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-6 h-4 bg-gray-300 rounded-sm flex-shrink-0"></div>
+                          <img 
+                            src={`/${country.code}.svg`} 
+                            alt={`${country.name} flag`} 
+                            className="w-6 h-6 rounded-sm object-cover shadow-sm" 
+                          />
                           <span className="font-medium">{country.name}</span>
                         </div>
                       </AccordionTrigger>
