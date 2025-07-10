@@ -245,7 +245,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
         <div className={`max-w-7xl mx-auto transition-all duration-1000 delay-1000 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
         }`}>
-          <div className="grid grid-cols-5 gap-2 sm:gap-3 bg-white/5 backdrop-blur-xl p-3 rounded-2xl shadow-2xl border border-white/10">
+          <div className="grid grid-cols-5 gap-2 sm:gap-3">
             {portalLinks.map((link, index) => {
               const ButtonContent = (
                 <div className="group relative overflow-hidden w-full h-12 sm:h-14 flex flex-col gap-1 items-center justify-center text-xs transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1">
@@ -289,7 +289,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
 
       {/* Enhanced Modal */}
       {isCustomerPortalOpen && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
+        <div className="fixed inset-0 bg-black/80">
           <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl border border-gray-200 animate-in slide-in-from-bottom duration-500">
             <div className="bg-gradient-to-r from-red-600 to-red-700 p-6">
               <div className="flex justify-between items-center">
