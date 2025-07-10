@@ -30,47 +30,41 @@ const HeroSection = () => {
     description: "Assured space with contracted rates to major trade routes .",
     gradient: "from-black/60 via-black/40 to-black/60"
   }];
-  const portalLinks = [
-    {
-      icon: <Users className="w-4 h-4" />,
-      title: "Customer Portal",
-      onClick: () => setIsCustomerPortalOpen(true),
-      color: "from-red-500 to-red-700",
-      hoverColor: "from-red-600 to-red-800"
-    },
-    {
-      icon: <UserCircle className="w-4 h-4" />,
-      title: "Partner Portal", 
-      url: "https://pp.onlinetracking.co/auth/login/3",
-      external: true,
-      color: "from-red-500 to-red-700",
-      hoverColor: "from-red-600 to-red-800"
-    },
-    {
-      icon: <SearchCode className="w-4 h-4" />,
-      title: "Tracking",
-      url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:102:::::P0_GROUP_RID:59",
-      external: true,
-      color: "from-red-500 to-red-700",
-      hoverColor: "from-red-600 to-red-800"
-    },
-    {
-      icon: <Ship className="w-4 h-4" />,
-      title: "Sailing Schedule",
-      url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:104:::::P0_GROUP_RID:59",
-      external: true,
-      color: "from-red-500 to-red-700",
-      hoverColor: "from-red-600 to-red-800"
-    },
-    {
-      icon: <Calendar className="w-4 h-4" />,
-      title: "Online Quote",
-      url: "/contact",
-      external: false,
-      color: "from-red-500 to-red-700",
-      hoverColor: "from-red-600 to-red-800"
-    }
-  ];
+  const portalLinks = [{
+    icon: <Users className="w-4 h-4" />,
+    title: "Customer Portal",
+    onClick: () => setIsCustomerPortalOpen(true),
+    color: "from-red-500 to-red-700",
+    hoverColor: "from-red-600 to-red-800"
+  }, {
+    icon: <UserCircle className="w-4 h-4" />,
+    title: "Partner Portal",
+    url: "https://pp.onlinetracking.co/auth/login/3",
+    external: true,
+    color: "from-red-500 to-red-700",
+    hoverColor: "from-red-600 to-red-800"
+  }, {
+    icon: <SearchCode className="w-4 h-4" />,
+    title: "Tracking",
+    url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:102:::::P0_GROUP_RID:59",
+    external: true,
+    color: "from-red-500 to-red-700",
+    hoverColor: "from-red-600 to-red-800"
+  }, {
+    icon: <Ship className="w-4 h-4" />,
+    title: "Sailing Schedule",
+    url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:104:::::P0_GROUP_RID:59",
+    external: true,
+    color: "from-red-500 to-red-700",
+    hoverColor: "from-red-600 to-red-800"
+  }, {
+    icon: <Calendar className="w-4 h-4" />,
+    title: "Online Quote",
+    url: "/contact",
+    external: false,
+    color: "from-red-500 to-red-700",
+    hoverColor: "from-red-600 to-red-800"
+  }];
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 300);
     return () => clearTimeout(timer);
@@ -156,10 +150,8 @@ const HeroSection = () => {
 
       {/* Enhanced Portal Buttons */}
        <div className="absolute bottom-6 left-0 right-0 z-20 px-4">
-        <div className={`max-w-7xl mx-auto transition-all duration-1000 delay-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-        }`}>
-          <div className="grid grid-cols-5 gap-2 sm:gap-3 bg-white/5 backdrop-blur-xl p-3 rounded-2xl shadow-2xl border border-white/10">
+        <div className={`max-w-7xl mx-auto transition-all duration-1000 delay-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+          <div className="grid grid-cols-5 gap-2 sm:gap-3 ">
             {portalLinks.map((link, index) => {
             const ButtonContent = <div className="group relative overflow-hidden w-full h-20 sm:h-24 flex flex-col gap-2 items-center justify-center text-xs sm:text-sm transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1">
                   <div className={`absolute inset-0 bg-gradient-to-br ${link.color} opacity-90 group-hover:opacity-100 transition-opacity`} />
