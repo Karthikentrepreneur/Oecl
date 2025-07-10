@@ -1,7 +1,5 @@
-
 import React, { useState, useEffect } from "react";
 import { Users, UserCircle, SearchCode, Ship, Calendar, Globe, ArrowRight, Play, Zap } from "lucide-react";
-import { Link } from "react-router-dom";
 
 interface HeroSectionProps {
   country?: 'india' | 'indonesia' | 'malaysia' | 'thailand';
@@ -154,143 +152,145 @@ const HeroSection = ({ country }: HeroSectionProps) => {
   const currentSlide = sliderImages[activeSlide];
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-red-900 text-white">
-      {/* Animated Background Particles */}
-      <div className="absolute inset-0 z-0">
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white/20 rounded-full animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 3}s`
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Background Slider */}
-      <div className="absolute inset-0 z-10 overflow-hidden">
-        {sliderImages.map((slide, i) => (
-          <div
-            key={i}
-            className={`absolute inset-0 transition-all duration-2000 ease-in-out ${
-              activeSlide === i ? "opacity-100 scale-100" : "opacity-0 scale-105"
-            }`}
-            style={{ zIndex: activeSlide === i ? 1 : 0 }}
-          >
-            <img
-              src={slide.url}
-              alt={`Slide ${i}`}
-              className="w-full h-full object-cover transition-transform duration-2000"
-              loading={i === 0 ? "eager" : "lazy"}
+    <>
+      <section className="relative min-h-screen overflow-hidden bg-red-900 text-white">
+        {/* Animated Background Particles */}
+        <div className="absolute inset-0 z-0">
+          {[...Array(50)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-white/20 rounded-full animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 3}s`
+              }}
             />
-            <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient} z-[1]`} />
-          </div>
-        ))}
-        <div className="absolute inset-0 bg-red-900/40 z-[2]" />
-      </div>
+          ))}
+        </div>
 
-      {/* Main Content */}
-      <div className="relative z-20 flex items-center min-h-screen px-6 lg:px-12">
-        <div className="max-w-4xl space-y-8 px-0 py-0 mx-[200px]">
-          {/* Title */}
-          <h1 className="text-4xl md:text-5xl">
-            {currentSlide.title.split(" ").map((word, i) => (
-              <span
-                key={i}
-                style={{ animationDelay: `${i * 0.1}s` }}
-                className="text-slate-50 font-bold animate-fade-in"
-              >
-                {word}{" "}
-              </span>
-            ))}
-          </h1>
-
-          {/* CTA Button */}
-          <div className={`flex flex-col sm:flex-row gap-4 transform transition-all duration-1000 delay-700 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-          }`}>
-            <Link to="/signup" className="group">
-              <button className="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl px-6 py-3 text-lg font-semibold flex items-center gap-3 shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-red-500/30 border border-red-500/30">
-                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                <Zap className="w-5 h-5" />
-                <span>GET STARTED</span>
-                <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
-              </button>
-            </Link>
-          </div>
-
-          {/* Slide Indicators */}
-          <div className="flex space-x-2 pt-4">
-            {sliderImages.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveSlide(i)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  activeSlide === i
-                    ? "bg-red-500 scale-125 shadow-lg shadow-red-500/50"
-                    : "bg-white/30 hover:bg-white/50"
-                }`}
+        {/* Background Slider */}
+        <div className="absolute inset-0 z-10 overflow-hidden">
+          {sliderImages.map((slide, i) => (
+            <div
+              key={i}
+              className={`absolute inset-0 transition-all duration-2000 ease-in-out ${
+                activeSlide === i ? "opacity-100 scale-100" : "opacity-0 scale-105"
+              }`}
+              style={{ zIndex: activeSlide === i ? 1 : 0 }}
+            >
+              <img
+                src={slide.url}
+                alt={`Slide ${i}`}
+                className="w-full h-full object-cover transition-transform duration-2000"
+                loading={i === 0 ? "eager" : "lazy"}
               />
-            ))}
+              <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient} z-[1]`} />
+            </div>
+          ))}
+          <div className="absolute inset-0 bg-red-900/40 z-[2]" />
+        </div>
+
+        {/* Main Content */}
+        <div className="relative z-20 flex items-center min-h-screen px-6 lg:px-12">
+          <div className="max-w-4xl space-y-8 px-0 py-0 mx-[200px]">
+            {/* Title */}
+            <h1 className="text-4xl md:text-5xl">
+              {currentSlide.title.split(" ").map((word, i) => (
+                <span
+                  key={i}
+                  style={{ animationDelay: `${i * 0.1}s` }}
+                  className="text-slate-50 font-bold animate-fade-in"
+                >
+                  {word}{" "}
+                </span>
+              ))}
+            </h1>
+
+            {/* CTA Button */}
+            <div className={`flex flex-col sm:flex-row gap-4 transform transition-all duration-1000 delay-700 ${
+              isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+            }`}>
+              <a href="/signup" className="group">
+                <button className="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl px-6 py-3 text-lg font-semibold flex items-center gap-3 shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-red-500/30 border border-red-500/30">
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                  <Zap className="w-5 h-5" />
+                  <span>GET STARTED</span>
+                  <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+                </button>
+              </a>
+            </div>
+
+            {/* Slide Indicators */}
+            <div className="flex space-x-2 pt-4">
+              {sliderImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveSlide(i)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    activeSlide === i
+                      ? "bg-red-500 scale-125 shadow-lg shadow-red-500/50"
+                      : "bg-white/30 hover:bg-white/50"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Enhanced Portal Buttons - Made Smaller */}
-      <div className="absolute bottom-6 left-0 right-0 z-20 px-4">
-        <div className={`max-w-7xl mx-auto transition-all duration-1000 delay-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-        }`}>
-          <div className="grid grid-cols-5 gap-2 sm:gap-3">
-            {portalLinks.map((link, index) => {
-              const ButtonContent = (
-                <div className="group relative overflow-hidden w-full h-12 sm:h-14 flex flex-col gap-1 items-center justify-center text-xs transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${link.color} opacity-90 group-hover:opacity-100 transition-opacity`} />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${link.hoverColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                  <div className="relative z-10 flex flex-col items-center gap-0.5">
-                    <div className="p-1.5 bg-white/20 rounded-lg group-hover:bg-white/30 transition-colors">
-                      {link.icon}
-                    </div>
-                    <div className="text-center">
-                      <div className="font-semibold text-white leading-tight text-xs">{link.title}</div>
+        {/* Enhanced Portal Buttons - Made Smaller */}
+        <div className="absolute bottom-6 left-0 right-0 z-20 px-4">
+          <div className={`max-w-7xl mx-auto transition-all duration-1000 delay-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+          }`}>
+            <div className="grid grid-cols-5 gap-2 sm:gap-3">
+              {portalLinks.map((link, index) => {
+                const ButtonContent = (
+                  <div className="group relative overflow-hidden w-full h-12 sm:h-14 flex flex-col gap-1 items-center justify-center text-xs transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${link.color} opacity-90 group-hover:opacity-100 transition-opacity`} />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${link.hoverColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                    <div className="relative z-10 flex flex-col items-center gap-0.5">
+                      <div className="p-1.5 bg-white/20 rounded-lg group-hover:bg-white/30 transition-colors">
+                        {link.icon}
+                      </div>
+                      <div className="text-center">
+                        <div className="font-semibold text-white leading-tight text-xs">{link.title}</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
+                );
 
-              if (link.external) {
-                return (
-                  <a href={link.url} key={index} target="_blank" rel="noopener noreferrer" className="w-full">
-                    {ButtonContent}
-                  </a>
-                );
-              } else if (link.onClick) {
-                return (
-                  <button key={index} onClick={link.onClick} className="w-full">
-                    {ButtonContent}
-                  </button>
-                );
-              } else {
-                return (
-                  <Link to={link.url} key={index} className="w-full">
-                    {ButtonContent}
-                  </Link>
-                );
-              }
-            })}
+                if (link.external) {
+                  return (
+                    <a href={link.url} key={index} target="_blank" rel="noopener noreferrer" className="w-full">
+                      {ButtonContent}
+                    </a>
+                  );
+                } else if (link.onClick) {
+                  return (
+                    <button key={index} onClick={link.onClick} className="w-full">
+                      {ButtonContent}
+                    </button>
+                  );
+                } else {
+                  return (
+                    <a href={link.url} key={index} className="w-full">
+                      {ButtonContent}
+                    </a>
+                  );
+                }
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Enhanced Modal */}
+      {/* Enhanced Modal - Fixed positioning and z-index */}
       {isCustomerPortalOpen && (
-        <div className="fixed inset-0 bg-black/80">
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl border border-gray-200 animate-in slide-in-from-bottom duration-500">
+        <div className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-2xl border border-gray-200 animate-in slide-in-from-bottom duration-500">
             <div className="bg-gradient-to-r from-red-600 to-red-700 p-6">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-3">
@@ -361,7 +361,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           </div>
         </div>
       )}
-    </section>
+    </>
   );
 };
 
