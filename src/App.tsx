@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -18,6 +17,9 @@ import LiquidCargo from "./pages/services/LiquidCargo";
 import ProjectCargo from "./pages/services/ProjectCargo";
 import Services from "./pages/Services";
 import IndiaServices from "./pages/services/IndiaServices";
+import ThailandServices from "./pages/services/ThailandServices";
+import MalaysiaServices from "./pages/services/MalaysiaServices";
+import IndonesiaServices from "./pages/services/IndonesiaServices";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import AboutUs from "./pages/aboutus";
@@ -80,16 +82,19 @@ const App = () => {
                 <Route path="/india/blogs" element={<Blog />} />
                 
                 <Route path="/indonesia/home" element={<IndonesiaHome />} />
+                <Route path="/indonesia/services" element={<IndonesiaServices />} />
                 <Route path="/indonesia/about-us" element={<AboutUs />} />
                 <Route path="/indonesia/contact" element={<Contact />} />
                 <Route path="/indonesia/blogs" element={<Blog />} />
                 
                 <Route path="/malaysia/home" element={<MalaysiaHome />} />
+                <Route path="/malaysia/services" element={<MalaysiaServices />} />
                 <Route path="/malaysia/about-us" element={<AboutUs />} />
                 <Route path="/malaysia/contact" element={<Contact />} />
                 <Route path="/malaysia/blogs" element={<Blog />} />
                 
                 <Route path="/thailand/home" element={<ThailandHome />} />
+                <Route path="/thailand/services" element={<ThailandServices />} />
                 <Route path="/thailand/about-us" element={<AboutUs />} />
                 <Route path="/thailand/contact" element={<Contact />} />
                 <Route path="/thailand/blogs" element={<Blog />} />
