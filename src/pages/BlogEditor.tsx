@@ -1,14 +1,17 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, Save, Eye, Trash2 } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { ArrowLeft, Save, Eye, Trash2, CalendarIcon, Upload, X, LogOut } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Link, useNavigate } from "react-router-dom";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
 
 interface Article {
   id: string;
@@ -21,7 +24,8 @@ interface Article {
 }
 
 const BlogEditor = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [articles, setArticles] = useState<Article[]>([]);
@@ -30,71 +34,170 @@ const BlogEditor = () => {
   const [content, setContent] = useState('');
   const [excerpt, setExcerpt] = useState('');
   const [featuredImage, setFeaturedImage] = useState('');
+  const [publishDate, setPublishDate] = useState<Date>(new Date());
+  const [uploading, setUploading] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [imagePreview, setImagePreview] = useState<string>('');
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  // Check authentication on mount
   useEffect(() => {
-    checkAuth();
-    if (isAuthenticated) {
+    checkUser();
+  }, []);
+
+  useEffect(() => {
+    if (user) {
       fetchArticles();
     }
-  }, [isAuthenticated]);
+  }, [user]);
 
-  const checkAuth = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (session) {
-      setIsAuthenticated(true);
+  const checkUser = async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        setUser(session.user);
+      }
+    } catch (error) {
+      console.error('Error checking user:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleLogin = async () => {
-    // Simple hardcoded authentication - you can replace with proper auth
-    if (email === 'admin@oecl.sg' && password === 'OECL@12345') {
-      // Sign in with Supabase
-      const { error } = await supabase.auth.signInWithPassword({
-        email: 'admin@oecl.sg',
-        password: 'OECL@12345'
+    try {
+      setLoading(true);
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
       });
 
       if (error) {
-        // If user doesn't exist, create them
-        const { error: signUpError } = await supabase.auth.signUp({
-          email: 'admin@oecl.sg',
-          password: 'OECL@12345'
+        toast({
+          title: "Login failed",
+          description: error.message,
+          variant: "destructive"
         });
-        
-        if (!signUpError) {
-          setIsAuthenticated(true);
-          toast({ title: "Logged in successfully!" });
-        }
-      } else {
-        setIsAuthenticated(true);
+        return;
+      }
+
+      if (data.user) {
+        setUser(data.user);
         toast({ title: "Logged in successfully!" });
       }
-    } else {
+    } catch (error: any) {
       toast({
-        title: "Invalid credentials",
-        description: "Please check your email and password.",
-        variant: "destructive"
-      });
-    }
-  };
-
-  const fetchArticles = async () => {
-    const { data, error } = await supabase
-      .from('articles')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      toast({
-        title: "Error fetching articles",
+        title: "Login error",
         description: error.message,
         variant: "destructive"
       });
-    } else {
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+    setEmail('');
+    setPassword('');
+    navigate('/blog');
+  };
+
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      toast({
+        title: "Invalid file type",
+        description: "Please select an image file.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: "File too large",
+        description: "Please select an image smaller than 5MB.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setUploading(true);
+
+    try {
+      const timestamp = Date.now();
+      const fileExt = file.name.split('.').pop();
+      const fileName = `article-${timestamp}.${fileExt}`;
+
+      const { data, error } = await supabase.storage
+        .from('images')
+        .upload(fileName, file);
+
+      if (!error && data) {
+        const { data: urlData } = supabase.storage
+          .from('images')
+          .getPublicUrl(fileName);
+
+        const imageUrl = urlData.publicUrl;
+        setFeaturedImage(imageUrl);
+        setImagePreview(imageUrl);
+        toast({ title: "Image uploaded successfully!" });
+      } else {
+        throw new Error('Upload failed');
+      }
+    } catch (error: any) {
+      console.log('Upload error, using local preview:', error);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result as string;
+        setImagePreview(result);
+        setFeaturedImage(result);
+      };
+      reader.readAsDataURL(file);
+      
+      toast({ 
+        title: "Using local image preview",
+        description: "Image stored locally for this session."
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const removeImage = () => {
+    setFeaturedImage('');
+    setImagePreview('');
+  };
+
+  const fetchArticles = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('articles')
+        .select('*')
+        .order('published_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching articles:', error);
+        toast({
+          title: "Error fetching articles",
+          description: error.message,
+          variant: "destructive"
+        });
+        return;
+      }
+
       setArticles(data || []);
+    } catch (error: any) {
+      console.error('Unexpected error fetching articles:', error);
+      toast({
+        title: "Error fetching articles",
+        description: "Please try again later",
+        variant: "destructive"
+      });
     }
   };
 
@@ -116,48 +219,57 @@ const BlogEditor = () => {
       return;
     }
 
+    setSaving(true);
+
     const slug = generateSlug(title);
     const articleData = {
       title,
       content,
       excerpt: excerpt || content.substring(0, 150) + '...',
       slug,
-      featured_image: featuredImage || null
+      featured_image: featuredImage || null,
+      published_at: publishDate.toISOString()
     };
 
-    if (editingArticle) {
-      const { error } = await supabase
-        .from('articles')
-        .update(articleData)
-        .eq('id', editingArticle.id);
+    try {
+      if (editingArticle) {
+        const { data, error } = await supabase
+          .from('articles')
+          .update(articleData)
+          .eq('id', editingArticle.id)
+          .select()
+          .single();
 
-      if (error) {
-        toast({
-          title: "Error updating article",
-          description: error.message,
-          variant: "destructive"
-        });
-      } else {
+        if (error) {
+          throw error;
+        }
+
         toast({ title: "Article updated successfully!" });
-        resetForm();
-        fetchArticles();
-      }
-    } else {
-      const { error } = await supabase
-        .from('articles')
-        .insert([articleData]);
-
-      if (error) {
-        toast({
-          title: "Error creating article",
-          description: error.message,
-          variant: "destructive"
-        });
       } else {
+        const { data, error } = await supabase
+          .from('articles')
+          .insert([articleData])
+          .select()
+          .single();
+
+        if (error) {
+          throw error;
+        }
+
         toast({ title: "Article created successfully!" });
-        resetForm();
-        fetchArticles();
       }
+      
+      await fetchArticles();
+      resetForm();
+    } catch (error: any) {
+      console.error('Save error:', error);
+      toast({
+        title: "Error saving article",
+        description: error.message,
+        variant: "destructive"
+      });
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -167,23 +279,30 @@ const BlogEditor = () => {
     setContent(article.content);
     setExcerpt(article.excerpt);
     setFeaturedImage(article.featured_image || '');
+    setImagePreview(article.featured_image || '');
+    setPublishDate(new Date(article.published_at));
   };
 
   const handleDeleteArticle = async (id: string) => {
-    const { error } = await supabase
-      .from('articles')
-      .delete()
-      .eq('id', id);
+    try {
+      const { error } = await supabase
+        .from('articles')
+        .delete()
+        .eq('id', id);
 
-    if (error) {
+      if (error) {
+        throw error;
+      }
+
+      toast({ title: "Article deleted successfully!" });
+      await fetchArticles();
+    } catch (error: any) {
+      console.error('Delete error:', error);
       toast({
         title: "Error deleting article",
         description: error.message,
         variant: "destructive"
       });
-    } else {
-      toast({ title: "Article deleted successfully!" });
-      fetchArticles();
     }
   };
 
@@ -193,16 +312,19 @@ const BlogEditor = () => {
     setContent('');
     setExcerpt('');
     setFeaturedImage('');
+    setImagePreview('');
+    setPublishDate(new Date());
   };
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setIsAuthenticated(false);
-    setEmail('');
-    setPassword('');
-  };
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mx-auto mb-4"></div>
+      </div>
+    );
+  }
 
-  if (!isAuthenticated) {
+  if (!user) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <Card className="w-full max-w-md">
@@ -215,7 +337,7 @@ const BlogEditor = () => {
               <Input
                 id="email"
                 type="email"
-                placeholder="admin@oecl.sg"
+                placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -225,9 +347,10 @@ const BlogEditor = () => {
               <Input
                 id="password"
                 type="password"
-                placeholder="Enter password"
+                placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleLogin()}
               />
             </div>
             <Button onClick={handleLogin} className="w-full bg-red-600 hover:bg-red-700">
@@ -254,13 +377,16 @@ const BlogEditor = () => {
             </Link>
             <h1 className="text-3xl font-bold">Blog Editor</h1>
           </div>
-          <Button onClick={handleLogout} variant="outline">
-            Logout
-          </Button>
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-gray-600">Welcome, {user.email}</span>
+            <Button onClick={handleLogout} variant="outline">
+              <LogOut className="w-4 h-4 mr-2" />
+              Logout
+            </Button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Editor Panel */}
           <Card>
             <CardHeader>
               <CardTitle>{editingArticle ? 'Edit Article' : 'Create New Article'}</CardTitle>
@@ -288,13 +414,81 @@ const BlogEditor = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="featuredImage">Featured Image URL</Label>
-                <Input
-                  id="featuredImage"
-                  placeholder="https://example.com/image.jpg"
-                  value={featuredImage}
-                  onChange={(e) => setFeaturedImage(e.target.value)}
-                />
+                <Label>Featured Image</Label>
+                <div className="space-y-2">
+                  <div className="flex gap-2">
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      disabled={uploading}
+                      className="flex-1"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      disabled={uploading}
+                    >
+                      <Upload className="w-4 h-4 mr-2" />
+                      {uploading ? 'Uploading...' : 'Upload'}
+                    </Button>
+                  </div>
+                  
+                  <Input
+                    placeholder="Or enter image URL"
+                    value={featuredImage}
+                    onChange={(e) => {
+                      setFeaturedImage(e.target.value);
+                      setImagePreview(e.target.value);
+                    }}
+                  />
+                  
+                  {imagePreview && (
+                    <div className="relative">
+                      <img 
+                        src={imagePreview} 
+                        alt="Preview" 
+                        className="w-full h-32 object-cover rounded border"
+                      />
+                      <Button
+                        type="button"
+                        variant="destructive"
+                        size="sm"
+                        className="absolute top-2 right-2"
+                        onClick={removeImage}
+                      >
+                        <X className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label>Publish Date</Label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal",
+                        !publishDate && "text-muted-foreground"
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {publishDate ? format(publishDate, "PPP") : <span>Pick a date</span>}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={publishDate}
+                      onSelect={(date) => date && setPublishDate(date)}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
 
               <div className="space-y-2">
@@ -310,9 +504,13 @@ const BlogEditor = () => {
               </div>
 
               <div className="flex gap-2">
-                <Button onClick={handleSaveArticle} className="bg-red-600 hover:bg-red-700">
+                <Button 
+                  onClick={handleSaveArticle} 
+                  className="bg-red-600 hover:bg-red-700"
+                  disabled={saving}
+                >
                   <Save className="w-4 h-4 mr-2" />
-                  {editingArticle ? 'Update Article' : 'Save Article'}
+                  {saving ? 'Saving...' : (editingArticle ? 'Update Article' : 'Save Article')}
                 </Button>
                 {editingArticle && (
                   <Button onClick={resetForm} variant="outline">
@@ -323,15 +521,21 @@ const BlogEditor = () => {
             </CardContent>
           </Card>
 
-          {/* Articles List */}
           <Card>
             <CardHeader>
-              <CardTitle>Published Articles</CardTitle>
+              <CardTitle>Published Articles ({articles.length})</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {articles.map((article) => (
                   <div key={article.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                    {article.featured_image && (
+                      <img 
+                        src={article.featured_image} 
+                        alt={article.title}
+                        className="w-full h-32 object-cover rounded mb-3"
+                      />
+                    )}
                     <h3 className="font-semibold text-lg mb-2">{article.title}</h3>
                     <p className="text-gray-600 text-sm mb-3 line-clamp-2">{article.excerpt}</p>
                     <div className="flex justify-between items-center">
