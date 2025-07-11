@@ -249,8 +249,8 @@ const countries = [{
     name: "Chicago",
     lat: 41.8622,
     lng: -87.7209,
-    address: "New Jersey Branch, 33 Wood Avenue South,Suite 600, Iselin, NJ 08830",
-    contacts: ["+1 732 456 6780"],
+    address: "939 W. North Avenue, Suite 750, Chicago, IL 60642",
+    contacts: ["+1 847 254 7320"],
     email: "info@gglusa.us"
   }, {
     name: "New York",
