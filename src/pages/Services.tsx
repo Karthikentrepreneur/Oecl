@@ -1,171 +1,207 @@
-// components/CountryServicesCards.tsx
-
-import { Link } from "react-router-dom";
-import ScrollAnimation from "./ScrollAnimation";
+import React, { useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import {
-  Shield,
-  Plane,
-  Warehouse,
-  Truck,
-  Ship,
+  Truck, Plane, Ship, Box, UserCheck, Container, Cuboid
 } from "lucide-react";
 
-interface ServiceCardProps {
+// Scroll to top on route change
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
+  return null;
+};
+
+interface Service {
+  id: number;
   title: string;
-  icon: React.ElementType;
-  delay: number;
+  description: string;
+  icon: React.FC<React.SVGProps<SVGSVGElement>>;
   image: string;
   slug: string;
 }
 
-interface CountryServicesProps {
-  country?: 'india' | 'indonesia' | 'malaysia' | 'thailand';
-}
-
-const CountryServicesCards = ({ country }: CountryServicesProps) => {
-  const countryServices: Record<string, ServiceCardProps[]> = {
-    india: [
-      {
-        title: "Customs Clearance",
-        icon: Shield,
-        delay: 0,
-        image: "/customclearance.png",
-        slug: "customs-clearance"
-      },
-      {
-        title: "Digital Forwarding",
-        icon: Plane,
-        delay: 100,
-        image: "/airfreight.png",
-        slug: "air-freight"
-      },
-      {
-        title: "Warehousing",
-        icon: Warehouse,
-        delay: 200,
-        image: "/warehousing.png",
-        slug: "warehousing"
-      },
-    ],
-    indonesia: [
-      {
-        title: "Project Cargo",
-        icon: Truck,
-        delay: 0,
-        image: "/projectcargo.png",
-        slug: "project-cargo"
-      },
-      {
-        title: "Digital Forwarding",
-        icon: Plane,
-        delay: 100,
-        image: "/airfreight.png",
-        slug: "air-freight"
-      },
-      {
-        title: "Liner Agency",
-        icon: Ship,
-        delay: 200,
-        image: "/linearagency.png",
-        slug: "liner-agency"
-      }
-    ],
-    malaysia: [
-      {
-        title: "Liquid Logistics",
-        icon: Truck,
-        delay: 0,
-        image: "/liquidtransportation.png",
-        slug: "liquid-cargo"
-      },
-      {
-        title: "Digital Forwarding",
-        icon: Plane,
-        delay: 100,
-        image: "/airfreight.png",
-        slug: "air-freight"
-      },
-      {
-        title: "Warehousing",
-        icon: Warehouse,
-        delay: 200,
-        image: "/warehousing.png",
-        slug: "warehousing"
-      }
-    ],
-    thailand: [
-      {
-        title: "Air Freight",
-        icon: Plane,
-        delay: 0,
-        image: "/airfreight.png",
-        slug: "air-freight"
-      },
-      {
-        title: "Ocean Freight",
-        icon: Ship,
-        delay: 100,
-        image: "/oceanfreight.png",
-        slug: "ocean-freight"
-      },
-      {
-        title: "Warehousing",
-        icon: Warehouse,
-        delay: 200,
-        image: "/warehousing.png",
-        slug: "warehousing"
-      }
-    ]
-  };
-
-  const services = country ? countryServices[country] : [];
-
-  const ServiceCard = ({ title, icon: Icon, delay, image, slug }: ServiceCardProps) => (
-    <ScrollAnimation
-      delay={delay}
-      className="group relative overflow-hidden bg-white shadow-lg rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
-    >
-      <Link to={`/services/${slug}`}>
-        <div className="aspect-video overflow-hidden">
-          <img
-            src={image}
-            alt={title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-        </div>
-
-        <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-          <div className="transform transition-all duration-500 group-hover:-translate-y-2">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 bg-red-500/80 backdrop-blur-sm rounded-lg">
-                <Icon size={24} />
-              </div>
-              <h3 className="text-xl font-bold">{title}</h3>
-            </div>
-          </div>
-        </div>
+const ServiceCard: React.FC<Service & { country: string }> = ({
+  title, description, icon: Icon, image, slug, country
+}) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    viewport={{ once: true }}
+    className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group grid grid-cols-1 md:grid-cols-2"
+  >
+    <div className="w-full h-48 md:h-64">
+      <img
+        src={image}
+        alt={title}
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+    </div>
+    <div className="p-6 flex flex-col justify-center bg-gray-200">
+      <div className="bg-red-600/10 text-red-600 p-2 rounded-full inline-block mb-2 w-fit">
+        <Icon className="w-5 h-5" />
+      </div>
+      <h3 className="text-xl font-semibold text-black mb-3">{title}</h3>
+      <p className="text-gray-600 text-sm mb-4 line-clamp-4">{description}</p>
+      <Link
+        to={`/${country}/services/${slug}`}
+        className="text-red-600 font-medium hover:text-red-800 inline-flex items-center text-sm"
+      >
+        Learn More
+        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
       </Link>
-    </ScrollAnimation>
-  );
+    </div>
+  </motion.div>
+);
+
+const Services: React.FC = () => {
+  const defaultCountry = "india"; // Set the base country to redirect to
+
+  const allServices: Service[] = [
+    {
+      id: 1,
+      title: "Air Freight",
+      description: "Fast and efficient air cargo services for time-sensitive shipments.",
+      icon: Plane,
+      image: "/airfreight.png",
+      slug: "air-freight"
+    },
+    {
+      id: 2,
+      title: "Ocean Freight",
+      description: "Reliable sea freight for bulk and large-volume cargo.",
+      icon: Ship,
+      image: "/oceanfreight.png",
+      slug: "ocean-freight"
+    },
+    {
+      id: 3,
+      title: "Warehousing",
+      description: "Secure storage and order fulfillment services.",
+      icon: Box,
+      image: "/warehousing.png",
+      slug: "warehousing"
+    },
+    {
+      id: 4,
+      title: "Customs Clearance",
+      description: "Hassle-free customs handling and documentation support.",
+      icon: UserCheck,
+      image: "/customclearance.png",
+      slug: "customs-clearance"
+    },
+    {
+      id: 5,
+      title: "Liner Agency",
+      description: "Comprehensive support for liner shipping operations.",
+      icon: Container,
+      image: "/linearagency.png",
+      slug: "liner-agency"
+    },
+    {
+      id: 6,
+      title: "Liquid Cargo Transportation",
+      description: "Safe transport of chemicals, oils, and liquids.",
+      icon: Truck,
+      image: "/liquidtransportation.png",
+      slug: "liquid-cargo"
+    },
+    {
+      id: 7,
+      title: "Consolidation",
+      description: "Optimize your logistics by combining multiple shipments.",
+      icon: Cuboid,
+      image: "/consolidation.png",
+      slug: "consolidation"
+    },
+    {
+      id: 8,
+      title: "Project Cargo",
+      description: "Handling of oversized and complex project shipments.",
+      icon: Container,
+      image: "/projectcargo.png",
+      slug: "project-cargo"
+    },
+    {
+      id: 9,
+      title: "3PL",
+      description: "Third-party logistics for flexible supply chain solutions.",
+      icon: Cuboid,
+      image: "/3pl.png",
+      slug: "3pl"
+    }
+  ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-50 to-gray-100">
-      <div className="container mx-auto px-4 md:px-6">
-        <ScrollAnimation className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-            Our Core Services
-          </h2>
-        </ScrollAnimation>
+    <div className="min-h-screen flex flex-col bg-white">
+      <ScrollToTop />
+      <Navigation />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <ServiceCard key={index} {...service} />
-          ))}
-        </div>
-      </div>
-    </section>
+      <main className="flex-grow pt-20">
+        {/* Hero Section */}
+        <section className="bg-gradient-to-r from-black via-gray-900 to-black text-white relative overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img
+              src="/lovable-uploads/gp.jpg"
+              alt="Services"
+              className="w-full h-full object-cover opacity-20"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-900 opacity-90" />
+          </div>
+          <div className="container mx-auto px-4 py-12 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-center max-w-3xl mx-auto"
+            >
+              <h1 className="text-4xl md:text-5xl font-bold mb-2 text-white">
+                Our Logistics Services
+              </h1>
+              <div className="w-16 h-1 bg-red-600 mx-auto mb-4"></div>
+              <p className="text-lg text-white/90">
+                Explore our full suite of end-to-end global logistics services.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Services Grid */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl font-bold text-black mb-3">All Services</h2>
+              <div className="w-20 h-1 bg-red-600 mx-auto mb-4"></div>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                From freight forwarding to specialized cargo handling, we’ve got it all covered.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {allServices.map((service) => (
+                <ServiceCard key={service.id} {...service} country={defaultCountry} />
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
   );
 };
 
-export default CountryServicesCards;
+export default Services;
