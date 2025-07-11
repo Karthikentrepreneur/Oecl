@@ -1,8 +1,22 @@
-
 import { Truck, Plane, Ship, Box, UserCheck, Container, Cuboid } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import ScrollAnimation from "./ScrollAnimation";
-import { getCurrentCountryFromPath } from "@/services/countryDetection";
+
+// Updated utility to return both name and slug
+const getCurrentCountryFromPath = (pathname) => {
+  const segments = pathname.split('/');
+  const countrySlug = segments[1]?.toLowerCase();
+
+  const map = {
+    india: "India",
+    malaysia: "Malaysia",
+    thailand: "Thailand",
+    indonesia: "Indonesia",
+  };
+
+  const name = map[countrySlug] || "Singapore"; // Default
+  return { name, slug: countrySlug || "singapore" };
+};
 
 const allServices = [
   { id: 1, title: "Air Freight", icon: Plane, image: "/airfreight.png", slug: "air-freight", delay: 100 },
@@ -17,31 +31,27 @@ const allServices = [
 ];
 
 const countryServiceFilters = {
-  'India': ['Ocean Freight', 'Air Freight', 'Liquid Cargo Transportation', 'Liner Agency', 'Project Cargo', 'Consolidation'],
-  'Malaysia': ['Ocean Freight', 'Air Freight', 'Customs Clearance', 'Liner Agency', 'Project Cargo', 'Consolidation'],
-  'Indonesia': ['Ocean Freight', 'Air Freight', 'Customs Clearance', 'Liquid Cargo Transportation', 'Warehousing', 'Consolidation'],
-  'Thailand': ['Project Cargo', 'Liner Agency', 'Customs Clearance', 'Liquid Cargo Transportation', '3PL', 'Consolidation']
+  India: ['Ocean Freight', 'Air Freight', 'Liquid Cargo Transportation', 'Liner Agency', 'Project Cargo', 'Consolidation'],
+  Malaysia: ['Ocean Freight', 'Air Freight', 'Customs Clearance', 'Liner Agency', 'Project Cargo', 'Consolidation'],
+  Indonesia: ['Ocean Freight', 'Air Freight', 'Customs Clearance', 'Liquid Cargo Transportation', 'Warehousing', 'Consolidation'],
+  Thailand: ['Project Cargo', 'Liner Agency', 'Customs Clearance', 'Liquid Cargo Transportation', '3PL', 'Consolidation']
 };
 
 const ServicesSection = () => {
   const location = useLocation();
   const currentCountry = getCurrentCountryFromPath(location.pathname);
-  
-  // Determine which services to show based on current country
+
   const getFilteredServices = () => {
     const serviceNames = countryServiceFilters[currentCountry.name];
     if (serviceNames) {
       return allServices.filter(service => serviceNames.includes(service.title));
     }
-    
-    // Default: show all services for Singapore
-    return allServices;
+    return allServices; // Default for Singapore or unmatched
   };
 
-  // Determine the services link based on current country
   const getServicesLink = () => {
-    if (currentCountry.name === 'India') {
-      return '/india/services';
+    if (currentCountry.slug && currentCountry.slug !== 'singapore') {
+      return `/${currentCountry.slug}/services`;
     }
     return '/services';
   };
@@ -62,7 +72,7 @@ const ServicesSection = () => {
           {services.map(service => (
             <ScrollAnimation key={service.id} delay={service.delay}>
               <Link
-                to={`/services/${service.slug}`}
+                to={`/${currentCountry.slug}/services/${service.slug}`}
                 className="group bg-zinc-900 rounded-xl overflow-hidden shadow-lg hover:shadow-red-600/40 transition-shadow duration-300"
               >
                 <div className="relative w-full h-56 overflow-hidden">
