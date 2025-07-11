@@ -22,7 +22,7 @@ interface CountryData {
 }
 
 const countries: CountryData[] = [
-  { country: "SINGAPORE", company: "OECL", website: "https://www.oecl.sg/", priority: 1, flag: "/sg.svg", route: "/" },
+  { country: "SINGAPORE", company: "OECL", website: "https://www.oecl.sg/home", priority: 1, flag: "/sg.svg", route: "/" },
   { country: "MALAYSIA", company: "OECL", website: "https://www.oecl.sg/malaysia/home", priority: 2, flag: "/my.svg", route: "/malaysia/home" },
   { country: "INDONESIA", company: "OECL", website: "https://www.oecl.sg/indonesia/home", priority: 3, flag: "/id.svg", route: "/indonesia/home" },
   { country: "THAILAND", company: "OECL", website: "https://www.oecl.sg/thailand/home", priority: 4, flag: "/th.svg", route: "/thailand/home" },
