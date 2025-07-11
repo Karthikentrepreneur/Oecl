@@ -28,12 +28,18 @@ const countries = [{
     lng: 77.2844,
     address: "JA 511, DLF Tower A, Jasola District Centre, New Delhi, 110025",
     contacts: ["+91 9999022030"]
+  },{
+    name: "Chennai Warehouse",
+    lat: 13.0231,
+    lng: 79.9632,
+    address: "Survey No.209/6A(Part)209/6B(Part), Mannur & Valarpuram Village, Perambakkam Road, Sriperumbudur Taluk, Kanchipuram District-602105",
+    contacts: ["+91 9994355523"]
   }, {
     name: "Chennai",
-    lat: 13.0827,
-    lng: 80.2707,
-    address: "Old No G1, New G3, KAIZEN 2nd & 3rd Floor Plot No, 565Q, G Block, Annanagar East, Chennai, Tamil Nadu 600102",
-    contacts: ["+91 9123523496"]
+    lat: 13.0068,
+    lng: 80.2048,
+    address: "Roma Building, Door No. 10, 3rd Floor, G.S.T. Road, Alandur, Chennai-600 016",
+    contacts: ["044 4689 4646"]
   }, {
     name: "Bangalore",
     lat: 12.9716,
