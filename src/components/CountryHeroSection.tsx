@@ -15,64 +15,112 @@ const HeroSection = ({ country }: HeroSectionProps) => {
     india: {
       images: [
         {
-          url: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-          title: "INDIA LOGISTICS",
-          description: "Your trusted partner for comprehensive logistics solutions across India.",
-          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+          url: "/14.png",
+          title: "OECL",
+          description: "Vital Link to Enhance Your Supply Chain",
+          gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
-          url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-          title: "FREIGHT FORWARDING",
-          description: "Seamless freight services connecting India to the world.",
-          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+          url: "/16.png",
+          title: "AIR FREIGHT",
+          description: "We deliver flexible, global airfreight solutions"",
+          gradient: "from-black/60 via-black/40 to-black/60"
+        },
+          {
+          url: "/4.png",
+          title: "WAREHOUSE MANAGEMENT",
+          description: "A cutting edge solutions with advanced WMS .",
+          gradient: "from-black/60 via-black/40 to-black/60"
+        },
+        {
+          url: "/14.png",
+          title: "LIQUID CARGO TRANSPORTATION",
+          description: "Cost effective and safe transportation of liquid cargo",
+          gradient: "from-black/60 via-black/40 to-black/60"
         }
       ]
     },
     indonesia: {
       images: [
         {
-          url: "https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-          title: "INDONESIA MARITIME",
-          description: "Connecting the archipelago with world-class shipping solutions.",
-          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+          url: "/12.png",
+          title: "OECL",
+          description: "Vital Link to Enhance Your Supply Chain",
+          gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
-          url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-          title: "ISLAND LOGISTICS",
-          description: "Specialized logistics for Indonesia's unique geography.",
-          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+          url: "/4.png",
+          title: "LOGISTICS SERVICES",
+          description: "Supported through own offices and network of key partners around the world."",
+          gradient: "from-black/60 via-black/40 to-black/60"
+        },
+          {
+          url: "/5.png",
+          title: "WAREHOUSE MANAGEMENT",
+          description: "A cutting edge solutions with advanced WMS .",
+          gradient: "from-black/60 via-black/40 to-black/60"
+        },
+        {
+          url: "/9.png",
+          title: "LIQUID CARGO TRANSPORTATION",
+          description: "Cost effective and safe transportation of liquid cargo",
+          gradient: "from-black/60 via-black/40 to-black/60"
         }
       ]
     },
     malaysia: {
       images: [
-        {
-          url: "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-          title: "MALAYSIA HUB",
-          description: "Strategic logistics hub for Southeast Asian trade.",
-          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+       {
+          url: "/15.png",
+          title: "OECL",
+          description: "Vital Link to Enhance Your Supply Chain",
+          gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
-          url: "https://images.unsplash.com/photo-1568454537842-d933259bb258?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-          title: "TRADE GATEWAY",
-          description: "Your gateway to efficient cross-border logistics.",
-          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+          url: "/20.png",
+          title: "AIR FREIGHT",
+          description: "We deliver flexible, global airfreight solutions"",
+          gradient: "from-black/60 via-black/40 to-black/60"
+        },
+          {
+          url: "/5.png",
+          title: "WAREHOUSE MANAGEMENT",
+          description: "A cutting edge solutions with advanced WMS .",
+          gradient: "from-black/60 via-black/40 to-black/60"
+        },
+        {
+          url: "/9.png",
+          title: "LIQUID CARGO TRANSPORTATION",
+          description: "Cost effective and safe transportation of liquid cargo",
+          gradient: "from-black/60 via-black/40 to-black/60"
         }
       ]
     },
     thailand: {
       images: [
         {
-          url: "https://images.unsplash.com/photo-1539650116574-75c0c6d3e9e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-          title: "THAILAND EXPRESS",
-          description: "Fast and reliable logistics solutions throughout Thailand.",
-          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+          url: "/13.png",
+          title: "OECL",
+          description: "Vital Link to Enhance Your Supply Chain",
+          gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
-          url: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-          title: "REGIONAL NETWORK",
-          description: "Comprehensive coverage across the Thai region.",
-          gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+          url: "/17.png",
+          title: "AIR FREIGHT",
+          description: "We deliver flexible, global airfreight solutions"",
+          gradient: "from-black/60 via-black/40 to-black/60"
+        },
+          {
+          url: "/8.png",
+          title: "WAREHOUSE MANAGEMENT",
+          description: "A cutting edge solutions with advanced WMS .",
+          gradient: "from-black/60 via-black/40 to-black/60"
+        },
+        {
+          url: "/10.png",
+          title: "LIQUID CARGO TRANSPORTATION",
+          description: "Cost effective and safe transportation of liquid cargo",
+          gradient: "from-black/60 via-black/40 to-black/60"
         }
       ]
     }
