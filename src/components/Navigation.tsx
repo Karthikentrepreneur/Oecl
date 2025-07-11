@@ -49,7 +49,7 @@ const Navigation = () => {
           {/* Country Selector & Quote Button */}
           <div className="hidden md:flex items-center gap-4">
             <CountrySelector />
-            <Link to="/ContactForm">
+            <Link to="/Contact">
               <Button className="bg-kargon-red hover:bg-kargon-red/90 text-white rounded-md">
                 GET QUOTE
               </Button>
@@ -92,7 +92,7 @@ const Navigation = () => {
                 <CountrySelector />
               </div>
 
-              <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+              <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
                 <Button className="bg-kargon-red hover:bg-kargon-red/90 text-white w-full rounded-md mt-4">
                   GET QUOTE
                 </Button>
