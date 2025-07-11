@@ -1,49 +1,58 @@
-
-import { Truck, Plane, Ship, Box, UserCheck, Container, Cuboid } from "lucide-react";
+import React from "react";
+import {
+  Truck,
+  Plane,
+  Ship,
+  Box,
+  UserCheck,
+  Container,
+  Cuboid,
+  LucideIcon,
+} from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import ScrollAnimation from "./ScrollAnimation";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
-const allServices = [
+interface ServiceItem {
+  id: number;
+  title: string;
+  icon: LucideIcon;
+  image: string;
+  slug: string;
+  delay: number;
+}
+
+const allServices: ServiceItem[] = [
   { id: 1, title: "Air Freight", icon: Plane, image: "/airfreight.png", slug: "air-freight", delay: 100 },
   { id: 2, title: "Ocean Freight", icon: Ship, image: "/oceanfreight.png", slug: "ocean-freight", delay: 200 },
   { id: 3, title: "Warehousing", icon: Box, image: "/warehousing.png", slug: "warehousing", delay: 0 },
   { id: 4, title: "Customs Clearance", icon: UserCheck, image: "/customclearance.png", slug: "customs-clearance", delay: 300 },
-  { id: 5, title: "Liner Agency", icon: Container, image: "/linearagency.png", slug: "linear-agency", delay: 300 },
-  { id: 6, title: "Liquid Cargo Transportation", icon: Truck, image: "/liquidtransportation.png", slug: "liquid-cargo", delay: 0 },
+  { id: 5, title: "Liner Agency", icon: Container, image: "/linearagency.png", slug: "liner-agency", delay: 300 },
+  { id: 6, title: "Liquid Logistics", icon: Truck, image: "/liquidtransportation.png", slug: "liquid-logistics", delay: 0 },
   { id: 7, title: "Consolidation", icon: Cuboid, image: "/consolidation.png", slug: "consolidation", delay: 100 },
   { id: 8, title: "Project Cargo", icon: Container, image: "/projectcargo.png", slug: "project-cargo", delay: 200 },
   { id: 9, title: "3PL", icon: Cuboid, image: "/3pl.png", slug: "3pl", delay: 300 },
+  { id: 10, title: "Digital Forwarding", icon: Plane, image: "/digitalforwarding.png", slug: "digital-forwarding", delay: 200 },
+  { id: 11, title: "Regional Distribution", icon: Truck, image: "/regionaldistribution.png", slug: "regional-distribution", delay: 100 },
 ];
 
-const countryServiceFilters = {
-  'India': ['Ocean Freight', 'Air Freight', 'Liquid Cargo Transportation', 'Liner Agency', 'Project Cargo', 'Consolidation'],
-  'Malaysia': ['Ocean Freight', 'Air Freight', 'Customs Clearance', 'Liner Agency', 'Project Cargo', 'Consolidation'],
-  'Indonesia': ['Ocean Freight', 'Air Freight', 'Customs Clearance', 'Liquid Cargo Transportation', 'Warehousing', 'Consolidation'],
-  'Thailand': ['Project Cargo', 'Liner Agency', 'Customs Clearance', 'Liquid Cargo Transportation', '3PL', 'Consolidation']
+const countryServiceFilters: Record<string, string[]> = {
+  India: ["Customs Clearance", "Digital Forwarding", "Warehousing", "Regional Distribution"],
+  Indonesia: ["Project Cargo", "Digital Forwarding", "Liner Agency"],
+  Malaysia: ["Liquid Logistics", "Digital Forwarding", "Warehousing", "Regional Distribution"],
+  Thailand: ["Air Freight", "Ocean Freight", "Warehousing", "Regional Distribution"],
 };
 
-const ServicesSection = () => {
+const ServicesSection: React.FC = () => {
   const location = useLocation();
   const currentCountry = getCurrentCountryFromPath(location.pathname);
-  
-  // Determine which services to show based on current country
-  const getFilteredServices = () => {
-    const serviceNames = countryServiceFilters[currentCountry.name];
-    if (serviceNames) {
-      return allServices.filter(service => serviceNames.includes(service.title));
-    }
-    
-    // Default: show all services for Singapore
-    return allServices;
-  };
 
-  // Determine the services link based on current country
-  const getServicesLink = () => {
-    if (currentCountry.name === 'India') {
-      return '/india/services';
+  const getFilteredServices = (): ServiceItem[] => {
+    const serviceTitles = countryServiceFilters[currentCountry.name];
+    if (serviceTitles) {
+      return allServices.filter(service => serviceTitles.includes(service.title));
     }
-    return '/services';
+    return allServices; // Default: show all services
   };
 
   const services = getFilteredServices();
@@ -62,7 +71,7 @@ const ServicesSection = () => {
           {services.map(service => (
             <ScrollAnimation key={service.id} delay={service.delay}>
               <Link
-                to={`/services/${service.slug}`}
+                to="/services"
                 className="group bg-zinc-900 rounded-xl overflow-hidden shadow-lg hover:shadow-red-600/40 transition-shadow duration-300"
               >
                 <div className="relative w-full h-56 overflow-hidden">
@@ -93,7 +102,7 @@ const ServicesSection = () => {
 
         <div className="text-center mt-12">
           <Link 
-            to={getServicesLink()}
+            to="/services"
             className="inline-block bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-300"
           >
             View All Services
