@@ -29,7 +29,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           {
           url: "/4.png",
           title: "WAREHOUSE MANAGEMENT",
-          description: "A cutting edge solutions with advanced WMS .",
+          description: "A cutting edge solutions with advanced WMS",
           gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
@@ -51,13 +51,13 @@ const HeroSection = ({ country }: HeroSectionProps) => {
         {
           url: "/4.png",
           title: "LOGISTICS SERVICES",
-          description: "Supported through own offices and network of key partners around the world."",
+          description: "Supported through own offices and network of key partners around the world.",
           gradient: "from-black/60 via-black/40 to-black/60"
         },
           {
           url: "/5.png",
           title: "WAREHOUSE MANAGEMENT",
-          description: "A cutting edge solutions with advanced WMS .",
+          description: "A cutting edge solutions with advanced WMS.",
           gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
@@ -85,7 +85,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           {
           url: "/5.png",
           title: "WAREHOUSE MANAGEMENT",
-          description: "A cutting edge solutions with advanced WMS .",
+          description: "A cutting edge solutions with advanced WMS.",
           gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
