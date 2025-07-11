@@ -25,7 +25,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
-          url: "/16.png",
+          url: "/18.png",
           title: "AIR FREIGHT",
           description: "We deliver flexible, global airfreight solutions",
           gradient: "from-black/60 via-black/40 to-black/60"
@@ -37,7 +37,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
-          url: "/14.png",
+          url: "/11.png",
           title: "LIQUID CARGO TRANSPORTATION",
           description: "Cost effective and safe transportation of liquid cargo",
           gradient: "from-black/60 via-black/40 to-black/60"
@@ -93,7 +93,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
-          url: "/9.png",
+          url: "/11.png",
           title: "LIQUID CARGO TRANSPORTATION",
           description: "Cost effective and safe transportation of liquid cargo",
           gradient: "from-black/60 via-black/40 to-black/60"
