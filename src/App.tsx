@@ -62,7 +62,7 @@ const App = () => {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/services" element={<Services />} />
-                <Route path="/:country/services/air-freight" element={<AirFreight />} />
+                <Route path="/services/air-freight" element={<AirFreight />} />
                 <Route path="/services/ocean-freight" element={<OceanFreight />} />
                 <Route path="/services/warehousing" element={<Warehousing />} />
                  <Route path="/services/project-cargo" element={<ProjectCargo />} />
@@ -104,6 +104,39 @@ const App = () => {
                 <Route path="/thailand/about-us" element={<AboutUs />} />
                 <Route path="/thailand/contact" element={<Contact />} />
                 <Route path="/thailand/blogs" element={<Blog />} />
+
+                <Route path="/india/services/air-freight" element={<AirFreight />} />
+<Route path="/india/services/ocean-freight" element={<OceanFreight />} />
+<Route path="/india/services/warehousing" element={<Warehousing />} />
+<Route path="/india/services/project-cargo" element={<ProjectCargo />} />
+<Route path="/india/services/customs-clearance" element={<CustomsClearance />} />
+<Route path="/india/services/linear-agency" element={<LinearAgency />} />
+<Route path="/india/services/liquid-cargo" element={<LiquidCargo />} />
+
+<Route path="/malaysia/services/air-freight" element={<AirFreight />} />
+<Route path="/malaysia/services/ocean-freight" element={<OceanFreight />} />
+<Route path="/malaysia/services/warehousing" element={<Warehousing />} />
+<Route path="/malaysia/services/project-cargo" element={<ProjectCargo />} />
+<Route path="/malaysia/services/customs-clearance" element={<CustomsClearance />} />
+<Route path="/malaysia/services/linear-agency" element={<LinearAgency />} />
+<Route path="/malaysia/services/liquid-cargo" element={<LiquidCargo />} />
+
+<Route path="/thailand/services/air-freight" element={<AirFreight />} />
+<Route path="/thailand/services/ocean-freight" element={<OceanFreight />} />
+<Route path="/thailand/services/warehousing" element={<Warehousing />} />
+<Route path="/thailand/services/project-cargo" element={<ProjectCargo />} />
+<Route path="/thailand/services/customs-clearance" element={<CustomsClearance />} />
+<Route path="/thailand/services/linear-agency" element={<LinearAgency />} />
+<Route path="/thailand/services/liquid-cargo" element={<LiquidCargo />} />
+
+<Route path="/indonesia/services/air-freight" element={<AirFreight />} />
+<Route path="/indonesia/services/ocean-freight" element={<OceanFreight />} />
+<Route path="/indonesia/services/warehousing" element={<Warehousing />} />
+<Route path="/indonesia/services/project-cargo" element={<ProjectCargo />} />
+<Route path="/indonesia/services/customs-clearance" element={<CustomsClearance />} />
+<Route path="/indonesia/services/linear-agency" element={<LinearAgency />} />
+<Route path="/indonesia/services/liquid-cargo" element={<LiquidCargo />} />
+
                 
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
