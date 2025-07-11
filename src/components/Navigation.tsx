@@ -35,7 +35,7 @@ const Navigation = () => {
             <Link to={getNavLink("/about-us")} className={`nav-link font-medium text-black hover:text-kargon-red ${isActive(getNavLink("/about-us")) ? "text-kargon-red" : ""}`}>
               ABOUT US
             </Link>
-            <Link to={currentCountry.code === 'IN' ? "/india/services" : "/services"} className={`nav-link font-medium text-black hover:text-kargon-red ${isActive(currentCountry.code === 'IN' ? "/india/services" : "/services") ? "text-kargon-red" : ""}`}>
+            <Link to={getNavLink("/services")} className={`nav-link font-medium text-black hover:text-kargon-red ${isActive(getNavLink("/services")) ? "text-kargon-red" : ""}`}>
               SERVICES
             </Link>
             <Link to={getNavLink("/blogs")} className={`nav-link font-medium text-black hover:text-kargon-red ${isActive("/blog") ? "text-kargon-red" : ""}`}>
@@ -78,7 +78,7 @@ const Navigation = () => {
               <Link to={getNavLink("/about-us")} className={`font-medium text-black hover:text-kargon-red ${isActive(getNavLink("/about-us")) ? "text-kargon-red" : ""}`} onClick={() => setIsMenuOpen(false)}>
                 ABOUT US
               </Link>
-              <Link to={currentCountry.code === 'IN' ? "/india/services" : "/services"} className={`font-medium text-black hover:text-kargon-red ${isActive(currentCountry.code === 'IN' ? "/india/services" : "/services") ? "text-kargon-red" : ""}`} onClick={() => setIsMenuOpen(false)}>
+              <Link to={getNavLink("/services")} className={`font-medium text-black hover:text-kargon-red ${isActive(getNavLink("/services")) ? "text-kargon-red" : ""}`} onClick={() => setIsMenuOpen(false)}>
                 SERVICES
               </Link>
               <Link to="/blog" className={`font-medium text-black hover:text-kargon-red ${isActive("/blog") ? "text-kargon-red" : ""}`} onClick={() => setIsMenuOpen(false)}>
