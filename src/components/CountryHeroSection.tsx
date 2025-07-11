@@ -23,7 +23,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
         {
           url: "/16.png",
           title: "AIR FREIGHT",
-          description: "We deliver flexible, global airfreight solutions"",
+          description: "We deliver flexible, global airfreight solutions",
           gradient: "from-black/60 via-black/40 to-black/60"
         },
           {
@@ -79,7 +79,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
         {
           url: "/20.png",
           title: "AIR FREIGHT",
-          description: "We deliver flexible, global airfreight solutions"",
+          description: "We deliver flexible, global airfreight solutions",
           gradient: "from-black/60 via-black/40 to-black/60"
         },
           {
@@ -107,7 +107,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
         {
           url: "/17.png",
           title: "AIR FREIGHT",
-          description: "We deliver flexible, global airfreight solutions"",
+          description: "We deliver flexible, global airfreight solutions",
           gradient: "from-black/60 via-black/40 to-black/60"
         },
           {
