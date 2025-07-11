@@ -82,19 +82,19 @@ const App = () => {
                 
                 {/* Country-specific routes */}
                 <Route path="/india/home" element={<IndiaHome />} />
-                <Route path="/india/services" element={<IndiaServices />} />
+                <Route path="/india/services" element={<Services />} />
                 <Route path="/india/about-us" element={<AboutUs />} />
                 <Route path="/india/contact" element={<Contact />} />
                 <Route path="/india/blogs" element={<Blog />} />
                 
                 <Route path="/indonesia/home" element={<IndonesiaHome />} />
-                <Route path="/indonesia/services" element={<IndonesiaServices />} />
+                <Route path="/indonesia/services" element={<Services />} />
                 <Route path="/indonesia/about-us" element={<AboutUs />} />
                 <Route path="/indonesia/contact" element={<Contact />} />
                 <Route path="/indonesia/blogs" element={<Blog />} />
                 
                 <Route path="/malaysia/home" element={<MalaysiaHome />} />
-                <Route path="/malaysia/services" element={<MalaysiaServices />} />
+                <Route path="/malaysia/services" element={<Services />} />
                 <Route path="/malaysia/about-us" element={<AboutUs />} />
                 <Route path="/malaysia/contact" element={<Contact />} />
                 <Route path="/malaysia/blogs" element={<Blog />} />
