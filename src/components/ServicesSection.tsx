@@ -62,7 +62,7 @@ const ServicesSection = () => {
           {services.map(service => (
             <ScrollAnimation key={service.id} delay={service.delay}>
               <Link
-                to={`[currentCountry.name]/services/${service.slug}`}
+                to={`/services/${service.slug}`}
                 className="group bg-zinc-900 rounded-xl overflow-hidden shadow-lg hover:shadow-red-600/40 transition-shadow duration-300"
               >
                 <div className="relative w-full h-56 overflow-hidden">
