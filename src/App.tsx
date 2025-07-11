@@ -80,7 +80,7 @@ const App = () => {
               <Route path="/blog-admin" element={<BlogAdmin />} />
               <Route path="/blog/:slug" element={<BlogDetail />} />
 
-              {["india", "indonesia", "malaysia", "thailand", "singapore"].map(country => (
+              {["india", "indonesia", "malaysia", "home", "thailand", "singapore"].map(country => (
                 <>
                   <Route path={`/${country}/home`} element={<Index />} />
                   <Route path={`/${country}/services`} element={<Services />} />
