@@ -22,7 +22,7 @@ interface CountryServicesProps {
   country?: 'india' | 'indonesia' | 'malaysia' | 'thailand';
 }
 
-const CountryServicesCards = ({ country }: CountryServicesProps) => {
+const CountryServicesCards = ({ country = 'india' }: CountryServicesProps) => {
   const countryServices: Record<string, ServiceCardProps[]> = {
     india: [
       {
@@ -125,7 +125,7 @@ const CountryServicesCards = ({ country }: CountryServicesProps) => {
       delay={delay}
       className="group relative overflow-hidden bg-white shadow-lg rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
     >
-      <Link to={`/services/${slug}`}>
+      <Link to={`/${country}/services/${slug}`}>
         <div className="aspect-video overflow-hidden">
           <img
             src={image}
