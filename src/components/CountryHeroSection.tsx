@@ -131,13 +131,13 @@ const HeroSection = ({ country }: HeroSectionProps) => {
       url: "/h1.png",
       title: "OECL",
       description: "Vital Link to Enhance Your Supply Chain.",
-      gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+      gradient: "from-black/60 via-black/40 to-black/60"
     },
     {
       url: "/h2.png", 
       title: "LOGISTICS SERVICES",
       description: "Supported through own offices and network of key partners around the world.",
-      gradient: "from-red-600/80 via-red-500/60 to-red-600/80"
+      gradient: "from-black/60 via-black/40 to-black/60"
     }
   ];
 
