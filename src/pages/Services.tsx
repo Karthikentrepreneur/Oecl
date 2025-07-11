@@ -27,39 +27,46 @@ interface Service {
 
 const ServiceCard: React.FC<Service & { country: string }> = ({
   title, description, icon: Icon, image, slug, country
-}) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    viewport={{ once: true }}
-    className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group grid grid-cols-1 md:grid-cols-2"
-  >
-    <div className="w-full h-48 md:h-64">
-      <img
-        src={image}
-        alt={title}
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-      />
-    </div>
-    <div className="p-6 flex flex-col justify-center bg-gray-200">
-      <div className="bg-red-600/10 text-red-600 p-2 rounded-full inline-block mb-2 w-fit">
-        <Icon className="w-5 h-5" />
+}) => {
+  // Avoid redirecting to /services/services
+  const url = slug === "services"
+    ? `/${country}/services`
+    : `/${country}/services/${slug}`;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+      className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group grid grid-cols-1 md:grid-cols-2"
+    >
+      <div className="w-full h-48 md:h-64">
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
       </div>
-      <h3 className="text-xl font-semibold text-black mb-3">{title}</h3>
-      <p className="text-gray-600 text-sm mb-4 line-clamp-4">{description}</p>
-      <Link
-        to={`/${country}/services/${slug}`}
-        className="text-red-600 font-medium hover:text-red-800 inline-flex items-center text-sm"
-      >
-        Learn More
-        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </Link>
-    </div>
-  </motion.div>
-);
+      <div className="p-6 flex flex-col justify-center bg-gray-200">
+        <div className="bg-red-600/10 text-red-600 p-2 rounded-full inline-block mb-2 w-fit">
+          <Icon className="w-5 h-5" />
+        </div>
+        <h3 className="text-xl font-semibold text-black mb-3">{title}</h3>
+        <p className="text-gray-600 text-sm mb-4 line-clamp-4">{description}</p>
+        <Link
+          to={url}
+          className="text-red-600 font-medium hover:text-red-800 inline-flex items-center text-sm"
+        >
+          Learn More
+          <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </Link>
+      </div>
+    </motion.div>
+  );
+};
 
 const Services: React.FC = () => {
   const location = useLocation();
