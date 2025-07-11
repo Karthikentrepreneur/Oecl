@@ -2,61 +2,33 @@ import { Truck, Plane, Ship, Box, UserCheck, Container, Cuboid } from "lucide-re
 import { Link, useLocation } from "react-router-dom";
 import ScrollAnimation from "./ScrollAnimation";
 
-// Updated utility to return both name and slug
-const getCurrentCountryFromPath = (pathname) => {
+// Utility to get country slug from URL path
+const getCurrentCountryFromPath = (pathname: string) => {
   const segments = pathname.split('/');
   const countrySlug = segments[1]?.toLowerCase();
 
-  const map = {
-    india: "India",
-    malaysia: "Malaysia",
-    thailand: "Thailand",
-    indonesia: "Indonesia",
-  };
+  const validCountries = ['india', 'malaysia', 'indonesia', 'thailand'];
+  const slug = validCountries.includes(countrySlug) ? countrySlug : 'singapore';
 
-  const name = map[countrySlug] || "Singapore"; // Default
-  return { name, slug: countrySlug || "singapore" };
+  return { slug };
 };
 
+// All services list (shown for all countries)
 const allServices = [
   { id: 1, title: "Air Freight", icon: Plane, image: "/airfreight.png", slug: "air-freight", delay: 100 },
   { id: 2, title: "Ocean Freight", icon: Ship, image: "/oceanfreight.png", slug: "ocean-freight", delay: 200 },
   { id: 3, title: "Warehousing", icon: Box, image: "/warehousing.png", slug: "warehousing", delay: 0 },
   { id: 4, title: "Customs Clearance", icon: UserCheck, image: "/customclearance.png", slug: "customs-clearance", delay: 300 },
-  { id: 5, title: "Liner Agency", icon: Container, image: "/linearagency.png", slug: "linear-agency", delay: 300 },
+  { id: 5, title: "Liner Agency", icon: Container, image: "/linearagency.png", slug: "liner-agency", delay: 300 },
   { id: 6, title: "Liquid Cargo Transportation", icon: Truck, image: "/liquidtransportation.png", slug: "liquid-cargo", delay: 0 },
   { id: 7, title: "Consolidation", icon: Cuboid, image: "/consolidation.png", slug: "consolidation", delay: 100 },
   { id: 8, title: "Project Cargo", icon: Container, image: "/projectcargo.png", slug: "project-cargo", delay: 200 },
   { id: 9, title: "3PL", icon: Cuboid, image: "/3pl.png", slug: "3pl", delay: 300 },
 ];
 
-const countryServiceFilters = {
-  India: ['Ocean Freight', 'Air Freight', 'Liquid Cargo Transportation', 'Liner Agency', 'Project Cargo', 'Consolidation'],
-  Malaysia: ['Ocean Freight', 'Air Freight', 'Customs Clearance', 'Liner Agency', 'Project Cargo', 'Consolidation'],
-  Indonesia: ['Ocean Freight', 'Air Freight', 'Customs Clearance', 'Liquid Cargo Transportation', 'Warehousing', 'Consolidation'],
-  Thailand: ['Project Cargo', 'Liner Agency', 'Customs Clearance', 'Liquid Cargo Transportation', '3PL', 'Consolidation']
-};
-
 const ServicesSection = () => {
   const location = useLocation();
-  const currentCountry = getCurrentCountryFromPath(location.pathname);
-
-  const getFilteredServices = () => {
-    const serviceNames = countryServiceFilters[currentCountry.name];
-    if (serviceNames) {
-      return allServices.filter(service => serviceNames.includes(service.title));
-    }
-    return allServices; // Default for Singapore or unmatched
-  };
-
-  const getServicesLink = () => {
-    if (currentCountry.slug && currentCountry.slug !== 'singapore') {
-      return `/${currentCountry.slug}/services`;
-    }
-    return '/services';
-  };
-
-  const services = getFilteredServices();
+  const { slug: currentCountrySlug } = getCurrentCountryFromPath(location.pathname);
 
   return (
     <section className="py-20 bg-black">
@@ -69,10 +41,10 @@ const ServicesSection = () => {
         </ScrollAnimation>
 
         <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map(service => (
+          {allServices.map(service => (
             <ScrollAnimation key={service.id} delay={service.delay}>
               <Link
-                to={`/${currentCountry.slug}/services/${service.slug}`}
+                to={`/${currentCountrySlug}/services/${service.slug}`}
                 className="group bg-zinc-900 rounded-xl overflow-hidden shadow-lg hover:shadow-red-600/40 transition-shadow duration-300"
               >
                 <div className="relative w-full h-56 overflow-hidden">
@@ -103,7 +75,7 @@ const ServicesSection = () => {
 
         <div className="text-center mt-12">
           <Link 
-            to={getServicesLink()}
+            to={`/${currentCountrySlug}/services`}
             className="inline-block bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-300"
           >
             View All Services
