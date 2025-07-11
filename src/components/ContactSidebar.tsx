@@ -24,10 +24,10 @@ const countries = [{
     contacts: ["Export customer service: +91 2245174102, +91 2245174109, +91 2245174118", "Export docs team: +91 2245174103, +91 2245174105", "Import docs team: +91 2245174104, +91 2245174106", "Import customer service: +91 2245174113, +91 2245174110, +91 2245174107, +91 2245174112"]
   }, {
     name: "Delhi",
-    lat: 28.5371,
-    lng: 77.2844,
-    address: "JA 511, DLF Tower A, Jasola District Centre, New Delhi, 110025",
-    contacts: ["+91 9999022030"]
+    lat: 28.5894,
+    lng: 77.0318,
+    address: "Plot No. 15, 1st Floor,Block C, Pocket 8, Sector 17, Dwarka,New Delhi 110075",
+    contacts: ["+91 11 41088871"]
   },{
     name: "Chennai Warehouse",
     lat: 13.0231,
@@ -42,16 +42,16 @@ const countries = [{
     contacts: ["044 4689 4646"]
   }, {
     name: "Bangalore",
-    lat: 12.9716,
-    lng: 77.5946,
-    address: "No 2M-216, First Floor, 2nd Main, East Of NGEF Layout, Kasturinagar, Bangalore-560043",
-    contacts: ["+91 9986949743"]
+    lat: 13.0185,
+    lng: 77.6419,
+    address: "3C-964 IIIrd Cross Street,HRBR LAYOUT 1st Block,Kalayan Nagar Bannaswadi,Bengaluru - 560043.",
+    contacts: ["+91 9841676259"]
   }, {
     name: "Kolkata",
-    lat: 22.5726,
-    lng: 88.3639,
-    address: "Room No - 29, 4th Floor, 6, Jawaharlal Nehru Rd, Siddha Esplanade, Adjacent to Metro Central (Previously Metro Cinema), Kolkata, West Bengal 700013",
-    contacts: ["+91 6290921534"]
+    lat: 22.5745,
+    lng: 88.4353,
+    address: "Imagine Techpark, Unit No. 10,19th. Floor, Block DN 6, Sector - VSalt Lake City, Kolkata,West Bengal, India - 700091",
+    contacts: ["+91 33 4814 9162 / 63"]
   }]
 }, {
   code: "my",
