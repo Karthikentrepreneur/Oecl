@@ -18,10 +18,10 @@ const countries = [{
   lng: 78.9629,
   cities: [{
     name: "Mumbai",
-    lat: 19.0760,
-    lng: 72.8777,
-    address: "407, mayuresh planet, plot no - 42 & 43, sector-15, cbd belapur, navi mumbai, maharashtra, 400614",
-    contacts: ["Export customer service: +91 2245174102, +91 2245174109, +91 2245174118", "Export docs team: +91 2245174103, +91 2245174105", "Import docs team: +91 2245174104, +91 2245174106", "Import customer service: +91 2245174113, +91 2245174110, +91 2245174107, +91 2245174112"]
+    lat: 19.1061,
+    lng: 72.8830,
+    address: "Town Center - 2,Office No.607,6th Floor, Marol,Andheri Kurla Road,Andheri East, Mumbai - 400059.",
+    contacts: ["+91 8879756838, 022-35131688 / 35113475 / 35082586"]
   }, {
     name: "Delhi",
     lat: 28.5894,
@@ -41,6 +41,18 @@ const countries = [{
     address: "Roma Building, Door No. 10, 3rd Floor, G.S.T. Road, Alandur, Chennai-600 016",
     contacts: ["044 4689 4646"]
   }, {
+    name: "Kerala",
+    lat: 9.9323,
+    lng: 76.2996,
+    address: "CC 59/801A Elizabeth Memorial Building, Thevara Ferry Jn, Cochin 682013 , Kerala.",
+    contacts: ["+91 484 4019192 / 93"]
+  },{
+    name: "Hyderabad",
+    lat: 17.4425,
+    lng: 78.4735,
+    address: "H.No. 1-8-450/1/A-7 Indian Airlines colony ,Opp Police Lines, BegumpetHyderabad-500016,Telangana",
+    contacts: ["040-49559704"]
+  },{
     name: "Bangalore",
     lat: 13.0185,
     lng: 77.6419,
