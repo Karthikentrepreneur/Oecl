@@ -25,13 +25,15 @@ interface Service {
   slug: string;
 }
 
-const ServiceCard: React.FC<Service & { country: string }> = ({
-  title, description, icon: Icon, image, slug, country
+interface ServiceCardProps extends Service {
+  baseUrl: string;
+}
+
+const ServiceCard: React.FC<ServiceCardProps> = ({
+  title, description, icon: Icon, image, slug, baseUrl
 }) => {
-  // Avoid redirecting to /services/services
-  const url = slug === "services"
-    ? `/${country}/services`
-    : `/${country}/services/${slug}`;
+  // If slug is 'services', link to baseUrl only to avoid /services/services
+  const url = slug === 'services' ? baseUrl : `${baseUrl}/${slug}`;
 
   return (
     <motion.div
@@ -70,7 +72,30 @@ const ServiceCard: React.FC<Service & { country: string }> = ({
 
 const Services: React.FC = () => {
   const location = useLocation();
-  const countrySlug = location.pathname.split("/")[1] || "india"; // fallback to 'india' if empty
+  const pathSegments = location.pathname.split('/').filter(Boolean);
+
+  // Determine if first segment is 'services' (no country), or country slug
+  const firstSegment = pathSegments[0] || "";
+  const secondSegment = pathSegments[1] || "";
+
+  // baseUrl for links:
+  // If first segment is 'services' (like /services), baseUrl = '/services'
+  // Else if path is /:country/services or /:country, baseUrl = '/:country/services'
+  // This handles both country-specific and default cases
+
+  let baseUrl = "/services"; // default
+
+  if (firstSegment && firstSegment !== "services") {
+    // E.g. /india/services or /india/...
+    if (secondSegment === "services") {
+      baseUrl = `/${firstSegment}/services`;
+    } else {
+      // If no /services in path, still add it for service links
+      baseUrl = `/${firstSegment}/services`;
+    }
+  } else if (firstSegment === "services") {
+    baseUrl = "/services";
+  }
 
   const allServices: Service[] = [
     {
@@ -198,8 +223,12 @@ const Services: React.FC = () => {
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {allServices.map((service) => (
-                <ServiceCard key={service.id} {...service} country={countrySlug} />
+              {allServices.map(service => (
+                <ServiceCard
+                  key={service.id}
+                  {...service}
+                  baseUrl={baseUrl}
+                />
               ))}
             </div>
           </div>
