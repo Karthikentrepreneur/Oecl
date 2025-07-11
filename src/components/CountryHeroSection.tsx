@@ -201,7 +201,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
 
   return (
     <>
-      <section className="relative min-h-screen overflow-hidden bg-red-900 text-white">
+      <section className="relative min-h-screen overflow-hidden  text-white">
         {/* Animated Background Particles */}
         <div className="absolute inset-0 z-0">
           {[...Array(50)].map((_, i) => (
@@ -237,7 +237,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
               <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient} z-[1]`} />
             </div>
           ))}
-          <div className="absolute inset-0 bg-red-900/40 z-[2]" />
+          <div className="absolute inset-0  z-[2]" />
         </div>
 
         {/* Main Content */}
