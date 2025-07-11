@@ -1,19 +1,17 @@
 import { Truck, Plane, Ship, Box, UserCheck, Container, Cuboid } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ScrollAnimation from "./ScrollAnimation";
+import { useEffect } from "react";
 
-// Utility to get country slug from URL path
 const getCurrentCountryFromPath = (pathname: string) => {
   const segments = pathname.split('/');
   const countrySlug = segments[1]?.toLowerCase();
 
-  const validCountries = ['india', 'malaysia', 'indonesia', 'thailand'];
-  const slug = validCountries.includes(countrySlug) ? countrySlug : 'singapore';
-
-  return { slug };
+  const validCountries = ['india', 'malaysia', 'thailand', 'indonesia'];
+  const slug = validCountries.includes(countrySlug) ? countrySlug : 'india'; // Default to India
+  return slug;
 };
 
-// All services list (shown for all countries)
 const allServices = [
   { id: 1, title: "Air Freight", icon: Plane, image: "/airfreight.png", slug: "air-freight", delay: 100 },
   { id: 2, title: "Ocean Freight", icon: Ship, image: "/oceanfreight.png", slug: "ocean-freight", delay: 200 },
@@ -28,7 +26,16 @@ const allServices = [
 
 const ServicesSection = () => {
   const location = useLocation();
-  const { slug: currentCountrySlug } = getCurrentCountryFromPath(location.pathname);
+  const navigate = useNavigate();
+
+  const currentCountrySlug = getCurrentCountryFromPath(location.pathname);
+
+  // Optional: Redirect from root or /services to /india/services
+  useEffect(() => {
+    if (!location.pathname.includes('/services')) {
+      navigate('/india/services');
+    }
+  }, [location.pathname, navigate]);
 
   return (
     <section className="py-20 bg-black">
@@ -74,7 +81,7 @@ const ServicesSection = () => {
         </div>
 
         <div className="text-center mt-12">
-          <Link 
+          <Link
             to={`/${currentCountrySlug}/services`}
             className="inline-block bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-300"
           >
