@@ -82,8 +82,6 @@ const App = () => {
 
               {["india", "indonesia", "malaysia", "home", "thailand", "singapore"].map(country => (
                 <>
-                  <Route path={`/${country}`} element={<Index />} />
-                  <Route path={`/${country}/home`} element={<Index />} />
                   <Route path={`/${country}/services`} element={<Services />} />
                   <Route path={`/${country}/about-us`} element={<AboutUs />} />
                   <Route path={`/${country}/contact`} element={<Contact />} />
@@ -100,6 +98,17 @@ const App = () => {
                   <Route path={`/${country}/services/liner-agency`} element={<LinerAgency />} />
                 </>
               ))}
+
+                  <Route path="/india/home" element={<IndiaHome />} />
+                 <Route path="/india" element={<IndiaHome />} />                                
+                 <Route path="/indonesia/home" element={<IndonesiaHome />} />
+                 <Route path="/indonesia" element={<IndonesiaHome />} />                              
+                 <Route path="/malaysia/home" element={<MalaysiaHome />} />
+                 <Route path="/malaysia" element={<MalaysiaHome />} />                                
+                <Route path="/thailand/home" element={<ThailandHome />} />
+                <Route path="/thailand" element={<ThailandHome />} />
+                <Route path="/Singapore/home" element={<ThailandHome />} />
+                <Route path="/Singapore" element={<ThailandHome />} />
 
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
