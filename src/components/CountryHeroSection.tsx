@@ -59,7 +59,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
-          url: "/5.png",
+          url: "/warehose5.png",
           title: "WAREHOUSE MANAGEMENT",
           description: "A cutting edge solutions with advanced WMS.",
           gradient: "from-black/60 via-black/40 to-black/60"
