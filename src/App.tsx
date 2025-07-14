@@ -82,6 +82,7 @@ const App = () => {
 
               {["india", "indonesia", "malaysia", "home", "thailand", "singapore"].map(country => (
                 <>
+                  <Route path={`/${country}`} element={<Index />} />
                   <Route path={`/${country}/home`} element={<Index />} />
                   <Route path={`/${country}/services`} element={<Services />} />
                   <Route path={`/${country}/about-us`} element={<AboutUs />} />
