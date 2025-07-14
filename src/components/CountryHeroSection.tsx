@@ -25,13 +25,13 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
-          url: "/18.png",
+          url: "/air1.png",
           title: "AIR FREIGHT",
           description: "We deliver flexible, global airfreight solutions",
           gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
-          url: "/4.png",
+          url: "/whouse1.png",
           title: "WAREHOUSE MANAGEMENT",
           description: "A cutting edge solutions with advanced WMS",
           gradient: "from-black/60 via-black/40 to-black/60"
@@ -65,7 +65,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
-          url: "/9.png",
+          url: "/liquid9.png",
           title: "LIQUID CARGO TRANSPORTATION",
           description: "Cost effective and safe transportation of liquid cargo",
           gradient: "from-black/60 via-black/40 to-black/60"
@@ -87,7 +87,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
-          url: "/5.png",
+          url: "/whouse3.png",
           title: "WAREHOUSE MANAGEMENT",
           description: "A cutting edge solutions with advanced WMS.",
           gradient: "from-black/60 via-black/40 to-black/60"
