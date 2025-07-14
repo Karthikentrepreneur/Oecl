@@ -190,14 +190,6 @@ const HeroSection = ({ country }: HeroSectionProps) => {
       external: true,
       color: "from-red-500 to-red-700",
       hoverColor: "from-red-600 to-red-800"
-    },
-    {
-      icon: <Calendar className="w-4 h-4" />,
-      title: "Online Quote",
-      url: "/contact",
-      external: false,
-      color: "from-red-500 to-red-700",
-      hoverColor: "from-red-600 to-red-800"
     }
   ];
 
