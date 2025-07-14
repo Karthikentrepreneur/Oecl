@@ -57,13 +57,6 @@ const HeroSection = () => {
     external: true,
     color: "from-red-500 to-red-700",
     hoverColor: "from-red-600 to-red-800"
-  }, {
-    icon: <Calendar className="w-4 h-4" />,
-    title: "Online Quote",
-    url: "/contact",
-    external: false,
-    color: "from-red-500 to-red-700",
-    hoverColor: "from-red-600 to-red-800"
   }];
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 300);
@@ -127,7 +120,7 @@ const HeroSection = () => {
 
           {/* CTA Button */}
           <div className={`flex flex-col sm:flex-row gap-4 transform transition-all duration-1000 delay-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
-            <Link to="/signup" className="group hidden md:block">
+            <Link to="/contact" className="group hidden md:block">
               <button className="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl px-8 py-4 text-lg font-semibold flex items-center gap-3 shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-red-500/30 border border-red-500/30">
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
                 <Zap className="w-5 h-5" />
@@ -147,7 +140,7 @@ const HeroSection = () => {
       {/* Enhanced Portal Buttons - Made smaller and responsive */}
       <div className="absolute bottom-6 left-0 right-0 z-30 px-4">
         <div className={`max-w-7xl mx-auto transition-all duration-1000 delay-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
-          <div className="grid grid-cols-5 gap-1 sm:gap-2">
+          <div className="grid grid-cols-4 gap-1 sm:gap-2">
             {portalLinks.map((link, index) => {
             const ButtonContent = <div className="group relative overflow-hidden w-full h-14 sm:h-16 md:h-18 flex flex-col gap-1 items-center justify-center text-xs transition-all duration-300 rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 hover:-translate-y-1">
                   <div className={`absolute inset-0 bg-gradient-to-br ${link.color} opacity-90 group-hover:opacity-100 transition-opacity`} />
