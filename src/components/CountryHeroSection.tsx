@@ -65,7 +65,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
-          url: "/liquid9.png",
+          url: "/5.png",
           title: "LIQUID CARGO TRANSPORTATION",
           description: "Cost effective and safe transportation of liquid cargo",
           gradient: "from-black/60 via-black/40 to-black/60"
@@ -115,7 +115,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           gradient: "from-black/60 via-black/40 to-black/60"
         },
         {
-          url: "/8.png",
+          url: "/whouse2.png",
           title: "WAREHOUSE MANAGEMENT",
           description: "A cutting edge solutions with advanced WMS .",
           gradient: "from-black/60 via-black/40 to-black/60"
