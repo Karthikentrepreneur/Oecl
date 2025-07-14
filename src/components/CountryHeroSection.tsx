@@ -321,7 +321,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
         <div className={`max-w-7xl mx-auto transition-all duration-1000 delay-1000 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
         }`}>
-          <div className="grid grid-cols-5 gap-1 sm:gap-2">
+          <div className="grid grid-cols-4 gap-1 sm:gap-2">
             {portalLinks.map((link, index) => {
               const ButtonContent = (
                 <div className="group relative overflow-hidden w-full h-14 sm:h-16 md:h-18 flex flex-col gap-1 items-center justify-center text-xs transition-all duration-300 rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 hover:-translate-y-1">
