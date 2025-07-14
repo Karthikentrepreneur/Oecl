@@ -23,9 +23,9 @@ interface CountryData {
 
 const countries: CountryData[] = [
   { country: "SINGAPORE", company: "OECL", website: "https://www.oecl.sg/home", priority: 1, flag: "/sg.svg", route: "/home" },
-  { country: "MALAYSIA", company: "OECL", website: "https://www.oecl.sg/malaysia/home", priority: 2, flag: "/my.svg"}, 
-  { country: "INDONESIA", company: "OECL", website: "https://www.oecl.sg/indonesia/home", priority: 3, flag: "/id.svg"},
-  { country: "THAILAND", company: "OECL", website: "https://www.oecl.sg/thailand/home", priority: 4, flag: "/th.svg"},
+  { country: "MALAYSIA", company: "OECL", website: "https://www.oecl.vercel.app/malaysia/home", priority: 2, flag: "/my.svg"}, 
+  { country: "INDONESIA", company: "OECL", website: "https://www.oecl.vercel.app/indonesia/home", priority: 3, flag: "/id.svg"},
+  { country: "THAILAND", company: "OECL", website: "https://www.oecl.vercel.app/thailand/home", priority: 4, flag: "/th.svg"},
   { country: "MYANMAR", company: "GC", website: "https://www.globalconsol.com", priority: 5, flag: "/mm.svg" },
   { country: "CHINA", company: "Haixun", website: "https://www.haixun.co/", priority: 6, flag: "/cn.svg" },
   { country: "AUSTRALIA", company: "Moltech AU", website: "https://www.moltech.com.au", priority: 7, flag: "/au.svg" },
