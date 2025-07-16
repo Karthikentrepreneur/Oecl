@@ -47,7 +47,6 @@ const MalaysiaHome = () => {
       <AboutSection />
       <ServicesSection />
       <WorkflowSection />
-      <StatsSection />
       <TestimonialsSection />
       <UpdatesSection />
       <ContactForm />
