@@ -59,13 +59,13 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           gradient: ""
         },
         {
-          url: "/warehose5.png",
+          url: "/warehousing1.png",
           title: "WAREHOUSE MANAGEMENT",
           description: "A cutting edge solutions with advanced WMS.",
           gradient: ""
         },
         {
-          url: "/5.png",
+          url: "/liqtransport.png",
           title: "LIQUID CARGO TRANSPORTATION",
           description: "Cost effective and safe transportation of liquid cargo",
           gradient: ""
