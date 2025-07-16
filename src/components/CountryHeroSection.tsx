@@ -22,25 +22,25 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           url: "/14.png",
           title: "OECL",
           description: "Vital Link to Enhance Your Supply Chain",
-          gradient: "from-black/60 via-black/40 to-black/60"
+          gradient: ""
         },
         {
           url: "/air1.png",
           title: "AIR FREIGHT",
           description: "We deliver flexible, global airfreight solutions",
-          gradient: "from-black/60 via-black/40 to-black/60"
+          gradient: ""
         },
         {
           url: "/whouse1.png",
           title: "WAREHOUSE MANAGEMENT",
           description: "A cutting edge solutions with advanced WMS",
-          gradient: "from-black/60 via-black/40 to-black/60"
+          gradient: ""
         },
         {
           url: "/11.png",
           title: "LIQUID CARGO TRANSPORTATION",
           description: "Cost effective and safe transportation of liquid cargo",
-          gradient: "from-black/60 via-black/40 to-black/60"
+          gradient: ""
         }
       ]
     },
@@ -50,25 +50,25 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           url: "/12.png",
           title: "OECL",
           description: "Vital Link to Enhance Your Supply Chain",
-          gradient: "from-black/60 via-black/40 to-black/60"
+          gradient: ""
         },
         {
           url: "/4.png",
           title: "LOGISTICS SERVICES",
           description: "Supported through own offices and network of key partners around the world.",
-          gradient: "from-black/60 via-black/40 to-black/60"
+          gradient: ""
         },
         {
           url: "/warehose5.png",
           title: "WAREHOUSE MANAGEMENT",
           description: "A cutting edge solutions with advanced WMS.",
-          gradient: "from-black/60 via-black/40 to-black/60"
+          gradient: ""
         },
         {
           url: "/5.png",
           title: "LIQUID CARGO TRANSPORTATION",
           description: "Cost effective and safe transportation of liquid cargo",
-          gradient: "from-black/60 via-black/40 to-black/60"
+          gradient: ""
         }
       ]
     },
@@ -78,25 +78,25 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           url: "/15.png",
           title: "OECL",
           description: "Vital Link to Enhance Your Supply Chain",
-          gradient: "from-black/60 via-black/40 to-black/60"
+          gradient: ""
         },
         {
           url: "/20.png",
           title: "AIR FREIGHT",
           description: "We deliver flexible, global airfreight solutions",
-          gradient: "from-black/60 via-black/40 to-black/60"
+          gradient: ""
         },
         {
           url: "/whouse3.png",
           title: "WAREHOUSE MANAGEMENT",
           description: "A cutting edge solutions with advanced WMS.",
-          gradient: "from-black/60 via-black/40 to-black/60"
+          gradient: ""
         },
         {
           url: "/11.png",
           title: "LIQUID CARGO TRANSPORTATION",
           description: "Cost effective and safe transportation of liquid cargo",
-          gradient: "from-black/60 via-black/40 to-black/60"
+          gradient: ""
         }
       ]
     },
@@ -106,25 +106,25 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           url: "/13.png",
           title: "OECL",
           description: "Vital Link to Enhance Your Supply Chain",
-          gradient: "from-black/60 via-black/40 to-black/60"
+          gradient: ""
         },
         {
           url: "/17.png",
           title: "AIR FREIGHT",
           description: "We deliver flexible, global airfreight solutions",
-          gradient: "from-black/60 via-black/40 to-black/60"
+          gradient: ""
         },
         {
           url: "/whouse2.png",
           title: "WAREHOUSE MANAGEMENT",
           description: "A cutting edge solutions with advanced WMS .",
-          gradient: "from-black/60 via-black/40 to-black/60"
+          gradient: ""
         },
         {
           url: "/10.png",
           title: "LIQUID CARGO TRANSPORTATION",
           description: "Cost effective and safe transportation of liquid cargo",
-          gradient: "from-black/60 via-black/40 to-black/60"
+          gradient: ""
         }
       ]
     }
@@ -135,25 +135,25 @@ const HeroSection = ({ country }: HeroSectionProps) => {
       url: "/h1.png",
       title: "OECL",
       description: "Vital Link to Enhance Your Supply Chain.",
-      gradient: "from-black/60 via-black/40 to-black/60"
+      gradient: ""
     },
     {
       url: "/h2.png",
       title: "LOGISTICS SERVICES",
       description: "Supported through own offices and network of key partners around the world.",
-      gradient: "from-black/60 via-black/40 to-black/60"
+      gradient: ""
     },
     {
       url: "/h3.png",
       title: "WAREHOUSE MANAGEMENT",
       description: "A cutting edge solutions with advanced WMS .",
-      gradient: "from-black/60 via-black/40 to-black/60"
+      gradient: ""
     },
     {
       url: "/h4.png",
       title: "MULTIPLE CARRIER OPTION",
       description: "Assured space with contracted rates to major trade routes .",
-      gradient: "from-black/60 via-black/40 to-black/60"
+      gradient: ""
     }
   ];
 
