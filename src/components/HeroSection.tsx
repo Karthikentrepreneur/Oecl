@@ -13,22 +13,22 @@ const HeroSection = () => {
     url: "/h1.png",
     title: "OECL",
     description: "Vital Link to Enhance Your Supply Chain.",
-    gradient: "from-black/60 via-black/40 to-black/60"
+    gradient: ""
   }, {
     url: "/h2.png",
     title: "LOGISTICS SERVICES",
     description: "Supported through own offices and network of key partners around the world.",
-    gradient: "from-black/60 via-black/40 to-black/60"
+    gradient: ""
   }, {
     url: "/h3.png",
     title: "WAREHOUSE MANAGEMENT",
     description: "A cutting edge solutions with advanced WMS .",
-    gradient: "from-black/60 via-black/40 to-black/60"
+    gradient: ""
   }, {
     url: "/h4.png",
     title: "MULTIPLE CARRIER OPTION",
     description: "Assured space with contracted rates to major trade routes .",
-    gradient: "from-black/60 via-black/40 to-black/60"
+    gradient: ""
   }];
   const portalLinks = [{
     icon: <Users className="w-4 h-4" />,
