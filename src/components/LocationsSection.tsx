@@ -23,7 +23,7 @@ const allLocations: LocationsData = {
       phone: "044 4689 4646",
     },
     "Chennai Warehouse": {
-      map: "https://www.google.com/maps/d/embed?mid=1prpWPmOJpIfxQg4LmwnRIyNE8pXue20&ehbc=2E312F&noprof=1",
+      map: "https://www.google.com/maps/d/embed?mid=1y9YjgEy16tEWEAjmndzSI_7fRUgA45U&ehbc=2E312F&noprof=1",
       address: "Survey No.209/6A(Part)209/6B(Part), Mannur & Valarpuram Village, Perambakkam Road, Sriperumbudur Taluk, Kanchipuram District-602105",
       phone: "+91 9994355523",
     },
