@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+// Location data
 type LocationDetails = {
   map: string;
   address: string;
@@ -14,7 +15,6 @@ type CountryLocations = {
 type LocationsData = {
   [country: string]: CountryLocations;
 };
-
 
 const allLocations: LocationsData = {
   India: {
@@ -100,25 +100,32 @@ const allLocations: LocationsData = {
 };
 
 const LocationsSection: React.FC = () => {
-  const { pathname } = useLocation();
-  const countryFromPath = pathname.split("/")[1]?.toLowerCase();
+  const location = useLocation();
 
-  const matchedCountry = Object.keys(allLocations).find(
-    (country) => country.toLowerCase() === countryFromPath
-  ) as keyof LocationsData;
+  const pathParts = location.pathname.split("/").filter(Boolean);
+  const countrySlug = pathParts[0]?.toLowerCase() || "";
 
-  const defaultCountry = matchedCountry || "India";
-  const [selectedCountry, setSelectedCountry] = useState<keyof LocationsData>(defaultCountry);
+  const slugToCountryMap: { [slug: string]: keyof typeof allLocations } = {
+    india: "India",
+    singapore: "Singapore",
+    malaysia: "Malaysia",
+    thailand: "Thailand",
+    indonesia: "Indonesia",
+  };
+
+  const defaultCountry: keyof typeof allLocations =
+    slugToCountryMap[countrySlug] || "Singapore";
+
+  const [selectedCountry, setSelectedCountry] = useState<keyof typeof allLocations>(defaultCountry);
   const [selectedLocation, setSelectedLocation] = useState<keyof CountryLocations>(
-    Object.keys(allLocations[defaultCountry])[1]
+    Object.keys(allLocations[defaultCountry])[0]
   );
 
   useEffect(() => {
-    if (matchedCountry) {
-      setSelectedCountry(matchedCountry);
-      setSelectedLocation(Object.keys(allLocations[matchedCountry])[0]);
-    }
-  }, [matchedCountry]);
+    const updatedCountry = slugToCountryMap[countrySlug] || "Singapore";
+    setSelectedCountry(updatedCountry);
+    setSelectedLocation(Object.keys(allLocations[updatedCountry])[0]);
+  }, [location.pathname]);
 
   const locations = allLocations[selectedCountry];
 
@@ -126,9 +133,24 @@ const LocationsSection: React.FC = () => {
     <div className="px-4 py-8 max-w-7xl mx-auto">
       <div className="mb-6">
         <h2 className="text-3xl font-bold mb-4 text-center">Our Office Locations</h2>
-        {/* Only one selected country shown */}
-        <div className="text-center text-xl font-semibold py-2 px-4 bg-blue-900 text-white rounded inline-block">
-          {selectedCountry}
+        <div className="flex flex-wrap justify-center gap-3">
+          {Object.keys(allLocations).map((country) => (
+            <button
+              key={country}
+              className={`px-4 py-2 rounded border font-semibold transition-all ${
+                selectedCountry === country
+                  ? "bg-red-900 text-white"
+                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+              }`}
+              onClick={() => {
+                setSelectedCountry(country as keyof LocationsData);
+                const firstLocation = Object.keys(allLocations[country])[0] as keyof CountryLocations;
+                setSelectedLocation(firstLocation);
+              }}
+            >
+              {country}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -139,7 +161,7 @@ const LocationsSection: React.FC = () => {
               key={loc}
               className={`w-full text-left p-3 rounded border transition-all ${
                 selectedLocation === loc
-                  ? "bg-blue-800 text-white border-blue-800"
+                  ? "bg-black-800 text-white border-blue-800"
                   : "bg-white border-gray-300 hover:bg-blue-100"
               }`}
               onClick={() => setSelectedLocation(loc as keyof CountryLocations)}
@@ -160,7 +182,7 @@ const LocationsSection: React.FC = () => {
           </div>
 
           <div className="relative rounded-lg overflow-hidden h-[400px] shadow-lg">
-            <div className="absolute top-0 left-0 w-full text-center py-2 bg-yellow-400 font-semibold z-10">
+            <div className="absolute top-0 left-0 w-full text-center py-2 bg-RED-800 font-semibold z-10">
               {selectedCountry} - {selectedLocation}
             </div>
             <iframe
