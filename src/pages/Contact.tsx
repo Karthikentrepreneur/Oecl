@@ -9,8 +9,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Send, XCircle, Building2 } from 'lucide-react';
 import { useLocation } from "react-router-dom";
-import ContactMapContainer from "@/components/ContactMapContainer";
-import ContactSidebar from "@/components/ContactSidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const ScrollToTop = () => {
@@ -21,15 +19,12 @@ const ScrollToTop = () => {
   return null;
 };
 
-const Contact = () => {
+const Contact: React.FC = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("");
   const isMobile = useIsMobile();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [showMap, setShowMap] = useState(true);
   const location = useLocation();
 
-  // All office locations
   const allOffices = [
     {
       country: "Singapore",
@@ -39,7 +34,7 @@ const Contact = () => {
       address: "OECL (Singapore) Pte Ltd. Blk 511 Kampong Bahru Road #03-01 Keppel Distripark Singapore - 099447"
     },
     {
-      country: "India", 
+      country: "India",
       name: "India Office",
       email: "india@oecl.com",
       phone: "+91 22 4517 4102",
@@ -47,7 +42,7 @@ const Contact = () => {
     },
     {
       country: "Malaysia",
-      name: "Malaysia Office", 
+      name: "Malaysia Office",
       email: "malaysia@oecl.com",
       phone: "+60 3-3319 2778",
       address: "Unit 20-03A, Level 20 Menara Zurich, 15 Jalan Dato Abdullah Tahir, 80300 Johor Bahru"
@@ -55,7 +50,7 @@ const Contact = () => {
     {
       country: "Indonesia",
       name: "Indonesia Office",
-      email: "indonesia@oecl.com", 
+      email: "indonesia@oecl.com",
       phone: "+62 21 529 20292",
       address: "408, Lina Building, JL.HR Rasuna Said kav B7, Jakarta"
     },
@@ -63,12 +58,11 @@ const Contact = () => {
       country: "Thailand",
       name: "Thailand Office",
       email: "thailand@oecl.com",
-      phone: "+66 2-634-3240", 
+      phone: "+66 2-634-3240",
       address: "109 CCT Building, 3rd Floor, Rm.3, Surawong Road, Suriyawongse, Bangrak, Bangkok 10500"
     }
   ];
 
-  // Determine country from current route
   const getCountryFromRoute = () => {
     const path = location.pathname;
     if (path.includes('/india')) return 'india';
@@ -80,16 +74,6 @@ const Contact = () => {
 
   const country = getCountryFromRoute();
   const currentCountryInfo = allOffices.find(office => office.country.toLowerCase() === country) || allOffices[0];
-  
-  useEffect(() => {
-    if (isMobile) {
-      setShowMap(false);
-      setIsSidebarOpen(true);
-    } else {
-      setShowMap(true);
-      setIsSidebarOpen(true);
-    }
-  }, [isMobile]);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -116,16 +100,16 @@ const Contact = () => {
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <motion.section 
-          initial={{ opacity: 0 }} 
-          animate={{ opacity: 1 }} 
+        <motion.section
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           className="relative h-[40vh] flex items-center justify-center bg-red-700 overflow-hidden"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-black to-red-900/90" />
-          <motion.div 
-            initial={{ y: 20, opacity: 0 }} 
-            animate={{ y: 0, opacity: 1 }} 
-            transition={{ delay: 0.2, duration: 0.8 }} 
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
             className="text-center px-4 relative z-10"
           >
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-5">Get in Touch</h1>
@@ -135,14 +119,14 @@ const Contact = () => {
           </motion.div>
         </motion.section>
 
-        {/* Interactive Global Presence Section */}
+        {/* Global Presence Section */}
         <section className="py-16 bg-gradient-to-b from-red-50/30 to-white">
           <div className="container mx-auto px-4">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
-              transition={{ duration: 0.6 }} 
-              viewport={{ once: true }} 
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
               className="text-center mb-8"
             >
               <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Global Presence</h2>
@@ -152,21 +136,19 @@ const Contact = () => {
               </p>
             </motion.div>
 
+            <section>
+              <div>
+                <motion.div>
+                  <motion.main className="transition-all duration-300 ease-in-out w-full">
+                    <LocationsSection />
+                  </motion.main>
+                </motion.div>
+              </div>
+            </section>
+          </div>
+        </section>
 
-              <section>
-  <div>
-    <motion.div>
-      <motion.main
-        className="transition-all duration-300 ease-in-out w-full"
-      >
-        <LocationsSection />
-      </motion.main>
-    </motion.div>
-  </div>
-</section>
-
-
-        {/* Centered Contact Form */}
+        {/* Contact Form */}
         <section className="py-16 bg-white" id="contact-form">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl mx-auto">
@@ -181,10 +163,10 @@ const Contact = () => {
                 <p className="text-gray-600 mb-8 text-center">
                   Fill in the form below and we'll get back to you as soon as possible.
                 </p>
-                
-                <form 
-                  action={`https://formsubmit.co/ajax/${currentCountryInfo.email}`} 
-                  method="POST" 
+
+                <form
+                  action={`https://formsubmit.co/ajax/${currentCountryInfo.email}`}
+                  method="POST"
                   className="space-y-6"
                 >
                   <input type="hidden" name="_captcha" value="false" />
@@ -195,58 +177,34 @@ const Contact = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-700">First Name *</label>
-                      <Input 
-                        placeholder="Enter your first name" 
-                        name="First Name" 
-                        required 
-                        className="border-gray-300 focus:border-red-500 focus:ring-red-500"
-                      />
+                      <Input name="First Name" required placeholder="Enter your first name" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-700">Last Name *</label>
-                      <Input 
-                        placeholder="Enter your last name" 
-                        name="Last Name" 
-                        required 
-                        className="border-gray-300 focus:border-red-500 focus:ring-red-500"
-                      />
+                      <Input name="Last Name" required placeholder="Enter your last name" />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-700">Email Address *</label>
-                      <Input 
-                        placeholder="Enter your email" 
-                        type="email" 
-                        name="Email" 
-                        required 
-                        className="border-gray-300 focus:border-red-500 focus:ring-red-500"
-                      />
+                      <Input name="Email" required type="email" placeholder="Enter your email" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-700">Phone Number</label>
-                      <Input 
-                        placeholder="Enter your phone number" 
-                        name="Phone" 
-                        className="border-gray-300 focus:border-red-500 focus:ring-red-500"
-                      />
+                      <Input name="Phone" placeholder="Enter your phone number" />
                     </div>
                   </div>
 
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700">Company/Organization</label>
-                    <Input 
-                      placeholder="Enter your company name" 
-                      name="Organization" 
-                      className="border-gray-300 focus:border-red-500 focus:ring-red-500"
-                    />
+                    <Input name="Organization" placeholder="Enter your company name" />
                   </div>
 
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700">Preferred Location</label>
-                    <Select value={selectedLocation} onValueChange={setSelectedLocation} name="Preferred_Location">
-                      <SelectTrigger className="border-gray-300 focus:border-red-500 focus:ring-red-500">
+                    <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+                      <SelectTrigger>
                         <SelectValue placeholder="Select preferred office location" />
                       </SelectTrigger>
                       <SelectContent>
@@ -261,21 +219,12 @@ const Contact = () => {
 
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700">Message *</label>
-                    <Textarea 
-                      placeholder="Tell us about your logistics needs..." 
-                      name="Message" 
-                      required 
-                      rows={5}
-                      className="border-gray-300 focus:border-red-500 focus:ring-red-500 resize-none"
-                    />
+                    <Textarea name="Message" required placeholder="Tell us about your logistics needs..." rows={5} />
                   </div>
 
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Button 
-                      type="submit" 
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Button
+                      type="submit"
                       className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3"
                     >
                       <Send className="w-5 h-5" />
