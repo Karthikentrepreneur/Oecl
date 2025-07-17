@@ -1,6 +1,20 @@
 import React, { useState } from "react";
 
-const allLocations = {
+type LocationDetails = {
+  map: string;
+  address: string;
+  phone: string;
+};
+
+type CountryLocations = {
+  [location: string]: LocationDetails;
+};
+
+type LocationsData = {
+  [country: string]: CountryLocations;
+};
+
+const allLocations: LocationsData = {
   India: {
     Chennai: {
       map: "https://www.google.com/maps/d/embed?mid=1xTmhWpagroJz2YqtOTxHBEAZP8Xw_cA&ehbc=2E312F&noprof=1",
@@ -83,10 +97,10 @@ const allLocations = {
   },
 };
 
-const LocationsSection = () => {
-  const [selectedCountry, setSelectedCountry] = useState("India");
-  const [selectedLocation, setSelectedLocation] = useState(
-    Object.keys(allLocations[selectedCountry])[0]
+const LocationsSection: React.FC = () => {
+  const [selectedCountry, setSelectedCountry] = useState<keyof LocationsData>("India");
+  const [selectedLocation, setSelectedLocation] = useState<keyof CountryLocations>(
+    Object.keys(allLocations["India"])[0]
   );
 
   const locations = allLocations[selectedCountry];
@@ -94,7 +108,7 @@ const LocationsSection = () => {
   return (
     <div className="px-4 py-8 max-w-7xl mx-auto">
       <div className="mb-6">
-        <h2 className="text-3xl font-bold mb-2 text-center">Our Global Offices</h2>
+        <h2 className="text-3xl font-bold mb-4 text-center">Our Global Offices</h2>
         <div className="flex flex-wrap justify-center gap-3">
           {Object.keys(allLocations).map((country) => (
             <button
@@ -105,8 +119,9 @@ const LocationsSection = () => {
                   : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
               }`}
               onClick={() => {
-                setSelectedCountry(country);
-                setSelectedLocation(Object.keys(allLocations[country])[0]);
+                setSelectedCountry(country as keyof LocationsData);
+                const firstLocation = Object.keys(allLocations[country])[0] as keyof CountryLocations;
+                setSelectedLocation(firstLocation);
               }}
             >
               {country}
@@ -125,7 +140,7 @@ const LocationsSection = () => {
                   ? "bg-blue-800 text-white border-blue-800"
                   : "bg-white border-gray-300 hover:bg-blue-100"
               }`}
-              onClick={() => setSelectedLocation(loc)}
+              onClick={() => setSelectedLocation(loc as keyof CountryLocations)}
             >
               {loc}
             </button>
