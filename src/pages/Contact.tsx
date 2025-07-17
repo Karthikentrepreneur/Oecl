@@ -158,21 +158,19 @@ const Contact = () => {
               transition={{ duration: 0.5 }} 
               className="flex flex-1 relative overflow-hidden"
             >
-              {/* Map and Sidebar components remain the same */}
-              {(!isMobile || (isMobile && showMap)) && (
-                <motion.main className={`transition-all duration-300 ease-in-out ${isMobile ? 'w-full' : 'w-[60%]'}`}>
-                  <LocationsSection />
-                </motion.main>
-              )}
-              
-              {(!isMobile || (isMobile && !showMap)) && (
-                <motion.div className={`transition-all duration-300 ease-in-out ${isMobile ? 'w-full pt-12' : 'w-[35%]'}`}>
-                  <ContactSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-                </motion.div>
-              )}
-            </motion.div>
-          </div>
-        </section>
+
+              <section>
+  <div>
+    <motion.div>
+      <motion.main
+        className="transition-all duration-300 ease-in-out w-full"
+      >
+        <LocationsSection />
+      </motion.main>
+    </motion.div>
+  </div>
+</section>
+
 
         {/* Centered Contact Form */}
         <section className="py-16 bg-white" id="contact-form">
