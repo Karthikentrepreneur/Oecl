@@ -119,11 +119,11 @@ const ContactForm = () => {
 
   const currentCountry = getCurrentCountry();
   const currentOffices = allOffices[currentCountry] || [];
+  const currentOffice = currentOffices[0];
 
   return (
     <section className="py-16 bg-gradient-to-b from-gray-50 to-white" id="contact">
       <div className="container mx-auto px-4">
-        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -138,9 +138,7 @@ const ContactForm = () => {
           </p>
         </motion.div>
 
-        {/* Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Left: All Office Locations */}
           <div className="space-y-6">
             <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
               <Building2 className="w-6 h-6 text-red-600" /> Our Offices
@@ -180,7 +178,6 @@ const ContactForm = () => {
             ))}
           </div>
 
-          {/* Enhanced Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -192,10 +189,9 @@ const ContactForm = () => {
             <p className="text-gray-600 mb-6">
               Fill out the form below and we'll get back to you within 24 hours.
             </p>
-            
-            <form 
-              action={`https://formsubmit.co/ajax/${currentOffice.email}`} 
-              method="POST" 
+            <form
+              action={`https://formsubmit.co/ajax/${currentOffice.email}`}
+              method="POST"
               className="space-y-6"
             >
               <input type="hidden" name="_captcha" value="false" />
@@ -206,52 +202,28 @@ const ContactForm = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700">First Name *</label>
-                  <Input 
-                    placeholder="Enter your first name" 
-                    name="First Name" 
-                    required 
-                    className="border-gray-300 focus:border-red-500 focus:ring-red-500"
-                  />
+                  <Input name="First Name" required placeholder="Enter your first name" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700">Last Name *</label>
-                  <Input 
-                    placeholder="Enter your last name" 
-                    name="Last Name" 
-                    required 
-                    className="border-gray-300 focus:border-red-500 focus:ring-red-500"
-                  />
+                  <Input name="Last Name" required placeholder="Enter your last name" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700">Email Address *</label>
-                  <Input 
-                    placeholder="Enter your email" 
-                    type="email" 
-                    name="Email" 
-                    required 
-                    className="border-gray-300 focus:border-red-500 focus:ring-red-500"
-                  />
+                  <Input type="email" name="Email" required placeholder="Enter your email" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700">Phone Number</label>
-                  <Input 
-                    placeholder="Enter your phone number" 
-                    name="Phone" 
-                    className="border-gray-300 focus:border-red-500 focus:ring-red-500"
-                  />
+                  <Input name="Phone" placeholder="Enter your phone number" />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">Company/Organization</label>
-                <Input 
-                  placeholder="Enter your company name" 
-                  name="Organization" 
-                  className="border-gray-300 focus:border-red-500 focus:ring-red-500"
-                />
+                <Input name="Organization" placeholder="Enter your company name" />
               </div>
 
               <div className="space-y-2">
@@ -261,32 +233,25 @@ const ContactForm = () => {
                     <SelectValue placeholder="Select office location" />
                   </SelectTrigger>
                   <SelectContent>
-                    {allOffices.map((office) => (
-                      <SelectItem key={office.country} value={office.country}>
-                        {office.name}
-                      </SelectItem>
-                    ))}
+                    {Object.entries(allOffices).flatMap(([country, offices]) =>
+                      offices.map((office, index) => (
+                        <SelectItem key={`${country}-${index}`} value={office.name}>
+                          {office.name}
+                        </SelectItem>
+                      ))
+                    )}
                   </SelectContent>
                 </Select>
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">Message *</label>
-                <Textarea 
-                  placeholder="Tell us about your logistics needs..." 
-                  name="Message" 
-                  required 
-                  rows={5}
-                  className="border-gray-300 focus:border-red-500 focus:ring-red-500 resize-none"
-                />
+                <Textarea name="Message" required placeholder="Tell us about your logistics needs..." rows={5} />
               </div>
 
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Button 
-                  type="submit" 
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Button
+                  type="submit"
                   className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3"
                 >
                   <Send className="w-5 h-5" />
@@ -295,13 +260,10 @@ const ContactForm = () => {
               </motion.div>
             </form>
           </motion.div>
-            </div> {/* Closes the grid */}
-      </div> {/* Closes the container */}
-
-      {/* ✅ This closes the <section> started at top */}
+        </div>
+      </div>
     </section>
   );
 };
 
 export default ContactForm;
-
