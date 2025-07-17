@@ -1,15 +1,7 @@
 import React, { useState } from "react";
 
-type CountryKey = keyof typeof allOffices;
-
-type Office = {
-  name: string;
-  address: string;
-  phone: string;
-};
-
-const allOffices: Record<string, Office[]> = {
-  Singapore: [
+const allLocations = {
+   Singapore: [
     {
       name: "Singapore Office",
       address:
@@ -104,30 +96,84 @@ const allOffices: Record<string, Office[]> = {
   ],
 };
 
-const LocationSelector = ({ currentCountry }: { currentCountry: CountryKey }) => {
-  const locations = allOffices[currentCountry];
+const LocationsSection = () => {
+  const [selectedCountry, setSelectedCountry] = useState("India");
+  const [selectedLocation, setSelectedLocation] = useState(
+    Object.keys(allLocations[selectedCountry])[0]
+  );
+
+  const locations = allLocations[selectedCountry];
 
   return (
-    <div className="space-y-6">
-      <h3 className="text-2xl font-semibold text-gray-800 text-center">
-        {currentCountry} Office Locations
-      </h3>
-      <div className="grid md:grid-cols-2 gap-6">
-        {locations.map((office, idx) => (
-          <div
-            key={idx}
-            className="p-6 bg-slate-100 border rounded-lg shadow-sm"
-          >
-            <h4 className="text-lg font-bold mb-2">{office.name}</h4>
-            <p className="text-gray-700 whitespace-pre-line mb-2">
-              {office.address}
+    <div className="px-4 py-8 max-w-7xl mx-auto">
+      <div className="mb-6">
+        <h2 className="text-3xl font-bold mb-2 text-center">Our Global Offices</h2>
+        <div className="flex flex-wrap justify-center gap-3">
+          {Object.keys(allLocations).map((country) => (
+            <button
+              key={country}
+              className={`px-4 py-2 rounded border font-semibold transition-all ${
+                selectedCountry === country
+                  ? "bg-blue-900 text-white"
+                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+              }`}
+              onClick={() => {
+                setSelectedCountry(country);
+                setSelectedLocation(Object.keys(allLocations[country])[0]);
+              }}
+            >
+              {country}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-6">
+        <div className="w-full md:w-[30%] space-y-3">
+          {Object.keys(locations).map((loc) => (
+            <button
+              key={loc}
+              className={`w-full text-left p-3 rounded border transition-all ${
+                selectedLocation === loc
+                  ? "bg-blue-800 text-white border-blue-800"
+                  : "bg-white border-gray-300 hover:bg-blue-100"
+              }`}
+              onClick={() => setSelectedLocation(loc)}
+            >
+              {loc}
+            </button>
+          ))}
+        </div>
+
+        <div className="w-full md:w-[70%] space-y-4">
+          <div className="bg-slate-100 p-4 rounded border shadow">
+            <h3 className="text-xl font-bold mb-2">Address</h3>
+            <p className="whitespace-pre-line mb-2">
+              {locations[selectedLocation].address}
             </p>
-            <p className="text-gray-700 font-semibold">{office.phone}</p>
+            <h3 className="text-xl font-bold mb-2">Phone</h3>
+            <p>{locations[selectedLocation].phone}</p>
           </div>
-        ))}
+
+          <div className="relative rounded-lg overflow-hidden h-[400px] shadow-lg">
+            <div className="absolute top-0 left-0 w-full text-center py-2 bg-yellow-400 font-semibold z-10">
+              {selectedCountry} - {selectedLocation}
+            </div>
+            <iframe
+              src={locations[selectedLocation].map}
+              width="100%"
+              height="100%"
+              className="absolute top-0 left-0 w-full h-full"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              title={`${selectedLocation} Map`}
+            ></iframe>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default LocationSelector;
+export default LocationsSection;
