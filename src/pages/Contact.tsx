@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import LocationsSection from "@/components/LocationsSection";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Send, XCircle, Building2 } from 'lucide-react';
@@ -160,7 +161,7 @@ const Contact = () => {
               {/* Map and Sidebar components remain the same */}
               {(!isMobile || (isMobile && showMap)) && (
                 <motion.main className={`transition-all duration-300 ease-in-out ${isMobile ? 'w-full' : 'w-[60%]'}`}>
-                  <ContactMapContainer />
+                  <LocationsSection />
                 </motion.main>
               )}
               
