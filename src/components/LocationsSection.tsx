@@ -1,99 +1,86 @@
 import React, { useState } from "react";
 
 const allLocations = {
-   Singapore: [
-    {
-      name: "Singapore Office",
-      address:
-        "Blk 511 Kampong Bahru Road, #03-01 Keppel Distripark, Singapore 099447",
-      phone: "+65 6224 1338 / +65 6224 1336",
+  India: {
+    Chennai: {
+      map: "https://www.google.com/maps/d/embed?mid=1xTmhWpagroJz2YqtOTxHBEAZP8Xw_cA&ehbc=2E312F&noprof=1",
+      address: "Chennai Office Address Here",
+      phone: "+91 9123523496",
     },
-  ],
-  Malaysia: [
-    {
-      name: "Port Klang Office",
-      address:
-        "MTBBT 2, 3A-5, Jalan Batu Nilam 16, The Landmark (Behind AEON Mall), Bandar Bukit Tinggi 2, 41200 Klang, Selangor D.E",
-      phone: "+603 - 3319 2778 / 74 / 75",
+    Chennai2: {
+      map: "https://www.google.com/maps/d/embed?mid=1prpWPmOJpIfxQg4LmwnRIyNE8pXue20&ehbc=2E312F&noprof=1",
+      address: "Chennai 2 Office Address Here",
+      phone: "+91 9876543210",
     },
-    {
-      name: "Pasir Gudang Office",
-      address:
-        "Unit 20-03A, Level 20 Menara Zurich, 15 Jalan Dato Abdullah Tahir, 80300 Johor Bahru",
-      phone: "603-3319 2778 / 74 / 75, 79",
+    Delhi: {
+      map: "https://www.google.com/maps/d/embed?mid=1prpWPmOJpIfxQg4LmwnRIyNE8pXue20&ehbc=2E312F&noprof=1",
+      address: "Delhi Office Address Here",
+      phone: "+91 9999022030",
     },
-  ],
-  India: [
-    {
-      name: "Chennai Office",
-      address:
-        "Roma Building, Door No. 10, 3rd Floor, G.S.T. Road, Alandur, Chennai-600 016",
-      phone: "044 4689 4646",
+    Kolkata: {
+      map: "https://www.google.com/maps/d/embed?mid=1rM6AXz8EHQ7xg4aldjPH2AJuY5NtapY&ehbc=2E312F&noprof=1",
+      address: "Kolkata Office Address Here",
+      phone: "+91 6290921534",
     },
-    {
-      name: "Chennai Warehouse",
-      address:
-        "Survey No.209/6A(Part)209/6B(Part), Mannur & Valarpuram Village, Perambakkam Road, Sriperumbudur Taluk, Kanchipuram District-602105",
-      phone: "+91 9994355523",
+    Bengaluru: {
+      map: "https://www.google.com/maps/d/embed?mid=1VfZTXJHg3ekHgdcyt3lf9cbsEnf11oA&ehbc=2E312F&noprof=1",
+      address: "Bengaluru Office Address Here",
+      phone: "+91 9986949743",
     },
-    {
-      name: "Delhi Office",
-      address:
-        "Plot No. 15, 1st Floor, Block C, Pocket 8, Sector 17, Dwarka, New Delhi 110075",
-      phone: "+91 11 41088871",
+    Cochin: {
+      map: "https://www.google.com/maps/d/embed?mid=1wFWiRd2ewEGxxGv2NBKTwJX7eClgjv0&ehbc=2E312F&noprof=1",
+      address: "Cochin Office Address Here",
+      phone: "+91 9012345678",
     },
-    {
-      name: "Kolkata Office",
-      address:
-        "Imagine Techpark, Unit No. 10, 19th Floor, Block DN 6, Sector - V, Salt Lake City, Kolkata, West Bengal - 700091",
-      phone: "+91 33 4814 9162 / 63",
+    Hyderabad: {
+      map: "https://www.google.com/maps/d/embed?mid=1nfVu0PP4O3WJ9ZUqbJjpnKCblkY9rJI&ehbc=2E312F&noprof=1",
+      address: "Hyderabad Office Address Here",
+      phone: "+91 9123456789",
     },
-    {
-      name: "Bengaluru Office",
-      address:
-        "3C-964 IIIrd Cross Street, HRBR Layout 1st Block, Kalyan Nagar Bannaswadi, Bengaluru - 560043",
-      phone: "+91 9841676259",
+    Mumbai: {
+      map: "https://www.google.com/maps/d/embed?mid=1ndB2LDzMO0nBfUDdGe2o7-_BpQxQRUQ&ehbc=2E312F&noprof=1",
+      address: "Mumbai Office Address Here",
+      phone: "+91 2245174102",
     },
-    {
-      name: "Cochin Office",
-      address:
-        "CC 59/801A Elizabeth Memorial Building, Thevara Ferry Jn, Cochin 682013, Kerala",
-      phone: "+91 484 4019192 / 93",
+  },
+  Singapore: {
+    Singapore: {
+      map: "https://www.google.com/maps/d/embed?mid=1dMWuQ-5-EQL2a1gOFRIYFxVLUdfERNw&ehbc=2E312F&noprof=1",
+      address: "Singapore Office Address Here",
+      phone: "+65 12345678",
     },
-    {
-      name: "Hyderabad Office",
-      address:
-        "H.No. 1-8-450/1/A-7 Indian Airlines Colony, Opp Police Lines, Begumpet, Hyderabad-500016, Telangana",
-      phone: "040-49559704",
+  },
+  Malaysia: {
+    PortKlang: {
+      map: "https://www.google.com/maps/d/embed?mid=1wY9IR1V-C3m6rqDjbDVuARcHIn5DaX0&ehbc=2E312F&noprof=1",
+      address: "Port Klang Office Address Here",
+      phone: "+60 123456789",
     },
-    {
-      name: "Mumbai Office",
-      address:
-        "Town Center - 2, Office No.607, 6th Floor, Marol, Andheri Kurla Road, Andheri East, Mumbai - 400059",
-      phone: "+91 8879756838, 022-35131688 / 35113475 / 35082586",
+    PasirGudang: {
+      map: "https://www.google.com/maps/d/embed?mid=1Ef2sco0B8ZB3fShOADFD17mX6eEn22g&ehbc=2E312F&noprof=1",
+      address: "Pasir Gudang Office Address Here",
+      phone: "+60 987654321",
     },
-  ],
-  Indonesia: [
-    {
-      name: "Jakarta Office",
-      address: "408, Lina Building, JL.HR Rasuna Said kav B7, Jakarta",
-      phone: "+62 21 529 20292, 522 4887",
+  },
+  Thailand: {
+    Bangkok: {
+      map: "https://www.google.com/maps/d/embed?mid=1-KDMSa2eOSnchrGfGbRCMws3wdHa4tc&ehbc=2E312F&noprof=1",
+      address: "Bangkok Office Address Here",
+      phone: "+66 12345678",
     },
-    {
-      name: "Surabaya Office",
-      address:
-        "Japfa Indoland Center, Japfa Tower 1, Lantai 4/401-A, JL Jend, Basuki Rahmat 129-137, Surabaya 60271",
-      phone: "+62 21 529 20292, 522 4887",
+  },
+  Indonesia: {
+    Jakarta: {
+      map: "https://www.google.com/maps/d/embed?mid=1wNAxoHYpLj-a8ekPGklU6BpnaBaz0Co&ehbc=2E312F&noprof=1",
+      address: "Jakarta Office Address Here",
+      phone: "+62 812345678",
     },
-  ],
-  Thailand: [
-    {
-      name: "Bangkok Office",
-      address:
-        "109 CCT Building, 3rd Floor, Rm.3, Surawong Road, Suriyawongse, Bangrak, Bangkok 10500",
-      phone: "+662-634-3240, +662-634-3942",
+    Surabaya: {
+      map: "https://www.google.com/maps/d/embed?mid=1ecTq28A-CHVdwkhZB9M1HpLKe-xPKo0&ehbc=2E312F&noprof=1",
+      address: "Surabaya Office Address Here",
+      phone: "+62 876543210",
     },
-  ],
+  },
 };
 
 const LocationsSection = () => {
