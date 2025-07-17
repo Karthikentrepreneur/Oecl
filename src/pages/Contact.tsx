@@ -122,19 +122,7 @@ const Contact: React.FC = () => {
         {/* Global Presence Section */}
         <section className="py-16 bg-gradient-to-b from-red-50/30 to-white">
           <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-center mb-8"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Global Presence</h2>
-              <div className="w-24 h-1 bg-red-600 mx-auto mb-4"></div>
-              <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-                Explore our worldwide network of offices and partners.
-              </p>
-            </motion.div>
+            
 
             <section>
               <div>
