@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,13 +10,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Send, Building2 } from "lucide-react";
+import { Phone, Mail, MapPin, Send, Building2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
 const ContactForm = () => {
   const location = useLocation();
   const [selectedLocation, setSelectedLocation] = useState("");
-  const [indiaPage, setIndiaPage] = useState(0); // 0 or 1 for pagination
+  const [indiaPage, setIndiaPage] = useState(0); // 0 or 1
 
   const allOffices = {
     Singapore: [
@@ -139,163 +139,65 @@ const ContactForm = () => {
 
   const currentCountry = getCurrentCountry();
   const currentOffices = allOffices[currentCountry] || [];
-  const currentOffice = currentOffices[0]; // used in form email
 
-  // Auto-scroll logic for India office cards
-  useEffect(() => {
-    if (currentCountry === "India") {
-      const interval = setInterval(() => {
-        setIndiaPage((prev) => (prev === 0 ? 1 : 0));
-      }, 5000);
-      return () => clearInterval(interval);
-    }
-  }, [currentCountry]);
+  const visibleIndiaOffices =
+    currentCountry === "India"
+      ? currentOffices.slice(indiaPage * 4, indiaPage * 4 + 4)
+      : currentOffices;
+
+  const handlePrev = () => setIndiaPage((prev) => Math.max(prev - 1, 0));
+  const handleNext = () =>
+    setIndiaPage((prev) => Math.min(prev + 1, Math.floor(currentOffices.length / 4)));
 
   return (
-    <section className="py-16 bg-gradient-to-b from-gray-50 to-white" id="contact">
+    <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Get In Touch</h2>
-          <div className="w-24 h-1 bg-red-600 mx-auto mb-4" />
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-            Ready to streamline your logistics? Contact us today for a customized solution.
-          </p>
-        </motion.div>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-800 mb-2">Contact Our Offices</h2>
+          <p className="text-gray-600">Reach out to any of our global branches below.</p>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Office Cards */}
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-              <Building2 className="w-6 h-6 text-red-600" /> Our Offices
-            </h3>
-            {(currentCountry === "India"
-              ? currentOffices.slice(indiaPage * 4, indiaPage * 4 + 4)
-              : currentOffices
-            ).map((office, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 + idx * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white p-6 rounded-xl shadow-lg border-2 border-red-500 bg-red-50"
+        <div className="relative">
+          {currentCountry === "India" && (
+            <div className="flex justify-between mb-4">
+              <Button variant="ghost" onClick={handlePrev} disabled={indiaPage === 0}>
+                <ChevronLeft className="w-5 h-5" />
+              </Button>
+              <Button
+                variant="ghost"
+                onClick={handleNext}
+                disabled={indiaPage >= Math.floor(currentOffices.length / 4)}
               >
-                <h4 className="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-red-500" />
-                  {office.name}
-                </h4>
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-red-600 mt-0.5" />
-                    <p className="text-gray-600 text-sm">{office.address}</p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Phone className="w-5 h-5 text-red-600" />
-                    <a href={`tel:${office.phone}`} className="text-sm text-gray-600 hover:text-red-600">
-                      {office.phone}
-                    </a>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Mail className="w-5 h-5 text-red-600" />
-                    <a href={`mailto:${office.email}`} className="text-sm text-gray-600 hover:text-red-600">
-                      {office.email}
-                    </a>
-                  </div>
-                </div>
+                <ChevronRight className="w-5 h-5" />
+              </Button>
+            </div>
+          )}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6">
+            {visibleIndiaOffices.map((office, index) => (
+              <motion.div
+                key={index}
+                className="p-5 border rounded-xl shadow-md bg-red-50 border-red-400"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+              >
+                <h3 className="text-xl font-semibold text-red-700 mb-2">{office.name}</h3>
+                <p className="flex items-start gap-2 text-sm text-gray-700">
+                  <MapPin className="w-4 h-4 mt-1 text-red-600" /> {office.address}
+                </p>
+                <p className="flex items-center gap-2 mt-2 text-sm text-gray-700">
+                  <Phone className="w-4 h-4 text-red-600" /> {office.phone}
+                </p>
+                <p className="flex items-center gap-2 mt-1 text-sm text-gray-700">
+                  <Mail className="w-4 h-4 text-red-600" />{" "}
+                  <a href={`mailto:${office.email}`} className="hover:underline">
+                    {office.email}
+                  </a>
+                </p>
               </motion.div>
             ))}
           </div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100"
-          >
-            <h3 className="text-2xl font-bold text-gray-800 mb-6">Send us a Message</h3>
-            <p className="text-gray-600 mb-6">
-              Fill out the form below and we'll get back to you within 24 hours.
-            </p>
-
-            <form
-              action={`https://formsubmit.co/ajax/${currentOffice?.email || "info@oecl.sg"}`}
-              method="POST"
-              className="space-y-6"
-            >
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_template" value="box" />
-              <input type="hidden" name="_subject" value={`New Contact Submission from ${currentOffice?.name || "OECL"}!`} />
-              <input type="hidden" name="_next" value={`${window.location.origin}/contact?submitted=true`} />
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">First Name *</label>
-                  <Input placeholder="Enter your first name" name="First Name" required />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Last Name *</label>
-                  <Input placeholder="Enter your last name" name="Last Name" required />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Email Address *</label>
-                  <Input type="email" name="Email" placeholder="Enter your email" required />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Phone Number</label>
-                  <Input name="Phone" placeholder="Enter your phone number" />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Company/Organization</label>
-                <Input name="Organization" placeholder="Enter your company name" />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Preferred Office Location</label>
-                <Select value={selectedLocation} onValueChange={setSelectedLocation} name="Preferred_Location">
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select office location" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {Object.entries(allOffices).map(([country, offices]) =>
-                      offices.map((office, idx) => (
-                        <SelectItem key={`${country}-${idx}`} value={office.name}>
-                          {office.name}
-                        </SelectItem>
-                      ))
-                    )}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Message *</label>
-                <Textarea name="Message" placeholder="Tell us about your logistics needs..." required rows={5} />
-              </div>
-
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl"
-                >
-                  <Send className="w-5 h-5 mr-2" />
-                  Send Message
-                </Button>
-              </motion.div>
-            </form>
-          </motion.div>
         </div>
       </div>
     </section>
