@@ -22,7 +22,7 @@ const allLocations: LocationsData = {
       address: "Roma Building, Door No. 10, 3rd Floor, G.S.T. Road, Alandur, Chennai-600 016",
       phone: "044 4689 4646",
     },
-    Chennai Warehouse: {
+    Chennai (Warehouse): {
       map: "https://www.google.com/maps/d/embed?mid=1prpWPmOJpIfxQg4LmwnRIyNE8pXue20&ehbc=2E312F&noprof=1",
       address: "Survey No.209/6A(Part)209/6B(Part), Mannur & Valarpuram Village, Perambakkam Road, Sriperumbudur Taluk, Kanchipuram District-602105",
       phone: "+91 9994355523",
