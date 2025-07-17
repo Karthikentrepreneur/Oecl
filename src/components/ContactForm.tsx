@@ -295,8 +295,9 @@ const ContactForm = () => {
               </motion.div>
             </form>
           </motion.div>
-      </div>
-    </section>
+     </div> {/* Closes the grid */}
+      </div> {/* Closes the container */}
+    </section> {/* ✅ This closes the <section> started at top */}
   );
 };
 
