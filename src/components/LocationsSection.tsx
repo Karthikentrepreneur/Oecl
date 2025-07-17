@@ -104,7 +104,7 @@ const allOffices: Record<string, Office[]> = {
   ],
 };
 
-const LocationSelector = ({ currentCountry }: { currentCountry: CountryKey }) => {
+const LocationSection = ({ currentCountry }: { currentCountry: CountryKey }) => {
   const locations = allOffices[currentCountry];
 
   return (
@@ -130,4 +130,4 @@ const LocationSelector = ({ currentCountry }: { currentCountry: CountryKey }) =>
   );
 };
 
-export default LocationSelector;
+export default LocationSection;
