@@ -107,7 +107,7 @@ const LocationsSection: React.FC = () => {
     (country) => country.toLowerCase() === countryFromPath
   ) as keyof LocationsData;
 
-  const defaultCountry = matchedCountry || "Singapore";
+  const defaultCountry = matchedCountry || "India";
   const [selectedCountry, setSelectedCountry] = useState<keyof LocationsData>(defaultCountry);
   const [selectedLocation, setSelectedLocation] = useState<keyof CountryLocations>(
     Object.keys(allLocations[defaultCountry])[1]
