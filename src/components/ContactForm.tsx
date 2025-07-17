@@ -295,10 +295,13 @@ const ContactForm = () => {
               </motion.div>
             </form>
           </motion.div>
-     </div> {/* Closes the grid */}
+            </div> {/* Closes the grid */}
       </div> {/* Closes the container */}
-    </section> {/* ✅ This closes the <section> started at top */}
+
+      {/* ✅ This closes the <section> started at top */}
+    </section>
   );
 };
 
 export default ContactForm;
+
