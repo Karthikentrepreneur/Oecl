@@ -110,7 +110,7 @@ const LocationsSection: React.FC = () => {
   const defaultCountry = matchedCountry || "India";
   const [selectedCountry, setSelectedCountry] = useState<keyof LocationsData>(defaultCountry);
   const [selectedLocation, setSelectedLocation] = useState<keyof CountryLocations>(
-    Object.keys(allLocations[defaultCountry])[0]
+    Object.keys(allLocations[defaultCountry])[1]
   );
 
   useEffect(() => {
