@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 type LocationDetails = {
   map: string;
@@ -13,6 +14,7 @@ type CountryLocations = {
 type LocationsData = {
   [country: string]: CountryLocations;
 };
+
 
 const allLocations: LocationsData = {
   India: {
@@ -98,10 +100,25 @@ const allLocations: LocationsData = {
 };
 
 const LocationsSection: React.FC = () => {
-  const [selectedCountry, setSelectedCountry] = useState<keyof LocationsData>("India");
+  const { pathname } = useLocation();
+  const countryFromPath = pathname.split("/")[1]?.toLowerCase();
+
+  const matchedCountry = Object.keys(allLocations).find(
+    (country) => country.toLowerCase() === countryFromPath
+  ) as keyof LocationsData;
+
+  const defaultCountry = matchedCountry || "India";
+  const [selectedCountry, setSelectedCountry] = useState<keyof LocationsData>(defaultCountry);
   const [selectedLocation, setSelectedLocation] = useState<keyof CountryLocations>(
-    Object.keys(allLocations["India"])[0]
+    Object.keys(allLocations[defaultCountry])[0]
   );
+
+  useEffect(() => {
+    if (matchedCountry) {
+      setSelectedCountry(matchedCountry);
+      setSelectedLocation(Object.keys(allLocations[matchedCountry])[0]);
+    }
+  }, [matchedCountry]);
 
   const locations = allLocations[selectedCountry];
 
@@ -109,24 +126,9 @@ const LocationsSection: React.FC = () => {
     <div className="px-4 py-8 max-w-7xl mx-auto">
       <div className="mb-6">
         <h2 className="text-3xl font-bold mb-4 text-center">Our Office Locations</h2>
-        <div className="flex flex-wrap justify-center gap-3">
-          {Object.keys(allLocations).map((country) => (
-            <button
-              key={country}
-              className={`px-4 py-2 rounded border font-semibold transition-all ${
-                selectedCountry === country
-                  ? "bg-blue-900 text-white"
-                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
-              }`}
-              onClick={() => {
-                setSelectedCountry(country as keyof LocationsData);
-                const firstLocation = Object.keys(allLocations[country])[0] as keyof CountryLocations;
-                setSelectedLocation(firstLocation);
-              }}
-            >
-              {country}
-            </button>
-          ))}
+        {/* Only one selected country shown */}
+        <div className="text-center text-xl font-semibold py-2 px-4 bg-blue-900 text-white rounded inline-block">
+          {selectedCountry}
         </div>
       </div>
 
