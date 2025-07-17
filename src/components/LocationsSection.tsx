@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-type CountryKey = keyof typeof allOffices;
-
 type Office = {
   name: string;
   address: string;
@@ -104,28 +102,61 @@ const allOffices: Record<string, Office[]> = {
   ],
 };
 
-const LocationSection = ({ currentCountry }: { currentCountry: CountryKey }) => {
-  const locations = allOffices[currentCountry];
+const LocationSection = () => {
+  const countryOptions = Object.keys(allOffices);
+  const [selectedCountry, setSelectedCountry] = useState(countryOptions[0]);
+
+  const normalizedCountry = countryOptions.find(
+    (country) => country.toLowerCase() === selectedCountry.toLowerCase()
+  );
+
+  const locations = normalizedCountry ? allOffices[normalizedCountry] : undefined;
 
   return (
-    <div className="space-y-6">
-      <h3 className="text-2xl font-semibold text-gray-800 text-center">
-        {currentCountry} Office Locations
+    <div className="max-w-4xl mx-auto space-y-6 px-4">
+      <h3 className="text-2xl font-bold text-center text-gray-800">
+        Select Your Country
       </h3>
-      <div className="grid md:grid-cols-2 gap-6">
-        {locations.map((office, idx) => (
-          <div
-            key={idx}
-            className="p-6 bg-slate-100 border rounded-lg shadow-sm"
-          >
-            <h4 className="text-lg font-bold mb-2">{office.name}</h4>
-            <p className="text-gray-700 whitespace-pre-line mb-2">
-              {office.address}
-            </p>
-            <p className="text-gray-700 font-semibold">{office.phone}</p>
-          </div>
-        ))}
+
+      <div className="text-center">
+        <select
+          value={selectedCountry}
+          onChange={(e) => setSelectedCountry(e.target.value)}
+          className="border border-gray-300 px-4 py-2 rounded-md text-gray-800"
+        >
+          {countryOptions.map((country) => (
+            <option key={country} value={country}>
+              {country}
+            </option>
+          ))}
+        </select>
       </div>
+
+      {locations ? (
+        <>
+          <h4 className="text-xl font-semibold text-center">
+            {normalizedCountry} Office Locations
+          </h4>
+          <div className="grid md:grid-cols-2 gap-6">
+            {locations.map((office, idx) => (
+              <div
+                key={idx}
+                className="p-6 bg-slate-100 border rounded-lg shadow-sm"
+              >
+                <h5 className="text-lg font-bold mb-2">{office.name}</h5>
+                <p className="text-gray-700 whitespace-pre-line mb-2">
+                  {office.address}
+                </p>
+                <p className="text-gray-700 font-semibold">{office.phone}</p>
+              </div>
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className="text-center text-red-600 font-semibold">
+          No locations found for "{selectedCountry}"
+        </div>
+      )}
     </div>
   );
 };
