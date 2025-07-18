@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import MapContainer from '@/components/ContactMapContainer';
-import Sidebar from '@/components/ContactSidebar';
+import ContactMapContainer from '@/components/ContactMapContainer';
+import ContactSidebar from '@/components/ContactSidebar';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Menu, Map, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
