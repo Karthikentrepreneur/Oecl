@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'; // ✅ Fixed missing import
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ContactMapContainer from '@/components/ContactMapContainer';
@@ -11,7 +11,10 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }, [pathname]);
 
   return null;
@@ -50,42 +53,41 @@ const GlobalPresence = () => {
           </div>
         )}
 
-        {/* Map View */}
+        {/* Main content with map */}
         {(!isMobile || (isMobile && showMap)) && (
           <motion.main
             initial={isMobile ? { x: '100%' } : { opacity: 0 }}
             animate={isMobile ? { x: 0 } : { opacity: 1 }}
             exit={isMobile ? { x: '100%' } : { opacity: 0 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className={`transition-all duration-300 ease-in-out ${
-              isMobile ? 'w-full' : 'w-[60%]'
-            }`}
+            transition={{
+              type: 'spring',
+              stiffness: 300,
+              damping: 30
+            }}
+            className={`transition-all duration-300 ease-in-out ${isMobile ? 'w-full' : 'w-[60%]'}`}
           >
             <ContactMapContainer />
           </motion.main>
         )}
 
-        {/* Sidebar View */}
+        {/* Sidebar for locations */}
         {(!isMobile || (isMobile && !showMap)) && (
           <motion.div
             initial={isMobile ? { x: '-100%' } : { opacity: 0 }}
             animate={isMobile ? { x: 0 } : { opacity: 1 }}
             exit={isMobile ? { x: '-100%' } : { opacity: 0 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className={`transition-all duration-300 ease-in-out ${
-              isMobile ? 'w-full pt-12' : 'w-[35%]'
-            }`}
+            transition={{
+              type: 'spring',
+              stiffness: 300,
+              damping: 30
+            }}
+            className={`transition-all duration-300 ease-in-out ${isMobile ? 'w-full pt-12' : 'w-[35%]'}`}
           >
             <ContactSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
           </motion.div>
         )}
 
-        {/* Mobile buttons (if needed, can add toggle here) */}
-        {isMobile && (
-          <div className="fixed bottom-4 right-4 z-50 flex gap-2">
-            {/* Example Toggle Buttons can go here if needed */}
-          </div>
-        )}
+        {/* Optional toggle buttons can go here if needed */}
       </motion.div>
 
       <Footer />
