@@ -7,7 +7,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import GlobalPresence from "./pages/GlobalPresence";
 import ForgotPassword from "./pages/ForgotPassword";
 import AirFreight from "./pages/services/AirFreight";
 import OceanFreight from "./pages/services/OceanFreight";
@@ -41,6 +40,7 @@ import BlogDetail from "./components/BlogDetail";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import CountryRedirect from "./components/CountryRedirect";
+import GlobalPresence from "./pages/GlobalPresence";
 
 const queryClient = new QueryClient();
 
