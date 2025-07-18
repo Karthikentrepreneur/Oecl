@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import GlobalPresence from "./pages/GlobalPresence";
 import ForgotPassword from "./pages/ForgotPassword";
 import AirFreight from "./pages/services/AirFreight";
 import OceanFreight from "./pages/services/OceanFreight";
@@ -79,6 +80,7 @@ const App = () => {
               <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
               <Route path="/blog-admin" element={<BlogAdmin />} />
               <Route path="/blog/:slug" element={<BlogDetail />} />
+              <Route path="/global-presence" element={<GlobalPresence />} />
 
               {["india", "indonesia", "malaysia", "home", "thailand", "singapore"].map(country => (
                 <>
