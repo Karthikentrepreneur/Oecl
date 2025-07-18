@@ -75,11 +75,7 @@ const UpdatesSection = () => {
           ))}
         </div>
 
-        <div className="text-center">
-          <Button className="bg-kargon-red hover:bg-kargon-red/90 text-white px-6">
-            EXPLORE ALL SERVICES
-          </Button>
-        </div>
+        
       </div>
     </section>
   );
