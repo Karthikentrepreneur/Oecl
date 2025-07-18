@@ -8,7 +8,7 @@ import LocationsSection from "@/components/LocationsSection";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Send, XCircle, Building2 } from 'lucide-react';
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from 'react-router-dom';
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const ScrollToTop = () => {
