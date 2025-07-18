@@ -5,6 +5,7 @@ import HeroSection from "@/components/HeroSection";
 import TrackOrder from "@/components/TrackOrder";
 import ServicesCards from "@/components/ServicesCards";
 import AboutSection from "@/components/AboutSection";
+import GlobalPresence from "@/components/GlobalPresence";
 import ServicesSection from "@/components/ServicesSection";
 import WorkflowSection from "@/components/WorkflowSection";
 import StatsSection from "@/components/StatsSection";
@@ -64,6 +65,7 @@ const Index = () => {
       <ServicesSection />
       <WorkflowSection />
       <TestimonialsSection />
+      <GlobalPresence />
       <UpdatesSection />
       <ContactForm />
       <Footer />
