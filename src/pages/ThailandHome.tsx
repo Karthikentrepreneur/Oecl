@@ -9,6 +9,7 @@ import WorkflowSection from "@/components/WorkflowSection";
 import StatsSection from "@/components/StatsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import UpdatesSection from "@/components/UpdatesSection";
+import GlobalPresence from "@/components/GlobalPresence";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 
