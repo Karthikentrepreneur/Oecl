@@ -28,7 +28,7 @@ const GlobalPresence = () => {
     setShowMap(!showMap);
   };
   return <div className="min-h-screen flex flex-col bg-gradient-to-b from-amber-50/30 to-white">
-      <Header />
+      <Navigation />
       
       <motion.div initial={{
       opacity: 0
