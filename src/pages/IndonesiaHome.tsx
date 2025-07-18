@@ -10,6 +10,7 @@ import StatsSection from "@/components/StatsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import UpdatesSection from "@/components/UpdatesSection";
 import ContactForm from "@/components/ContactForm";
+import GlobalPresence from "@/components/GlobalPresence";
 import Footer from "@/components/Footer";
 
 const IndonesiaHome = () => {
