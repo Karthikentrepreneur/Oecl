@@ -27,7 +27,20 @@ const GlobalPresence = () => {
   const toggleView = () => {
     setShowMap(!showMap);
   };
+  const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }, [pathname]);
+
+  return null;
+};
   return <div className="min-h-screen flex flex-col bg-gradient-to-b from-amber-50/30 to-white">
+      <ScrollToTop />
       <Navigation />
       
       <motion.div initial={{
