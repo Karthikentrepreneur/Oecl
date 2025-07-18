@@ -103,7 +103,7 @@ const HeroSection = () => {
 
       {/* Main Content */}
       <div className="relative z-20 flex items-center min-h-screen px-6 lg:px-12">
-        <div className="max-w-4xl space-y-8 px-0 py-0 mx-auto lg:mx-[200px]">
+  <div className="max-w-4xl space-y-8 px-0 py-0 mx-auto lg:mx-0 lg:ml-20 lg:text-left text-center w-full">
           {/* Title */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
             {currentSlide.title.split(" ").map((word, i) => <span key={i} style={{
