@@ -153,8 +153,8 @@ const countries = [{
 }, {
   code: "bd",
   name: "Bangladesh",
-  lat: 23.6850,
-  lng: 90.3563,
+  lat: 23.8103,
+  lng: 90.4125,
   cities: [{
     name: "Dhaka",
     lat: 23.8103,
