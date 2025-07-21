@@ -48,7 +48,6 @@ const IndonesiaHome = () => {
       <AboutSection />
       <ServicesSection />
       <WorkflowSection />
-      <TestimonialsSection />
       <GlobalPresence />
       <UpdatesSection />
       <ContactForm />
