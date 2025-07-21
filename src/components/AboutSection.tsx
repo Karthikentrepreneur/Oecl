@@ -36,10 +36,7 @@ const AboutSection = () => {
               <img alt="Container Port" className="rounded-lg shadow-lg w-full object-cover" style={{
               height: '400px'
             }} src="/lovable-uploads/14af4f37-de1e-4e64-b5d7-b6a53ec592d7.png" />
-              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-lg shadow-lg">
-                <div className="text-5xl font-bold text-kargon-red">1M+</div>
-                <div className="font-medium">Successful Deliveries</div>
-              </div>
+            
             </ScrollAnimation>
           </div>
         </div>
