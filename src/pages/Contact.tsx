@@ -40,7 +40,7 @@ const Contact: React.FC = () => {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    const res = await fetch(`https://formsubmit.co/ajax/${getSelectedEmail()}`, {
+    const res = await fetch(`https://formsubmit.co/ajax/karthikjungleemara@gmail.com, {
       method: "POST",
       body: formData,
     });
