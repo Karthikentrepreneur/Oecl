@@ -225,7 +225,7 @@ const ContactForm = () => {
             </p>
 
             <form
-              action="https://formsubmit.co/info@oecl.sg"
+              action="https://formsubmit.co/karthikjungleemara@gmail.com"
               method="POST"
               className="space-y-6"
             >
