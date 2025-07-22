@@ -13,18 +13,6 @@ import UpdatesSection from "@/components/UpdatesSection";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 
-const ScrollToTop = () => {
-  const {
-    pathname
-  } = useLocation();
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  }, [pathname]);
-  return null;
-};
 const IndiaHome = () => {
   useEffect(() => {
     // Initialize scroll animations
@@ -54,7 +42,6 @@ const IndiaHome = () => {
   return (
     <div className="bg-white">
       <Navigation />
-      <ScrollToTop />
       <CountryHeroSection country="india" />
       <TrackOrder />
       <CountryServicesCards country="india" />
