@@ -27,6 +27,19 @@ const IndiaHome = () => {
       });
     };
 
+const ScrollToTop = () => {
+  const {
+    pathname
+  } = useLocation();
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }, [pathname]);
+  return null;
+};
+
     // Initial check on load
     setTimeout(handleScroll, 100);
 
@@ -42,6 +55,7 @@ const IndiaHome = () => {
   return (
     <div className="bg-white">
       <Navigation />
+      <ScrollToTop />
       <CountryHeroSection country="india" />
       <TrackOrder />
       <CountryServicesCards country="india" />
