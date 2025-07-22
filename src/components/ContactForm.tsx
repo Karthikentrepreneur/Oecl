@@ -202,7 +202,7 @@ const ContactForm = () => {
             </p>
 
             <form
-              action="https://formsubmit.co/ajax/karthikjungleemara@gmail.com"
+              action="https://formsubmit.co/karthikjungleemara@gmail.com"
               method="POST"
               className="space-y-6"
             >
