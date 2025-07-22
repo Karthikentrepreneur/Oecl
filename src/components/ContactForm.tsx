@@ -1,4 +1,3 @@
-// ContactForm.tsx
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,30 +11,13 @@ import {
 } from "@/components/ui/select";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Send, Building2, CheckCircle2 } from "lucide-react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const ContactForm = () => {
   const location = useLocation();
-  const [searchParams] = useSearchParams();
   const [selectedLocation, setSelectedLocation] = useState("");
   const [indiaPage, setIndiaPage] = useState(0);
-  const [currentUrl, setCurrentUrl] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setCurrentUrl(`${window.location.origin}${location.pathname}?submitted=true`);
-    }
-  }, [location.pathname]);
-
-  useEffect(() => {
-    if (searchParams.get("submitted") === "true") {
-      setShowSuccess(true);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      const timer = setTimeout(() => setShowSuccess(false), 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [searchParams]);
 
   const allOffices = {
     Singapore: [
@@ -148,6 +130,7 @@ const ContactForm = () => {
   return (
     <section className="py-16 bg-gradient-to-b from-gray-50 to-white" id="contact">
       <div className="container mx-auto px-4">
+
         {showSuccess && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -160,6 +143,20 @@ const ContactForm = () => {
             </p>
           </motion.div>
         )}
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Get In Touch</h2>
+          <div className="w-24 h-1 bg-red-600 mx-auto mb-4" />
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            Ready to streamline your logistics? Contact us today for a customized solution.
+          </p>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Office Info */}
@@ -176,6 +173,7 @@ const ContactForm = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 + idx * 0.1 }}
+                viewport={{ once: true }}
                 className="bg-white p-6 rounded-xl shadow-lg border-2 border-red-500 bg-red-50"
               >
                 <h4 className="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
@@ -203,18 +201,26 @@ const ContactForm = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
             className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100"
           >
             <h3 className="text-2xl font-bold text-gray-800 mb-6">Send us a Message</h3>
+            <p className="text-gray-600 mb-6">
+              Fill out the form below and we'll get back to you within 24 hours.
+            </p>
+
             <form
               action="https://formsubmit.co/ajax/karthikjungleemara@gmail.com"
               method="POST"
               className="space-y-6"
+              onSubmit={() => {
+                setShowSuccess(true);
+                setTimeout(() => setShowSuccess(false), 5000);
+              }}
             >
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="box" />
               <input type="hidden" name="_subject" value={`New Contact Submission from ${selectedLocation}`} />
-              <input type="hidden" name="_next" value={currentUrl} />
               <input type="hidden" name="Preferred_Location" value={selectedLocation} />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -244,7 +250,7 @@ const ContactForm = () => {
                 <Input name="Organization" placeholder="Enter your company name" />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-2 max-w-md mx-auto p-4 bg-white rounded-lg shadow">
                 <label className="text-sm font-medium text-gray-700">Preferred Office Location</label>
                 <Select value={selectedLocation} onValueChange={setSelectedLocation}>
                   <SelectTrigger>
