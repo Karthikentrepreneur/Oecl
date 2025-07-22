@@ -1,6 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,31 +8,24 @@ import LocationsSection from "@/components/LocationsSection";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { motion } from "framer-motion";
 import { Send, XCircle } from "lucide-react";
-import { useLocation } from "react-router-dom";
 
 const Contact: React.FC = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
   const [showNotification, setShowNotification] = useState(false);
 
-  const locationEmails: { [key: string]: string } = {
-    "SINGAPORE - HEADQUARTERS": "info@oecl.sg",
-    MALAYSIA: "malaysia@oecl.com",
-    INDIA: "india@oecl.com",
-    THAILAND: "thailand@oecl.com",
-    INDONESIA: "indonesia@oecl.com",
-    SRILANKA: "srilanka@oecl.com",
-    MYANMAR: "myanmar@oecl.com",
-    PAKISTAN: "pakistan@oecl.com",
-    BANGLADESH: "bangladesh@oecl.com",
-    UK: "uk@oecl.com",
-    USA: "usa@oecl.com",
-  };
-
-  const locationNames = Object.keys(locationEmails);
-
-  const getSelectedEmail = () => {
-    return locationEmails[selectedLocation] || "info@oecl.sg";
-  };
+  const locationNames = [
+    "SINGAPORE - HEADQUARTERS",
+    "MALAYSIA",
+    "INDIA",
+    "THAILAND",
+    "INDONESIA",
+    "SRILANKA",
+    "MYANMAR",
+    "PAKISTAN",
+    "BANGLADESH",
+    "UK",
+    "USA",
+  ];
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,7 +33,7 @@ const Contact: React.FC = () => {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    const res = await fetch(`https://formsubmit.co/ajax/karthikjungleemara@gmail.com, {
+    const res = await fetch("https://formsubmit.co/ajax/karthikjungleemara@gmail.com", {
       method: "POST",
       body: formData,
     });
@@ -93,8 +86,6 @@ const Contact: React.FC = () => {
         {/* Global Presence Section */}
         <section className="py-16 bg-gradient-to-b from-red-50/30 to-white">
           <div className="container mx-auto px-4">
-            
-
             <section>
               <div>
                 <motion.div>
@@ -126,7 +117,7 @@ const Contact: React.FC = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <input type="hidden" name="_captcha" value="false" />
                   <input type="hidden" name="_template" value="box" />
-                  <input type="hidden" name="_subject" value={`New Contact from ${selectedLocation}`} />
+                  <input type="hidden" name="_subject" value="New Contact Form Submission" />
                   <input type="hidden" name="_next" value={window.location.href} />
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
