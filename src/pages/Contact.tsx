@@ -1,11 +1,17 @@
+import React, { useState, useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import LocationsSection from "@/components/LocationsSection";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { motion } from "framer-motion";
 import { Send, XCircle } from "lucide-react";
 
@@ -26,6 +32,11 @@ const Contact: React.FC = () => {
     "UK",
     "USA",
   ];
+
+  // ✅ Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -153,7 +164,12 @@ const Contact: React.FC = () => {
 
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700">Message *</label>
-                    <Textarea name="Message" required placeholder="Tell us about your logistics needs..." rows={5} />
+                    <Textarea
+                      name="Message"
+                      required
+                      placeholder="Tell us about your logistics needs..."
+                      rows={5}
+                    />
                   </div>
 
                   <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
