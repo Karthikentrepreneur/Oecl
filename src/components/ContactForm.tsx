@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,29 +11,14 @@ import {
 } from "@/components/ui/select";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Send, Building2, CheckCircle2 } from "lucide-react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const ContactForm = () => {
   const location = useLocation();
-  const [searchParams] = useSearchParams();
   const [selectedLocation, setSelectedLocation] = useState("");
   const [indiaPage, setIndiaPage] = useState(0);
-  const [currentUrl, setCurrentUrl] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setCurrentUrl(`${window.location.origin}${location.pathname}?submitted=true`);
-    }
-  }, [location.pathname]);
-
-  useEffect(() => {
-    if (searchParams.get("submitted") === "true") {
-      setShowSuccess(true);
-      const timer = setTimeout(() => setShowSuccess(false), 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [searchParams]);
+  const formRef = useRef(null);
 
   const allOffices = {
     Singapore: [
@@ -66,46 +51,11 @@ const ContactForm = () => {
         address: "Survey No.209/6A(Part)209/6B(Part), Mannur & Valarpuram Village, Perambakkam Road, Sriperumbudur Taluk, Kanchipuram District-602105",
         phone: "+91 9994355523",
       },
-      {
-        name: "Delhi Office",
-        address: "Plot No. 15, 1st Floor, Block C, Pocket 8, Sector 17, Dwarka, New Delhi 110075",
-        phone: "+91 11 41088871",
-      },
-      {
-        name: "Kolkata Office",
-        address: "Imagine Techpark, Unit No. 10, 19th Floor, Block DN 6, Sector - V, Salt Lake City, Kolkata, West Bengal - 700091",
-        phone: "+91 33 4814 9162 / 63",
-      },
-      {
-        name: "Bengaluru Office",
-        address: "3C-964 IIIrd Cross Street, HRBR Layout 1st Block, Kalyan Nagar Bannaswadi, Bengaluru - 560043",
-        phone: "+91 9841676259",
-      },
-      {
-        name: "Cochin Office",
-        address: "CC 59/801A Elizabeth Memorial Building, Thevara Ferry Jn, Cochin 682013, Kerala",
-        phone: "+91 484 4019192 / 93",
-      },
-      {
-        name: "Hyderabad Office",
-        address: "H.No. 1-8-450/1/A-7 Indian Airlines Colony, Opp Police Lines, Begumpet, Hyderabad-500016, Telangana",
-        phone: "040-49559704",
-      },
-      {
-        name: "Mumbai Office",
-        address: "Town Center - 2, Office No.607, 6th Floor, Marol, Andheri Kurla Road, Andheri East, Mumbai - 400059",
-        phone: "+91 8879756838, 022-35131688 / 35113475 / 35082586",
-      },
     ],
     Indonesia: [
       {
         name: "Jakarta Office",
         address: "408, Lina Building, JL.HR Rasuna Said kav B7, Jakarta",
-        phone: "+62 21 529 20292, 522 4887",
-      },
-      {
-        name: "Surabaya Office",
-        address: "Japfa Indoland Center, Japfa Tower 1, Lantai 4/401-A, JL Jend, Basuki Rahmat 129-137, Surabaya 60271",
         phone: "+62 21 529 20292, 522 4887",
       },
     ],
@@ -124,7 +74,6 @@ const ContactForm = () => {
     if (path.includes("/malaysia")) return "Malaysia";
     if (path.includes("/indonesia")) return "Indonesia";
     if (path.includes("/thailand")) return "Thailand";
-    if (path.includes("/singapore")) return "Singapore";
     return "Singapore";
   };
 
@@ -144,24 +93,33 @@ const ContactForm = () => {
     }
   }, [currentCountry]);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/karthikjungleemara@gmail.com", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
+      });
+
+      if (response.ok) {
+        form.reset();
+        setShowSuccess(true);
+        setTimeout(() => setShowSuccess(false), 5000);
+      } else {
+        alert("There was a problem submitting the form. Please try again.");
+      }
+    } catch (err) {
+      alert("Something went wrong: " + err.message);
+    }
+  };
+
   return (
     <section className="py-16 bg-gradient-to-b from-gray-50 to-white" id="contact">
       <div className="container mx-auto px-4">
-
-        {showSuccess && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="mb-6 mx-auto max-w-3xl p-4 rounded-xl bg-green-100 border border-green-400 text-green-800 shadow-md flex items-center gap-3"
-          >
-            <CheckCircle2 className="w-6 h-6 text-green-600" />
-            <p className="text-sm md:text-base font-medium">
-              Your message has been sent successfully. We’ll get back to you soon!
-            </p>
-          </motion.div>
-        )}
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -177,7 +135,7 @@ const ContactForm = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Offices */}
+          {/* Office List */}
           <div className="space-y-6">
             <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
               <Building2 className="w-6 h-6 text-red-600" /> Our Offices
@@ -227,39 +185,11 @@ const ContactForm = () => {
               Fill out the form below and we'll get back to you within 24 hours.
             </p>
 
-            <form
-  onSubmit={async (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    try {
-      const response = await fetch("https://formsubmit.co/ajax/karthikjungleemara@gmail.com", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
-        body: formData,
-      });
-
-      if (response.ok) {
-        form.reset();
-        setShowSuccess(true);
-        setTimeout(() => setShowSuccess(false), 5000);
-      } else {
-        alert("There was a problem submitting the form. Please try again.");
-      }
-    } catch (error) {
-      alert("There was an error: " + error);
-    }
-  }}
-  className="space-y-6"
->
-  <input type="hidden" name="_captcha" value="false" />
-  <input type="hidden" name="_template" value="box" />
-  <input type="hidden" name="_subject" value={`New Contact Submission from ${selectedLocation}`} />
-  <input type="hidden" name="Preferred_Location" value={selectedLocation} />
-
+            <form onSubmit={handleSubmit} ref={formRef} className="space-y-6">
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="box" />
+              <input type="hidden" name="_subject" value={`New Contact Submission from ${selectedLocation}`} />
+              <input type="hidden" name="Preferred_Location" value={selectedLocation} />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -288,11 +218,9 @@ const ContactForm = () => {
                 <Input name="Organization" placeholder="Enter your company name" />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-2 max-w-md mx-auto p-4 bg-white rounded-lg shadow">
                 <label className="text-sm font-medium text-gray-700">Preferred Office Location</label>
-                <Select value={selectedLocation} onValueChange={(val) => {
-                  setSelectedLocation(val.includes("Singapore") ? "Singapore" : val);
-                }}>
+                <Select value={selectedLocation} onValueChange={setSelectedLocation}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select office location" />
                   </SelectTrigger>
@@ -321,6 +249,21 @@ const ContactForm = () => {
                   Send Message
                 </Button>
               </motion.div>
+
+              {/* Success message below form */}
+              {showSuccess && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="mt-6 p-4 rounded-xl bg-green-100 border border-green-400 text-green-800 shadow flex items-center gap-3"
+                >
+                  <CheckCircle2 className="w-5 h-5 text-green-600" />
+                  <p className="text-sm md:text-base font-medium">
+                    Your message has been sent successfully. We’ll get back to you soon!
+                  </p>
+                </motion.div>
+              )}
             </form>
           </motion.div>
         </div>
