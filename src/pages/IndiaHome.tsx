@@ -13,6 +13,18 @@ import UpdatesSection from "@/components/UpdatesSection";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 
+const ScrollToTop = () => {
+  const {
+    pathname
+  } = useLocation();
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }, [pathname]);
+  return null;
+};
 const IndiaHome = () => {
   useEffect(() => {
     // Initialize scroll animations
@@ -26,19 +38,6 @@ const IndiaHome = () => {
         }
       });
     };
-
-const ScrollToTop = () => {
-  const {
-    pathname
-  } = useLocation();
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  }, [pathname]);
-  return null;
-};
 
     // Initial check on load
     setTimeout(handleScroll, 100);
