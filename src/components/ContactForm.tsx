@@ -11,13 +11,29 @@ import {
 } from "@/components/ui/select";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Send, Building2, CheckCircle2 } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 const ContactForm = () => {
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const [selectedLocation, setSelectedLocation] = useState("");
   const [indiaPage, setIndiaPage] = useState(0);
+  const [currentUrl, setCurrentUrl] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCurrentUrl(`${window.location.origin}${location.pathname}?submitted=true`);
+    }
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (searchParams.get("submitted") === "true") {
+      setShowSuccess(true);
+      const timer = setTimeout(() => setShowSuccess(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [searchParams]);
 
   const allOffices = {
     Singapore: [
@@ -108,6 +124,7 @@ const ContactForm = () => {
     if (path.includes("/malaysia")) return "Malaysia";
     if (path.includes("/indonesia")) return "Indonesia";
     if (path.includes("/thailand")) return "Thailand";
+    if (path.includes("/singapore")) return "Singapore";
     return "Singapore";
   };
 
@@ -135,6 +152,7 @@ const ContactForm = () => {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
             className="mb-6 mx-auto max-w-3xl p-4 rounded-xl bg-green-100 border border-green-400 text-green-800 shadow-md flex items-center gap-3"
           >
             <CheckCircle2 className="w-6 h-6 text-green-600" />
@@ -159,7 +177,7 @@ const ContactForm = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Office Info */}
+          {/* Offices */}
           <div className="space-y-6">
             <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
               <Building2 className="w-6 h-6 text-red-600" /> Our Offices
@@ -196,7 +214,7 @@ const ContactForm = () => {
             ))}
           </div>
 
-          {/* Contact Form */}
+          {/* Form */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -213,14 +231,11 @@ const ContactForm = () => {
               action="https://formsubmit.co/ajax/karthikjungleemara@gmail.com"
               method="POST"
               className="space-y-6"
-              onSubmit={() => {
-                setShowSuccess(true);
-                setTimeout(() => setShowSuccess(false), 5000);
-              }}
             >
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="box" />
               <input type="hidden" name="_subject" value={`New Contact Submission from ${selectedLocation}`} />
+              <input type="hidden" name="_next" value={currentUrl} />
               <input type="hidden" name="Preferred_Location" value={selectedLocation} />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -250,9 +265,11 @@ const ContactForm = () => {
                 <Input name="Organization" placeholder="Enter your company name" />
               </div>
 
-              <div className="space-y-2 max-w-md mx-auto p-4 bg-white rounded-lg shadow">
+              <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">Preferred Office Location</label>
-                <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+                <Select value={selectedLocation} onValueChange={(val) => {
+                  setSelectedLocation(val.includes("Singapore") ? "Singapore" : val);
+                }}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select office location" />
                   </SelectTrigger>
