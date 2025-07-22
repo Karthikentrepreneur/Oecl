@@ -243,7 +243,7 @@ const ContactForm = () => {
                 <Input name="Organization" placeholder="Enter your company name" />
               </div>
 
-              <div className="space-y-2 max-w-md mx-auto mt-10 p-4 bg-white rounded-lg shadow">
+               <div className="space-y-2 max-w-md mx-auto p-4 bg-white rounded-lg shadow">
       <label className="text-sm font-medium text-gray-700">
         Preferred Office Location
       </label>
