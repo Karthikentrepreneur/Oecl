@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,78 +16,67 @@ import { useLocation } from "react-router-dom";
 const ContactForm = () => {
   const location = useLocation();
   const [selectedLocation, setSelectedLocation] = useState("");
-  const [indiaPage, setIndiaPage] = useState(0); // 0 or 1 for pagination
+  const [indiaPage, setIndiaPage] = useState(0);
 
   const allOffices = {
     Singapore: [
       {
         name: "Singapore Office",
-        address:
-          "Blk 511 Kampong Bahru Road, #03-01 Keppel Distripark, Singapore 099447",
+        address: "Blk 511 Kampong Bahru Road, #03-01 Keppel Distripark, Singapore 099447",
         phone: "+65 6224 1338 / +65 6224 1336",
       },
     ],
     Malaysia: [
       {
         name: "Port Klang Office",
-        address:
-          "MTBBT 2, 3A-5, Jalan Batu Nilam 16, The Landmark (Behind AEON Mall), Bandar Bukit Tinggi 2, 41200 Klang, Selangor D.E",
+        address: "MTBBT 2, 3A-5, Jalan Batu Nilam 16, The Landmark (Behind AEON Mall), Bandar Bukit Tinggi 2, 41200 Klang, Selangor D.E",
         phone: "+603 - 3319 2778 / 74 / 75",
       },
       {
         name: "Pasir Gudang Office",
-        address:
-          "Unit 20-03A, Level 20 Menara Zurich, 15 Jalan Dato Abdullah Tahir, 80300 Johor Bahru",
+        address: "Unit 20-03A, Level 20 Menara Zurich, 15 Jalan Dato Abdullah Tahir, 80300 Johor Bahru",
         phone: "603-3319 2778 / 74 / 75, 79",
       },
     ],
     India: [
       {
         name: "Chennai Office",
-        address:
-          "Roma Building, Door No. 10, 3rd Floor, G.S.T. Road, Alandur, Chennai-600 016",
+        address: "Roma Building, Door No. 10, 3rd Floor, G.S.T. Road, Alandur, Chennai-600 016",
         phone: "044 4689 4646",
       },
       {
         name: "Chennai Warehouse",
-        address:
-          "Survey No.209/6A(Part)209/6B(Part), Mannur & Valarpuram Village, Perambakkam Road, Sriperumbudur Taluk, Kanchipuram District-602105",
+        address: "Survey No.209/6A(Part)209/6B(Part), Mannur & Valarpuram Village, Perambakkam Road, Sriperumbudur Taluk, Kanchipuram District-602105",
         phone: "+91 9994355523",
       },
       {
         name: "Delhi Office",
-        address:
-          "Plot No. 15, 1st Floor, Block C, Pocket 8, Sector 17, Dwarka, New Delhi 110075",
+        address: "Plot No. 15, 1st Floor, Block C, Pocket 8, Sector 17, Dwarka, New Delhi 110075",
         phone: "+91 11 41088871",
       },
       {
         name: "Kolkata Office",
-        address:
-          "Imagine Techpark, Unit No. 10, 19th Floor, Block DN 6, Sector - V, Salt Lake City, Kolkata, West Bengal - 700091",
+        address: "Imagine Techpark, Unit No. 10, 19th Floor, Block DN 6, Sector - V, Salt Lake City, Kolkata, West Bengal - 700091",
         phone: "+91 33 4814 9162 / 63",
       },
       {
         name: "Bengaluru Office",
-        address:
-          "3C-964 IIIrd Cross Street, HRBR Layout 1st Block, Kalyan Nagar Bannaswadi, Bengaluru - 560043",
+        address: "3C-964 IIIrd Cross Street, HRBR Layout 1st Block, Kalyan Nagar Bannaswadi, Bengaluru - 560043",
         phone: "+91 9841676259",
       },
       {
         name: "Cochin Office",
-        address:
-          "CC 59/801A Elizabeth Memorial Building, Thevara Ferry Jn, Cochin 682013, Kerala",
+        address: "CC 59/801A Elizabeth Memorial Building, Thevara Ferry Jn, Cochin 682013, Kerala",
         phone: "+91 484 4019192 / 93",
       },
       {
         name: "Hyderabad Office",
-        address:
-          "H.No. 1-8-450/1/A-7 Indian Airlines Colony, Opp Police Lines, Begumpet, Hyderabad-500016, Telangana",
+        address: "H.No. 1-8-450/1/A-7 Indian Airlines Colony, Opp Police Lines, Begumpet, Hyderabad-500016, Telangana",
         phone: "040-49559704",
       },
       {
         name: "Mumbai Office",
-        address:
-          "Town Center - 2, Office No.607, 6th Floor, Marol, Andheri Kurla Road, Andheri East, Mumbai - 400059",
+        address: "Town Center - 2, Office No.607, 6th Floor, Marol, Andheri Kurla Road, Andheri East, Mumbai - 400059",
         phone: "+91 8879756838, 022-35131688 / 35113475 / 35082586",
       },
     ],
@@ -100,16 +88,14 @@ const ContactForm = () => {
       },
       {
         name: "Surabaya Office",
-        address:
-          "Japfa Indoland Center, Japfa Tower 1, Lantai 4/401-A, JL Jend, Basuki Rahmat 129-137, Surabaya 60271",
+        address: "Japfa Indoland Center, Japfa Tower 1, Lantai 4/401-A, JL Jend, Basuki Rahmat 129-137, Surabaya 60271",
         phone: "+62 21 529 20292, 522 4887",
       },
     ],
     Thailand: [
       {
         name: "Bangkok Office",
-        address:
-          "109 CCT Building, 3rd Floor, Rm.3, Surawong Road, Suriyawongse, Bangrak, Bangkok 10500",
+        address: "109 CCT Building, 3rd Floor, Rm.3, Surawong Road, Suriyawongse, Bangrak, Bangkok 10500",
         phone: "+662-634-3240, +662-634-3942",
       },
     ],
@@ -126,9 +112,7 @@ const ContactForm = () => {
 
   const currentCountry = getCurrentCountry();
   const currentOffices = allOffices[currentCountry] || [];
-  const currentOffice = currentOffices[0]; // used in form email
 
-  // Auto-scroll logic for India office cards
   useEffect(() => {
     if (currentCountry === "India") {
       const interval = setInterval(() => {
@@ -207,14 +191,15 @@ const ContactForm = () => {
             </p>
 
             <form
-              action={`https://formsubmit.co/ajax/${currentOffice?.email || "info@oecl.sg"}`}
+              action="https://formsubmit.co/ajax/info@oecl.sg"
               method="POST"
               className="space-y-6"
             >
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="box" />
-              <input type="hidden" name="_subject" value={`New Contact Submission from ${currentOffice?.name || "OECL"}!`} />
+              <input type="hidden" name="_subject" value="New Contact Submission from OECL!" />
               <input type="hidden" name="_next" value={`${window.location.origin}/contact?submitted=true`} />
+              <input type="hidden" name="Preferred_Location" value={selectedLocation} />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -243,33 +228,27 @@ const ContactForm = () => {
                 <Input name="Organization" placeholder="Enter your company name" />
               </div>
 
-               <div className="space-y-2 max-w-md mx-auto p-4 bg-white rounded-lg shadow">
-      <label className="text-sm font-medium text-gray-700">
-        Preferred Office Location
-      </label>
-      <Select
-        value={selectedLocation}
-        onValueChange={setSelectedLocation}
-        name="Preferred_Location"
-      >
-        <SelectTrigger>
-          <SelectValue placeholder="Select office location" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="Singapore (HQ)">Singapore (HQ)</SelectItem>
-          <SelectItem value="Malaysia">Malaysia</SelectItem>
-          <SelectItem value="India">India</SelectItem>
-          <SelectItem value="Thailand">Thailand</SelectItem>
-          <SelectItem value="Indonesia">Indonesia</SelectItem>
-          <SelectItem value="Sri Lanka">Sri Lanka</SelectItem>
-          <SelectItem value="Myanmar">Myanmar</SelectItem>
-          <SelectItem value="Pakistan">Pakistan</SelectItem>
-          <SelectItem value="Bangladesh">Bangladesh</SelectItem>
-          <SelectItem value="UK">UK</SelectItem>
-          <SelectItem value="USA">USA</SelectItem>
-        </SelectContent>
-      </Select>
-    </div>
+              <div className="space-y-2 max-w-md mx-auto p-4 bg-white rounded-lg shadow">
+                <label className="text-sm font-medium text-gray-700">Preferred Office Location</label>
+                <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select office location" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Singapore (HQ)">Singapore (HQ)</SelectItem>
+                    <SelectItem value="Malaysia">Malaysia</SelectItem>
+                    <SelectItem value="India">India</SelectItem>
+                    <SelectItem value="Thailand">Thailand</SelectItem>
+                    <SelectItem value="Indonesia">Indonesia</SelectItem>
+                    <SelectItem value="Sri Lanka">Sri Lanka</SelectItem>
+                    <SelectItem value="Myanmar">Myanmar</SelectItem>
+                    <SelectItem value="Pakistan">Pakistan</SelectItem>
+                    <SelectItem value="Bangladesh">Bangladesh</SelectItem>
+                    <SelectItem value="UK">UK</SelectItem>
+                    <SelectItem value="USA">USA</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">Message *</label>
