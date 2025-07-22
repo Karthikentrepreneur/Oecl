@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import LocationsSection from "@/components/LocationsSection";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { motion } from "framer-motion";
 import { Send, XCircle } from "lucide-react";
@@ -88,6 +89,17 @@ const Contact: React.FC = () => {
             </p>
           </motion.div>
         </motion.section>
+        <section>
+              <div>
+                <motion.div>
+                  <motion.main className="transition-all duration-300 ease-in-out w-full">
+                    <LocationsSection />
+                  </motion.main>
+                </motion.div>
+              </div>
+            </section>
+          </div>
+        </section>
 
         {/* Contact Form */}
         <section className="py-16 bg-white" id="contact-form">
