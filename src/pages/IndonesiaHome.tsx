@@ -12,30 +12,28 @@ import UpdatesSection from "@/components/UpdatesSection";
 import ContactForm from "@/components/ContactForm";
 import GlobalPresence from "@/components/GlobalPresence";
 import Footer from "@/components/Footer";
+import { useScrollToTop } from "@/hooks/useScrollToTop"; // ✅ Import the hook
 
 const IndonesiaHome = () => {
+  useScrollToTop(); // ✅ Call the hook at the top of the component
+
   useEffect(() => {
-    // Initialize scroll animations
     const handleScroll = () => {
-      const scrollAnimElements = document.querySelectorAll('.scroll-animate');
-      scrollAnimElements.forEach(element => {
+      const scrollAnimElements = document.querySelectorAll(".scroll-animate");
+      scrollAnimElements.forEach((element) => {
         const elementTop = element.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
         if (elementTop < windowHeight * 0.9) {
-          element.classList.add('appear');
+          element.classList.add("appear");
         }
       });
     };
 
-    // Initial check on load
     setTimeout(handleScroll, 100);
+    window.addEventListener("scroll", handleScroll);
 
-    // Add event listener
-    window.addEventListener('scroll', handleScroll);
-
-    // Cleanup
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
