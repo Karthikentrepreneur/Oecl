@@ -10,20 +10,30 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Send, Building2 } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { Phone, Mail, MapPin, Send, Building2, CheckCircle2 } from "lucide-react";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 const ContactForm = () => {
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const [selectedLocation, setSelectedLocation] = useState("");
   const [indiaPage, setIndiaPage] = useState(0);
   const [currentUrl, setCurrentUrl] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setCurrentUrl(`${window.location.origin}/contact?submitted=true`);
+      setCurrentUrl(`${window.location.origin}${location.pathname}?submitted=true`);
     }
-  }, []);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (searchParams.get("submitted") === "true") {
+      setShowSuccess(true);
+      const timer = setTimeout(() => setShowSuccess(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [searchParams]);
 
   const allOffices = {
     Singapore: [
@@ -136,6 +146,21 @@ const ContactForm = () => {
   return (
     <section className="py-16 bg-gradient-to-b from-gray-50 to-white" id="contact">
       <div className="container mx-auto px-4">
+
+        {showSuccess && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="mb-6 mx-auto max-w-3xl p-4 rounded-xl bg-green-100 border border-green-400 text-green-800 shadow-md flex items-center gap-3"
+          >
+            <CheckCircle2 className="w-6 h-6 text-green-600" />
+            <p className="text-sm md:text-base font-medium">
+              Your message has been sent successfully. We’ll get back to you soon!
+            </p>
+          </motion.div>
+        )}
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -151,7 +176,6 @@ const ContactForm = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Office Cards */}
           <div className="space-y-6">
             <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
               <Building2 className="w-6 h-6 text-red-600" /> Our Offices
@@ -188,7 +212,6 @@ const ContactForm = () => {
             ))}
           </div>
 
-          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
