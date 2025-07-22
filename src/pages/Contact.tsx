@@ -89,7 +89,13 @@ const Contact: React.FC = () => {
             </p>
           </motion.div>
         </motion.section>
-        <section>
+
+        {/* Global Presence Section */}
+        <section className="py-16 bg-gradient-to-b from-red-50/30 to-white">
+          <div className="container mx-auto px-4">
+            
+
+            <section>
               <div>
                 <motion.div>
                   <motion.main className="transition-all duration-300 ease-in-out w-full">
