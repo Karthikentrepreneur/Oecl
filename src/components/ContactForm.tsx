@@ -228,15 +228,38 @@ const ContactForm = () => {
             </p>
 
             <form
-              action="https://formsubmit.co/ajax/karthikjungleemara@gmail.com"
-              method="POST"
-              className="space-y-6"
-            >
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_template" value="box" />
-              <input type="hidden" name="_subject" value={`New Contact Submission from ${selectedLocation}`} />
-              <input type="hidden" name="_next" value={currentUrl} />
-              <input type="hidden" name="Preferred_Location" value={selectedLocation} />
+  onSubmit={async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/karthikjungleemara@gmail.com", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+
+      if (response.ok) {
+        form.reset();
+        setShowSuccess(true);
+        setTimeout(() => setShowSuccess(false), 5000);
+      } else {
+        alert("There was a problem submitting the form. Please try again.");
+      }
+    } catch (error) {
+      alert("There was an error: " + error);
+    }
+  }}
+  className="space-y-6"
+>
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="hidden" name="_template" value="box" />
+  <input type="hidden" name="_subject" value={`New Contact Submission from ${selectedLocation}`} />
+  <input type="hidden" name="Preferred_Location" value={selectedLocation} />
+
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
