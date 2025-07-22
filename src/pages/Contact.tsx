@@ -14,7 +14,7 @@ const Contact: React.FC = () => {
   const [showNotification, setShowNotification] = useState(false);
 
   const locationNames = [
-    "SINGAPORE - HEADQUARTERS",
+    "SINGAPORE",
     "MALAYSIA",
     "INDIA",
     "THAILAND",
@@ -29,7 +29,6 @@ const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const form = e.currentTarget;
     const formData = new FormData(form);
 
@@ -63,7 +62,6 @@ const Contact: React.FC = () => {
       )}
 
       <main className="flex-grow">
-        {/* Hero Section */}
         <motion.section
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -83,22 +81,12 @@ const Contact: React.FC = () => {
           </motion.div>
         </motion.section>
 
-        {/* Global Presence Section */}
         <section className="py-16 bg-gradient-to-b from-red-50/30 to-white">
           <div className="container mx-auto px-4">
-            <section>
-              <div>
-                <motion.div>
-                  <motion.main className="transition-all duration-300 ease-in-out w-full">
-                    <LocationsSection />
-                  </motion.main>
-                </motion.div>
-              </div>
-            </section>
+            <LocationsSection />
           </div>
         </section>
 
-        {/* Contact Form */}
         <section className="py-16 bg-white" id="contact-form">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl mx-auto">
@@ -118,7 +106,6 @@ const Contact: React.FC = () => {
                   <input type="hidden" name="_captcha" value="false" />
                   <input type="hidden" name="_template" value="box" />
                   <input type="hidden" name="_subject" value="New Contact Form Submission" />
-                  <input type="hidden" name="_next" value={window.location.href} />
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
@@ -161,6 +148,7 @@ const Contact: React.FC = () => {
                         ))}
                       </SelectContent>
                     </Select>
+                    <input type="hidden" name="Preferred Location" value={selectedLocation} />
                   </div>
 
                   <div className="space-y-2">
