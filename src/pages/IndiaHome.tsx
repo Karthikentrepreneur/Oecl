@@ -11,6 +11,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import GlobalPresence from "@/components/GlobalPresence";
 import UpdatesSection from "@/components/UpdatesSection";
 import ContactForm from "@/components/ContactForm";
+import { useScrollToTop } from "@/hooks/useScrollToTop";
 import Footer from "@/components/Footer";
 
 const IndiaHome = () => {
@@ -42,6 +43,7 @@ const IndiaHome = () => {
   return (
     <div className="bg-white">
       <Navigation />
+      <useScrollToTop />
       <CountryHeroSection country="india" />
       <TrackOrder />
       <CountryServicesCards country="india" />
