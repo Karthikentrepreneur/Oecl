@@ -289,7 +289,7 @@ const HeroSection = ({ country }: HeroSectionProps) => {
           <div className={`flex flex-col sm:flex-row gap-4 transform transition-all duration-1000 delay-700 ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
           }`}>
-            <a href="/signup" className="group hidden md:block">
+            <a href="/contact" className="group hidden md:block">
               <button className="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl px-8 py-4 text-lg font-semibold flex items-center gap-3 shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-red-500/30 border border-red-500/30">
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
                 <Zap className="w-5 h-5" />
