@@ -11,12 +11,13 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import GlobalPresence from "@/components/GlobalPresence";
 import UpdatesSection from "@/components/UpdatesSection";
 import ContactForm from "@/components/ContactForm";
-import { useScrollToTop } from "@/hooks/useScrollToTop";
 import Footer from "@/components/Footer";
+import { useScrollToTop } from "@/hooks/useScrollToTop"; // ✅ correct usage
 
 const IndiaHome = () => {
+  useScrollToTop(); // ✅ hook should be called, not rendered
+
   useEffect(() => {
-    // Initialize scroll animations
     const handleScroll = () => {
       const scrollAnimElements = document.querySelectorAll('.scroll-animate');
       scrollAnimElements.forEach(element => {
@@ -28,13 +29,9 @@ const IndiaHome = () => {
       });
     };
 
-    // Initial check on load
     setTimeout(handleScroll, 100);
-
-    // Add event listener
     window.addEventListener('scroll', handleScroll);
 
-    // Cleanup
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -43,13 +40,14 @@ const IndiaHome = () => {
   return (
     <div className="bg-white">
       <Navigation />
-      <useScrollToTop />
       <CountryHeroSection country="india" />
       <TrackOrder />
       <CountryServicesCards country="india" />
       <AboutSection />
       <ServicesSection />
       <WorkflowSection />
+      <StatsSection />
+      <TestimonialsSection />
       <GlobalPresence />
       <UpdatesSection />
       <ContactForm />
