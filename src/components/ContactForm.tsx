@@ -243,27 +243,33 @@ const ContactForm = () => {
                 <Input name="Organization" placeholder="Enter your company name" />
               </div>
 
-              <div className="space-y-2">
-  <label className="text-sm font-medium text-gray-700">Preferred Office Location</label>
-  <Select value={selectedLocation} onValueChange={setSelectedLocation} name="Preferred_Location">
-    <SelectTrigger>
-      <SelectValue placeholder="Select office location" />
-    </SelectTrigger>
-    <SelectContent>
-      <SelectItem value="Singapore (HQ)">Singapore (HQ)</SelectItem>
-      <SelectItem value="Malaysia">Malaysia</SelectItem>
-      <SelectItem value="India">India</SelectItem>
-      <SelectItem value="Thailand">Thailand</SelectItem>
-      <SelectItem value="Indonesia">Indonesia</SelectItem>
-      <SelectItem value="Sri Lanka">Sri Lanka</SelectItem>
-      <SelectItem value="Myanmar">Myanmar</SelectItem>
-      <SelectItem value="Pakistan">Pakistan</SelectItem>
-      <SelectItem value="Bangladesh">Bangladesh</SelectItem>
-      <SelectItem value="UK">UK</SelectItem>
-      <SelectItem value="USA">USA</SelectItem>
-    </SelectContent>
-  </Select>
-</div>
+              <div className="space-y-2 max-w-md mx-auto mt-10 p-4 bg-white rounded-lg shadow">
+      <label className="text-sm font-medium text-gray-700">
+        Preferred Office Location
+      </label>
+      <Select
+        value={selectedLocation}
+        onValueChange={setSelectedLocation}
+        name="Preferred_Location"
+      >
+        <SelectTrigger>
+          <SelectValue placeholder="Select office location" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="Singapore (HQ)">Singapore (HQ)</SelectItem>
+          <SelectItem value="Malaysia">Malaysia</SelectItem>
+          <SelectItem value="India">India</SelectItem>
+          <SelectItem value="Thailand">Thailand</SelectItem>
+          <SelectItem value="Indonesia">Indonesia</SelectItem>
+          <SelectItem value="Sri Lanka">Sri Lanka</SelectItem>
+          <SelectItem value="Myanmar">Myanmar</SelectItem>
+          <SelectItem value="Pakistan">Pakistan</SelectItem>
+          <SelectItem value="Bangladesh">Bangladesh</SelectItem>
+          <SelectItem value="UK">UK</SelectItem>
+          <SelectItem value="USA">USA</SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">Message *</label>
