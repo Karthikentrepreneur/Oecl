@@ -46,8 +46,6 @@ const IndiaHome = () => {
       <AboutSection />
       <ServicesSection />
       <WorkflowSection />
-      <StatsSection />
-      <TestimonialsSection />
       <GlobalPresence />
       <UpdatesSection />
       <ContactForm />
