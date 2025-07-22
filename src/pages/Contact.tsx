@@ -1,91 +1,61 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import LocationsSection from "@/components/LocationsSection";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Send, XCircle, Building2 } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
-import { useIsMobile } from "@/hooks/use-mobile";
-
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [pathname]);
-  return null;
-};
+import { motion } from "framer-motion";
+import { Send, XCircle } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 const Contact: React.FC = () => {
-  const [showNotification, setShowNotification] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("");
-  const isMobile = useIsMobile();
-  const location = useLocation();
+  const [showNotification, setShowNotification] = useState(false);
 
-  const allOffices = [
-    {
-      country: "Singapore",
-      name: "Singapore Office",
-      email: "info@oecl.com",
-      phone: "+65 69080838",
-      address: "OECL (Singapore) Pte Ltd. Blk 511 Kampong Bahru Road #03-01 Keppel Distripark Singapore - 099447"
-    },
-    {
-      country: "India",
-      name: "India Office",
-      email: "india@oecl.com",
-      phone: "+91 22 4517 4102",
-      address: "407, Mayuresh Planet, Plot No - 42 & 43, Sector-15, CBD Belapur, Navi Mumbai, Maharashtra, 400614"
-    },
-    {
-      country: "Malaysia",
-      name: "Malaysia Office",
-      email: "malaysia@oecl.com",
-      phone: "+60 3-3319 2778",
-      address: "Unit 20-03A, Level 20 Menara Zurich, 15 Jalan Dato Abdullah Tahir, 80300 Johor Bahru"
-    },
-    {
-      country: "Indonesia",
-      name: "Indonesia Office",
-      email: "indonesia@oecl.com",
-      phone: "+62 21 529 20292",
-      address: "408, Lina Building, JL.HR Rasuna Said kav B7, Jakarta"
-    },
-    {
-      country: "Thailand",
-      name: "Thailand Office",
-      email: "thailand@oecl.com",
-      phone: "+66 2-634-3240",
-      address: "109 CCT Building, 3rd Floor, Rm.3, Surawong Road, Suriyawongse, Bangrak, Bangkok 10500"
-    }
-  ];
-
-  const getCountryFromRoute = () => {
-    const path = location.pathname;
-    if (path.includes('/india')) return 'india';
-    if (path.includes('/malaysia')) return 'malaysia';
-    if (path.includes('/indonesia')) return 'indonesia';
-    if (path.includes('/thailand')) return 'thailand';
-    return 'singapore';
+  const locationEmails: { [key: string]: string } = {
+    "SINGAPORE - HEADQUARTERS": "info@oecl.sg",
+    MALAYSIA: "malaysia@oecl.com",
+    INDIA: "india@oecl.com",
+    THAILAND: "thailand@oecl.com",
+    INDONESIA: "indonesia@oecl.com",
+    SRILANKA: "srilanka@oecl.com",
+    MYANMAR: "myanmar@oecl.com",
+    PAKISTAN: "pakistan@oecl.com",
+    BANGLADESH: "bangladesh@oecl.com",
+    UK: "uk@oecl.com",
+    USA: "usa@oecl.com",
   };
 
-  const country = getCountryFromRoute();
-  const currentCountryInfo = allOffices.find(office => office.country.toLowerCase() === country) || allOffices[0];
+  const locationNames = Object.keys(locationEmails);
 
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    if (url.searchParams.get('submitted') === 'true') {
+  const getSelectedEmail = () => {
+    return locationEmails[selectedLocation] || "info@oecl.sg";
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const res = await fetch(`https://formsubmit.co/ajax/${getSelectedEmail()}`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (res.ok) {
       setShowNotification(true);
+      form.reset();
+      setSelectedLocation("");
       setTimeout(() => setShowNotification(false), 4000);
+    } else {
+      alert("Submission failed. Please try again.");
     }
-  }, []);
+  };
 
   return (
     <div className="min-h-screen flex flex-col relative">
-      <ScrollToTop />
       <Navigation />
 
       {showNotification && (
@@ -119,23 +89,6 @@ const Contact: React.FC = () => {
           </motion.div>
         </motion.section>
 
-        {/* Global Presence Section */}
-        <section className="py-16 bg-gradient-to-b from-red-50/30 to-white">
-          <div className="container mx-auto px-4">
-            
-
-            <section>
-              <div>
-                <motion.div>
-                  <motion.main className="transition-all duration-300 ease-in-out w-full">
-                    <LocationsSection />
-                  </motion.main>
-                </motion.div>
-              </div>
-            </section>
-          </div>
-        </section>
-
         {/* Contact Form */}
         <section className="py-16 bg-white" id="contact-form">
           <div className="container mx-auto px-4">
@@ -152,15 +105,11 @@ const Contact: React.FC = () => {
                   Fill in the form below and we'll get back to you as soon as possible.
                 </p>
 
-                <form
-                  action={`https://formsubmit.co/ajax/${currentCountryInfo.email}`}
-                  method="POST"
-                  className="space-y-6"
-                >
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <input type="hidden" name="_captcha" value="false" />
                   <input type="hidden" name="_template" value="box" />
-                  <input type="hidden" name="_subject" value={`New Contact Submission from ${currentCountryInfo.name}!`} />
-                  <input type="hidden" name="_next" value={`${window.location.origin}/contact?submitted=true`} />
+                  <input type="hidden" name="_subject" value={`New Contact from ${selectedLocation}`} />
+                  <input type="hidden" name="_next" value={window.location.href} />
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
@@ -190,15 +139,15 @@ const Contact: React.FC = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-700">Preferred Location</label>
-                    <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+                    <label className="text-sm font-medium text-gray-700">Preferred Location *</label>
+                    <Select value={selectedLocation} onValueChange={setSelectedLocation} required>
                       <SelectTrigger>
                         <SelectValue placeholder="Select preferred office location" />
                       </SelectTrigger>
                       <SelectContent>
-                        {allOffices.map((office) => (
-                          <SelectItem key={office.country} value={office.country}>
-                            {office.name}
+                        {locationNames.map((loc) => (
+                          <SelectItem key={loc} value={loc}>
+                            {loc}
                           </SelectItem>
                         ))}
                       </SelectContent>
