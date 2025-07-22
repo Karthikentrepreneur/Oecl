@@ -12,10 +12,12 @@ import UpdatesSection from "@/components/UpdatesSection";
 import GlobalPresence from "@/components/GlobalPresence";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import { useScrollToTop } from "@/hooks/useScrollToTop"; // ✅ Import the hook
 
 const MalaysiaHome = () => {
+  useScrollToTop(); // ✅ Call the hook at the top of the component
+
   useEffect(() => {
-    // Initialize scroll animations
     const handleScroll = () => {
       const scrollAnimElements = document.querySelectorAll('.scroll-animate');
       scrollAnimElements.forEach(element => {
@@ -27,13 +29,9 @@ const MalaysiaHome = () => {
       });
     };
 
-    // Initial check on load
     setTimeout(handleScroll, 100);
-
-    // Add event listener
     window.addEventListener('scroll', handleScroll);
 
-    // Cleanup
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -48,6 +46,8 @@ const MalaysiaHome = () => {
       <AboutSection />
       <ServicesSection />
       <WorkflowSection />
+      <StatsSection />
+      <TestimonialsSection />
       <GlobalPresence />
       <UpdatesSection />
       <ContactForm />
