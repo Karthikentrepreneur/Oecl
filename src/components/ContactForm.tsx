@@ -30,6 +30,7 @@ const ContactForm = () => {
   useEffect(() => {
     if (searchParams.get("submitted") === "true") {
       setShowSuccess(true);
+      window.scrollTo({ top: 0, behavior: "smooth" }); // scroll to popup
       const timer = setTimeout(() => setShowSuccess(false), 5000);
       return () => clearTimeout(timer);
     }
@@ -176,6 +177,7 @@ const ContactForm = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          {/* Office Info */}
           <div className="space-y-6">
             <h3 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
               <Building2 className="w-6 h-6 text-red-600" /> Our Offices
@@ -212,6 +214,7 @@ const ContactForm = () => {
             ))}
           </div>
 
+          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
