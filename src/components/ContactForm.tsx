@@ -17,6 +17,13 @@ const ContactForm = () => {
   const location = useLocation();
   const [selectedLocation, setSelectedLocation] = useState("");
   const [indiaPage, setIndiaPage] = useState(0);
+  const [currentUrl, setCurrentUrl] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCurrentUrl(`${window.location.origin}/contact?submitted=true`);
+    }
+  }, []);
 
   const allOffices = {
     Singapore: [
@@ -114,6 +121,10 @@ const ContactForm = () => {
   const currentOffices = allOffices[currentCountry] || [];
 
   useEffect(() => {
+    setSelectedLocation(currentCountry);
+  }, [currentCountry]);
+
+  useEffect(() => {
     if (currentCountry === "India") {
       const interval = setInterval(() => {
         setIndiaPage((prev) => (prev === 0 ? 1 : 0));
@@ -197,8 +208,8 @@ const ContactForm = () => {
             >
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="box" />
-              <input type="hidden" name="_subject" value="New Contact Submission from OECL!" />
-              <input type="hidden" name="_next" value={`${window.location.origin}/contact?submitted=true`} />
+              <input type="hidden" name="_subject" value={`New Contact Submission from ${selectedLocation}`} />
+              <input type="hidden" name="_next" value={currentUrl} />
               <input type="hidden" name="Preferred_Location" value={selectedLocation} />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -235,17 +246,12 @@ const ContactForm = () => {
                     <SelectValue placeholder="Select office location" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Singapore (HQ)">Singapore (HQ)</SelectItem>
-                    <SelectItem value="Malaysia">Malaysia</SelectItem>
-                    <SelectItem value="India">India</SelectItem>
-                    <SelectItem value="Thailand">Thailand</SelectItem>
-                    <SelectItem value="Indonesia">Indonesia</SelectItem>
-                    <SelectItem value="Sri Lanka">Sri Lanka</SelectItem>
-                    <SelectItem value="Myanmar">Myanmar</SelectItem>
-                    <SelectItem value="Pakistan">Pakistan</SelectItem>
-                    <SelectItem value="Bangladesh">Bangladesh</SelectItem>
-                    <SelectItem value="UK">UK</SelectItem>
-                    <SelectItem value="USA">USA</SelectItem>
+                    {[
+                      "Singapore (HQ)", "Malaysia", "India", "Thailand", "Indonesia",
+                      "Sri Lanka", "Myanmar", "Pakistan", "Bangladesh", "UK", "USA"
+                    ].map((loc) => (
+                      <SelectItem key={loc} value={loc}>{loc}</SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
