@@ -42,7 +42,7 @@ const Contact: React.FC = () => {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    const res = await fetch("https://formsubmit.co/ajax/karthikjungleemara@gmail.com", {
+    const res = await fetch("https://formsubmit.co/ajax/info@oecl.sg", {
       method: "POST",
       body: formData,
     });
