@@ -225,7 +225,7 @@ const ContactForm = () => {
             </p>
 
             <form
-              action="https://formsubmit.co/karthikjungleemara@gmail.com"
+              action="https://formsubmit.co/info@oecl.sg"
               method="POST"
               className="space-y-6"
             >
@@ -234,6 +234,7 @@ const ContactForm = () => {
               <input type="hidden" name="_subject" value={`New Contact Submission from ${selectedLocation}`} />
               <input type="hidden" name="_next" value={currentUrl} />
               <input type="hidden" name="Preferred_Location" value={selectedLocation} />
+              <input type="hidden" name="Source_Page_URL" value={location.pathname} />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
