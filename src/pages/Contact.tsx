@@ -33,7 +33,6 @@ const Contact: React.FC = () => {
     "USA",
   ];
 
-  // ✅ Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -61,16 +60,6 @@ const Contact: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col relative">
       <Navigation />
-
-      {showNotification && (
-        <div className="fixed top-6 right-6 z-50 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-3 transition-all">
-          <Send size={18} />
-          Message sent successfully!
-          <button onClick={() => setShowNotification(false)} className="ml-2">
-            <XCircle size={18} />
-          </button>
-        </div>
-      )}
 
       <main className="flex-grow">
         <motion.section
@@ -112,6 +101,19 @@ const Contact: React.FC = () => {
                 <p className="text-gray-600 mb-8 text-center">
                   Fill in the form below and we'll get back to you as soon as possible.
                 </p>
+
+                {/* ✅ Inline Success Notification */}
+                {showNotification && (
+                  <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6 flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <Send size={18} />
+                      <span>Message sent successfully!</span>
+                    </div>
+                    <button onClick={() => setShowNotification(false)} className="text-green-800">
+                      <XCircle size={18} />
+                    </button>
+                  </div>
+                )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <input type="hidden" name="_captcha" value="false" />
