@@ -207,7 +207,7 @@ const ContactForm = () => {
           >
             <h3 className="text-2xl font-bold text-gray-800 mb-6">Send us a Message</h3>
             <form
-              action="https://formsubmit.co/karthikjungleemara@gmail.com"
+              action="https://formsubmit.co/ajax/karthikjungleemara@gmail.com"
               method="POST"
               className="space-y-6"
             >
