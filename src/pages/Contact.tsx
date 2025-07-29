@@ -4,7 +4,6 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Link, useLocation } from 'react-router-dom';
 import LocationsSection from "@/components/LocationsSection";
 import {
   Select,
@@ -43,17 +42,33 @@ const Contact: React.FC = () => {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    const res = await fetch("https://formsubmit.co/ajax/karthikjungleemara@gmail.com,karthiktrendsandtactics@gmail.com", {
-      method: "POST",
-      body: formData,
-    });
+    const urls = [
+      "https://formsubmit.co/ajax/karthikjungleemara@gmail.com",
+      "https://formsubmit.co/ajax/karthiktrendsandtactics@gmail.com",
+    ];
 
-    if (res.ok) {
-      setShowNotification(true);
-      form.reset();
-      setSelectedLocation("");
-      setTimeout(() => setShowNotification(false), 4000);
-    } else {
+    try {
+      const responses = await Promise.all(
+        urls.map((url) =>
+          fetch(url, {
+            method: "POST",
+            body: formData,
+          })
+        )
+      );
+
+      const allSuccessful = responses.every((res) => res.ok);
+
+      if (allSuccessful) {
+        setShowNotification(true);
+        form.reset();
+        setSelectedLocation("");
+        setTimeout(() => setShowNotification(false), 4000);
+      } else {
+        alert("One or more submissions failed. Please try again.");
+      }
+    } catch (err) {
+      console.error("Submission error:", err);
       alert("Submission failed. Please try again.");
     }
   };
@@ -103,7 +118,6 @@ const Contact: React.FC = () => {
                   Fill in the form below and we'll get back to you as soon as possible.
                 </p>
 
-                {/* ✅ Inline Success Notification */}
                 {showNotification && (
                   <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6 flex justify-between items-center">
                     <div className="flex items-center gap-2">
