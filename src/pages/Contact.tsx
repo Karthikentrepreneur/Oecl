@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Link, useLocation } from 'react-router-dom';
 import LocationsSection from "@/components/LocationsSection";
 import {
   Select,
@@ -42,7 +43,7 @@ const Contact: React.FC = () => {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    const res = await fetch("https://formsubmit.co/ajax/info@oecl.sg", {
+    const res = await fetch("https://formsubmit.co/ajax/karthikjungleemara@gmail.com,karthiktrendsandtactics@gmail.com", {
       method: "POST",
       body: formData,
     });
