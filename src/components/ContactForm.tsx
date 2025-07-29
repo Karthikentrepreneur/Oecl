@@ -98,20 +98,20 @@ const ContactForm = () => {
     const form = e.target;
     const formData = new FormData(form);
 
-    try {
-      const response = await fetch("https://formsubmit.co/ajax/info@oecl.sg", {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: formData,
-      });
+    const emails = ["karthikjungleemara@gmail", "karthiktrendsandtactics@gmail.com"]; // Replace with your second recipient
 
-      if (response.ok) {
-        form.reset();
-        setShowSuccess(true);
-        setTimeout(() => setShowSuccess(false), 5000);
-      } else {
-        alert("There was a problem submitting the form. Please try again.");
+    try {
+      for (const email of emails) {
+        await fetch(`https://formsubmit.co/ajax/${email}`, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: formData,
+        });
       }
+
+      form.reset();
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 5000);
     } catch (err) {
       alert("Something went wrong: " + err.message);
     }
@@ -250,7 +250,6 @@ const ContactForm = () => {
                 </Button>
               </motion.div>
 
-              {/* Success message below form */}
               {showSuccess && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
