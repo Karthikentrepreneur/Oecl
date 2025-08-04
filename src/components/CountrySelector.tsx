@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronDown, Globe } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -10,7 +11,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
-import { getCurrentCountryFromPath } from '@/services/countryDetection';
+import { getCurrentCountryFromPath, detectCountryByIP, CountryInfo } from '@/services/countryDetection';
 
 interface CountryData {
   country: string;
@@ -41,11 +42,41 @@ const countries: CountryData[] = [
 
 const CountrySelector = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [detectedCountry, setDetectedCountry] = useState<CountryInfo | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
-  // Get current country info
+  // Get current country info from URL path
   const currentCountry = getCurrentCountryFromPath(location.pathname);
+
+  // Detect user's country by IP on component mount
+  useEffect(() => {
+    const detectUserCountry = async () => {
+      try {
+        const country = await detectCountryByIP();
+        setDetectedCountry(country);
+      } catch (error) {
+        console.log('Failed to detect country by IP:', error);
+      }
+    };
+
+    detectUserCountry();
+  }, []);
+
+  // Get flag for detected country
+  const getDetectedCountryFlag = () => {
+    if (!detectedCountry) return null;
+    
+    const countryMapping: Record<string, string> = {
+      'IN': '/in.svg',
+      'MY': '/my.svg',
+      'ID': '/id.svg',
+      'TH': '/th.svg',
+      'SG': '/sg.svg'
+    };
+    
+    return countryMapping[detectedCountry.code] || null;
+  };
 
   // Filter out the current country from the list
   const availableCountries = countries.filter(country =>
@@ -94,6 +125,8 @@ const CountrySelector = () => {
     };
   }, []);
 
+  const detectedFlag = getDetectedCountryFlag();
+
   return (
     <div ref={dropdownRef} className="relative z-50">
       <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
@@ -102,7 +135,15 @@ const CountrySelector = () => {
             variant="outline"
             className="border-[#F6B100] bg-white text-gray-800 hover:bg-[#F6B100]/10 px-4 py-2 rounded-full flex items-center gap-2"
           >
-            <Globe className="w-6 h-6 text-[#F6B100]" />
+            {detectedFlag ? (
+              <img
+                src={detectedFlag}
+                alt={`${detectedCountry?.name || 'Detected country'} flag`}
+                className="w-6 h-6 rounded-sm shadow-sm object-cover"
+              />
+            ) : (
+              <Globe className="w-6 h-6 text-[#F6B100]" />
+            )}
             <span className="flex items-center gap-1">
               Switch Country <ChevronDown className="h-3 w-3 ml-1 text-gray-500" />
             </span>
