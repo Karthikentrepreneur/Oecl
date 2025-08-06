@@ -1,5 +1,3 @@
-
-
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronDown, Globe } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -44,104 +42,71 @@ const countries: CountryData[] = [
 const CountrySelector = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [detectedCountry, setDetectedCountry] = useState<CountryInfo | null>(null);
+  const [selectedCountry, setSelectedCountry] = useState<CountryData | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
-  // Get current country info from URL path
   const currentCountry = getCurrentCountryFromPath(location.pathname);
 
-  // Detect user's country by IP on component mount
+  // Set initial selected country based on URL
+  useEffect(() => {
+    const matchedCountry = countries.find(c => c.country.toLowerCase() === currentCountry.name.toLowerCase());
+    if (matchedCountry) {
+      setSelectedCountry(matchedCountry);
+    }
+  }, [location.pathname]);
+
+  // Detect user country by IP
   useEffect(() => {
     const detectUserCountry = async () => {
       try {
         const country = await detectCountryByIP();
         setDetectedCountry(country);
       } catch (error) {
-        console.log('Failed to detect country by IP:', error);
+        console.log('Country detection failed:', error);
       }
     };
-
     detectUserCountry();
   }, []);
 
-  // Get flag for detected country
-  const getDetectedCountryFlag = () => {
-    if (!detectedCountry) return null;
-    
-    const countryMapping: Record<string, string> = {
-      'IN': '/in.svg',
-      'MY': '/my.svg',
-      'ID': '/id.svg',
-      'TH': '/th.svg',
-      'SG': '/sg.svg'
-    };
-    
-    return countryMapping[detectedCountry.code] || null;
-  };
-
-  // Filter out the current country from the list
-  const availableCountries = countries.filter(country =>
-    country.country !== currentCountry.name.toUpperCase()
+  const availableCountries = countries.filter(
+    (c) => c.country.toUpperCase() !== currentCountry.name.toUpperCase()
   );
 
-  // Sort countries by priority
   const sortedCountries = [...availableCountries].sort((a, b) => a.priority - b.priority);
 
-  // Handle country selection with smart routing
   const handleCountrySelect = (country: CountryData) => {
+    setSelectedCountry(country); // Update selected flag
     if (country.route) {
-      // For internal routes, try to maintain the current page context
       const currentPath = location.pathname;
       let targetRoute = country.route;
+      const prefix = country.country === 'SINGAPORE' ? '' : `/${country.country.toLowerCase()}`;
 
-      // If user is on about-us or contact, try to navigate to the same page in the new country
       if (currentPath.includes('/about-us')) {
-        const countryPrefix = country.country === 'SINGAPORE' ? '' : `/${country.country.toLowerCase()}`;
-        targetRoute = `${countryPrefix}/about-us`;
+        targetRoute = `${prefix}/about-us`;
       } else if (currentPath.includes('/contact')) {
-        const countryPrefix = country.country === 'SINGAPORE' ? '' : `/${country.country.toLowerCase()}`;
-        targetRoute = `${countryPrefix}/contact`;
+        targetRoute = `${prefix}/contact`;
       }
 
-      // Navigate to local route
       window.location.href = targetRoute;
     } else {
-      // Open external website
       window.open(country.website, '_blank', 'noopener,noreferrer');
     }
     setIsOpen(false);
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setIsOpen(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
-  const detectedFlag = getDetectedCountryFlag();
 
   return (
     <div className="flex items-center gap-2">
-      {/* Detected Country Flag - shown separately */}
-      {detectedFlag && (
-        <div className="flex-shrink-0">
-          <img
-            src={detectedFlag}
-            alt={`${detectedCountry?.name || 'Detected country'} flag`}
-            className="w-6 h-6 rounded-sm shadow-sm object-cover"
-            title={`Your location: ${detectedCountry?.name}`}
-          />
-        </div>
-      )}
-      
       {/* Country Selector Dropdown */}
       <div ref={dropdownRef} className="relative z-50">
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
@@ -150,9 +115,17 @@ const CountrySelector = () => {
               variant="outline"
               className="border-[#F6B100] bg-white text-gray-800 hover:bg-[#F6B100]/10 px-4 py-2 rounded-full flex items-center gap-2"
             >
-              <Globe className="w-6 h-6 text-[#F6B100]" />
-              <span className="flex items-center gap-1">
-                Switch Country <ChevronDown className="h-3 w-3 ml-1 text-gray-500" />
+              {selectedCountry?.flag ? (
+                <img
+                  src={selectedCountry.flag}
+                  alt={`${selectedCountry.country} flag`}
+                  className="w-6 h-6 rounded-sm shadow-sm object-cover"
+                />
+              ) : (
+                <Globe className="w-6 h-6 text-[#F6B100]" />
+              )}
+              <span className="flex items-center gap-1 text-sm font-medium">
+                {selectedCountry?.country || "Switch Country"} <ChevronDown className="h-3 w-3 ml-1 text-gray-500" />
               </span>
             </Button>
           </DropdownMenuTrigger>
@@ -172,10 +145,7 @@ const CountrySelector = () => {
                     }}
                     className="cursor-pointer hover:bg-amber-50 p-2 rounded-md flex items-center gap-2 transition-colors"
                   >
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      className="flex items-center w-full"
-                    >
+                    <motion.div whileHover={{ scale: 1.05 }} className="flex items-center w-full">
                       <div className="flex-shrink-0">
                         {country.flag ? (
                           <img
@@ -184,9 +154,7 @@ const CountrySelector = () => {
                             className="w-6 h-6 rounded-sm shadow-sm object-cover"
                           />
                         ) : (
-                          <div className="w-6 h-6 bg-gray-200 rounded-sm flex items-center justify-center">
-                            <Globe className="w-6 h-6 text-[#F6B100]" />
-                          </div>
+                          <Globe className="w-6 h-6 text-[#F6B100]" />
                         )}
                       </div>
                       <div className="ml-3 flex-1">
@@ -206,4 +174,3 @@ const CountrySelector = () => {
 };
 
 export default CountrySelector;
-
