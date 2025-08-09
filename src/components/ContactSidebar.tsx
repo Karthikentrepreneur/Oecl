@@ -65,11 +65,11 @@ const countries = [{
     address: "Imagine Techpark, Unit No. 10,19th. Floor, Block DN 6, Sector - VSalt Lake City, Kolkata,West Bengal, India - 700091",
     contacts: ["+91 33 4814 9162 / 63"]
   }]
-}, {
+},  {
   code: "my",
   name: "Malaysia",
-  lat: 4.2105,
-  lng: 101.9758,
+  lat: 1.4842,
+  lng: 103.7629,
   cities: [{
     name: "PASIRGUDANG",
     lat: 1.4842,
@@ -84,6 +84,79 @@ const countries = [{
     contacts: ["+603 - 3319 2778 / 74 / 75"]
   }]
 }, {
+  code: "ae",
+  name: "United Arab Emirates (UAE)",
+    lat: 25.2048,
+    lng: 55.2708,
+  cities: [{
+    name: "Dubai",
+    lat: 25.2048,
+    lng: 55.2708,
+    address: "Office # 509, Al Nazar Plaza, Oud Metha, Dubai, U.A.E",
+    contacts: ["+971 4 3433388"]
+  }, {
+    name: "JEBEL ALI",
+    lat: 24.9857,
+    lng: 55.1436,
+    address: "Warehouse# Zg06, Near Roundabout 13, North Zone, p. B No: 30821, jebel Ali, Dubai, U.A.E",
+    contacts: ["+971 4 8819787"]
+  }, {
+    name: "ABU DHABI",
+    lat: 24.4539,
+    lng: 54.3773,
+    address: "PB No: 30500, Office 3-1, Unit 101, 1st Floor, Al Jaber Jewellery Building, Al Khalidiya, Abu Dhabi, U.A.E",
+    contacts: ["+971 50 4337214"]
+  }]
+}, {
+  code: "qa",
+  name: "Qatar",
+    lat: 25.276987,
+    lng: 51.520008,
+  cities: [{
+    name: "Doha",
+    lat: 25.276987,
+    lng: 51.520008,
+    address: "Office no: 48, 2nd Floor, Al matar Centre, Old Airport Road Doha",
+    contacts: ["0974 33622555"]
+  }]
+},{
+  code: "cn",
+  name: "China",
+    lat: 22.54262,
+    lng: 114.11696,
+  cities: [{
+    name: "China",
+    lat: 22.54262,
+    lng: 114.11696,
+    address: "13C02, Block A, Zhaoxin Huijin Plaza 3085 Shennan East Road, Luohu, Shenzhen.",
+    contacts: ["+86 75582222447"],
+    email: "helen@haixun.co"
+  }]
+}, {
+  code: "sa",
+  name: "Saudi Arabia",
+  lat: 26.4207,
+    lng: 50.0888,
+  cities: [{
+    name: "Dammam",
+    lat: 26.4207,
+    lng: 50.0888,
+    address: "Building No.2817, Secondary No9403, King Faisal Road, Al Tubebayshi Dist, Dammam, KSA 32233",
+    contacts: ["+966 13 343 0003"]
+  }, {
+    name: "Riyadh",
+    lat: 24.7136,
+    lng: 46.6753,
+    address: "Room No. T18, Rail Business Centre, Bldg No. 3823, Omar Aimukhtar St, Thulaim, Riyadh 11332",
+    contacts: ["+966 11295 0020"]
+  }, {
+    name: "Jeddah",
+    lat: 21.4858,
+    lng: 39.1925,
+    address: "Al-Madinah Al-Munawarah Road, Al Sharafeyah, Jeddah 4542 -22234, Kingdom of Saudi Arabia",
+    contacts: ["+966 12 578 0874"]
+  }]
+},{
   code: "sg",
   name: "Singapore",
   lat: 1.3521,
@@ -94,13 +167,13 @@ const countries = [{
     lng: 103.8198,
     address: "Blk 511 Kampong Bahru Road, #03-01 Keppel Distripark, Singapore - 099447",
     contacts: ["+ 65 69080838"],
-    email: "june@ggl.sg"
+    email: "buddhika@globalconsol.com"
   }]
 }, {
   code: "id",
   name: "Indonesia",
-  lat: -4.4676,
-  lng: 112.3205,
+  lat: -6.2088,
+  lng: 106.8456,
   cities: [{
     name: "Jakarta",
     lat: -6.2088,
@@ -117,38 +190,40 @@ const countries = [{
 }, {
   code: "lk",
   name: "Sri Lanka",
-  lat: 7.8731,
-  lng: 80.7718,
+  lat: 6.9271,
+  lng: 79.8612,
   cities: [{
     name: "Colombo",
     lat: 6.9271,
     lng: 79.8612,
     address: "Ceylinco House, 9th Floor, No. 69, Janadhipathi Mawatha, Colombo 01, Sri Lanka",
-    contacts: ["+94 114477499", "+94 114477494 / 98"]
+    contacts: ["+94 114477499", "+94 114477494 / 98"],
+    email: "thilanka.cmb@globalconsol.com"
   }]
 }, {
   code: "th",
   name: "Thailand",
-  lat: 15.8700,
-  lng: 100.9925,
+  lat: 13.72957,  
+  lng: 100.53095,
   cities: [{
     name: "Bangkok",
-    lat: 13.7563,
-    lng: 100.5018,
+    lat: 13.72957,  
+    lng: 100.53095,
     address: "109 CCT Building, 3rd Floor, Rm.3, Surawong Road, Suriyawongse, Bangrak, Bangkok 10500 109",
     contacts: ["+662-634-3240", "+662-634-3942"]
   }]
 }, {
   code: "mm",
   name: "Myanmar",
-  lat: 21.9162,
-  lng: 95.9560,
+  lat: 16.8409,
+  lng: 96.1735,
   cities: [{
     name: "Yangon",
     lat: 16.8409,
     lng: 96.1735,
     address: "No.608, Room 8B, Bo Soon Pat Tower, Merchant Street, Pabedan Township, Yangon, Myanmar",
-    contacts: ["+951 243158", "+951 377985, 243101"]
+    contacts: ["+951 243158", "+951 377985, 243101"],
+    email: "info@globalconsol.com"
   }]
 }, {
   code: "bd",
@@ -160,25 +235,28 @@ const countries = [{
     lat: 23.8103,
     lng: 90.4125,
     address: "ID #9-N (New), 9-M(Old-N), 9th floor, Tower 1, Police Plaza Concord No.2, Road # 144, Gulshan Model Town, Dhaka 1215, Bangladesh",
-    contacts: ["+880 1716 620989"]
+    contacts: ["+880 1716 620989"],
+    email: "info@globalconsol.com"
   }]
 }, {
   code: "pk",
   name: "Pakistan",
-  lat: 30.3753,
-  lng: 69.3451,
+  lat: 24.8608,
+  lng: 67.0097,
   cities: [{
     name: "Karachi",
     lat: 24.8608,
     lng: 67.0097,
     address: "Suite No.301, 3rd Floor, Fortune Center, Shahrah-e-Faisal, Block 6, PECHS, Karachi, Pakistan",
-    contacts: ["+92-300-8282511", "+92-21-34302281-5"]
+    contacts: ["+92-300-8282511", "+92-21-34302281-5"],
+    email: "khalid.pk@globalconsol.com"
   }, {
     name: "Lahore",
     lat: 31.5204,
     lng: 74.3487,
     address: "Office # 301, 3rd Floor, Gulberg Arcade Main Market, Gulberg 2, Lahore, Pakistan",
-    contacts: ["+92 42-35782306/07/08"]
+    contacts: ["+92 42-35782306/07/08"],
+    email: "shazia.pklhe@globalconsol.com"
   }]
 },  {
   code: "us",
@@ -229,7 +307,8 @@ const countries = [{
     lat: -37.7064,
     lng: 144.8503,
     address: "Suite 5, 7-9 Mallet Road, Tullamarine, Victoria, 3043",
-    contacts: ["Mob: +61 432254969", "Tel: +61 388205157"]
+    contacts: ["Mob: +61 432254969", "Tel: +61 388205157"],
+    email: "info@gglaustralia.com"
   }]
 }];
 
