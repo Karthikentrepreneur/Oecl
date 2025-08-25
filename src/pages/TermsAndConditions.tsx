@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -21,6 +22,12 @@ const TermsAndConditions = () => {
     <div className="min-h-screen bg-white">
       <ScrollToTop />
       <Navigation />
+      <SEO
+        title="Terms and Conditions | OECL Singapore Logistics"
+        description="Review OECL Singapore's Terms and Conditions to understand the legal framework governing the use of our logistics services, including warehousing, freight forwarding, customs clearance, and more. Ensure compliance and clarity in our business engagements."
+        keywords="OECL terms and conditions, logistics service agreement, Singapore logistics terms, freight forwarding terms, warehousing service terms, customs clearance agreement, B2B logistics contract"
+        url="https://www.oecl.sg/terms-and-conditions"
+      />
       
       <div className="container mx-auto px-4 py-12 pt-24 max-w-4xl">
         <div className="prose prose-lg max-w-none text-black">

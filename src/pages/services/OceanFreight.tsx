@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 import { Ship } from "lucide-react";
 
@@ -21,6 +22,12 @@ const OceanFreight = () => {
   return (
     <div className="bg-white text-black min-h-screen">
       <Navigation />
+      <SEO
+        title="B2B Ocean Freight Services | OECL Global Shipping Solutions"
+        description="OECL provides reliable B2B ocean freight services for businesses worldwide—offering FCL, LCL, chartering, and seamless port-to-port logistics solutions."
+        keywords="B2B ocean freight services, full container shipping, LCL cargo forwarding, ocean freight solutions, global shipping for businesses, FCL LCL ocean transport"
+        url="https://www.oecl.sg/services/ocean-freight"
+      />
 
       {/* Hero Section */}
       <section className="pt-28 pb-16 relative overflow-hidden">

@@ -7,6 +7,7 @@ import { Pagination, PaginationContent, PaginationItem, PaginationLink, Paginati
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { supabase } from "@/integrations/supabase/client";
+import SEO from '@/components/SEO';
 const ScrollToTop = () => {
   const {
     pathname
@@ -82,6 +83,12 @@ const Blog = () => {
   return <div className="min-h-screen bg-background">
       <ScrollToTop />
       <Navigation />
+      <SEO
+        title="OECL Logistics Blog | Expert Insights for B2B Supply Chain Solutions"
+        description="Explore OECL's logistics blog for B2B-focused articles on warehousing, customs clearance, project cargo, and more. Stay informed with expert insights to optimize your supply chain operations."
+        keywords="B2B logistics blog, supply chain insights, warehousing solutions, customs clearance tips, project cargo logistics, OECL Singapore, logistics industry news, freight forwarding updates, supply chain optimization"
+        url="https://www.oecl.sg/blogs"
+      />
       <div className="container mx-auto px-4 py-12 pt-24">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">Our Blog</h1>

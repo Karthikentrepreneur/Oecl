@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { Truck, Ship, Globe, Users, Award, TrendingUp, CheckCircle, Star } from "lucide-react";
 const ScrollToTop = () => {
   const {
@@ -39,6 +40,12 @@ const AboutUs = () => {
   return <div className="bg-black text-white min-h-screen flex flex-col">
       <ScrollToTop />
       <Navigation />
+      <SEO
+        title="About OECL Singapore | Leading Global Logistics & Supply Chain Partner"
+        description="OECL is a premier global logistics and supply chain partner headquartered in Singapore. Established in 2008 by a team of experienced professionals, we offer end-to-end solutions across warehousing, freight forwarding, customs clearance, and more. Our strategic presence in key markets ensures seamless operations for your business worldwide."
+        keywords="OECL Singapore, global logistics partner, supply chain solutions, warehousing services, freight forwarding, customs clearance, project cargo, B2B logistics, international logistics, supply chain optimization"
+        url="https://www.oecl.sg/about-us"
+      />
       <main className="flex-grow pt-20">
         {/* Hero Section */}
         <section className="py-20 relative overflow-hidden">

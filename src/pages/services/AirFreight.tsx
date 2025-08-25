@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 import { Plane, Clock, Globe, Shield, CheckCircle } from "lucide-react";
 
@@ -21,6 +22,12 @@ const AirFreight = () => {
   return (
     <div className="bg-white text-black min-h-screen">
       <Navigation />
+      <SEO
+        title="B2B Air Freight Services | OECL Global Cargo Solutions"
+        description="OECL offers fast, reliable B2B air freight services for global businesses. Secure, time-critical cargo solutions with end-to-end logistics support."
+        keywords="B2B air freight services, business cargo solutions, corporate air shipping, international air freight logistics, global cargo transport, air freight forwarding"
+        url="https://www.oecl.sg/services/air-freight"
+      />
 
       <section className="pt-28 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-transparent"></div>

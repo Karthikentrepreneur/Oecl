@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 import { Truck, Droplets, Shield, CheckCircle } from "lucide-react";
 const LiquidCargo = () => {
@@ -10,6 +11,12 @@ const LiquidCargo = () => {
   const features = ["Specialized tank transportation", "Temperature-controlled transport", "Hazardous material handling", "ISO tank containers", "Safety compliance", "Real-time monitoring"];
   return <div className="bg-white text-black min-h-screen">
       <Navigation />
+      <SEO
+        title="B2B Liquid Cargo Transportation Services | OECL Singapore"
+        description="OECL offers specialized B2B liquid cargo transportation solutions in Singapore, utilizing ISO Tanks, Flexi Tanks, and IBCs for safe and efficient handling of hazardous and non-hazardous liquids."
+        keywords="B2B liquid cargo Singapore, liquid cargo transportation, hazardous liquid logistics, non-hazardous liquid shipping, ISO tank transport, Flexi tank logistics, IBC liquid transport, chemical logistics Singapore, bulk liquid shipping, OECL liquid cargo"
+        url="https://www.oecl.sg/services/liquid-cargo"
+      />
       
       <section className="pt-28 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-transparent"></div>

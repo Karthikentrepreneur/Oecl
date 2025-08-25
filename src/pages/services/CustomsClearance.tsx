@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 import { UserCheck, FileText, Shield, Globe, CheckCircle } from "lucide-react";
 const CustomsClearance = () => {
@@ -10,6 +11,12 @@ const CustomsClearance = () => {
   const features = ["Import/Export documentation", "Duty & tax calculation", "Compliance management", "Certificate handling", "Government liaison", "Fast clearance processing"];
   return <div className="bg-white text-black min-h-screen">
       <Navigation />
+      <SEO
+        title="B2B Customs Clearance Services in Singapore | OECL Logistics"
+        description="OECL offers expert customs clearance solutions for businesses in Singapore, ensuring seamless import and export compliance, accurate documentation, and efficient handling of trade procedures."
+        keywords="B2B customs clearance Singapore, business import/export services, trade compliance logistics, OECL customs solutions, Singapore customs brokers, commercial customs clearance, logistics documentation support, B2B logistics Singapore"
+        url="https://www.oecl.sg/services/customs-clearance"
+      />
       
       <section className="pt-28 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-transparent"></div>

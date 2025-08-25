@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 import { Box } from "lucide-react";
 
@@ -12,6 +13,12 @@ const ThirdPartyLogistics = () => {
   return (
     <div className="bg-white text-black min-h-screen">
       <Navigation />
+      <SEO
+        title="B2B 3PL Services in Singapore | OECL Logistics"
+        description="OECL offers comprehensive B2B 3PL services in Singapore, including warehousing, fulfillment, transportation, and reverse logistics, to streamline your supply chain operations."
+        keywords="B2B 3PL Singapore, third-party logistics services, supply chain management, warehousing solutions, fulfillment services, transportation logistics, reverse logistics, OECL 3PL"
+        url="https://www.oecl.sg/services/3pl"
+      />
 
       <section className="pt-28 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-transparent"></div>

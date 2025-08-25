@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 import { Cuboid } from "lucide-react";
 
@@ -12,6 +13,12 @@ const Consolidation = () => {
   return (
     <div className="bg-white text-black min-h-screen">
       <Navigation />
+      <SEO
+        title="B2B Cargo Consolidation Services in Singapore | OECL Logistics"
+        description="OECL offers efficient B2B cargo consolidation services in Singapore, combining smaller shipments into full container loads (FCL) to reduce costs and improve shipping efficiency."
+        keywords="B2B cargo consolidation Singapore, LCL consolidation services, cost-effective shipping solutions, OECL consolidation logistics, freight consolidation Singapore, FCL shipping for businesses, supply chain optimization, logistics consolidation services"
+        url="https://www.oecl.sg/services/consolidation"
+      />
 
       <section className="pt-28 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-transparent"></div>

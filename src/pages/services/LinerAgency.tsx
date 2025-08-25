@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 import { Container } from "lucide-react";
 
@@ -12,6 +13,12 @@ const LinerAgency = () => {
   return (
     <div className="bg-white text-black min-h-screen">
       <Navigation />
+      <SEO
+        title="B2B Liner Agency Services in Singapore | OECL Logistics"
+        description="OECL offers comprehensive B2B liner agency services in Singapore, including vessel scheduling, documentation, customs clearance, cargo booking, and port coordination to streamline your shipping operations."
+        keywords="B2B liner agency Singapore, vessel scheduling services, shipping documentation support, customs clearance logistics, cargo booking services, port coordination Singapore, OECL liner agency, business shipping solutions, commercial liner services, logistics for businesses"
+        url="https://www.oecl.sg/services/liner-agency"
+      />
 
       <section className="pt-28 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-transparent"></div>
