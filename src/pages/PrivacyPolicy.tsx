@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -21,6 +22,12 @@ const PrivacyPolicy = () => {
     <div className="min-h-screen bg-white">
       <ScrollToTop />
       <Navigation />
+      <SEO
+        title="Privacy Policy | OECL Singapore Logistics"
+        description="OECL Singapore is committed to protecting your privacy. Our Privacy Policy outlines how we collect, use, disclose, and safeguard your information when you visit our website and use our services. We ensure compliance with applicable data protection laws to maintain the confidentiality and security of your personal data."
+        keywords="OECL privacy policy, data protection Singapore, logistics company privacy, personal data security, OECL data collection, privacy compliance, business data protection, logistics service provider privacy policy"
+        url="https://www.oecl.sg/privacy-policy"
+      />
       
       <div className="container mx-auto px-4 py-12 pt-24 max-w-4xl">
         <div className="prose prose-lg max-w-none text-black">

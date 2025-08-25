@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 import { Box, Package, Database, BarChart3, CheckCircle } from "lucide-react";
 const ProjectCargo = () => {
@@ -10,6 +11,12 @@ const ProjectCargo = () => {
   const features = ["Advanced WMS system", "Temperature-controlled storage", "Inventory management", "Order fulfillment", "Pick & pack services", "Real-time reporting"];
   return <div className="bg-white text-black min-h-screen">
       <Navigation />
+      <SEO
+        title="B2B Project Cargo Services in Singapore | OECL Logistics"
+        description="OECL offers specialized B2B project cargo services in Singapore, handling oversized, heavy-lift, and complex shipments with precision and efficiency. Our team ensures seamless coordination for your project's logistics needs."
+        keywords="B2B project cargo Singapore, heavy-lift logistics, oversized cargo transportation, complex project shipments, OECL project cargo, project logistics services, Singapore project cargo solutions, industrial cargo handling, project cargo coordination"
+        url="https://www.oecl.sg/services/project-cargo"
+      />
 
       <section className="pt-28 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-transparent"></div>

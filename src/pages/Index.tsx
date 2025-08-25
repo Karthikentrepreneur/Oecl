@@ -1,6 +1,7 @@
 
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
+import SEO from "@/components/SEO";
 import HeroSection from "@/components/HeroSection";
 import TrackOrder from "@/components/TrackOrder";
 import ServicesCards from "@/components/ServicesCards";
@@ -56,6 +57,12 @@ const Index = () => {
 
   return (
     <div className="bg-white">
+      <SEO
+        title="OECL Singapore | Global Logistics & Supply Chain Solutions"
+        description="OECL is a premier global logistics and supply chain partner, offering end-to-end solutions including warehousing, freight forwarding, customs clearance, and project cargo services. With a presence across Southeast Asia, South Asia, the Middle East, and select Western countries, we deliver reliable, efficient, and tech-driven logistics solutions tailored to your business needs."
+        keywords="B2B logistics Singapore, global supply chain solutions, warehousing services, freight forwarding, customs clearance, project cargo, OECL logistics, international logistics partner, supply chain optimization"
+        url="https://www.oecl.sg/home"
+      />
       <Navigation />
       <ScrollToTop />
       <HeroSection />

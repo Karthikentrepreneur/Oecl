@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 import { Box, Package, Database, BarChart3, CheckCircle } from "lucide-react";
 const Warehousing = () => {
@@ -10,6 +11,12 @@ const Warehousing = () => {
   const features = ["Advanced WMS system", "Temperature-controlled storage", "Inventory management", "Order fulfillment", "Pick & pack services", "Real-time reporting"];
   return <div className="bg-white text-black min-h-screen">
       <Navigation />
+      <SEO
+        title="Efficient B2B Warehousing Solutions | OECL Singapore Logistics Services"
+        description="OECL offers tailored B2B warehousing solutions in Singapore, including inventory management, cold storage, container vanning, and distribution services to streamline your supply chain and boost business efficiency."
+        keywords="B2B warehousing Singapore, business warehousing solutions, inventory management services, cold storage logistics, container vanning Singapore, supply chain warehousing, OECL warehousing, logistics for businesses, B2B logistics services, warehouse storage for companies"
+        url="https://www.oecl.sg/services/warehousing"
+      />
       
       <section className="pt-28 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-transparent"></div>

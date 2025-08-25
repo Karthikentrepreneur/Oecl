@@ -3,6 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import {
   Truck, Plane, Ship, Box, UserCheck, Container, Cuboid
 } from "lucide-react";
@@ -176,6 +177,12 @@ const Services: React.FC = () => {
     <div className="min-h-screen flex flex-col bg-white">
       <ScrollToTop />
       <Navigation />
+      <SEO
+        title="Comprehensive B2B Logistics Services | OECL Singapore"
+        description="OECL offers end-to-end logistics solutions for businesses, including warehousing, air and ocean freight forwarding, customs clearance, liner agency, liquid cargo transportation, consolidation, project cargo, and 3PL services. Our expertise ensures efficient and reliable supply chain management tailored to your business needs."
+        keywords="B2B logistics Singapore, warehousing services, air freight forwarding, ocean freight forwarding, customs clearance, liner agency, liquid cargo transportation, consolidation services, project cargo logistics, 3PL services, OECL logistics"
+        url="https://www.oecl.sg/services"
+      />
       <main className="flex-grow pt-20">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-black via-gray-900 to-black text-white relative overflow-hidden">

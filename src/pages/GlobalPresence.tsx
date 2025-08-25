@@ -6,6 +6,7 @@ import ContactMapContainer from '@/components/ContactMapContainer';
 import ContactSidebar from '@/components/ContactSidebar';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { motion } from 'framer-motion';
+import SEO from '@/components/SEO';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -39,6 +40,12 @@ const GlobalPresence = () => {
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-amber-50/30 to-white">
       <ScrollToTop />
       <Navigation />
+      <SEO
+        title="OECL Global Presence | International Logistics Solutions"
+        description="Explore OECL's extensive global presence, offering comprehensive logistics and supply chain solutions across key markets. Our strategic network ensures seamless operations for your business worldwide."
+        keywords="OECL global logistics, international supply chain solutions, global logistics network, OECL worldwide presence, B2B logistics services, global freight forwarding, international warehousing services, OECL supply chain partners"
+        url="https://www.oecl.sg/global-presence"
+      />
 
       <motion.div
         initial={{ opacity: 0 }}
